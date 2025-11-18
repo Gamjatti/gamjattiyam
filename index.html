@@ -76,18 +76,22 @@
       width: 100%;
       height: 100%;
       background-image:
-        radial-gradient(circle, rgba(255,255,255,0.8) 1px, transparent 1px),
-        radial-gradient(circle, rgba(255,215,0,0.6) 1px, transparent 1px);
-      background-size: 150px 150px, 200px 200px;
-      background-position: 0 0, 50px 50px;
-      animation: twinkle 3s ease-in-out infinite;
+        radial-gradient(circle, rgba(255,255,255,0.9) 1px, transparent 1px),
+        radial-gradient(circle, rgba(255,215,0,0.8) 1px, transparent 1px),
+        radial-gradient(circle, rgba(255,192,203,0.6) 1px, transparent 1px);
+      background-size: 150px 150px, 200px 200px, 180px 180px;
+      background-position: 0 0, 50px 50px, 100px 30px;
+      animation: twinkleEnhanced 2s ease-in-out infinite;
       z-index: 0;
-      opacity: 0.3;
+      opacity: 0.4;
     }
 
-    @keyframes twinkle {
-      0%, 100% { opacity: 0.3; }
-      50% { opacity: 0.6; }
+    @keyframes twinkleEnhanced {
+      0% { opacity: 0.3; }
+      25% { opacity: 0.5; }
+      50% { opacity: 0.7; }
+      75% { opacity: 0.5; }
+      100% { opacity: 0.3; }
     }
 
     main {
@@ -113,6 +117,12 @@
       position: relative;
       overflow: hidden;
       animation: cardFadeIn 0.6s ease-out backwards;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .card-section:active {
+      transform: scale(0.98);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
     }
 
     .card-section:nth-child(1) { animation-delay: 0.1s; }
@@ -167,6 +177,7 @@
       border: 2px solid var(--gold);
       pointer-events: none;
       z-index: 2;
+      opacity: 0.7;
     }
 
     .corner-ornament.top-left {
@@ -174,7 +185,6 @@
       left: 15px;
       border-right: none;
       border-bottom: none;
-      animation: cornerGlow 2s ease-in-out infinite;
     }
 
     .corner-ornament.top-right {
@@ -182,7 +192,6 @@
       right: 15px;
       border-left: none;
       border-bottom: none;
-      animation: cornerGlow 2s ease-in-out infinite 0.5s;
     }
 
     .corner-ornament.bottom-left {
@@ -190,7 +199,6 @@
       left: 15px;
       border-right: none;
       border-top: none;
-      animation: cornerGlow 2s ease-in-out infinite 1s;
     }
 
     .corner-ornament.bottom-right {
@@ -198,12 +206,6 @@
       right: 15px;
       border-left: none;
       border-top: none;
-      animation: cornerGlow 2s ease-in-out infinite 1.5s;
-    }
-
-    @keyframes cornerGlow {
-      0%, 100% { opacity: 0.5; }
-      50% { opacity: 1; box-shadow: 0 0 10px var(--gold); }
     }
 
     .card-tag {
@@ -219,16 +221,25 @@
       letter-spacing: 0.15em;
       margin-bottom: 1.2rem;
       border: 1px solid var(--gold);
-      animation: tagPulse 2s ease-in-out infinite;
+      transition: transform 0.3s ease;
     }
 
-    @keyframes tagPulse {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.05); }
+    .card-tag:active {
+      transform: scale(0.95);
     }
 
     .card-tag span.emoji {
       font-size: 0.9rem;
+      animation: emojiWiggle 2s ease-in-out infinite;
+    }
+
+    @keyframes emojiWiggle {
+      0%, 100% { transform: rotate(0deg); }
+      10% { transform: rotate(-5deg); }
+      20% { transform: rotate(5deg); }
+      30% { transform: rotate(-5deg); }
+      40% { transform: rotate(5deg); }
+      50% { transform: rotate(0deg); }
     }
 
     h1, h2, h3 {
@@ -255,12 +266,12 @@
       color: var(--cream);
       font-family: 'Gamja Flower', cursive;
       text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-      animation: titleFloat 3s ease-in-out infinite;
+      animation: fadeIn 1.5s ease-out;
     }
 
-    @keyframes titleFloat {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-5px); }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
     }
 
     .cover-title .highlight {
@@ -268,12 +279,7 @@
       display: block;
       font-size: 2.2rem;
       margin-top: 0.3rem;
-      animation: highlightGlow 2s ease-in-out infinite;
-    }
-
-    @keyframes highlightGlow {
-      0%, 100% { text-shadow: 2px 2px 4px rgba(0,0,0,0.3); }
-      50% { text-shadow: 0 0 20px var(--gold), 2px 2px 4px rgba(0,0,0,0.3); }
+      animation: fadeIn 1.5s ease-out 0.3s backwards;
     }
 
     .cover-sub {
@@ -294,12 +300,7 @@
       margin: 0 auto 1.5rem;
       border: 2px solid var(--gold);
       box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-      animation: accentBounce 1s ease-in-out infinite;
-    }
-
-    @keyframes accentBounce {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.03); }
+      animation: fadeIn 1.5s ease-out 0.6s backwards;
     }
 
     .scroll-hint {
@@ -372,13 +373,17 @@
 
     .section-heading span.emoji {
       font-size: 1.4rem;
-      animation: emojiSpin 3s ease-in-out infinite;
+      display: inline-block;
+      animation: emojiDance 4s ease-in-out infinite;
     }
 
-    @keyframes emojiSpin {
-      0%, 100% { transform: rotate(0deg); }
-      25% { transform: rotate(-10deg); }
-      75% { transform: rotate(10deg); }
+    @keyframes emojiDance {
+      0%, 100% { transform: rotate(0deg) scale(1); }
+      10% { transform: rotate(-15deg) scale(1.1); }
+      20% { transform: rotate(15deg) scale(1.1); }
+      30% { transform: rotate(-15deg) scale(1.1); }
+      40% { transform: rotate(15deg) scale(1.1); }
+      50% { transform: rotate(0deg) scale(1); }
     }
 
     .info-grid {
@@ -394,6 +399,12 @@
       border: 2px solid var(--ornament-gold);
       box-shadow: 0 2px 8px rgba(0,0,0,0.05);
       animation: itemFloat 3s ease-in-out infinite;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .info-item:active {
+      transform: translateY(-2px) !important;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     }
 
     .info-item:nth-child(1) { animation-delay: 0s; }
@@ -474,60 +485,67 @@
     .timeline {
       position: relative;
       margin-top: 1rem;
-      padding-left: 1.8rem;
-    }
-
-    .timeline::before {
-      content: "";
-      position: absolute;
-      left: 0.4rem;
-      top: 0.5rem;
-      bottom: 0.5rem;
-      width: 3px;
-      background: linear-gradient(to bottom, var(--burgundy), var(--ornament-gold));
-      animation: lineGlow 2s ease-in-out infinite;
-    }
-
-    @keyframes lineGlow {
-      0%, 100% { opacity: 0.7; }
-      50% { opacity: 1; box-shadow: 0 0 10px var(--burgundy); }
+      padding-left: 0;
     }
 
     .timeline-item {
       position: relative;
-      padding-left: 1.2rem;
-      margin-bottom: 1.5rem;
+      padding-left: 2.5rem;
+      margin-bottom: 2rem;
+      transition: transform 0.2s ease;
     }
 
-    .timeline-dot {
+    .timeline-item:last-child {
+      margin-bottom: 0;
+    }
+
+    .timeline-item:active {
+      transform: translateX(3px);
+    }
+
+    .timeline-item::before {
+      content: "";
       position: absolute;
-      left: -0.05rem;
-      top: 0.35rem;
+      left: 0.45rem;
+      top: 0;
+      bottom: -2rem;
+      width: 2px;
+      background: linear-gradient(to bottom, var(--burgundy) 0%, var(--ornament-gold) 100%);
+    }
+
+    .timeline-item:last-child::before {
+      display: none;
+    }
+
+    .timeline-item::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.4rem;
       width: 12px;
       height: 12px;
       border-radius: 50%;
       background: var(--gold);
       border: 3px solid var(--burgundy);
       box-shadow: 0 0 0 3px var(--card-bg);
-      animation: dotPulse 2s ease-in-out infinite;
-    }
-
-    @keyframes dotPulse {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.2); box-shadow: 0 0 10px var(--gold), 0 0 0 3px var(--card-bg); }
+      z-index: 1;
     }
 
     .timeline-time {
-      font-size: 0.8rem;
+      font-size: 0.75rem;
       color: var(--burgundy);
-      font-weight: 600;
-      margin-bottom: 0.3rem;
+      font-weight: 700;
+      margin-bottom: 0.4rem;
+      display: inline-block;
+      background: rgba(139, 21, 56, 0.1);
+      padding: 0.2rem 0.6rem;
+      border-radius: 3px;
     }
 
     .timeline-title {
       font-size: 0.95rem;
       font-weight: 600;
-      margin-bottom: 0.4rem;
+      margin-bottom: 0.5rem;
       color: var(--deep-red);
     }
 
@@ -559,6 +577,11 @@
       border-radius: 4px;
       border: 2px solid var(--ornament-gold);
       animation: checkFloat 3s ease-in-out infinite;
+      transition: transform 0.2s ease;
+    }
+
+    .check-item:active {
+      transform: translateY(-2px) scale(0.98) !important;
     }
 
     .check-item:nth-child(1) { animation-delay: 0s; }
@@ -576,12 +599,21 @@
       font-size: 1.3rem;
       margin-top: 0.1rem;
       flex-shrink: 0;
-      animation: iconBounce 1.5s ease-in-out infinite;
+      animation: iconShake 3s ease-in-out infinite;
     }
 
-    @keyframes iconBounce {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.1); }
+    .check-item:nth-child(1) .check-icon { animation-delay: 0s; }
+    .check-item:nth-child(2) .check-icon { animation-delay: 0.5s; }
+    .check-item:nth-child(3) .check-icon { animation-delay: 1s; }
+    .check-item:nth-child(4) .check-icon { animation-delay: 1.5s; }
+    .check-item:nth-child(5) .check-icon { animation-delay: 2s; }
+
+    @keyframes iconShake {
+      0%, 90%, 100% { transform: rotate(0deg); }
+      92% { transform: rotate(-10deg); }
+      94% { transform: rotate(10deg); }
+      96% { transform: rotate(-10deg); }
+      98% { transform: rotate(10deg); }
     }
 
     .check-main {
@@ -767,10 +799,6 @@
             평범한 얼굴로 왔다가 → 갑자기 캐릭터 되는 그 과정이<br />
             또 웃기고 재밌단 말이제!
             <br /><br />
-            술 마실 줄 아는 친구는 술 가져오고,<br />
-            안 마시는 친구는 사이다나 콜라 가져오고.<br />
-            할배 생각엔 <strong>뭘 마시든 다 같이 웃으면 그만</strong>이제.
-            <br /><br />
             아, 그리고 말이여!<br />
             할배가 <strong>크리스마스 당일엔 바빠서 못 간다.</strong><br />
             전세계 애들 선물 배달하느라 정신없단 말이여!<br />
@@ -883,7 +911,6 @@
 
           <div class="timeline">
             <div class="timeline-item">
-              <div class="timeline-dot"></div>
               <div class="timeline-time">저녁 7시 ~ 7시 반</div>
               <div class="timeline-title">들어와서 방 정하고 꾸미기</div>
               <div class="timeline-desc">
@@ -893,7 +920,6 @@
             </div>
 
             <div class="timeline-item">
-              <div class="timeline-dot"></div>
               <div class="timeline-time">7시 반 ~ 8시</div>
               <div class="timeline-title">캐릭터로 등장하는 시간 & 사진 찍기</div>
               <div class="timeline-desc">
@@ -904,7 +930,6 @@
             </div>
 
             <div class="timeline-item">
-              <div class="timeline-dot"></div>
               <div class="timeline-time">8시부터 ~</div>
               <div class="timeline-title">배달 음식 먹으면서 수다</div>
               <div class="timeline-desc">
@@ -915,7 +940,6 @@
             </div>
 
             <div class="timeline-item">
-              <div class="timeline-dot"></div>
               <div class="timeline-time">그다음엔</div>
               <div class="timeline-title">선물 바꾸기 🎁</div>
               <div class="timeline-desc">
@@ -926,7 +950,6 @@
             </div>
 
             <div class="timeline-item">
-              <div class="timeline-dot"></div>
               <div class="timeline-time">밤새도록</div>
               <div class="timeline-title">노래방에 게임에 수다</div>
               <div class="timeline-desc">
@@ -965,7 +988,9 @@
                 <div class="check-sub">
                   <strong>돈:</strong> 5천 원에서 만 원 정도면 충분하네 (부담 갖지 말고!)<br />
                   귀여운 거, 재밌는 거, 쓸모있는 거<br />
-                  <strong>포장은 꼭 해야 한다!</strong> 누가 뭘 가져왔는지 바로 모르게 해야 재미있제.
+                  <strong>포장은 꼭 해야 한다!</strong><br />
+                  <strong>🤫 절대 비밀:</strong> 누가 뭘 가져왔는지 다른 친구들이 절대 모르게!<br />
+                  블라인드로 가져와서 랜덤 추첨할 거니께.
                 </div>
               </div>
             </li>
@@ -975,9 +1000,12 @@
               <div>
                 <div class="check-main">캐릭터 꾸미기 준비물</div>
                 <div class="check-sub">
+                  <strong>⚠️ 저가형으로! 부담 갖지 말기!</strong><br />
                   옷이랑, 악세서리랑, 가발이랑, 렌즈랑, 소품 같은 거<br />
-                  집에 있는 거 가져오고, 필요하면 조금만 더 사와도 되네!<br />
-                  <strong>완벽하게 안 해도 괜찮단다:</strong> 느낌만 나면 충분히 멋있어!
+                  다이소 레벨로 가볍게 준비해도 충분해!<br />
+                  <strong>목적:</strong> 너의 <strong>텅장을 만든 그 가해자</strong>가 누군지 알아내는 거야 ㅋㅋㅋ<br />
+                  완벽하게 안 해도 괜찮단다. 느낌만 나면 충분히 멋있어!<br />
+                  <strong>🤫 비밀 엄수:</strong> 다른 친구들이 절대 알아채지 못하게 비밀로!
                 </div>
               </div>
             </li>
@@ -994,13 +1022,14 @@
             </li>
 
             <li class="check-item">
-              <span class="check-icon">🥤</span>
+              <span class="check-icon">🍬</span>
               <div>
-                <div class="check-main">마실 거</div>
+                <div class="check-main">빨간색 과자 하나</div>
                 <div class="check-sub">
-                  <strong>술 마실 줄 아는 친구:</strong> 좋아하는 술 조금<br />
-                  <strong>안 마시는 친구:</strong> 사이다, 주스, 이온음료 같은 거<br />
-                  다 같이 건배할 수 있게 음료 하나씩은 가져오면 좋을 거네!
+                  <strong>크리스마스 느낌으로 빨간색 과자 하나씩!</strong><br />
+                  빨간 포장 과자, 딸기맛, 체리맛, 빨간 젤리 등등<br />
+                  <strong>⚠️ 중요: 어떤 과자인지 절대 비밀!</strong><br />
+                  블라인드로 가져와서 나중에 다 같이 공개할 거야.
                 </div>
               </div>
             </li>
