@@ -2,21 +2,20 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8" />
-  <title>2025 산타의 덕질 크리스마스 카드 초대장</title>
+  <title>2025 산타의 덕질 크리스마스 파티 초대장</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="2025 산타의 덕질 크리스마스 파티 카드형 초대장" />
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=Gaegu:wght@300;400;700&family=Gamja+Flower&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --red: #ff4b5c;
-      --deep-red: #b3202d;
-      --green: #2ecc71;
+      --burgundy: #8B1538;
+      --deep-red: #6B1229;
+      --forest-green: #1B4D3E;
       --dark-green: #0f3b26;
-      --gold: #f7c86b;
-      --cream: #fff7eb;
-      --card-bg: #ffffff;
-      --shadow-soft: 0 18px 40px rgba(0,0,0,0.25);
-      --max-width: 760px;
+      --gold: #D4AF37;
+      --cream: #F5EFE0;
+      --card-bg: #FDFAF5;
+      --ornament-gold: #C9A961;
     }
 
     * {
@@ -27,16 +26,17 @@
 
     html, body {
       height: 100%;
-      font-family: 'Noto Sans KR', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      font-family: 'Noto Sans KR', sans-serif;
       scroll-behavior: smooth;
-      background: radial-gradient(circle at top, #ffecd2 0%, #fcb69f 25%, #132033 70%, #050814 100%);
-      color: #222;
+      background: linear-gradient(to bottom, #1a1a1a 0%, #2d1f1f 50%, #1a1a1a 100%);
+      color: #333;
     }
 
     body {
       display: flex;
       flex-direction: column;
       align-items: stretch;
+      overflow-x: hidden;
     }
 
     /* 눈 내리는 효과 */
@@ -49,76 +49,121 @@
       width: 100%;
       height: 100%;
       background-image:
-        radial-gradient(2px 2px at 20% 20%, rgba(255,255,255,0.9), transparent),
-        radial-gradient(2px 2px at 80% 30%, rgba(255,255,255,0.7), transparent),
-        radial-gradient(2px 2px at 50% 80%, rgba(255,255,255,0.8), transparent);
+        radial-gradient(2px 2px at 20% 30%, rgba(255,255,255,0.9), transparent),
+        radial-gradient(3px 3px at 60% 70%, rgba(255,255,255,0.7), transparent),
+        radial-gradient(2px 2px at 80% 10%, rgba(255,255,255,0.8), transparent);
       background-repeat: repeat;
-      background-size: 220px 220px, 260px 260px, 300px 300px;
-      opacity: 0.9;
-      animation: snow 18s linear infinite;
+      background-size: 200px 200px, 300px 300px, 250px 250px;
+      opacity: 0.6;
+      animation: snow 20s linear infinite;
       z-index: 0;
     }
 
     @keyframes snow {
-      0% { transform: translate3d(0, -20px, 0); }
-      100% { transform: translate3d(0, 40px, 0); }
+      0% { transform: translateY(0); }
+      100% { transform: translateY(100vh); }
     }
 
     main {
       position: relative;
       z-index: 1;
       width: 100%;
-      padding: 2.5rem 1.25rem 3.5rem;
+      padding: 3rem 1.5rem 4rem;
     }
 
     .card-stack {
-      max-width: var(--max-width);
+      max-width: 800px;
       margin: 0 auto;
     }
 
     .card-section {
       background: var(--card-bg);
-      border-radius: 26px;
-      margin-bottom: 1.9rem;
-      box-shadow: var(--shadow-soft);
-      border: 2px solid #fff;
-      padding: 2.1rem 1.8rem 2.4rem;
+      border-radius: 8px;
+      margin-bottom: 2rem;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+      border: 3px solid var(--gold);
+      padding: 0;
       position: relative;
       overflow: hidden;
     }
 
+    /* 빈티지 테두리 패턴 */
     .card-section::before {
       content: "";
       position: absolute;
-      inset: 0;
-      border-radius: inherit;
-      padding: 2px;
-      background: linear-gradient(135deg, rgba(255,255,255,0.8), rgba(255,255,255,0) 40%, rgba(247,200,107,0.5), rgba(255,75,92,0.65));
-      mask:
-        linear-gradient(#000 0 0) content-box,
-        linear-gradient(#000 0 0);
-      -webkit-mask-composite: xor;
-      mask-composite: exclude;
-      opacity: 0.7;
+      inset: 8px;
+      border: 2px solid var(--ornament-gold);
+      border-radius: 4px;
+      pointer-events: none;
+      opacity: 0.5;
+    }
+
+    .card-section::after {
+      content: "";
+      position: absolute;
+      inset: 14px;
+      border: 1px dotted var(--gold);
+      border-radius: 2px;
+      pointer-events: none;
+      opacity: 0.3;
+    }
+
+    .card-inner {
+      position: relative;
+      z-index: 1;
+      padding: 2.5rem 2rem 3rem;
+    }
+
+    /* 코너 장식 */
+    .corner-ornament {
+      position: absolute;
+      width: 40px;
+      height: 40px;
+      border: 2px solid var(--gold);
       pointer-events: none;
     }
 
-    .card-section:last-child {
-      margin-bottom: 0;
+    .corner-ornament.top-left {
+      top: 20px;
+      left: 20px;
+      border-right: none;
+      border-bottom: none;
+    }
+
+    .corner-ornament.top-right {
+      top: 20px;
+      right: 20px;
+      border-left: none;
+      border-bottom: none;
+    }
+
+    .corner-ornament.bottom-left {
+      bottom: 20px;
+      left: 20px;
+      border-right: none;
+      border-top: none;
+    }
+
+    .corner-ornament.bottom-right {
+      bottom: 20px;
+      right: 20px;
+      border-left: none;
+      border-top: none;
     }
 
     .card-tag {
       display: inline-flex;
       align-items: center;
-      gap: 0.4rem;
-      font-size: 0.75rem;
-      padding: 0.25rem 0.7rem;
-      border-radius: 999px;
-      background: #132033;
-      color: #fff;
+      gap: 0.5rem;
+      font-size: 0.7rem;
+      padding: 0.4rem 1rem;
+      border-radius: 2px;
+      background: var(--burgundy);
+      color: var(--cream);
       text-transform: uppercase;
-      letter-spacing: 0.13em;
-      margin-bottom: 0.9rem;
+      letter-spacing: 0.15em;
+      margin-bottom: 1.5rem;
+      border: 1px solid var(--gold);
     }
 
     .card-tag span.emoji {
@@ -126,249 +171,357 @@
     }
 
     h1, h2, h3 {
-      font-weight: 800;
+      font-weight: 700;
+    }
+
+    /* 표지 스타일 */
+    #cover .card-inner {
+      text-align: center;
+      padding: 3rem 2rem 3.5rem;
+      background: linear-gradient(135deg, var(--burgundy) 0%, var(--deep-red) 100%);
+      color: var(--cream);
+    }
+
+    #cover .card-section::before,
+    #cover .card-section::after {
+      border-color: var(--gold);
     }
 
     .cover-title {
-      font-size: clamp(1.7rem, 4.4vw, 2.4rem);
+      font-size: clamp(2rem, 5vw, 3rem);
       line-height: 1.3;
-      text-align: center;
-      margin-bottom: 1rem;
-      color: var(--deep-red);
+      margin-bottom: 1.5rem;
+      color: var(--cream);
+      font-family: 'Gamja Flower', cursive;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    }
+
+    .cover-title .highlight {
+      color: var(--gold);
+      display: block;
+      font-size: 1.1em;
     }
 
     .cover-sub {
-      text-align: center;
-      font-size: 0.95rem;
-      color: #444;
-      margin-bottom: 1.3rem;
+      font-size: 1rem;
+      color: var(--cream);
+      margin-bottom: 2rem;
+      line-height: 1.7;
+      opacity: 0.95;
     }
 
     .cover-accent {
-      text-align: center;
-      font-size: 0.9rem;
-      color: #fff;
-      background: linear-gradient(135deg, var(--deep-red), #f96f5d);
-      display: inline-flex;
-      padding: 0.4rem 0.9rem;
-      border-radius: 999px;
-      margin: 0 auto 1.6rem;
-      box-shadow: 0 12px 25px rgba(179,32,45,0.55);
+      font-size: 1rem;
+      color: var(--cream);
+      background: rgba(0,0,0,0.2);
+      display: inline-block;
+      padding: 1rem 1.5rem;
+      border-radius: 4px;
+      margin: 0 auto 2rem;
+      border: 2px solid var(--gold);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
     }
 
     .scroll-hint {
-      margin-top: 0.4rem;
-      text-align: center;
-      font-size: 0.8rem;
-      color: #777;
+      margin-top: 1rem;
+      font-size: 0.85rem;
+      color: var(--cream);
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 0.1rem;
+      gap: 0.3rem;
+      opacity: 0.8;
     }
 
     .scroll-hint span.arrow {
-      font-size: 1.2rem;
-      animation: bounce 1.4s infinite;
+      font-size: 1.5rem;
+      animation: bounce 1.5s infinite;
     }
 
     @keyframes bounce {
       0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(4px); }
+      50% { transform: translateY(6px); }
     }
 
-    /* Santa letter */
+    /* 산타 편지 */
     .letter-title {
-      font-size: 1.3rem;
-      margin-bottom: 0.8rem;
-      color: var(--deep-red);
-      text-align: left;
+      font-size: 1.5rem;
+      margin-bottom: 1.2rem;
+      color: var(--burgundy);
+      text-align: center;
+      font-family: 'Gamja Flower', cursive;
     }
 
     .letter-body {
-      font-size: 0.93rem;
-      line-height: 1.9;
+      font-size: 0.95rem;
+      line-height: 2;
       background: var(--cream);
-      border-radius: 18px;
-      padding: 1.3rem 1.1rem;
-      border: 1px solid rgba(247,200,107,0.7);
+      border-radius: 4px;
+      padding: 2rem 1.5rem;
+      border: 2px solid var(--ornament-gold);
       position: relative;
+      box-shadow: inset 0 2px 8px rgba(0,0,0,0.05);
     }
 
-    .letter-body::before {
-      content: "TO. 2025년을 버틴 너희 다섯 명에게";
-      position: absolute;
-      top: -0.9rem;
-      left: 1.2rem;
-      font-size: 0.7rem;
-      padding: 0.15rem 0.7rem;
-      border-radius: 999px;
-      background: #132033;
-      color: #fff;
-      letter-spacing: 0.06em;
+    .letter-body strong {
+      color: var(--burgundy);
+      font-weight: 600;
     }
 
     .letter-sign {
-      margin-top: 1.1rem;
-      font-size: 0.88rem;
+      margin-top: 1.5rem;
+      font-size: 0.9rem;
       text-align: right;
-      color: #555;
+      color: var(--burgundy);
+      font-style: italic;
     }
 
-    /* Info cards */
+    /* 정보 섹션 */
     .section-heading {
-      font-size: 1.25rem;
-      margin-bottom: 1.2rem;
-      color: var(--deep-red);
+      font-size: 1.4rem;
+      margin-bottom: 1.5rem;
+      color: var(--burgundy);
       display: flex;
       align-items: center;
-      gap: 0.4rem;
+      justify-content: center;
+      gap: 0.5rem;
+      font-family: 'Gamja Flower', cursive;
+      text-align: center;
     }
 
     .section-heading span.emoji {
-      font-size: 1.3rem;
+      font-size: 1.5rem;
     }
 
     .info-grid {
       display: grid;
-      gap: 0.9rem;
-      margin-bottom: 1rem;
+      gap: 1.2rem;
+      margin-bottom: 1.5rem;
     }
 
     .info-item {
-      border-radius: 16px;
-      padding: 0.95rem 0.95rem;
-      background: #faf7f1;
-      border: 1px solid rgba(0,0,0,0.04);
+      border-radius: 4px;
+      padding: 1.2rem;
+      background: var(--cream);
+      border: 2px solid var(--ornament-gold);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
     }
 
     .info-label {
-      font-size: 0.78rem;
+      font-size: 0.75rem;
       text-transform: uppercase;
-      letter-spacing: 0.12em;
-      color: #777;
-      margin-bottom: 0.15rem;
+      letter-spacing: 0.1em;
+      color: var(--burgundy);
+      margin-bottom: 0.4rem;
+      font-weight: 600;
     }
 
     .info-value {
-      font-size: 0.95rem;
+      font-size: 1.05rem;
       font-weight: 600;
-      margin-bottom: 0.1rem;
+      margin-bottom: 0.5rem;
+      color: var(--deep-red);
     }
 
     .info-note {
-      font-size: 0.82rem;
+      font-size: 0.88rem;
       color: #555;
+      line-height: 1.6;
     }
 
-    /* Timeline */
+    .info-note strong {
+      color: var(--burgundy);
+    }
+
+    .theme-box {
+      background: var(--cream);
+      border: 2px solid var(--ornament-gold);
+      border-radius: 4px;
+      padding: 1.2rem;
+      margin-top: 1.5rem;
+    }
+
+    .theme-box h3 {
+      font-size: 1.1rem;
+      margin-bottom: 0.8rem;
+      color: var(--burgundy);
+    }
+
+    .theme-box p {
+      font-size: 0.9rem;
+      color: #555;
+      line-height: 1.7;
+    }
+
+    .theme-box strong {
+      color: var(--burgundy);
+    }
+
+    .theme-list {
+      margin-top: 0.8rem;
+      padding-left: 1.2rem;
+    }
+
+    .theme-list li {
+      font-size: 0.88rem;
+      color: #555;
+      line-height: 1.8;
+      margin-bottom: 0.3rem;
+    }
+
+    /* 타임라인 */
     .timeline {
       position: relative;
-      margin-top: 0.4rem;
-      padding-left: 1.3rem;
+      margin-top: 1rem;
+      padding-left: 2rem;
     }
 
     .timeline::before {
       content: "";
       position: absolute;
-      left: 0.35rem;
-      top: 0.4rem;
-      bottom: 0.6rem;
-      width: 2px;
-      background: linear-gradient(to bottom, var(--green), rgba(46,204,113,0.1));
+      left: 0.5rem;
+      top: 0.5rem;
+      bottom: 0.5rem;
+      width: 3px;
+      background: linear-gradient(to bottom, var(--burgundy), var(--ornament-gold));
     }
 
     .timeline-item {
       position: relative;
-      padding-left: 0.7rem;
-      margin-bottom: 1rem;
+      padding-left: 1.5rem;
+      margin-bottom: 1.8rem;
     }
 
     .timeline-dot {
       position: absolute;
-      left: -0.05rem;
-      top: 0.35rem;
-      width: 11px;
-      height: 11px;
+      left: 0;
+      top: 0.4rem;
+      width: 14px;
+      height: 14px;
       border-radius: 50%;
-      background: #fff;
-      border: 2px solid var(--green);
+      background: var(--gold);
+      border: 3px solid var(--burgundy);
+      box-shadow: 0 0 0 3px var(--card-bg);
     }
 
     .timeline-time {
-      font-size: 0.8rem;
-      color: var(--green);
+      font-size: 0.85rem;
+      color: var(--burgundy);
       font-weight: 600;
-      margin-bottom: 0.1rem;
+      margin-bottom: 0.3rem;
     }
 
     .timeline-title {
-      font-size: 0.95rem;
+      font-size: 1rem;
       font-weight: 600;
-      margin-bottom: 0.1rem;
+      margin-bottom: 0.4rem;
+      color: var(--deep-red);
     }
 
     .timeline-desc {
-      font-size: 0.83rem;
+      font-size: 0.88rem;
       color: #555;
+      line-height: 1.7;
     }
 
-    /* Checklist */
+    .timeline-desc strong {
+      color: var(--burgundy);
+    }
+
+    /* 체크리스트 */
     .checklist {
       list-style: none;
       display: grid;
-      gap: 0.7rem;
+      gap: 1.2rem;
       font-size: 0.9rem;
     }
 
     .check-item {
       display: flex;
       align-items: flex-start;
-      gap: 0.6rem;
+      gap: 1rem;
+      background: var(--cream);
+      padding: 1rem;
+      border-radius: 4px;
+      border: 2px solid var(--ornament-gold);
     }
 
     .check-icon {
-      font-size: 1.1rem;
-      margin-top: 0.1rem;
+      font-size: 1.5rem;
+      margin-top: 0.2rem;
+      flex-shrink: 0;
     }
 
     .check-main {
       font-weight: 600;
-      margin-bottom: 0.1rem;
+      margin-bottom: 0.4rem;
+      color: var(--deep-red);
     }
 
     .check-sub {
-      font-size: 0.8rem;
+      font-size: 0.85rem;
       color: #555;
+      line-height: 1.7;
+    }
+
+    .check-sub strong {
+      color: var(--burgundy);
+    }
+
+    .check-list {
+      margin-top: 0.5rem;
+      padding-left: 1rem;
+    }
+
+    .check-list li {
+      font-size: 0.85rem;
+      color: #666;
+      margin-bottom: 0.2rem;
     }
 
     /* Footer */
     footer {
       position: relative;
       z-index: 1;
-      padding: 0 1.25rem 2.3rem;
+      padding: 0 1.5rem 3rem;
     }
 
     .footer-inner {
-      max-width: var(--max-width);
+      max-width: 800px;
       margin: 0 auto;
       text-align: center;
-      font-size: 0.8rem;
-      color: #ddd;
+      font-size: 0.9rem;
+      color: var(--cream);
+      background: rgba(139, 21, 56, 0.3);
+      padding: 2rem;
+      border-radius: 8px;
+      border: 2px solid var(--gold);
     }
 
     .footer-inner strong {
-      color: #fff;
+      color: var(--gold);
+    }
+
+    .footer-inner p {
+      line-height: 1.8;
     }
 
     @media (min-width: 720px) {
-      .card-section {
-        padding: 2.4rem 2.4rem 2.7rem;
+      .card-inner {
+        padding: 3rem 3rem 3.5rem;
       }
 
       .info-grid {
         grid-template-columns: repeat(3, minmax(0, 1fr));
       }
+    }
+
+    /* 장식 요소 */
+    .ornament-divider {
+      text-align: center;
+      margin: 2rem 0;
+      color: var(--gold);
+      font-size: 1.5rem;
     }
   </style>
 </head>
@@ -378,181 +531,256 @@
 
       <!-- 1. COVER - 크리스마스 카드 표지 -->
       <section class="card-section" id="cover">
-        <div class="card-tag">
-          <span class="emoji">🎄</span>
-          <span>2025 CHRISTMAS CARD</span>
-        </div>
+        <div class="corner-ornament top-left"></div>
+        <div class="corner-ornament top-right"></div>
+        <div class="corner-ornament bottom-left"></div>
+        <div class="corner-ornament bottom-right"></div>
+        
+        <div class="card-inner">
+          <div class="card-tag">
+            <span class="emoji">🎄</span>
+            <span>2025 Christmas Card</span>
+          </div>
 
-        <h1 class="cover-title">
-          2025 산타의<br />
-          <span style="color:var(--red);">덕질 크리스마스 파티</span> 카드
-        </h1>
+          <h1 class="cover-title">
+            2025 산타의<br />
+            <span class="highlight">덕질 크리스마스 파티</span>
+          </h1>
 
-        <p class="cover-sub">
-          올 한 해 너를 뜨겁게 만들었던 <strong>그 캐릭터</strong>와 함께,  
-          다섯 명만 아는 비밀스러운 크리스마스 밤을 준비했어.
-        </p>
+          <p class="cover-sub">
+            올 한 해 네 마음을 가장 뜨겁게 만든<br />
+            그 최애로 변신해서 오는 특별한 밤.
+          </p>
 
-        <div class="cover-accent">
-          🎅 산타 왈: “일단 7시에 와. 나머진 우리 같이 미쳐보자.”
-        </div>
+          <div class="cover-accent">
+            🎅 산타 왈: "7시에 와. 나머진 우리 같이 신나게 놀아보자!"
+          </div>
 
-        <div class="scroll-hint">
-          <span>카드를 아래로 넘기듯, 천천히 읽어줘.</span>
-          <span class="arrow">⬇️</span>
+          <div class="scroll-hint">
+            <span>카드를 천천히 넘겨보세요</span>
+            <span class="arrow">⬇️</span>
+          </div>
         </div>
       </section>
 
       <!-- 2. SANTA LETTER - 산타 편지 -->
       <section class="card-section" id="letter">
-        <div class="card-tag">
-          <span class="emoji">📬</span>
-          <span>FROM SANTA</span>
-        </div>
+        <div class="corner-ornament top-left"></div>
+        <div class="corner-ornament top-right"></div>
+        <div class="corner-ornament bottom-left"></div>
+        <div class="corner-ornament bottom-right"></div>
+        
+        <div class="card-inner">
+          <div class="card-tag">
+            <span class="emoji">📬</span>
+            <span>From Santa</span>
+          </div>
 
-        <h2 class="letter-title">호호호, 얘들아. 산타야.</h2>
+          <h2 class="letter-title">호호호, 얘들아. 산타 할아배여.</h2>
 
-        <div class="letter-body">
-          2025년 동안 안 울고, 아니 솔직히 좀 울었어도 괜찮다.  
-          어쨌든 여기까지 잘 버텼다.  
-          학교, 일, 인간관계, 미래 걱정… 머리 터질 것 같았지?
-          <br /><br />
-          그래서 산타가 <strong>아주 조촐하지만, 제대로 미친 몰입 파티</strong>를 하나 준비했어.  
-          거창한 건 없고, 딱 다섯 명이서 웃다가 숨 넘어가는 그런 밤.
-          <br /><br />
-          드레스코드는 미리 하고 오는 거 아냐.  
-          <strong>7시에 입실해서 그때부터 각자 방에서 코스프레 준비</strong>하는 거야.  
-          2025년 네 마음을 가장 뜨겁게 만든 캐릭터, 인물, 아이돌…  
-          누구든 좋아. 그냥 “아 이거 나다” 싶은 존재로 변신해 와.
-          <br /><br />
-          술 마시는 애는 술, 안 마시는 애는 탄산이나 쥬스.  
-          중요한 건 잔에 뭐가 들었냐가 아니라,  
-          오늘만큼은 <strong>현실 걱정 잠깐 내려놓고</strong>  
-          마음 편하게 떠들 수 있는 자리가 되는 거다.
-          <div class="letter-sign">
-            2025년 12월의 어딘가에서<br />
-            🎅 산타 드림
+          <div class="letter-body">
+            할배가 올해 착한 아이 명단 확인해봤는디...<br />
+            어이구, 너희들 이름이 <strong>빨간 줄 쳐져 있더라고?</strong>
+            <br /><br />
+            착한 아이 조건이 여러 가지 있는디,<br />
+            그 중에 하나가 <strong>"통장 잔고 건전하게 관리하기"</strong>란 말이여.<br />
+            과소비하면 나쁜 아이로 분류된단다...
+            <br /><br />
+            근디 너희들 통장 확인해봤더니<br />
+            어머나, 전부 다 <strong>텅장</strong>이 되어버렸구만!<br />
+            호호호, 다들 이 조항에 해당되더라고!<br />
+            뭘 그렇게 샀는지 할배는 다 알지...
+            <br /><br />
+            학교 다니는 것도, 일하는 것도, 사람 만나는 것도<br />
+            올해 참 쉽지 않았제?<br />
+            그래도 여기까지 버텨준 거, 그거면 됐단다!
+            <br /><br />
+            근데 말이여, 착한 아이 명단에서 빠졌다고 해서<br />
+            선물 안 주는 건 아니란다.<br />
+            오히려 <strong>더 재밌는 선물</strong>을 준비했지!
+            <br /><br />
+            그래서 할배가 <strong>특별한 크리스마스 파티</strong>를 하나 준비했네.<br />
+            올해 네 마음을 가장 뜨겁게 만든<br />
+            그 캐릭터나 인물로 변신해서 모이는 거여!
+            <br /><br />
+            참가자는 딱 다섯 명.<br />
+            다섯 명이면 적당하제. 더 많으면 할배가 헷갈린단 말이여.
+            <br /><br />
+            할배가 하나만 부탁하자면:<br />
+            👉 <strong>2025년에 네 마음을 제일 흔들어놨던<br />
+            그 캐릭터나 사람으로 변신해서 오는 거여.</strong>
+            <br /><br />
+            근데! 미리 다 꾸미고 오면 재미없잖겄나?<br />
+            <strong>7시에 와서 그때부터 각자 방에서 변신 시작</strong>하는 거란다.<br />
+            평범한 얼굴로 왔다가 → 갑자기 캐릭터 되는 그 과정이<br />
+            또 웃기고 재밌단 말이제!
+            <br /><br />
+            술 마실 줄 아는 친구는 술 가져오고,<br />
+            안 마시는 친구는 사이다나 콜라 가져오고.<br />
+            할배 생각엔 <strong>뭘 마시든 다 같이 웃으면 그만</strong>이제.
+            <br /><br />
+            아, 그리고 말이여!<br />
+            할배가 <strong>크리스마스 당일엔 바빠서 못 간다.</strong><br />
+            전세계 애들 선물 배달하느라 정신없단 말이여!<br />
+            그래서 <strong>할배 조수 한 명을 보낼 거여.</strong><br />
+            걔가 나 대신 가서 너희들이랑 같이 놀아줄 거란다. 호호호!
+            <br /><br />
+            자세한 건 아래 카드들 천천히 넘겨보고,<br />
+            7시 딱 맞춰서 오면 되네!<br />
+            늦으면... 호호호, 할배가 알 거여. 🎄
+
+            <div class="letter-sign">
+              - 산타 할배 올림 -
+            </div>
           </div>
         </div>
       </section>
 
       <!-- 3. INFO - 파티 정보 카드 -->
       <section class="card-section" id="info">
-        <div class="card-tag">
-          <span class="emoji">📍</span>
-          <span>PARTY INFO</span>
+        <div class="corner-ornament top-left"></div>
+        <div class="corner-ornament top-right"></div>
+        <div class="corner-ornament bottom-left"></div>
+        <div class="corner-ornament bottom-right"></div>
+        
+        <div class="card-inner">
+          <div class="card-tag">
+            <span class="emoji">📍</span>
+            <span>Party Info</span>
+          </div>
+
+          <h2 class="section-heading">
+            <span class="emoji">🎁</span>
+            <span>파티 기본 정보</span>
+          </h2>
+
+          <div class="info-grid">
+            <div class="info-item">
+              <div class="info-label">언제</div>
+              <div class="info-value">2025.12.25 (목)</div>
+              <p class="info-note">
+                📅 저녁 일곱시 입실<br />
+                (언제까지? → 너희들 마음 가는 대로 놀다 가면 되제!)
+              </p>
+            </div>
+
+            <div class="info-item">
+              <div class="info-label">어디</div>
+              <div class="info-value">아지트 같은 파티룸</div>
+              <p class="info-note">
+                📍 정확한 주소는 카톡으로 따로 알려줄 거여.<br />
+                노래방 기계도 있는 곳으로 할배가 미리 알아봤단다! 🎤
+              </p>
+            </div>
+
+            <div class="info-item">
+              <div class="info-label">누구</div>
+              <div class="info-value">다섯 명 + 산타 조수</div>
+              <p class="info-note">
+                👥 이 정도면 딱 좋제. 너무 많으면 시끄럽고, 적당해야 다들 친해지기도 쉽잖겄나.
+              </p>
+            </div>
+          </div>
+
+          <div class="theme-box">
+            <h3>🎭 테마</h3>
+            <p>
+              <strong>2025년, 네 인생을 빛낸 최애 캐릭터나 사람으로 나타나기!</strong>
+            </p>
+            <ul class="theme-list">
+              <li>만화책 캐릭터든, 드라마 사람이든, 노래하는 사람이든 다 좋네</li>
+              <li>"이거 딱 나한테 맞네!" 싶은 거 있으면 그걸로 하면 돼</li>
+              <li>크리스마스 느낌 조금만 넣어주면 할배가 더 기뻐할 거여 🎄</li>
+            </ul>
+          </div>
+
+          <div class="theme-box" style="margin-top: 1rem;">
+            <h3>⚠️ 드레스코드 방식</h3>
+            <p>
+              <strong>집에서 미리 다 꾸미고 오는 거 안 된다!</strong><br />
+              편한 옷으로 와서 → 7시에 들어와서 → 방 정하고 → 거기서 꾸미기 시작!<br />
+              "현장에서 변신하기" 그런 거제.<br />
+              평범하게 있다가 → 갑자기 캐릭터 되는 그 과정도 다 추억이 될 거란다!
+            </p>
+          </div>
         </div>
-
-        <h2 class="section-heading">
-          <span class="emoji">🎁</span>
-          <span>언제, 어디, 누구</span>
-        </h2>
-
-        <div class="info-grid">
-          <div class="info-item">
-            <div class="info-label">DATE & TIME</div>
-            <div class="info-value">2025.12.25 (목) 19:00 입실</div>
-            <p class="info-note">
-              크리스마스 밤, 대충 <strong>밤샘 모드</strong> 예상.  
-              중간에 기절해도 산타는 이해해 줌.
-            </p>
-          </div>
-
-          <div class="info-item">
-            <div class="info-label">PLACE</div>
-            <div class="info-value">비밀 파티룸 아지트</div>
-            <p class="info-note">
-              주소는 따로 카톡으로 공유될 예정.  
-              노래방 기계 있는 곳으로 이미 사전 리서치 완료 🎤
-            </p>
-          </div>
-
-          <div class="info-item">
-            <div class="info-label">PEOPLE</div>
-            <div class="info-value">소수정예 5명</div>
-            <p class="info-note">
-              인원 적다고 안 재밌는 거 아님.  
-              <strong>오히려 더 시끄럽고 더 웃김.</strong>
-            </p>
-          </div>
-        </div>
-
-        <h3 style="font-size:1rem; margin-top:1.2rem; margin-bottom:0.4rem;">
-          오늘의 테마 🎭
-        </h3>
-        <p style="font-size:0.88rem; color:#555;">
-          <strong>“2025년, 너를 미치게 만들었던 최애 캐릭터/인물 코스프레”</strong><br />
-          애니, 드라마, 아이돌, 게임, 스트리머, VTuber, 유튜버, 뭐든 가능.  
-          크리스마스 느낌 조금 섞어주면 보너스 점수 ⭐
-        </p>
       </section>
 
       <!-- 4. SCHEDULE - 스케줄 카드 -->
       <section class="card-section" id="schedule">
-        <div class="card-tag">
-          <span class="emoji">🕒</span>
-          <span>SCHEDULE</span>
-        </div>
-
-        <h2 class="section-heading">
-          <span class="emoji">📖</span>
-          <span>크리스마스 밤, 대충 이런 흐름</span>
-        </h2>
-
-        <p style="font-size:0.84rem; color:#666; margin-bottom:0.7rem;">
-          시계 보면서 딱딱 맞추기보단, <strong>우리 텐션에 맞춰 유연하게</strong> 흐를 예정이야.
-        </p>
-
-        <div class="timeline">
-          <div class="timeline-item">
-            <div class="timeline-dot"></div>
-            <div class="timeline-time">19:00 ~ 19:30</div>
-            <div class="timeline-title">입실 & 방 배정 & 코스프레 준비</div>
-            <div class="timeline-desc">
-              편한 옷으로 도착 → 방 정하고 → 각자 캐릭터로 변신 타임.  
-              가발, 메이크업, 소품 꺼내는 순간부터 이미 웃김 시작.
-            </div>
+        <div class="corner-ornament top-left"></div>
+        <div class="corner-ornament top-right"></div>
+        <div class="corner-ornament bottom-left"></div>
+        <div class="corner-ornament bottom-right"></div>
+        
+        <div class="card-inner">
+          <div class="card-tag">
+            <span class="emoji">🕒</span>
+            <span>Schedule</span>
           </div>
 
-          <div class="timeline-item">
-            <div class="timeline-dot"></div>
-            <div class="timeline-time">19:30 ~ 20:00</div>
-            <div class="timeline-title">캐릭터 등장식 & 크리스마스 포토타임</div>
-            <div class="timeline-desc">
-              한 명씩 등장하면서 “나는 누구다” 캐릭터 소개 + 시그니처 포즈.  
-              휴대폰 / 폴라로이드로 <strong>2025 공식 크리스마스 샷</strong> 남기기.
-            </div>
-          </div>
+          <h2 class="section-heading">
+            <span class="emoji">📖</span>
+            <span>크리스마스 밤 흐름</span>
+          </h2>
 
-          <div class="timeline-item">
-            <div class="timeline-dot"></div>
-            <div class="timeline-time">20:00 ~</div>
-            <div class="timeline-title">배달 음식 + 덕질 수다</div>
-            <div class="timeline-desc">
-              시켜둔 음식 도착하면 먹으면서  
-              “왜 올해 이 캐릭터/인물이 내 인생을 박살냈는지” 발표 시간.
-            </div>
-          </div>
+          <p style="font-size:0.88rem; color:#666; margin-bottom:1rem; text-align: center;">
+            (대충 이렇게 흘러갈 거여, 딱딱하게 안 해도 되네!)
+          </p>
 
-          <div class="timeline-item">
-            <div class="timeline-dot"></div>
-            <div class="timeline-time">그 이후</div>
-            <div class="timeline-title">블라인드 선물 교환식 🎁</div>
-            <div class="timeline-desc">
-              각자 포장해온 선물로 랜덤 추첨.  
-              웃긴 선물, 쓸데없이 진지한 선물, 다 환영.  
-              포장 뜯을 때 리액션 많이 할수록 산타 만족도 ↑
+          <div class="timeline">
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="timeline-time">저녁 7시 ~ 7시 반</div>
+              <div class="timeline-title">들어와서 방 정하고 꾸미기</div>
+              <div class="timeline-desc">
+                반갑게 인사 나누고 짐 풀고 → 각자 방 들어가서 변신 시작!<br />
+                이때부터 벌써 웃음 나올 거제.
+              </div>
             </div>
-          </div>
 
-          <div class="timeline-item">
-            <div class="timeline-dot"></div>
-            <div class="timeline-time">밤새도록</div>
-            <div class="timeline-title">노래방 + 게임 + 프리 수다 타임</div>
-            <div class="timeline-desc">
-              노래방 기계로 캐럴, 애니송, 아이돌, 드라마 OST 털기.  
-              술 마시는 사람은 술, 안 마시는 사람은 탄산/쥬스/물로 같이 게임 가능.  
-              <strong>중요한 건 다 같이 웃는 거.</strong>
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="timeline-time">7시 반 ~ 8시</div>
+              <div class="timeline-title">캐릭터로 등장하는 시간 & 사진 찍기</div>
+              <div class="timeline-desc">
+                한 명씩 나오면서 캐릭터 소개하고 포즈 취하는 거여!<br />
+                나머지 친구들은 박수치고 사진 찍어주고.<br />
+                올해 크리스마스 기념사진 남기는 시간이제!
+              </div>
+            </div>
+
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="timeline-time">8시부터 ~</div>
+              <div class="timeline-title">배달 음식 먹으면서 수다</div>
+              <div class="timeline-desc">
+                맛있는 거 시켜다가 먹으면서<br />
+                "올해 왜 이 캐릭터가 내 마음을 흔들었는지" 이야기하는 시간.<br />
+                서로 얘기 들으면서 공감하고 웃으면 되제.
+              </div>
+            </div>
+
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="timeline-time">그다음엔</div>
+              <div class="timeline-title">선물 바꾸기 🎁</div>
+              <div class="timeline-desc">
+                각자 가져온 선물 랜덤으로 교환하는 거여!<br />
+                누가 뭘 가져왔는지 몰라서 더 재밌단다.<br />
+                포장 뜯을 때 <strong>리액션 크게 해주면 할배가 좋아할 거네!</strong>
+              </div>
+            </div>
+
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="timeline-time">밤새도록</div>
+              <div class="timeline-title">노래방에 게임에 수다</div>
+              <div class="timeline-desc">
+                노래방으로 캐럴도 부르고, 요즘 노래도 부르고!<br />
+                간단한 게임도 하면서 더 친해지는 시간.<br />
+                <strong>중요한 건 다섯 명이서 편하게 웃으면서 노는 거제!</strong>
+              </div>
             </div>
           </div>
         </div>
@@ -560,73 +788,87 @@
 
       <!-- 5. CHECKLIST - 준비물 카드 -->
       <section class="card-section" id="checklist">
-        <div class="card-tag">
-          <span class="emoji">✅</span>
-          <span>CHECKLIST</span>
+        <div class="corner-ornament top-left"></div>
+        <div class="corner-ornament top-right"></div>
+        <div class="corner-ornament bottom-left"></div>
+        <div class="corner-ornament bottom-right"></div>
+        
+        <div class="card-inner">
+          <div class="card-tag">
+            <span class="emoji">✅</span>
+            <span>Checklist</span>
+          </div>
+
+          <h2 class="section-heading">
+            <span class="emoji">🧳</span>
+            <span>오기 전에 챙겨야 할 것들</span>
+          </h2>
+
+          <ul class="checklist">
+            <li class="check-item">
+              <span class="check-icon">🎁</span>
+              <div>
+                <div class="check-main">선물 하나</div>
+                <div class="check-sub">
+                  <strong>돈:</strong> 5천 원에서 만 원 정도면 충분하네 (부담 갖지 말고!)<br />
+                  귀여운 거, 재밌는 거, 쓸모있는 거<br />
+                  <strong>포장은 꼭 해야 한다!</strong> 누가 뭘 가져왔는지 바로 모르게 해야 재미있제.
+                </div>
+              </div>
+            </li>
+
+            <li class="check-item">
+              <span class="check-icon">👗</span>
+              <div>
+                <div class="check-main">캐릭터 꾸미기 준비물</div>
+                <div class="check-sub">
+                  옷이랑, 악세서리랑, 가발이랑, 렌즈랑, 소품 같은 거<br />
+                  집에 있는 거 가져오고, 필요하면 조금만 더 사와도 되네!<br />
+                  <strong>완벽하게 안 해도 괜찮단다:</strong> 느낌만 나면 충분히 멋있어!
+                </div>
+              </div>
+            </li>
+
+            <li class="check-item">
+              <span class="check-icon">🧴</span>
+              <div>
+                <div class="check-main">개인 짐</div>
+                <div class="check-sub">
+                  세수하는 거, 화장품, 렌즈 담는 거, 약, 잠옷, 충전기 같은 거<br />
+                  다음 날 개운하게 일어나려면 이런 거 챙겨와야제!
+                </div>
+              </div>
+            </li>
+
+            <li class="check-item">
+              <span class="check-icon">🥤</span>
+              <div>
+                <div class="check-main">마실 거</div>
+                <div class="check-sub">
+                  <strong>술 마실 줄 아는 친구:</strong> 좋아하는 술 조금<br />
+                  <strong>안 마시는 친구:</strong> 사이다, 주스, 이온음료 같은 거<br />
+                  다 같이 건배할 수 있게 음료 하나씩은 가져오면 좋을 거네!
+                </div>
+              </div>
+            </li>
+
+            <li class="check-item">
+              <span class="check-icon">💖</span>
+              <div>
+                <div class="check-main">2025년 이야기들</div>
+                <div class="check-sub">
+                  <ul class="check-list">
+                    <li>올해 있었던 재밌는 일, 힘들었던 일</li>
+                    <li>덕질하면서 느낀 것들</li>
+                    <li>친구들한테 하고 싶었던 말들</li>
+                  </ul>
+                  <strong>오늘은 편하게 마음 열고 이야기하는 날</strong>이니께<br />
+                  하고 싶은 얘기 있으면 다 가져오라고!
+                </div>
+              </div>
+            </li>
+          </ul>
         </div>
-
-        <h2 class="section-heading">
-          <span class="emoji">🧳</span>
-          <span>파티 오기 전에 마지막 체크</span>
-        </h2>
-
-        <ul class="checklist">
-          <li class="check-item">
-            <span class="check-icon">🎁</span>
-            <div>
-              <div class="check-main">블라인드 선물 1개 (5,000 ~ 10,000원 이하, 다이소 환영)</div>
-              <div class="check-sub">
-                너무 무거운 선물 말고, <strong>웃기거나 귀엽거나 은근 쓸모 있는 것</strong>이면 딱 좋아.  
-                포장은 꼭 해서, 누가 뭘 가져왔는지 바로 안 보이게!
-              </div>
-            </div>
-          </li>
-
-          <li class="check-item">
-            <span class="check-icon">👗</span>
-            <div>
-              <div class="check-main">2025년 너를 미치게 한 최애 코스프레 세트</div>
-              <div class="check-sub">
-                의상 / 가디건 / 망토 / 헤어밴드 / 가발 / 렌즈 / 메이크업 / 소품 등  
-                현실 가능한 선에서 준비하면 됨. <strong>완벽 재현보다 “느낌 살리기”가 목표.</strong>
-              </div>
-            </div>
-          </li>
-
-          <li class="check-item">
-            <span class="check-icon">🧴</span>
-            <div>
-              <div class="check-main">개인 생활용품 & 파자마</div>
-              <div class="check-sub">
-                세안제, 스킨/로션, 렌즈통, 약, 파자마, 양말, 충전기, 파우치 등  
-                사진 많이 찍을 거라 화장품 파우치는 거의 필수템.
-              </div>
-            </div>
-          </li>
-
-          <li class="check-item">
-            <span class="check-icon">🥤</span>
-            <div>
-              <div class="check-main">마시고 싶은 거 하나씩</div>
-              <div class="check-sub">
-                술 마시는 사람 → 좋아하는 주종 조금.  
-                안 마시는 사람 → 탄산, 쥬스, 이온음료 등.  
-                같이 나눠 마셔도 좋고, 개인 텀블러 가져와도 귀엽다.
-              </div>
-            </div>
-          </li>
-
-          <li class="check-item">
-            <span class="check-icon">💖</span>
-            <div>
-              <div class="check-main">올해 있었던 이야기들</div>
-              <div class="check-sub">
-                힘들었던 거, 웃겼던 거, 덕질 썰, 비밀 이야기까지.  
-                오늘은 <strong>“우리끼리니까 할 수 있는 얘기”</strong> 마음 편하게 풀어놓는 날.
-              </div>
-            </div>
-          </li>
-        </ul>
       </section>
 
     </div>
@@ -635,15 +877,31 @@
   <footer>
     <div class="footer-inner">
       <p>
-        🎅 <strong>산타 마지막 멘트</strong><br />
-        “약속 시간만 안 늦으면, 나머지는 다 괜찮다.  
-        2025년 크리스마스, 우리끼리 한 번 <strong>제대로 미쳐보자</strong>.”
+        🎅 <strong>산타 할배 마지막 한마디</strong>
+      </p>
+      <p style="margin-top: 1rem;">
+        "호호호, 시간 약속만 잘 지켜주면 되네!<br />
+        일찍 와서 준비하는 시간도 재밌을 거란다.
+      </p>
+      <p style="margin-top: 1rem;">
+        할배가 직접 못 가서 좀 아쉽긴 한디,<br />
+        대신 보내는 조수가 너희들이랑 신나게 놀아줄 거여!
+      </p>
+      <p style="margin-top: 1rem;">
+        2025년 크리스마스,<br />
+        우리끼리 <strong>정말 따뜻하고 재밌는 추억</strong> 만들어보자꾸나!
+      </p>
+      <p style="margin-top: 1.5rem; font-size: 1.1rem;">
+        호호호, 메리 크리스마스! 🎄✨
+      </p>
+      <p style="margin-top: 0.5rem; font-style: italic;">
+        - 산타 할배 올림 -
       </p>
     </div>
   </footer>
 
   <script>
-    console.log("🎄 2025 산타의 덕질 크리스마스 카드 초대장");
+    console.log("🎄 2025 산타의 덕질 크리스마스 파티 초대장");
   </script>
 </body>
 </html>
