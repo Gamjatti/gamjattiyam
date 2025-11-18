@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <title>2025 산타의 덕질 크리스마스 파티 초대장</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <meta name="description" content="2025 산타의 덕질 크리스마스 파티 카드형 초대장" />
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=Gaegu:wght@300;400;700&family=Gamja+Flower&display=swap" rel="stylesheet" />
   <style>
@@ -22,6 +22,7 @@
       box-sizing: border-box;
       margin: 0;
       padding: 0;
+      -webkit-tap-highlight-color: transparent;
     }
 
     html, body {
@@ -30,17 +31,43 @@
       scroll-behavior: smooth;
       background: linear-gradient(to bottom, #1a1a1a 0%, #2d1f1f 50%, #1a1a1a 100%);
       color: #333;
+      overflow-x: hidden;
     }
 
     body {
       display: flex;
       flex-direction: column;
       align-items: stretch;
-      overflow-x: hidden;
     }
 
-    /* 눈 내리는 효과 */
+    /* 눈 내리는 효과 - 개선 버전 */
     body::before {
+      content: "";
+      pointer-events: none;
+      position: fixed;
+      top: -100%;
+      left: 0;
+      width: 100%;
+      height: 200%;
+      background-image:
+        radial-gradient(2px 2px at 15% 20%, white, transparent),
+        radial-gradient(3px 3px at 75% 40%, rgba(255,255,255,0.8), transparent),
+        radial-gradient(2px 2px at 45% 60%, rgba(255,255,255,0.9), transparent),
+        radial-gradient(3px 3px at 85% 80%, rgba(255,255,255,0.7), transparent),
+        radial-gradient(2px 2px at 25% 90%, white, transparent);
+      background-repeat: repeat;
+      background-size: 250px 250px, 300px 300px, 200px 200px, 350px 350px, 280px 280px;
+      animation: snow 25s linear infinite;
+      z-index: 0;
+    }
+
+    @keyframes snow {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(50%); }
+    }
+
+    /* 반짝이는 별 효과 */
+    body::after {
       content: "";
       pointer-events: none;
       position: fixed;
@@ -49,42 +76,60 @@
       width: 100%;
       height: 100%;
       background-image:
-        radial-gradient(2px 2px at 20% 30%, rgba(255,255,255,0.9), transparent),
-        radial-gradient(3px 3px at 60% 70%, rgba(255,255,255,0.7), transparent),
-        radial-gradient(2px 2px at 80% 10%, rgba(255,255,255,0.8), transparent);
-      background-repeat: repeat;
-      background-size: 200px 200px, 300px 300px, 250px 250px;
-      opacity: 0.6;
-      animation: snow 20s linear infinite;
+        radial-gradient(circle, rgba(255,255,255,0.8) 1px, transparent 1px),
+        radial-gradient(circle, rgba(255,215,0,0.6) 1px, transparent 1px);
+      background-size: 150px 150px, 200px 200px;
+      background-position: 0 0, 50px 50px;
+      animation: twinkle 3s ease-in-out infinite;
       z-index: 0;
+      opacity: 0.3;
     }
 
-    @keyframes snow {
-      0% { transform: translateY(0); }
-      100% { transform: translateY(100vh); }
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.3; }
+      50% { opacity: 0.6; }
     }
 
     main {
       position: relative;
       z-index: 1;
       width: 100%;
-      padding: 3rem 1.5rem 4rem;
+      padding: 1.5rem 1rem 2.5rem;
+      max-width: 500px;
+      margin: 0 auto;
     }
 
     .card-stack {
-      max-width: 800px;
-      margin: 0 auto;
+      width: 100%;
     }
 
     .card-section {
       background: var(--card-bg);
-      border-radius: 8px;
-      margin-bottom: 2rem;
-      box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+      border-radius: 12px;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.4);
       border: 3px solid var(--gold);
       padding: 0;
       position: relative;
       overflow: hidden;
+      animation: cardFadeIn 0.6s ease-out backwards;
+    }
+
+    .card-section:nth-child(1) { animation-delay: 0.1s; }
+    .card-section:nth-child(2) { animation-delay: 0.2s; }
+    .card-section:nth-child(3) { animation-delay: 0.3s; }
+    .card-section:nth-child(4) { animation-delay: 0.4s; }
+    .card-section:nth-child(5) { animation-delay: 0.5s; }
+
+    @keyframes cardFadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     /* 빈티지 테두리 패턴 */
@@ -93,7 +138,7 @@
       position: absolute;
       inset: 8px;
       border: 2px solid var(--ornament-gold);
-      border-radius: 4px;
+      border-radius: 8px;
       pointer-events: none;
       opacity: 0.5;
     }
@@ -103,7 +148,7 @@
       position: absolute;
       inset: 14px;
       border: 1px dotted var(--gold);
-      border-radius: 2px;
+      border-radius: 4px;
       pointer-events: none;
       opacity: 0.3;
     }
@@ -111,63 +156,79 @@
     .card-inner {
       position: relative;
       z-index: 1;
-      padding: 2.5rem 2rem 3rem;
+      padding: 2rem 1.5rem 2.5rem;
     }
 
     /* 코너 장식 */
     .corner-ornament {
       position: absolute;
-      width: 40px;
-      height: 40px;
+      width: 30px;
+      height: 30px;
       border: 2px solid var(--gold);
       pointer-events: none;
+      z-index: 2;
     }
 
     .corner-ornament.top-left {
-      top: 20px;
-      left: 20px;
+      top: 15px;
+      left: 15px;
       border-right: none;
       border-bottom: none;
+      animation: cornerGlow 2s ease-in-out infinite;
     }
 
     .corner-ornament.top-right {
-      top: 20px;
-      right: 20px;
+      top: 15px;
+      right: 15px;
       border-left: none;
       border-bottom: none;
+      animation: cornerGlow 2s ease-in-out infinite 0.5s;
     }
 
     .corner-ornament.bottom-left {
-      bottom: 20px;
-      left: 20px;
+      bottom: 15px;
+      left: 15px;
       border-right: none;
       border-top: none;
+      animation: cornerGlow 2s ease-in-out infinite 1s;
     }
 
     .corner-ornament.bottom-right {
-      bottom: 20px;
-      right: 20px;
+      bottom: 15px;
+      right: 15px;
       border-left: none;
       border-top: none;
+      animation: cornerGlow 2s ease-in-out infinite 1.5s;
+    }
+
+    @keyframes cornerGlow {
+      0%, 100% { opacity: 0.5; }
+      50% { opacity: 1; box-shadow: 0 0 10px var(--gold); }
     }
 
     .card-tag {
       display: inline-flex;
       align-items: center;
       gap: 0.5rem;
-      font-size: 0.7rem;
-      padding: 0.4rem 1rem;
+      font-size: 0.65rem;
+      padding: 0.4rem 0.9rem;
       border-radius: 2px;
       background: var(--burgundy);
       color: var(--cream);
       text-transform: uppercase;
       letter-spacing: 0.15em;
-      margin-bottom: 1.5rem;
+      margin-bottom: 1.2rem;
       border: 1px solid var(--gold);
+      animation: tagPulse 2s ease-in-out infinite;
+    }
+
+    @keyframes tagPulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
     }
 
     .card-tag span.emoji {
-      font-size: 1rem;
+      font-size: 0.9rem;
     }
 
     h1, h2, h3 {
@@ -177,7 +238,7 @@
     /* 표지 스타일 */
     #cover .card-inner {
       text-align: center;
-      padding: 3rem 2rem 3.5rem;
+      padding: 2.5rem 1.5rem 3rem;
       background: linear-gradient(135deg, var(--burgundy) 0%, var(--deep-red) 100%);
       color: var(--cream);
     }
@@ -188,43 +249,62 @@
     }
 
     .cover-title {
-      font-size: clamp(2rem, 5vw, 3rem);
-      line-height: 1.3;
-      margin-bottom: 1.5rem;
+      font-size: 2rem;
+      line-height: 1.4;
+      margin-bottom: 1.2rem;
       color: var(--cream);
       font-family: 'Gamja Flower', cursive;
       text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+      animation: titleFloat 3s ease-in-out infinite;
+    }
+
+    @keyframes titleFloat {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-5px); }
     }
 
     .cover-title .highlight {
       color: var(--gold);
       display: block;
-      font-size: 1.1em;
+      font-size: 2.2rem;
+      margin-top: 0.3rem;
+      animation: highlightGlow 2s ease-in-out infinite;
+    }
+
+    @keyframes highlightGlow {
+      0%, 100% { text-shadow: 2px 2px 4px rgba(0,0,0,0.3); }
+      50% { text-shadow: 0 0 20px var(--gold), 2px 2px 4px rgba(0,0,0,0.3); }
     }
 
     .cover-sub {
-      font-size: 1rem;
+      font-size: 0.95rem;
       color: var(--cream);
-      margin-bottom: 2rem;
-      line-height: 1.7;
+      margin-bottom: 1.5rem;
+      line-height: 1.8;
       opacity: 0.95;
     }
 
     .cover-accent {
-      font-size: 1rem;
+      font-size: 0.9rem;
       color: var(--cream);
       background: rgba(0,0,0,0.2);
       display: inline-block;
-      padding: 1rem 1.5rem;
+      padding: 0.9rem 1.2rem;
       border-radius: 4px;
-      margin: 0 auto 2rem;
+      margin: 0 auto 1.5rem;
       border: 2px solid var(--gold);
       box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      animation: accentBounce 1s ease-in-out infinite;
+    }
+
+    @keyframes accentBounce {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.03); }
     }
 
     .scroll-hint {
       margin-top: 1rem;
-      font-size: 0.85rem;
+      font-size: 0.8rem;
       color: var(--cream);
       display: flex;
       flex-direction: column;
@@ -245,22 +325,23 @@
 
     /* 산타 편지 */
     .letter-title {
-      font-size: 1.5rem;
-      margin-bottom: 1.2rem;
+      font-size: 1.4rem;
+      margin-bottom: 1rem;
       color: var(--burgundy);
       text-align: center;
       font-family: 'Gamja Flower', cursive;
     }
 
     .letter-body {
-      font-size: 0.95rem;
-      line-height: 2;
+      font-size: 0.9rem;
+      line-height: 1.9;
       background: var(--cream);
       border-radius: 4px;
-      padding: 2rem 1.5rem;
+      padding: 1.5rem 1.2rem;
       border: 2px solid var(--ornament-gold);
       position: relative;
       box-shadow: inset 0 2px 8px rgba(0,0,0,0.05);
+      word-break: keep-all;
     }
 
     .letter-body strong {
@@ -269,8 +350,8 @@
     }
 
     .letter-sign {
-      margin-top: 1.5rem;
-      font-size: 0.9rem;
+      margin-top: 1.2rem;
+      font-size: 0.85rem;
       text-align: right;
       color: var(--burgundy);
       font-style: italic;
@@ -278,8 +359,8 @@
 
     /* 정보 섹션 */
     .section-heading {
-      font-size: 1.4rem;
-      margin-bottom: 1.5rem;
+      font-size: 1.3rem;
+      margin-bottom: 1.2rem;
       color: var(--burgundy);
       display: flex;
       align-items: center;
@@ -290,25 +371,42 @@
     }
 
     .section-heading span.emoji {
-      font-size: 1.5rem;
+      font-size: 1.4rem;
+      animation: emojiSpin 3s ease-in-out infinite;
+    }
+
+    @keyframes emojiSpin {
+      0%, 100% { transform: rotate(0deg); }
+      25% { transform: rotate(-10deg); }
+      75% { transform: rotate(10deg); }
     }
 
     .info-grid {
       display: grid;
-      gap: 1.2rem;
-      margin-bottom: 1.5rem;
+      gap: 1rem;
+      margin-bottom: 1.2rem;
     }
 
     .info-item {
       border-radius: 4px;
-      padding: 1.2rem;
+      padding: 1rem;
       background: var(--cream);
       border: 2px solid var(--ornament-gold);
       box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      animation: itemFloat 3s ease-in-out infinite;
+    }
+
+    .info-item:nth-child(1) { animation-delay: 0s; }
+    .info-item:nth-child(2) { animation-delay: 0.3s; }
+    .info-item:nth-child(3) { animation-delay: 0.6s; }
+
+    @keyframes itemFloat {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-3px); }
     }
 
     .info-label {
-      font-size: 0.75rem;
+      font-size: 0.7rem;
       text-transform: uppercase;
       letter-spacing: 0.1em;
       color: var(--burgundy);
@@ -317,16 +415,17 @@
     }
 
     .info-value {
-      font-size: 1.05rem;
+      font-size: 1rem;
       font-weight: 600;
       margin-bottom: 0.5rem;
       color: var(--deep-red);
     }
 
     .info-note {
-      font-size: 0.88rem;
+      font-size: 0.85rem;
       color: #555;
-      line-height: 1.6;
+      line-height: 1.7;
+      word-break: keep-all;
     }
 
     .info-note strong {
@@ -337,20 +436,21 @@
       background: var(--cream);
       border: 2px solid var(--ornament-gold);
       border-radius: 4px;
-      padding: 1.2rem;
-      margin-top: 1.5rem;
+      padding: 1rem;
+      margin-top: 1.2rem;
     }
 
     .theme-box h3 {
-      font-size: 1.1rem;
-      margin-bottom: 0.8rem;
+      font-size: 1rem;
+      margin-bottom: 0.7rem;
       color: var(--burgundy);
     }
 
     .theme-box p {
-      font-size: 0.9rem;
+      font-size: 0.85rem;
       color: #555;
-      line-height: 1.7;
+      line-height: 1.8;
+      word-break: keep-all;
     }
 
     .theme-box strong {
@@ -358,70 +458,84 @@
     }
 
     .theme-list {
-      margin-top: 0.8rem;
-      padding-left: 1.2rem;
+      margin-top: 0.7rem;
+      padding-left: 1rem;
     }
 
     .theme-list li {
-      font-size: 0.88rem;
+      font-size: 0.83rem;
       color: #555;
       line-height: 1.8;
       margin-bottom: 0.3rem;
+      word-break: keep-all;
     }
 
     /* 타임라인 */
     .timeline {
       position: relative;
       margin-top: 1rem;
-      padding-left: 2rem;
+      padding-left: 1.8rem;
     }
 
     .timeline::before {
       content: "";
       position: absolute;
-      left: 0.5rem;
+      left: 0.4rem;
       top: 0.5rem;
       bottom: 0.5rem;
       width: 3px;
       background: linear-gradient(to bottom, var(--burgundy), var(--ornament-gold));
+      animation: lineGlow 2s ease-in-out infinite;
+    }
+
+    @keyframes lineGlow {
+      0%, 100% { opacity: 0.7; }
+      50% { opacity: 1; box-shadow: 0 0 10px var(--burgundy); }
     }
 
     .timeline-item {
       position: relative;
-      padding-left: 1.5rem;
-      margin-bottom: 1.8rem;
+      padding-left: 1.2rem;
+      margin-bottom: 1.5rem;
     }
 
     .timeline-dot {
       position: absolute;
-      left: 0;
-      top: 0.4rem;
-      width: 14px;
-      height: 14px;
+      left: -0.05rem;
+      top: 0.35rem;
+      width: 12px;
+      height: 12px;
       border-radius: 50%;
       background: var(--gold);
       border: 3px solid var(--burgundy);
       box-shadow: 0 0 0 3px var(--card-bg);
+      animation: dotPulse 2s ease-in-out infinite;
+    }
+
+    @keyframes dotPulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.2); box-shadow: 0 0 10px var(--gold), 0 0 0 3px var(--card-bg); }
     }
 
     .timeline-time {
-      font-size: 0.85rem;
+      font-size: 0.8rem;
       color: var(--burgundy);
       font-weight: 600;
       margin-bottom: 0.3rem;
     }
 
     .timeline-title {
-      font-size: 1rem;
+      font-size: 0.95rem;
       font-weight: 600;
       margin-bottom: 0.4rem;
       color: var(--deep-red);
     }
 
     .timeline-desc {
-      font-size: 0.88rem;
+      font-size: 0.83rem;
       color: #555;
-      line-height: 1.7;
+      line-height: 1.8;
+      word-break: keep-all;
     }
 
     .timeline-desc strong {
@@ -432,36 +546,56 @@
     .checklist {
       list-style: none;
       display: grid;
-      gap: 1.2rem;
+      gap: 1rem;
       font-size: 0.9rem;
     }
 
     .check-item {
       display: flex;
       align-items: flex-start;
-      gap: 1rem;
+      gap: 0.8rem;
       background: var(--cream);
       padding: 1rem;
       border-radius: 4px;
       border: 2px solid var(--ornament-gold);
+      animation: checkFloat 3s ease-in-out infinite;
+    }
+
+    .check-item:nth-child(1) { animation-delay: 0s; }
+    .check-item:nth-child(2) { animation-delay: 0.2s; }
+    .check-item:nth-child(3) { animation-delay: 0.4s; }
+    .check-item:nth-child(4) { animation-delay: 0.6s; }
+    .check-item:nth-child(5) { animation-delay: 0.8s; }
+
+    @keyframes checkFloat {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-2px); }
     }
 
     .check-icon {
-      font-size: 1.5rem;
-      margin-top: 0.2rem;
+      font-size: 1.3rem;
+      margin-top: 0.1rem;
       flex-shrink: 0;
+      animation: iconBounce 1.5s ease-in-out infinite;
+    }
+
+    @keyframes iconBounce {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.1); }
     }
 
     .check-main {
       font-weight: 600;
       margin-bottom: 0.4rem;
       color: var(--deep-red);
+      font-size: 0.9rem;
     }
 
     .check-sub {
-      font-size: 0.85rem;
+      font-size: 0.8rem;
       color: #555;
-      line-height: 1.7;
+      line-height: 1.8;
+      word-break: keep-all;
     }
 
     .check-sub strong {
@@ -470,32 +604,40 @@
 
     .check-list {
       margin-top: 0.5rem;
-      padding-left: 1rem;
+      padding-left: 0.8rem;
     }
 
     .check-list li {
-      font-size: 0.85rem;
+      font-size: 0.78rem;
       color: #666;
       margin-bottom: 0.2rem;
+      word-break: keep-all;
     }
 
     /* Footer */
     footer {
       position: relative;
       z-index: 1;
-      padding: 0 1.5rem 3rem;
+      padding: 0 1rem 2.5rem;
     }
 
     .footer-inner {
-      max-width: 800px;
+      max-width: 500px;
       margin: 0 auto;
       text-align: center;
-      font-size: 0.9rem;
+      font-size: 0.85rem;
       color: var(--cream);
       background: rgba(139, 21, 56, 0.3);
-      padding: 2rem;
-      border-radius: 8px;
+      padding: 1.8rem 1.5rem;
+      border-radius: 12px;
       border: 2px solid var(--gold);
+      word-break: keep-all;
+      animation: footerGlow 3s ease-in-out infinite;
+    }
+
+    @keyframes footerGlow {
+      0%, 100% { box-shadow: 0 0 20px rgba(212, 175, 55, 0.3); }
+      50% { box-shadow: 0 0 30px rgba(212, 175, 55, 0.6); }
     }
 
     .footer-inner strong {
@@ -506,22 +648,32 @@
       line-height: 1.8;
     }
 
-    @media (min-width: 720px) {
-      .card-inner {
-        padding: 3rem 3rem 3.5rem;
+    /* 추가 애니메이션 */
+    @keyframes slideInLeft {
+      from {
+        opacity: 0;
+        transform: translateX(-30px);
       }
-
-      .info-grid {
-        grid-template-columns: repeat(3, minmax(0, 1fr));
+      to {
+        opacity: 1;
+        transform: translateX(0);
       }
     }
 
-    /* 장식 요소 */
-    .ornament-divider {
-      text-align: center;
-      margin: 2rem 0;
-      color: var(--gold);
-      font-size: 1.5rem;
+    @keyframes slideInRight {
+      from {
+        opacity: 0;
+        transform: translateX(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    /* 스크롤 시 애니메이션 */
+    .animate-in {
+      animation: slideInLeft 0.6s ease-out;
     }
   </style>
 </head>
@@ -603,8 +755,8 @@
             올해 네 마음을 가장 뜨겁게 만든<br />
             그 캐릭터나 인물로 변신해서 모이는 거여!
             <br /><br />
-            참가자는 딱 다섯 명.<br />
-            다섯 명이면 적당하제. 더 많으면 할배가 헷갈린단 말이여.
+            참가자는 할배 조수 포함해서 딱 다섯 명.<br />
+            이 정도면 적당하제.
             <br /><br />
             할배가 하나만 부탁하자면:<br />
             👉 <strong>2025년에 네 마음을 제일 흔들어놨던<br />
@@ -675,9 +827,10 @@
 
             <div class="info-item">
               <div class="info-label">누구</div>
-              <div class="info-value">다섯 명 + 산타 조수</div>
+              <div class="info-value">조수 포함 5명</div>
               <p class="info-note">
-                👥 이 정도면 딱 좋제. 너무 많으면 시끄럽고, 적당해야 다들 친해지기도 쉽잖겄나.
+                👥 산타 조수 포함해서 총 다섯 명!<br />
+                적당한 인원이라 다 같이 친해지기도 쉽고 재밌을 거제.
               </p>
             </div>
           </div>
@@ -779,7 +932,7 @@
               <div class="timeline-desc">
                 노래방으로 캐럴도 부르고, 요즘 노래도 부르고!<br />
                 간단한 게임도 하면서 더 친해지는 시간.<br />
-                <strong>중요한 건 다섯 명이서 편하게 웃으면서 노는 거제!</strong>
+                <strong>중요한 건 다 같이 편하게 웃으면서 노는 거제!</strong>
               </div>
             </div>
           </div>
