@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -417,6 +416,41 @@
       word-break: keep-all;
     }
 
+    /* ✅ 카카오맵 길찾기 버튼 */
+    .map-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.45rem;
+      margin-top: 0.55rem;
+      padding: 0.55rem 0.85rem;
+      background: var(--burgundy);
+      color: var(--cream);
+      border-radius: 8px;
+      border: 1px solid var(--gold);
+      font-size: 0.82rem;
+      font-weight: 700;
+      text-decoration: none;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+      transition: transform 0.15s ease, box-shadow 0.15s ease, opacity 0.15s ease;
+      user-select: none;
+    }
+    .map-btn:active {
+      transform: translateY(1px) scale(0.98);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.16);
+      opacity: 0.95;
+    }
+    .map-btn .icon {
+      font-size: 1rem;
+      line-height: 1;
+    }
+    .map-btn-note {
+      margin-top: 0.45rem;
+      font-size: 0.75rem;
+      color: #666;
+      line-height: 1.6;
+    }
+
     /* ✅ 숙소 이미지 - 흐르는 슬라이더 */
     .stay-gallery {
       margin-top: 1.1rem;
@@ -437,11 +471,6 @@
       font-weight: 700;
       font-size: 0.9rem;
       letter-spacing: 0.01em;
-    }
-    .stay-gallery .gallery-head small {
-      font-weight: 600;
-      opacity: 0.8;
-      font-size: 0.75rem;
     }
     .marquee {
       position: relative;
@@ -639,14 +668,6 @@
     .footer-inner strong { color: var(--gold); }
     .footer-inner p { line-height: 1.8; }
 
-    /* 스크롤 시 애니메이션 */
-    .animate-in { animation: slideInLeft 0.6s ease-out; }
-
-    @keyframes slideInLeft {
-      from { opacity: 0; transform: translateX(-30px); }
-      to { opacity: 1; transform: translateX(0); }
-    }
-
     /* 작은 화면에서 이미지 카드 조금 더 작게 */
     @media (max-width: 360px) {
       .stay-photo { width: 160px; height: 110px; }
@@ -663,7 +684,7 @@
   <main>
     <div class="card-stack">
 
-      <!-- 1. COVER - 크리스마스 카드 표지 -->
+      <!-- 1. COVER -->
       <section class="card-section" id="cover">
         <div class="corner-ornament top-left"></div>
         <div class="corner-ornament top-right"></div>
@@ -697,7 +718,7 @@
         </div>
       </section>
 
-      <!-- 2. SANTA LETTER - 산타 편지 -->
+      <!-- 2. SANTA LETTER -->
       <section class="card-section" id="letter">
         <div class="corner-ornament top-left"></div>
         <div class="corner-ornament top-right"></div>
@@ -746,7 +767,6 @@
             <br /><br />
             근디! 미리 다 꾸미고 오면 재미없잖겄나?<br />
             <strong>7시에 와서 그때부터 <br />각자 방에서 변신 시작</strong>하는 거란다.<br />
-
             <br /><br />
             아, 그리고 말이여!<br />
             할배가 <strong>크리스마스 당일엔 바빠서 못 간다.</strong><br />
@@ -765,7 +785,7 @@
         </div>
       </section>
 
-      <!-- 3. INFO - 파티 정보 카드 (✅ 체크인 가이드 + 와이파이 + 숙소 이미지 추가) -->
+      <!-- 3. INFO -->
       <section class="card-section" id="info">
         <div class="corner-ornament top-left"></div>
         <div class="corner-ornament top-right"></div>
@@ -798,8 +818,8 @@
               <div class="info-label">어디</div>
               <div class="info-value">아지트 같은 파티룸</div>
               <p class="info-note">
-                📍 주소는 아래에 <strong>딱 박아놨으니</strong> 잘 보고 오고!<br />
-                              </p>
+                📍 주소 아래 버튼 누르면 <strong>카카오맵 바로 뜸!</strong><br />
+              </p>
             </div>
 
             <div class="info-item">
@@ -812,14 +832,27 @@
             </div>
           </div>
 
-          <!-- ✅ 숙소 체크인 가이드 -->
+          <!-- ✅ 체크인 가이드 -->
           <div class="theme-box" style="margin-top: 0.4rem;">
             <h3>🧭 체크인 가이드 (길치 구제용)</h3>
-            <p style="margin-bottom:0.7rem;">
-              <strong>주소:</strong> [서울시 구로구 구로동 496-167]<br />
-              이거 찍고 오면 되는데, 그래도 불안한 애들을 위해 “우리 조수가” 길 안내 적어준다잉~
+            <p style="margin-bottom:0.35rem;">
+              <strong>주소:</strong> 서울시 구로구 구로동 496-167
             </p>
-            <ol class="theme-list" style="padding-left: 1.2rem; margin-top:0;">
+
+            <!-- ✅ 카카오맵 버튼 (추가된 부분) -->
+            <a class="map-btn"
+               href="https://map.kakao.com/link/search/서울시%20구로구%20구로동%20496-167"
+               target="_blank"
+               rel="noopener noreferrer"
+               aria-label="카카오맵으로 서울시 구로구 구로동 496-167 검색">
+              <span class="icon">📍</span>
+              카카오맵으로 길찾기
+            </a>
+            <div class="map-btn-note">
+              (모바일은 앱으로, 없으면 웹으로 열림) ✅
+            </div>
+
+            <ol class="theme-list" style="padding-left: 1.2rem; margin-top:0.8rem;">
               <li><strong>구로역 1번 출구</strong> 나온 뒤 <strong>NC백화점 방면</strong>으로 가서 <strong>육교</strong>로 횡단!</li>
               <li>NC백화점 <strong>벽면 따라 150m 직진</strong> → 그 다음 <strong>횡단보도 2개</strong> 연속으로 건너기!</li>
               <li><strong>애견용품샵 방면</strong>으로 <strong>70m 직진</strong> 후 <strong>오른쪽 골목</strong>으로 쏙!</li>
@@ -828,7 +861,7 @@
             </ol>
           </div>
 
-          <!-- ✅ 출입/비번 안내 -->
+          <!-- ✅ 출입/비번 -->
           <div class="theme-box" style="margin-top: 1rem;">
             <h3>🔑 문 여는 법 / 비번</h3>
             <p>
@@ -852,7 +885,7 @@
             </p>
           </div>
 
-          <!-- ✅ 숙소 이미지 슬라이더(흘러가게) -->
+          <!-- ✅ 숙소 이미지 슬라이더 -->
           <div class="stay-gallery" aria-label="숙소 이미지 미리보기">
             <div class="gallery-head">
               <span>🏠 숙소 미리보기</span>
@@ -907,7 +940,7 @@
             </div>
           </div>
 
-          <!-- ✅ 테마/드레스코드: 그대로 유지 -->
+          <!-- ✅ 테마 -->
           <div class="theme-box">
             <h3>🎭 테마</h3>
             <p>
@@ -931,7 +964,7 @@
         </div>
       </section>
 
-      <!-- 4. SCHEDULE - 스케줄 카드 (✅ 3시 입실/7시 모임/마지막 술게임으로 수정) -->
+      <!-- 4. SCHEDULE -->
       <section class="card-section" id="schedule">
         <div class="corner-ornament top-left"></div>
         <div class="corner-ornament top-right"></div>
@@ -1008,7 +1041,7 @@
               <div class="timeline-time">밤새도록</div>
               <div class="timeline-title">술게임 + 게임파티 (조수 준비 완료)</div>
               <div class="timeline-desc">
-                산타 조수한테 <strong>여러 가지 게임</strong> 준비하라고 이미 
+                산타 조수한테 <strong>여러 가지 게임</strong> 준비하라고 이미
                 <br>시켜놨으니 <strong>기대해도 좋다잉~</strong><br />
                 중요한 건 다 같이 편하게 웃으면서 노는 거제!
               </div>
@@ -1017,7 +1050,7 @@
         </div>
       </section>
 
-      <!-- ✅ 5. FOOD PLAN - 음식/술 카드 (새로 추가) -->
+      <!-- 5. FOOD -->
       <section class="card-section" id="food">
         <div class="corner-ornament top-left"></div>
         <div class="corner-ornament top-right"></div>
@@ -1058,8 +1091,7 @@
             <h3>2) 샹츠마라 신도림점</h3>
             <p>
               • 로제 마라샹궈 2~3인분: <strong>36,900원</strong><br />
-              • 맵기 <strong>2단계</strong> 생각 중!<br />
-              <strong>신라면 맵기</strong> vs <strong>열라면 맵기</strong> 뭐로 갈지 의견 주세용~!!!!<br />
+              • 맵기 <strong>1단계</strong> 생각 중!<br />
               • 마라샹궈랑 <strong>밥 같이</strong> 드실 분도 말해주세용 🍚
             </p>
           </div>
@@ -1068,8 +1100,8 @@
             <h3>3) 요아정 (디저트)</h3>
             <p>
               • 홀리데이 선물박스 패키지: <strong>매장 방문 시 가능</strong><br />
-              • 3~4인용 메뉴 주문에 <strong>1,000원 추가</strong>하면 OK!<br /><br />
-                  </p>
+              • 3~4인용 메뉴 주문에 <strong>1,000원 추가</strong>하면 OK!<br />
+            </p>
           </div>
 
           <div class="theme-box" style="margin-top: 1rem;">
@@ -1092,7 +1124,7 @@
         </div>
       </section>
 
-      <!-- 6. CHECKLIST - 준비물 카드 (원본 유지) -->
+      <!-- 6. CHECKLIST -->
       <section class="card-section" id="checklist">
         <div class="corner-ornament top-left"></div>
         <div class="corner-ornament top-right"></div>
@@ -1211,11 +1243,7 @@
   </footer>
 
   <script>
-    console.log("🎄 2025 산타의 덕질 크리스마스 파티 초대장 (ver1 content updated)");
-
-    // (옵션) 슬라이더가 너무 빠르다/느리다 싶으면 여기서 숫자만 바꾸면 됨.
-    // 22s -> 더 느리게: 28s / 더 빠르게: 16s
-    // CSS에서 조정하는 게 제일 깔끔해서 여기선 로그만!
+    console.log("🎄 2025 산타의 덕질 크리스마스 파티 초대장 (KakaoMap button included)");
   </script>
 </body>
 </html>
