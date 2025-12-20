@@ -5,7 +5,20 @@
   <title>2025 산타의 덕질 크리스마스 파티 초대장</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <meta name="description" content="2025 산타의 덕질 크리스마스 파티 카드형 초대장" />
+
+  <!-- ✅ OG (카톡 미리보기 썸네일) : 원하는 이미지 링크로 세팅 -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="2025 산타의 덕질 크리스마스 파티 초대장" />
+  <meta property="og:description" content="🎄 산타 & 루돌프가 분주하게 준비 중! 7시에 와서 변신 시작!" />
+  <meta property="og:image" content="https://i.postimg.cc/yYLJKfBB/image.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="산타와 루돌프가 크리스마스 파티를 준비하는 장면" />
+  <!-- ⚠️ 아래 og:url은 GitHub Pages 주소로 바꿔줘야 캐시/미리보기 안정적 -->
+  <meta property="og:url" content="https://YOUR_USERNAME.github.io/YOUR_REPO/" />
+
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=Gaegu:wght@300;400;700&family=Gamja+Flower&display=swap" rel="stylesheet" />
+
   <style>
     :root {
       --burgundy: #8B1538;
@@ -709,8 +722,8 @@
     }
   </style>
 </head>
-<body>
 
+<body>
   <!-- ✅ BGM 컨트롤 UI -->
   <div class="bgm-controller" aria-label="배경음악 컨트롤">
     <button class="bgm-btn" id="bgmToggle" type="button" aria-label="배경음악 재생/정지">
@@ -1274,7 +1287,7 @@
 
   <script>
     /**
-     * ✅ "무료"로 안전하게: 외부 음원 없이 WebAudio로 잔잔한 피아노 캐롤(공개 영역 멜로디 느낌) 생성
+     * ✅ "무료"로 안전하게: 외부 음원 없이 WebAudio로 잔잔한 피아노 캐롤 생성
      * - 브라우저 정책상 자동재생은 막히는 경우가 많아서:
      *   1) 버튼 누르면 바로 시작
      *   2) 또는 첫 터치/스크롤에서 자동 시작 시도
@@ -1294,16 +1307,14 @@
     let nextNoteTime = 0;
     let seqIndex = 0;
 
-    // ---- Music: 잔잔한 캐롤 느낌 (Jingle Bells 같은 공개영역 멜로디 분위기, 단순 편곡)
+    // ---- Music: 잔잔한 캐롤 느낌 (단순 편곡)
     // 단위: 16분음표(= step)
     // note = MIDI 번호, durSteps = 지속(스텝), vel = 0~1
-    // (멜로디 + 간단한 왼손(베이스/화음) 섞어서 "피아노처럼" 들리게)
     const BPM = 84;
     const STEP = 60 / BPM / 4; // 16th note seconds
     const LOOP_STEPS = 64;     // 4마디(16*4) 루프
 
     const melody = [
-      // (가볍게 캐롤 분위기, 4마디 루프)
       // bar1
       { step: 0,  note: 76, dur: 4, vel: 0.55 }, // E5
       { step: 4,  note: 76, dur: 4, vel: 0.55 },
@@ -1360,7 +1371,7 @@
       master = audioCtx.createGain();
       master.gain.value = Number(volEl.value || 0.18);
 
-      // gentle reverb-ish (simple delay + lowpass for cozy feel)
+      // gentle reverb-ish (simple delay + lowpass)
       const delay = audioCtx.createDelay(1.0);
       delay.delayTime.value = 0.18;
 
@@ -1394,14 +1405,12 @@
       osc1.type = "triangle";
       osc2.type = "sine";
       osc1.frequency.setValueAtTime(freq, time);
-      osc2.frequency.setValueAtTime(freq * 2, time); // 살짝 상음
+      osc2.frequency.setValueAtTime(freq * 2, time);
 
-      // filter: 부드럽게
       lp.type = "lowpass";
       lp.frequency.setValueAtTime(2400, time);
       lp.frequency.exponentialRampToValueAtTime(1200, time + Math.min(0.25, durSec));
 
-      // envelope
       const a = 0.008;
       const d = Math.max(0.05, Math.min(0.22, durSec * 0.6));
       const s = vel * 0.55;
@@ -1412,7 +1421,6 @@
       g.gain.exponentialRampToValueAtTime(Math.max(0.0001, s), time + a + d);
       g.gain.exponentialRampToValueAtTime(0.0001, time + Math.max(durSec, a + d) + r);
 
-      // connect
       osc1.connect(lp);
       osc2.connect(lp);
       lp.connect(g);
@@ -1425,11 +1433,10 @@
     }
 
     // scheduling (lookahead)
-    const LOOKAHEAD = 0.025; // seconds
+    const LOOKAHEAD = 0.025;
     const SCHEDULE_AHEAD = 0.18;
 
     function scheduleStep(step, baseTime) {
-      // 멜로디
       melody.forEach(ev => {
         if (ev.step === step) {
           const t = baseTime;
@@ -1438,13 +1445,11 @@
         }
       });
 
-      // 왼손(화음)
       leftHand.forEach(ev => {
         if (ev.step === step) {
           const t = baseTime;
           const dur = ev.dur * STEP;
           ev.notes.forEach((n, i) => {
-            // 살짝 분산(아르페지오 느낌)
             const offset = i * 0.02;
             playPianoNote(midiToFreq(n), t + offset, dur * 0.9, ev.vel);
           });
@@ -1467,7 +1472,6 @@
     function startBGM() {
       ensureAudio();
 
-      // 브라우저가 suspended면 resume
       if (audioCtx.state === "suspended") {
         audioCtx.resume();
       }
@@ -1478,7 +1482,6 @@
       label.textContent = "BGM 끄기";
       statusEl.textContent = "재생중";
 
-      // align start
       nextNoteTime = audioCtx.currentTime + 0.05;
       seqIndex = 0;
 
@@ -1507,12 +1510,12 @@
       master.gain.value = Number(volEl.value || 0.18);
     });
 
-    // ✅ 첫 터치/스크롤에서 자동 재생 "시도" (정책상 실패할 수 있음 -> 그땐 버튼 누르면 됨)
+    // ✅ 첫 터치/스크롤에서 자동 재생 "시도"
     let autoTried = false;
     function autoStartOnce() {
       if (autoTried) return;
       autoTried = true;
-      try { startBGM(); } catch (e) { /* ignore */ }
+      try { startBGM(); } catch (e) {}
       window.removeEventListener("pointerdown", autoStartOnce);
       window.removeEventListener("touchstart", autoStartOnce);
       window.removeEventListener("keydown", autoStartOnce);
