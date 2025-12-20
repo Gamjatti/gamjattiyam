@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -40,7 +41,7 @@
       align-items: stretch;
     }
 
-    /* 눈 내리는 효과 - 개선 버전 */
+    /* 눈 내리는 효과 */
     body::before {
       content: "";
       pointer-events: none;
@@ -66,7 +67,7 @@
       100% { transform: translateY(50%); }
     }
 
-    /* 반짝이는 별 효과 */
+    /* 반짝이는 별 */
     body::after {
       content: "";
       pointer-events: none;
@@ -128,14 +129,13 @@
     .card-section:nth-child(3) { animation-delay: 0.3s; }
     .card-section:nth-child(4) { animation-delay: 0.4s; }
     .card-section:nth-child(5) { animation-delay: 0.5s; }
-    .card-section:nth-child(6) { animation-delay: 0.6s; } /* 추가 카드 */
+    .card-section:nth-child(6) { animation-delay: 0.6s; }
 
     @keyframes cardFadeIn {
       from { opacity: 0; transform: translateY(30px); }
       to { opacity: 1; transform: translateY(0); }
     }
 
-    /* 빈티지 테두리 패턴 */
     .card-section::before {
       content: "";
       position: absolute;
@@ -162,7 +162,6 @@
       padding: 2rem 1.5rem 2.5rem;
     }
 
-    /* 코너 장식 */
     .corner-ornament {
       position: absolute;
       width: 30px;
@@ -209,7 +208,6 @@
 
     h1, h2, h3 { font-weight: 700; }
 
-    /* 표지 스타일 */
     #cover .card-inner {
       text-align: center;
       padding: 2.5rem 1.5rem 3rem;
@@ -277,7 +275,6 @@
       50% { transform: translateY(6px); }
     }
 
-    /* 산타 편지 */
     .letter-title {
       font-size: 1.4rem;
       margin-bottom: 1rem;
@@ -308,7 +305,6 @@
       font-style: italic;
     }
 
-    /* 정보 섹션 */
     .section-heading {
       font-size: 1.3rem;
       margin-bottom: 1.2rem;
@@ -416,7 +412,6 @@
       word-break: keep-all;
     }
 
-    /* ✅ 카카오맵 길찾기 버튼 */
     .map-btn {
       display: inline-flex;
       align-items: center;
@@ -440,10 +435,7 @@
       box-shadow: 0 4px 12px rgba(0,0,0,0.16);
       opacity: 0.95;
     }
-    .map-btn .icon {
-      font-size: 1rem;
-      line-height: 1;
-    }
+    .map-btn .icon { font-size: 1rem; line-height: 1; }
     .map-btn-note {
       margin-top: 0.45rem;
       font-size: 0.75rem;
@@ -451,7 +443,6 @@
       line-height: 1.6;
     }
 
-    /* ✅ 숙소 이미지 - 흐르는 슬라이더 */
     .stay-gallery {
       margin-top: 1.1rem;
       background: rgba(0,0,0,0.02);
@@ -527,7 +518,6 @@
       letter-spacing: 0.02em;
     }
 
-    /* 타임라인 */
     .timeline { position: relative; margin-top: 1rem; padding-left: 0; }
     .timeline-item {
       position: relative;
@@ -589,7 +579,6 @@
     }
     .timeline-desc strong { color: var(--burgundy); }
 
-    /* 체크리스트 */
     .checklist { list-style: none; display: grid; gap: 1rem; font-size: 0.9rem; }
 
     .check-item {
@@ -622,11 +611,6 @@
       flex-shrink: 0;
       animation: iconShake 3s ease-in-out infinite;
     }
-    .check-item:nth-child(1) .check-icon { animation-delay: 0s; }
-    .check-item:nth-child(2) .check-icon { animation-delay: 0.5s; }
-    .check-item:nth-child(3) .check-icon { animation-delay: 1s; }
-    .check-item:nth-child(4) .check-icon { animation-delay: 1.5s; }
-    .check-item:nth-child(5) .check-icon { animation-delay: 2s; }
 
     @keyframes iconShake {
       0%, 90%, 100% { transform: rotate(0deg); }
@@ -643,7 +627,6 @@
     .check-list { margin-top: 0.5rem; padding-left: 0.8rem; }
     .check-list li { font-size: 0.78rem; color: #666; margin-bottom: 0.2rem; word-break: keep-all; }
 
-    /* Footer */
     footer { position: relative; z-index: 1; padding: 0 1rem 2.5rem; }
 
     .footer-inner {
@@ -668,19 +651,76 @@
     .footer-inner strong { color: var(--gold); }
     .footer-inner p { line-height: 1.8; }
 
-    /* 작은 화면에서 이미지 카드 조금 더 작게 */
     @media (max-width: 360px) {
       .stay-photo { width: 160px; height: 110px; }
       .card-inner { padding: 1.8rem 1.2rem 2.2rem; }
     }
 
-    /* 접근성: 모션 줄이기 */
     @media (prefers-reduced-motion: reduce) {
       * { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+    }
+
+    /* ✅ BGM 컨트롤 (오른쪽 아래 고정) */
+    .bgm-controller {
+      position: fixed;
+      right: 14px;
+      bottom: 14px;
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 12px;
+      border-radius: 14px;
+      border: 1px solid rgba(212,175,55,0.9);
+      background: rgba(20, 12, 14, 0.55);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+      color: #fff;
+      user-select: none;
+    }
+    .bgm-btn {
+      appearance: none;
+      border: 1px solid rgba(212,175,55,0.9);
+      background: rgba(139,21,56,0.85);
+      color: var(--cream);
+      font-weight: 800;
+      font-size: 0.85rem;
+      padding: 9px 12px;
+      border-radius: 12px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: transform .12s ease, opacity .12s ease;
+    }
+    .bgm-btn:active { transform: translateY(1px) scale(0.98); opacity: 0.95; }
+    .bgm-pill {
+      font-size: 0.75rem;
+      padding: 6px 9px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.28);
+      background: rgba(255,255,255,0.08);
+      opacity: 0.95;
+      white-space: nowrap;
+    }
+    .bgm-vol {
+      width: 92px;
+      accent-color: var(--gold);
     }
   </style>
 </head>
 <body>
+
+  <!-- ✅ BGM 컨트롤 UI -->
+  <div class="bgm-controller" aria-label="배경음악 컨트롤">
+    <button class="bgm-btn" id="bgmToggle" type="button" aria-label="배경음악 재생/정지">
+      🎹 <span id="bgmLabel">BGM 켜기</span>
+    </button>
+    <span class="bgm-pill" id="bgmStatus">대기중</span>
+    <input class="bgm-vol" id="bgmVol" type="range" min="0" max="1" step="0.01" value="0.18" aria-label="배경음악 볼륨" />
+  </div>
+
   <main>
     <div class="card-stack">
 
@@ -767,7 +807,7 @@
             <br /><br />
             근디! 미리 다 꾸미고 오면 재미없잖겄나?<br />
             <strong>7시에 와서 그때부터 <br />각자 방에서 변신 시작</strong>하는 거란다.<br />
-            <br /><br />
+            <br />
             아, 그리고 말이여!<br />
             할배가 <strong>크리스마스 당일엔 바빠서 못 간다.</strong><br />
             전세계 애들 선물 배달하느라 정신없단 말이여!<br />
@@ -827,19 +867,17 @@
               <div class="info-value">조수 포함 5명</div>
               <p class="info-note">
                 👥 산타 조수 포함해서 총 다섯 명!<br />
-                인원 딱 좋아서 수다+게임+술게임… 진행 쌉가능.
+                인원 딱 좋아서 수다+게임+술게임… 진행할거네!
               </p>
             </div>
           </div>
 
-          <!-- ✅ 체크인 가이드 -->
           <div class="theme-box" style="margin-top: 0.4rem;">
             <h3>🧭 체크인 가이드 (길치 구제용)</h3>
             <p style="margin-bottom:0.35rem;">
               <strong>주소:</strong> 서울시 구로구 구로동 496-167
             </p>
 
-            <!-- ✅ 카카오맵 버튼 (추가된 부분) -->
             <a class="map-btn"
                href="https://map.kakao.com/link/search/서울시%20구로구%20구로동%20496-167"
                target="_blank"
@@ -849,7 +887,7 @@
               카카오맵으로 길찾기
             </a>
             <div class="map-btn-note">
-              (모바일은 앱으로, 없으면 웹으로 열림) ✅
+              (이 부분은 조수가 설명해줄거라네!)
             </div>
 
             <ol class="theme-list" style="padding-left: 1.2rem; margin-top:0.8rem;">
@@ -861,7 +899,6 @@
             </ol>
           </div>
 
-          <!-- ✅ 출입/비번 -->
           <div class="theme-box" style="margin-top: 1rem;">
             <h3>🔑 문 여는 법 / 비번</h3>
             <p>
@@ -873,7 +910,6 @@
             </p>
           </div>
 
-          <!-- ✅ 와이파이 -->
           <div class="theme-box" style="margin-top: 1rem;">
             <h3>📶 와이파이</h3>
             <p>
@@ -885,15 +921,12 @@
             </p>
           </div>
 
-          <!-- ✅ 숙소 이미지 슬라이더 -->
           <div class="stay-gallery" aria-label="숙소 이미지 미리보기">
             <div class="gallery-head">
               <span>🏠 숙소 미리보기</span>
             </div>
-
             <div class="marquee" id="marquee">
               <div class="marquee-track" id="marqueeTrack">
-                <!-- 1st set -->
                 <figure class="stay-photo">
                   <span class="badge">1</span>
                   <img src="https://a0.muscache.com/im/pictures/miso/Hosting-1201505742783014540/original/a355abdc-9598-44bb-83d6-66c65f97db3a.jpeg?im_w=720" alt="숙소 이미지 1" loading="lazy" />
@@ -915,7 +948,6 @@
                   <img src="https://a0.muscache.com/im/pictures/miso/Hosting-1201505742783014540/original/cc933890-f5ee-4e37-9d24-4290cac72ad0.jpeg?im_w=1200" alt="숙소 이미지 5" loading="lazy" />
                 </figure>
 
-                <!-- duplicate set for seamless loop -->
                 <figure class="stay-photo" aria-hidden="true">
                   <span class="badge">1</span>
                   <img src="https://a0.muscache.com/im/pictures/miso/Hosting-1201505742783014540/original/a355abdc-9598-44bb-83d6-66c65f97db3a.jpeg?im_w=720" alt="" loading="lazy" />
@@ -940,7 +972,6 @@
             </div>
           </div>
 
-          <!-- ✅ 테마 -->
           <div class="theme-box">
             <h3>🎭 테마</h3>
             <p>
@@ -1243,7 +1274,257 @@
   </footer>
 
   <script>
-    console.log("🎄 2025 산타의 덕질 크리스마스 파티 초대장 (KakaoMap button included)");
+    /**
+     * ✅ "무료"로 안전하게: 외부 음원 없이 WebAudio로 잔잔한 피아노 캐롤(공개 영역 멜로디 느낌) 생성
+     * - 브라우저 정책상 자동재생은 막히는 경우가 많아서:
+     *   1) 버튼 누르면 바로 시작
+     *   2) 또는 첫 터치/스크롤에서 자동 시작 시도
+     */
+
+    // ---- UI refs
+    const btn = document.getElementById("bgmToggle");
+    const label = document.getElementById("bgmLabel");
+    const statusEl = document.getElementById("bgmStatus");
+    const volEl = document.getElementById("bgmVol");
+
+    // ---- Audio state
+    let audioCtx = null;
+    let master = null;
+    let playing = false;
+    let schedTimer = null;
+    let nextNoteTime = 0;
+    let seqIndex = 0;
+
+    // ---- Music: 잔잔한 캐롤 느낌 (Jingle Bells 같은 공개영역 멜로디 분위기, 단순 편곡)
+    // 단위: 16분음표(= step)
+    // note = MIDI 번호, durSteps = 지속(스텝), vel = 0~1
+    // (멜로디 + 간단한 왼손(베이스/화음) 섞어서 "피아노처럼" 들리게)
+    const BPM = 84;
+    const STEP = 60 / BPM / 4; // 16th note seconds
+    const LOOP_STEPS = 64;     // 4마디(16*4) 루프
+
+    const melody = [
+      // (가볍게 캐롤 분위기, 4마디 루프)
+      // bar1
+      { step: 0,  note: 76, dur: 4, vel: 0.55 }, // E5
+      { step: 4,  note: 76, dur: 4, vel: 0.55 },
+      { step: 8,  note: 76, dur: 6, vel: 0.55 },
+      { step: 14, note: 76, dur: 2, vel: 0.45 },
+
+      // bar2
+      { step: 16, note: 76, dur: 4, vel: 0.55 },
+      { step: 20, note: 79, dur: 4, vel: 0.55 }, // G5
+      { step: 24, note: 72, dur: 4, vel: 0.52 }, // C5
+      { step: 28, note: 74, dur: 4, vel: 0.52 }, // D5
+
+      // bar3
+      { step: 32, note: 76, dur: 8, vel: 0.58 },
+      { step: 40, note: 77, dur: 4, vel: 0.50 }, // F5
+      { step: 44, note: 77, dur: 4, vel: 0.50 },
+
+      // bar4
+      { step: 48, note: 77, dur: 4, vel: 0.52 },
+      { step: 52, note: 76, dur: 4, vel: 0.52 },
+      { step: 56, note: 76, dur: 4, vel: 0.50 },
+      { step: 60, note: 76, dur: 4, vel: 0.50 }
+    ];
+
+    // 왼손: 베이스 + 간단한 화음(아르페지오 느낌)
+    const leftHand = [
+      // bar1 (C)
+      { step: 0,  notes: [48, 55, 60], dur: 8,  vel: 0.18 }, // C2 G2 C3
+      { step: 8,  notes: [48, 55, 60], dur: 8,  vel: 0.16 },
+
+      // bar2 (G)
+      { step: 16, notes: [43, 50, 55], dur: 8,  vel: 0.18 }, // G1 D2 G2
+      { step: 24, notes: [43, 50, 55], dur: 8,  vel: 0.16 },
+
+      // bar3 (F)
+      { step: 32, notes: [41, 48, 53], dur: 8,  vel: 0.18 }, // F1 C2 F2
+      { step: 40, notes: [41, 48, 53], dur: 8,  vel: 0.16 },
+
+      // bar4 (C)
+      { step: 48, notes: [48, 55, 60], dur: 8,  vel: 0.18 },
+      { step: 56, notes: [48, 55, 60], dur: 8,  vel: 0.16 }
+    ];
+
+    function midiToFreq(m) {
+      return 440 * Math.pow(2, (m - 69) / 12);
+    }
+
+    function ensureAudio() {
+      if (audioCtx) return;
+
+      audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+
+      // master gain
+      master = audioCtx.createGain();
+      master.gain.value = Number(volEl.value || 0.18);
+
+      // gentle reverb-ish (simple delay + lowpass for cozy feel)
+      const delay = audioCtx.createDelay(1.0);
+      delay.delayTime.value = 0.18;
+
+      const fb = audioCtx.createGain();
+      fb.gain.value = 0.18;
+
+      const lp = audioCtx.createBiquadFilter();
+      lp.type = "lowpass";
+      lp.frequency.value = 1800;
+
+      // master routing
+      master.connect(audioCtx.destination);
+
+      // send effect (master -> delay -> filter -> master)
+      master.connect(delay);
+      delay.connect(lp);
+      lp.connect(fb);
+      fb.connect(delay);
+      lp.connect(audioCtx.destination); // subtle tail
+
+      statusEl.textContent = "준비완료";
+    }
+
+    // 피아노처럼: triangle + sine 조합 + 빠른 attack/짧은 decay + 살짝 tail
+    function playPianoNote(freq, time, durSec, vel) {
+      const osc1 = audioCtx.createOscillator();
+      const osc2 = audioCtx.createOscillator();
+      const g = audioCtx.createGain();
+      const lp = audioCtx.createBiquadFilter();
+
+      osc1.type = "triangle";
+      osc2.type = "sine";
+      osc1.frequency.setValueAtTime(freq, time);
+      osc2.frequency.setValueAtTime(freq * 2, time); // 살짝 상음
+
+      // filter: 부드럽게
+      lp.type = "lowpass";
+      lp.frequency.setValueAtTime(2400, time);
+      lp.frequency.exponentialRampToValueAtTime(1200, time + Math.min(0.25, durSec));
+
+      // envelope
+      const a = 0.008;
+      const d = Math.max(0.05, Math.min(0.22, durSec * 0.6));
+      const s = vel * 0.55;
+      const r = 0.10;
+
+      g.gain.setValueAtTime(0.0001, time);
+      g.gain.exponentialRampToValueAtTime(Math.max(0.0001, vel), time + a);
+      g.gain.exponentialRampToValueAtTime(Math.max(0.0001, s), time + a + d);
+      g.gain.exponentialRampToValueAtTime(0.0001, time + Math.max(durSec, a + d) + r);
+
+      // connect
+      osc1.connect(lp);
+      osc2.connect(lp);
+      lp.connect(g);
+      g.connect(master);
+
+      osc1.start(time);
+      osc2.start(time);
+      osc1.stop(time + durSec + r + 0.05);
+      osc2.stop(time + durSec + r + 0.05);
+    }
+
+    // scheduling (lookahead)
+    const LOOKAHEAD = 0.025; // seconds
+    const SCHEDULE_AHEAD = 0.18;
+
+    function scheduleStep(step, baseTime) {
+      // 멜로디
+      melody.forEach(ev => {
+        if (ev.step === step) {
+          const t = baseTime;
+          const dur = ev.dur * STEP;
+          playPianoNote(midiToFreq(ev.note), t, dur, ev.vel);
+        }
+      });
+
+      // 왼손(화음)
+      leftHand.forEach(ev => {
+        if (ev.step === step) {
+          const t = baseTime;
+          const dur = ev.dur * STEP;
+          ev.notes.forEach((n, i) => {
+            // 살짝 분산(아르페지오 느낌)
+            const offset = i * 0.02;
+            playPianoNote(midiToFreq(n), t + offset, dur * 0.9, ev.vel);
+          });
+        }
+      });
+    }
+
+    function scheduler() {
+      if (!audioCtx || !playing) return;
+
+      while (nextNoteTime < audioCtx.currentTime + SCHEDULE_AHEAD) {
+        const step = seqIndex % LOOP_STEPS;
+        scheduleStep(step, nextNoteTime);
+
+        seqIndex += 1;
+        nextNoteTime += STEP;
+      }
+    }
+
+    function startBGM() {
+      ensureAudio();
+
+      // 브라우저가 suspended면 resume
+      if (audioCtx.state === "suspended") {
+        audioCtx.resume();
+      }
+
+      if (playing) return;
+
+      playing = true;
+      label.textContent = "BGM 끄기";
+      statusEl.textContent = "재생중";
+
+      // align start
+      nextNoteTime = audioCtx.currentTime + 0.05;
+      seqIndex = 0;
+
+      schedTimer = setInterval(scheduler, LOOKAHEAD * 1000);
+    }
+
+    function stopBGM() {
+      playing = false;
+      label.textContent = "BGM 켜기";
+      statusEl.textContent = "정지";
+
+      if (schedTimer) {
+        clearInterval(schedTimer);
+        schedTimer = null;
+      }
+    }
+
+    // UI events
+    btn.addEventListener("click", () => {
+      if (!playing) startBGM();
+      else stopBGM();
+    });
+
+    volEl.addEventListener("input", () => {
+      if (!master) return;
+      master.gain.value = Number(volEl.value || 0.18);
+    });
+
+    // ✅ 첫 터치/스크롤에서 자동 재생 "시도" (정책상 실패할 수 있음 -> 그땐 버튼 누르면 됨)
+    let autoTried = false;
+    function autoStartOnce() {
+      if (autoTried) return;
+      autoTried = true;
+      try { startBGM(); } catch (e) { /* ignore */ }
+      window.removeEventListener("pointerdown", autoStartOnce);
+      window.removeEventListener("touchstart", autoStartOnce);
+      window.removeEventListener("keydown", autoStartOnce);
+      window.removeEventListener("scroll", autoStartOnce);
+    }
+    window.addEventListener("pointerdown", autoStartOnce, { once: true });
+    window.addEventListener("touchstart", autoStartOnce, { once: true });
+    window.addEventListener("keydown", autoStartOnce, { once: true });
+    window.addEventListener("scroll", autoStartOnce, { once: true });
+
+    console.log("🎄 초대장 + 잔잔 피아노 캐롤 BGM(웹오디오) 세팅 완료");
   </script>
 </body>
 </html>
