@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -103,9 +104,7 @@
       margin: 0 auto;
     }
 
-    .card-stack {
-      width: 100%;
-    }
+    .card-stack { width: 100%; }
 
     .card-section {
       background: var(--card-bg);
@@ -130,16 +129,11 @@
     .card-section:nth-child(3) { animation-delay: 0.3s; }
     .card-section:nth-child(4) { animation-delay: 0.4s; }
     .card-section:nth-child(5) { animation-delay: 0.5s; }
+    .card-section:nth-child(6) { animation-delay: 0.6s; } /* 추가 카드 */
 
     @keyframes cardFadeIn {
-      from {
-        opacity: 0;
-        transform: translateY(30px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     /* 빈티지 테두리 패턴 */
@@ -179,34 +173,10 @@
       z-index: 2;
       opacity: 0.7;
     }
-
-    .corner-ornament.top-left {
-      top: 15px;
-      left: 15px;
-      border-right: none;
-      border-bottom: none;
-    }
-
-    .corner-ornament.top-right {
-      top: 15px;
-      right: 15px;
-      border-left: none;
-      border-bottom: none;
-    }
-
-    .corner-ornament.bottom-left {
-      bottom: 15px;
-      left: 15px;
-      border-right: none;
-      border-top: none;
-    }
-
-    .corner-ornament.bottom-right {
-      bottom: 15px;
-      right: 15px;
-      border-left: none;
-      border-top: none;
-    }
+    .corner-ornament.top-left { top: 15px; left: 15px; border-right: none; border-bottom: none; }
+    .corner-ornament.top-right { top: 15px; right: 15px; border-left: none; border-bottom: none; }
+    .corner-ornament.bottom-left { bottom: 15px; left: 15px; border-right: none; border-top: none; }
+    .corner-ornament.bottom-right { bottom: 15px; right: 15px; border-left: none; border-top: none; }
 
     .card-tag {
       display: inline-flex;
@@ -223,16 +193,12 @@
       border: 1px solid var(--gold);
       transition: transform 0.3s ease;
     }
-
-    .card-tag:active {
-      transform: scale(0.95);
-    }
+    .card-tag:active { transform: scale(0.95); }
 
     .card-tag span.emoji {
       font-size: 0.9rem;
       animation: emojiWiggle 2s ease-in-out infinite;
     }
-
     @keyframes emojiWiggle {
       0%, 100% { transform: rotate(0deg); }
       10% { transform: rotate(-5deg); }
@@ -242,9 +208,7 @@
       50% { transform: rotate(0deg); }
     }
 
-    h1, h2, h3 {
-      font-weight: 700;
-    }
+    h1, h2, h3 { font-weight: 700; }
 
     /* 표지 스타일 */
     #cover .card-inner {
@@ -253,11 +217,7 @@
       background: linear-gradient(135deg, var(--burgundy) 0%, var(--deep-red) 100%);
       color: var(--cream);
     }
-
-    #cover .card-section::before,
-    #cover .card-section::after {
-      border-color: var(--gold);
-    }
+    #cover .card-section::before, #cover .card-section::after { border-color: var(--gold); }
 
     .cover-title {
       font-size: 2rem;
@@ -268,11 +228,7 @@
       text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
       animation: fadeIn 1.5s ease-out;
     }
-
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
     .cover-title .highlight {
       color: var(--gold);
@@ -313,12 +269,10 @@
       gap: 0.3rem;
       opacity: 0.8;
     }
-
     .scroll-hint span.arrow {
       font-size: 1.5rem;
       animation: bounce 1.5s infinite;
     }
-
     @keyframes bounce {
       0%, 100% { transform: translateY(0); }
       50% { transform: translateY(6px); }
@@ -345,10 +299,7 @@
       word-break: keep-all;
     }
 
-    .letter-body strong {
-      color: var(--burgundy);
-      font-weight: 600;
-    }
+    .letter-body strong { color: var(--burgundy); font-weight: 600; }
 
     .letter-sign {
       margin-top: 1.2rem;
@@ -401,12 +352,7 @@
       animation: itemFloat 3s ease-in-out infinite;
       transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
-
-    .info-item:active {
-      transform: translateY(-2px) !important;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    }
-
+    .info-item:active { transform: translateY(-2px) !important; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
     .info-item:nth-child(1) { animation-delay: 0s; }
     .info-item:nth-child(2) { animation-delay: 0.3s; }
     .info-item:nth-child(3) { animation-delay: 0.6s; }
@@ -438,10 +384,7 @@
       line-height: 1.7;
       word-break: keep-all;
     }
-
-    .info-note strong {
-      color: var(--burgundy);
-    }
+    .info-note strong { color: var(--burgundy); }
 
     .theme-box {
       background: var(--cream);
@@ -463,16 +406,9 @@
       line-height: 1.8;
       word-break: keep-all;
     }
+    .theme-box strong { color: var(--burgundy); }
 
-    .theme-box strong {
-      color: var(--burgundy);
-    }
-
-    .theme-list {
-      margin-top: 0.7rem;
-      padding-left: 1rem;
-    }
-
+    .theme-list { margin-top: 0.7rem; padding-left: 1rem; }
     .theme-list li {
       font-size: 0.83rem;
       color: #555;
@@ -481,27 +417,97 @@
       word-break: keep-all;
     }
 
-    /* 타임라인 */
-    .timeline {
+    /* ✅ 숙소 이미지 - 흐르는 슬라이더 */
+    .stay-gallery {
+      margin-top: 1.1rem;
+      background: rgba(0,0,0,0.02);
+      border: 2px solid var(--ornament-gold);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .stay-gallery .gallery-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.6rem;
+      padding: 0.85rem 0.9rem;
+      background: rgba(139, 21, 56, 0.06);
+      border-bottom: 1px dashed rgba(212, 175, 55, 0.55);
+      color: var(--burgundy);
+      font-weight: 700;
+      font-size: 0.9rem;
+      letter-spacing: 0.01em;
+    }
+    .stay-gallery .gallery-head small {
+      font-weight: 600;
+      opacity: 0.8;
+      font-size: 0.75rem;
+    }
+    .marquee {
       position: relative;
-      margin-top: 1rem;
-      padding-left: 0;
+      width: 100%;
+      overflow: hidden;
+      padding: 0.9rem 0.8rem 1rem;
+      background: rgba(245, 239, 224, 0.65);
+    }
+    .marquee-track {
+      display: flex;
+      width: max-content;
+      gap: 0.75rem;
+      animation: marqueeMove 22s linear infinite;
+      will-change: transform;
+    }
+    .marquee:hover .marquee-track { animation-play-state: paused; }
+    .marquee:active .marquee-track { animation-play-state: paused; }
+
+    @keyframes marqueeMove {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
     }
 
+    .stay-photo {
+      width: 180px;
+      height: 120px;
+      border-radius: 10px;
+      overflow: hidden;
+      flex: 0 0 auto;
+      border: 2px solid rgba(212, 175, 55, 0.7);
+      box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+      background: #fff;
+      position: relative;
+    }
+    .stay-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transform: scale(1.02);
+      transition: transform 0.35s ease;
+    }
+    .stay-photo:active img { transform: scale(1.08); }
+    .stay-photo .badge {
+      position: absolute;
+      left: 8px;
+      top: 8px;
+      background: rgba(107, 18, 41, 0.88);
+      color: var(--cream);
+      font-size: 0.72rem;
+      padding: 0.25rem 0.5rem;
+      border-radius: 6px;
+      border: 1px solid rgba(212, 175, 55, 0.9);
+      letter-spacing: 0.02em;
+    }
+
+    /* 타임라인 */
+    .timeline { position: relative; margin-top: 1rem; padding-left: 0; }
     .timeline-item {
       position: relative;
       padding-left: 2.5rem;
       margin-bottom: 2rem;
       transition: transform 0.2s ease;
     }
-
-    .timeline-item:last-child {
-      margin-bottom: 0;
-    }
-
-    .timeline-item:active {
-      transform: translateX(3px);
-    }
+    .timeline-item:last-child { margin-bottom: 0; }
+    .timeline-item:active { transform: translateX(3px); }
 
     .timeline-item::before {
       content: "";
@@ -512,10 +518,7 @@
       width: 2px;
       background: linear-gradient(to bottom, var(--burgundy) 0%, var(--ornament-gold) 100%);
     }
-
-    .timeline-item:last-child::before {
-      display: none;
-    }
+    .timeline-item:last-child::before { display: none; }
 
     .timeline-item::after {
       content: "";
@@ -555,18 +558,10 @@
       line-height: 1.8;
       word-break: keep-all;
     }
-
-    .timeline-desc strong {
-      color: var(--burgundy);
-    }
+    .timeline-desc strong { color: var(--burgundy); }
 
     /* 체크리스트 */
-    .checklist {
-      list-style: none;
-      display: grid;
-      gap: 1rem;
-      font-size: 0.9rem;
-    }
+    .checklist { list-style: none; display: grid; gap: 1rem; font-size: 0.9rem; }
 
     .check-item {
       display: flex;
@@ -579,10 +574,7 @@
       animation: checkFloat 3s ease-in-out infinite;
       transition: transform 0.2s ease;
     }
-
-    .check-item:active {
-      transform: translateY(-2px) scale(0.98) !important;
-    }
+    .check-item:active { transform: translateY(-2px) scale(0.98) !important; }
 
     .check-item:nth-child(1) { animation-delay: 0s; }
     .check-item:nth-child(2) { animation-delay: 0.2s; }
@@ -601,7 +593,6 @@
       flex-shrink: 0;
       animation: iconShake 3s ease-in-out infinite;
     }
-
     .check-item:nth-child(1) .check-icon { animation-delay: 0s; }
     .check-item:nth-child(2) .check-icon { animation-delay: 0.5s; }
     .check-item:nth-child(3) .check-icon { animation-delay: 1s; }
@@ -616,42 +607,15 @@
       98% { transform: rotate(10deg); }
     }
 
-    .check-main {
-      font-weight: 600;
-      margin-bottom: 0.4rem;
-      color: var(--deep-red);
-      font-size: 0.9rem;
-    }
+    .check-main { font-weight: 600; margin-bottom: 0.4rem; color: var(--deep-red); font-size: 0.9rem; }
+    .check-sub { font-size: 0.8rem; color: #555; line-height: 1.8; word-break: keep-all; }
+    .check-sub strong { color: var(--burgundy); }
 
-    .check-sub {
-      font-size: 0.8rem;
-      color: #555;
-      line-height: 1.8;
-      word-break: keep-all;
-    }
-
-    .check-sub strong {
-      color: var(--burgundy);
-    }
-
-    .check-list {
-      margin-top: 0.5rem;
-      padding-left: 0.8rem;
-    }
-
-    .check-list li {
-      font-size: 0.78rem;
-      color: #666;
-      margin-bottom: 0.2rem;
-      word-break: keep-all;
-    }
+    .check-list { margin-top: 0.5rem; padding-left: 0.8rem; }
+    .check-list li { font-size: 0.78rem; color: #666; margin-bottom: 0.2rem; word-break: keep-all; }
 
     /* Footer */
-    footer {
-      position: relative;
-      z-index: 1;
-      padding: 0 1rem 2.5rem;
-    }
+    footer { position: relative; z-index: 1; padding: 0 1rem 2.5rem; }
 
     .footer-inner {
       max-width: 500px;
@@ -672,40 +636,26 @@
       50% { box-shadow: 0 0 30px rgba(212, 175, 55, 0.6); }
     }
 
-    .footer-inner strong {
-      color: var(--gold);
-    }
-
-    .footer-inner p {
-      line-height: 1.8;
-    }
-
-    /* 추가 애니메이션 */
-    @keyframes slideInLeft {
-      from {
-        opacity: 0;
-        transform: translateX(-30px);
-      }
-      to {
-        opacity: 1;
-        transform: translateX(0);
-      }
-    }
-
-    @keyframes slideInRight {
-      from {
-        opacity: 0;
-        transform: translateX(30px);
-      }
-      to {
-        opacity: 1;
-        transform: translateX(0);
-      }
-    }
+    .footer-inner strong { color: var(--gold); }
+    .footer-inner p { line-height: 1.8; }
 
     /* 스크롤 시 애니메이션 */
-    .animate-in {
-      animation: slideInLeft 0.6s ease-out;
+    .animate-in { animation: slideInLeft 0.6s ease-out; }
+
+    @keyframes slideInLeft {
+      from { opacity: 0; transform: translateX(-30px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+
+    /* 작은 화면에서 이미지 카드 조금 더 작게 */
+    @media (max-width: 360px) {
+      .stay-photo { width: 160px; height: 110px; }
+      .card-inner { padding: 1.8rem 1.2rem 2.2rem; }
+    }
+
+    /* 접근성: 모션 줄이기 */
+    @media (prefers-reduced-motion: reduce) {
+      * { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
     }
   </style>
 </head>
@@ -719,7 +669,7 @@
         <div class="corner-ornament top-right"></div>
         <div class="corner-ornament bottom-left"></div>
         <div class="corner-ornament bottom-right"></div>
-        
+
         <div class="card-inner">
           <div class="card-tag">
             <span class="emoji">🎄</span>
@@ -753,7 +703,7 @@
         <div class="corner-ornament top-right"></div>
         <div class="corner-ornament bottom-left"></div>
         <div class="corner-ornament bottom-right"></div>
-        
+
         <div class="card-inner">
           <div class="card-tag">
             <span class="emoji">📬</span>
@@ -794,9 +744,9 @@
             <strong>2025년에 네 마음을 제일 흔들어놨던<br />
             그 캐릭터나 사람으로 변신해서 오는 거여.</strong>
             <br /><br />
-            근데! 미리 다 꾸미고 오면 재미없잖겄나?<br />
+            근디! 미리 다 꾸미고 오면 재미없잖겄나?<br />
             <strong>7시에 와서 그때부터 <br />각자 방에서 변신 시작</strong>하는 거란다.<br />
-          
+
             <br /><br />
             아, 그리고 말이여!<br />
             할배가 <strong>크리스마스 당일엔 바빠서 못 간다.</strong><br />
@@ -815,13 +765,13 @@
         </div>
       </section>
 
-      <!-- 3. INFO - 파티 정보 카드 -->
+      <!-- 3. INFO - 파티 정보 카드 (✅ 체크인 가이드 + 와이파이 + 숙소 이미지 추가) -->
       <section class="card-section" id="info">
         <div class="corner-ornament top-left"></div>
         <div class="corner-ornament top-right"></div>
         <div class="corner-ornament bottom-left"></div>
         <div class="corner-ornament bottom-right"></div>
-        
+
         <div class="card-inner">
           <div class="card-tag">
             <span class="emoji">📍</span>
@@ -838,8 +788,9 @@
               <div class="info-label">언제</div>
               <div class="info-value">2025.12.25 (목)</div>
               <p class="info-note">
-                📅 저녁 일곱시 입실<br />
-                (너네 술 마시고 그 담날 알아서 가라잉~)
+                📅 <strong>오후 3시부터 입실 가능</strong>하구,<br />
+                <strong>본게임은 7시에 시작</strong>이여!<br />
+                (3시~7시는 장 볼 사람 장 보고, 쉬고, 꿀같이 누워있다가 오면 됨 ㅇㅋ?)
               </p>
             </div>
 
@@ -847,8 +798,8 @@
               <div class="info-label">어디</div>
               <div class="info-value">아지트 같은 파티룸</div>
               <p class="info-note">
-                📍 정확한 주소는 카톡으로 따로 알려줄 거여.<br />
-                노래방 기계도 있는 곳으로 할배가 미리 알아봤단다! 🎤
+                📍 주소는 아래에 <strong>딱 박아놨으니</strong> 잘 보고 오고!<br />
+                노래방 기계도 있는 곳인데… 오늘은 그거보다 더 재밌게 놀 거여 😏
               </p>
             </div>
 
@@ -857,11 +808,108 @@
               <div class="info-value">조수 포함 5명</div>
               <p class="info-note">
                 👥 산타 조수 포함해서 총 다섯 명!<br />
-                적당한 인원이라 다 같이 이야기 나누기도 재밌을 거제.
+                인원 딱 좋아서 수다+게임+술게임… 진행 쌉가능.
               </p>
             </div>
           </div>
 
+          <!-- ✅ 숙소 체크인 가이드 -->
+          <div class="theme-box" style="margin-top: 0.4rem;">
+            <h3>🧭 체크인 가이드 (길치 구제용)</h3>
+            <p style="margin-bottom:0.7rem;">
+              <strong>주소:</strong> [서울시 구로구 구로동 496-167]<br />
+              이거 찍고 오면 되는데, 그래도 불안한 애들을 위해 “할배가” 길 안내 적어준다잉~
+            </p>
+            <ol class="theme-list" style="padding-left: 1.2rem; margin-top:0;">
+              <li><strong>구로역 1번 출구</strong> 나온 뒤 <strong>NC백화점 방면</strong>으로 가서 <strong>육교</strong>로 횡단!</li>
+              <li>NC백화점 <strong>벽면 따라 150m 직진</strong> → 그 다음 <strong>횡단보도 2개</strong> 연속으로 건너기!</li>
+              <li><strong>애견용품샵 방면</strong>으로 <strong>70m 직진</strong> 후 <strong>오른쪽 골목</strong>으로 쏙!</li>
+              <li>골목 들어가서 <strong>60m 직진</strong> → <strong>CU 방면 왼쪽 골목</strong>으로 또 쏙!</li>
+              <li><strong>50m</strong>만 더 가면 <strong>숙소 도착</strong>이여 🎄 (여기서부터는 “어? 여기 맞나?”가 맞음)</li>
+            </ol>
+          </div>
+
+          <!-- ✅ 출입/비번 안내 -->
+          <div class="theme-box" style="margin-top: 1rem;">
+            <h3>🔑 문 여는 법 / 비번</h3>
+            <p>
+              <strong>대문</strong>은 옆 <strong>우편함</strong>에 있는 <strong>대문 열쇠</strong>로 열어주세용!<br />
+              <strong>★중요★ 대문열쇠는 사용하고 나면 꼭 다시 우편함에 넣어서 보관!</strong><br /><br />
+              <strong>본채 비밀번호:</strong> 1234<br />
+              <strong>별채:</strong> 오픈되어있습니다요!<br />
+              (옥상 주민이 가끔 계단 지나갈 수 있대요! 놀라지 말기 😇)
+            </p>
+          </div>
+
+          <!-- ✅ 와이파이 -->
+          <div class="theme-box" style="margin-top: 1rem;">
+            <h3>📶 와이파이</h3>
+            <p>
+              <strong>name:</strong> SK_WIFIGIGA8778_5G (2.4G)<br />
+              <strong>password:</strong> AAZ83@9352<br /><br />
+              <strong>5G</strong>는 가까운 데서 빠르고,<br />
+              <strong>2.4G</strong>는 멀어도 잘 잡힌대요!<br />
+              <strong>별채</strong>에 머무는 친구는 <strong>2.4G</strong> 추천 😊
+            </p>
+          </div>
+
+          <!-- ✅ 숙소 이미지 슬라이더(흘러가게) -->
+          <div class="stay-gallery" aria-label="숙소 이미지 미리보기">
+            <div class="gallery-head">
+              <span>🏠 숙소 미리보기</span>
+              <small>(손가락으로 구경해도 됨)</small>
+            </div>
+
+            <div class="marquee" id="marquee">
+              <div class="marquee-track" id="marqueeTrack">
+                <!-- 1st set -->
+                <figure class="stay-photo">
+                  <span class="badge">1</span>
+                  <img src="https://a0.muscache.com/im/pictures/miso/Hosting-1201505742783014540/original/a355abdc-9598-44bb-83d6-66c65f97db3a.jpeg?im_w=720" alt="숙소 이미지 1" loading="lazy" />
+                </figure>
+                <figure class="stay-photo">
+                  <span class="badge">2</span>
+                  <img src="https://a0.muscache.com/im/pictures/miso/Hosting-1201505742783014540/original/8afa397c-697b-4cf4-854f-3a2db82c38fe.jpeg?im_w=720" alt="숙소 이미지 2" loading="lazy" />
+                </figure>
+                <figure class="stay-photo">
+                  <span class="badge">3</span>
+                  <img src="https://a0.muscache.com/im/pictures/miso/Hosting-1201505742783014540/original/755d8c3c-fb9c-420d-ad24-036c8a4a3da6.jpeg?im_w=720" alt="숙소 이미지 3" loading="lazy" />
+                </figure>
+                <figure class="stay-photo">
+                  <span class="badge">4</span>
+                  <img src="https://a0.muscache.com/im/pictures/miso/Hosting-1201505742783014540/original/5e2c0573-f888-4611-a56a-5203258ddc7e.jpeg?im_w=720" alt="숙소 이미지 4" loading="lazy" />
+                </figure>
+                <figure class="stay-photo">
+                  <span class="badge">5</span>
+                  <img src="https://a0.muscache.com/im/pictures/miso/Hosting-1201505742783014540/original/cc933890-f5ee-4e37-9d24-4290cac72ad0.jpeg?im_w=1200" alt="숙소 이미지 5" loading="lazy" />
+                </figure>
+
+                <!-- duplicate set for seamless loop -->
+                <figure class="stay-photo" aria-hidden="true">
+                  <span class="badge">1</span>
+                  <img src="https://a0.muscache.com/im/pictures/miso/Hosting-1201505742783014540/original/a355abdc-9598-44bb-83d6-66c65f97db3a.jpeg?im_w=720" alt="" loading="lazy" />
+                </figure>
+                <figure class="stay-photo" aria-hidden="true">
+                  <span class="badge">2</span>
+                  <img src="https://a0.muscache.com/im/pictures/miso/Hosting-1201505742783014540/original/8afa397c-697b-4cf4-854f-3a2db82c38fe.jpeg?im_w=720" alt="" loading="lazy" />
+                </figure>
+                <figure class="stay-photo" aria-hidden="true">
+                  <span class="badge">3</span>
+                  <img src="https://a0.muscache.com/im/pictures/miso/Hosting-1201505742783014540/original/755d8c3c-fb9c-420d-ad24-036c8a4a3da6.jpeg?im_w=720" alt="" loading="lazy" />
+                </figure>
+                <figure class="stay-photo" aria-hidden="true">
+                  <span class="badge">4</span>
+                  <img src="https://a0.muscache.com/im/pictures/miso/Hosting-1201505742783014540/original/5e2c0573-f888-4611-a56a-5203258ddc7e.jpeg?im_w=720" alt="" loading="lazy" />
+                </figure>
+                <figure class="stay-photo" aria-hidden="true">
+                  <span class="badge">5</span>
+                  <img src="https://a0.muscache.com/im/pictures/miso/Hosting-1201505742783014540/original/cc933890-f5ee-4e37-9d24-4290cac72ad0.jpeg?im_w=1200" alt="" loading="lazy" />
+                </figure>
+              </div>
+            </div>
+          </div>
+
+          <!-- ✅ 테마/드레스코드: 그대로 유지 -->
           <div class="theme-box">
             <h3>🎭 테마</h3>
             <p>
@@ -885,13 +933,13 @@
         </div>
       </section>
 
-      <!-- 4. SCHEDULE - 스케줄 카드 -->
+      <!-- 4. SCHEDULE - 스케줄 카드 (✅ 3시 입실/7시 모임/마지막 술게임으로 수정) -->
       <section class="card-section" id="schedule">
         <div class="corner-ornament top-left"></div>
         <div class="corner-ornament top-right"></div>
         <div class="corner-ornament bottom-left"></div>
         <div class="corner-ornament bottom-right"></div>
-        
+
         <div class="card-inner">
           <div class="card-tag">
             <span class="emoji">🕒</span>
@@ -909,10 +957,20 @@
 
           <div class="timeline">
             <div class="timeline-item">
-              <div class="timeline-time">저녁 7시 ~ 7시 반</div>
-              <div class="timeline-title">들어와서 방 정하고 꾸미기</div>
+              <div class="timeline-time">오후 3시 ~ 7시</div>
+              <div class="timeline-title">입실 & 장보기 & 쉬는 시간</div>
               <div class="timeline-desc">
-                반갑게 인사 나누고 짐 풀고 → 각자 방 들어가서 변신 시작!<br />
+                <strong>3시에 입실 가능!</strong><br />
+                장 볼 사람은 미리 장 보고, 아닌 사람은 그냥 누워서 기력 충전해도 됨.<br />
+                (최애로 변신하기 전에 체력 저장 필수라구요~)
+              </div>
+            </div>
+
+            <div class="timeline-item">
+              <div class="timeline-time">저녁 7시 ~ 7시 반</div>
+              <div class="timeline-title">모여서 방 정하고 꾸미기</div>
+              <div class="timeline-desc">
+                7시에 다 같이 모여서 인사 나누고 → 각자 방 배정 → 변신 시작!<br />
                 이때부터 벌써 웃음 나올 거제.
               </div>
             </div>
@@ -931,6 +989,7 @@
               <div class="timeline-time">8시부터 ~</div>
               <div class="timeline-title">배달 음식 먹으면서 수다</div>
               <div class="timeline-desc">
+                <strong>놀 시간 세이브하려고 음식은 전부 배달로 간다잉!</strong><br />
                 맛있는 거 시켜다가 먹으면서<br />
                 니네 하고 싶은 이야기 다 하려무나~ <br />
                 먼 얘기 했는지는 내가 다~~ 조수한테 들을겨~
@@ -949,24 +1008,101 @@
 
             <div class="timeline-item">
               <div class="timeline-time">밤새도록</div>
-              <div class="timeline-title">노래방에 게임에 수다</div>
+              <div class="timeline-title">술게임 + 게임파티 (조수 준비 완료)</div>
               <div class="timeline-desc">
-                노래방으로 캐럴도 부르고, 요즘 노래도 부르고!<br />
-                간단한 게임도 하면서 더 돈독해지는 시간.<br />
-                <strong>중요한 건 다 같이 편하게 웃으면서 노는 거제!</strong>
+                노래방도 좋지만… 오늘은 <strong>술게임으로 찢는다</strong> 😈<br />
+                산타 조수한테 <strong>여러 가지 게임</strong> 준비하라고 이미 시켜놨으니<br />
+                <strong>기대해도 좋다잉~</strong><br />
+                중요한 건 다 같이 편하게 웃으면서 노는 거제!
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      <!-- 5. CHECKLIST - 준비물 카드 -->
+      <!-- ✅ 5. FOOD PLAN - 음식/술 카드 (새로 추가) -->
+      <section class="card-section" id="food">
+        <div class="corner-ornament top-left"></div>
+        <div class="corner-ornament top-right"></div>
+        <div class="corner-ornament bottom-left"></div>
+        <div class="corner-ornament bottom-right"></div>
+
+        <div class="card-inner">
+          <div class="card-tag">
+            <span class="emoji">🍗</span>
+            <span>Food & Drinks</span>
+          </div>
+
+          <h2 class="section-heading">
+            <span class="emoji">🛵</span>
+            <span>음식/술 세팅 (시간 절약 버전)</span>
+          </h2>
+
+          <div class="theme-box" style="margin-top: 0.2rem;">
+            <h3>🧠 운영 철학</h3>
+            <p>
+              우리 <strong>놀 시간 세이브</strong>해야 하니까!<br />
+              장시간 조리/준비 없음. <strong>전부 배달음식 + 최소 장보기</strong>로 갑니당 😌
+            </p>
+          </div>
+
+          <div class="theme-box" style="margin-top: 1rem;">
+            <h3>1) BHC</h3>
+            <p>
+              • 뿌링클 콤보 1마리 (기프티콘): <strong>20,100원</strong><br />
+              • 달콤바삭 치즈볼: <strong>5,500원</strong><br />
+              • 배달비: <strong>3,500원</strong><br />
+              → <strong>총 29,100원</strong>이에요!
+            </p>
+          </div>
+
+          <div class="theme-box" style="margin-top: 1rem;">
+            <h3>2) 샹츠마라 신도림점</h3>
+            <p>
+              • 로제 마라샹궈 2~3인분: <strong>36,900원</strong><br />
+              • 맵기 <strong>2단계</strong> 생각 중!<br />
+              <strong>신라면 맵기</strong> vs <strong>열라면 맵기</strong> 뭐로 갈지 의견 주세용~!!!!<br />
+              • 마라샹궈랑 <strong>밥 같이</strong> 드실 분도 말해주세용 🍚
+            </p>
+          </div>
+
+          <div class="theme-box" style="margin-top: 1rem;">
+            <h3>3) 요아정 (디저트)</h3>
+            <p>
+              • 홀리데이 선물박스 패키지: <strong>매장 방문 시 가능</strong><br />
+              • 3~4인용 메뉴 주문에 <strong>1,000원 추가</strong>하면 OK!<br /><br />
+              근데 숙소 근처에 요아정이 없어서 <strong>조금 걸어야</strong> 한대요 😭<br />
+              <strong>“걸어도 된다”</strong> vs <strong>“파바 같은 대안이 낫다”</strong> 의견 부탁!
+            </p>
+          </div>
+
+          <div class="theme-box" style="margin-top: 1rem;">
+            <h3>4) 안주 최소 세팅</h3>
+            <p>
+              • 과일(딸기, 샤인머스켓, 토마토 등)<br />
+              • 마른안주 위주로<br />
+              → <strong>30,000원 선</strong>으로 생각 중이에요!
+            </p>
+          </div>
+
+          <div class="theme-box" style="margin-top: 1rem;">
+            <h3>5) 술</h3>
+            <p>
+              • 과일소주(다래, 살구) <strong>각 2병씩</strong><br />
+              • 카스 픽쳐 <strong>2개</strong><br /><br />
+              (여기서 추가 원하는 사람 있으면 말해줘! 근데 과음 금지다잉 😇)
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 6. CHECKLIST - 준비물 카드 (원본 유지) -->
       <section class="card-section" id="checklist">
         <div class="corner-ornament top-left"></div>
         <div class="corner-ornament top-right"></div>
         <div class="corner-ornament bottom-left"></div>
         <div class="corner-ornament bottom-right"></div>
-        
+
         <div class="card-inner">
           <div class="card-tag">
             <span class="emoji">✅</span>
@@ -1057,9 +1193,7 @@
 
   <footer>
     <div class="footer-inner">
-      <p>
-        🎅 <strong>산타 할배 마지막 한마디</strong>
-      </p>
+      <p>🎅 <strong>산타 할배 마지막 한마디</strong></p>
       <p style="margin-top: 1rem;">
         "호호호, 시간 약속만 잘 지켜주면 되네!<br />
       </p>
@@ -1081,7 +1215,11 @@
   </footer>
 
   <script>
-    console.log("🎄 2025 산타의 덕질 크리스마스 파티 초대장");
+    console.log("🎄 2025 산타의 덕질 크리스마스 파티 초대장 (ver1 content updated)");
+
+    // (옵션) 슬라이더가 너무 빠르다/느리다 싶으면 여기서 숫자만 바꾸면 됨.
+    // 22s -> 더 느리게: 28s / 더 빠르게: 16s
+    // CSS에서 조정하는 게 제일 깔끔해서 여기선 로그만!
   </script>
 </body>
 </html>
