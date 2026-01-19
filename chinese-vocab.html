@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>중국어 단어 학습</title>
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body{
+      font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;
+      background:linear-gradient(135deg,#e0f2e9 0%,#d4e7f7 100%);
+      min-height:100vh;
+      display:flex; align-items:center; justify-content:center;
+      padding:20px;
+    }
+    .container{ width:100%; max-width:800px; }
+    .progress-section{ margin-bottom:20px; }
+    .progress-header{
+      display:flex; justify-content:space-between; align-items:center;
+      margin-bottom:10px; gap:12px;
+    }
+    .progress-text{ font-size:14px; font-weight:600; color:#555; }
+    .stats{ display:flex; gap:15px; align-items:center; }
+    .stat-correct{ color:#22c55e; font-size:14px; }
+    .stat-incorrect{ color:#ef4444; font-size:14px; }
+    .reset-btn{
+      background:none; border:none; color:#888; cursor:pointer;
+      font-size:18px; padding:5px; transition:color .3s;
+    }
+    .reset-btn:hover{ color:#555; }
+    .progress-bar{
+      width:100%; height:8px; background:#ddd; border-radius:10px; overflow:hidden;
+    }
+    .progress-fill{
+      height:100%;
+      background:linear-gradient(90deg,#22c55e 0%,#3b82f6 100%);
+      transition:width .5s ease;
+    }
+    .review-notice{ margin-top:8px; font-size:13px; color:#f97316; }
+    .card-container{
+      background:white; border-radius:20px;
+      box-shadow:0 10px 40px rgba(0,0,0,0.1);
+      padding:40px;
+    }
+    .question-section{
+      text-align:center; margin-bottom:40px; padding-bottom:30px;
+      border-bottom:2px solid #f0f0f0;
+    }
+    .chinese-word{ font-size:72px; font-weight:bold; color:#333; margin-bottom:15px; }
+    .pinyin{ font-size:28px; color:#888; margin-bottom:25px; }
+    .pronunciation-btn{
+      background:#3b82f6; color:white; border:none;
+      padding:12px 24px; border-radius:50px;
+      font-size:16px; font-weight:600; cursor:pointer;
+      display:inline-flex; align-items:center; gap:8px;
+      box-shadow:0 4px 12px rgba(59,130,246,0.3);
+      transition:all .3s;
+    }
+    .pronunciation-btn:hover{ background:#2563eb; transform:translateY(-2px); box-shadow:0 6px 16px rgba(59,130,246,0.4); }
+    .pronunciation-btn:disabled{ opacity:.7; cursor:not-allowed; transform:none; }
+    .pronunciation-btn.playing{ animation:pulse 1s infinite; }
+    @keyframes pulse{ 0%,100%{opacity:1} 50%{opacity:.7} }
+
+    .answer-section{ margin-top:30px; }
+    .question-prompt{
+      text-align:center; color:#666; font-weight:600;
+      margin-bottom:20px; font-size:16px;
+    }
+    .options{ display:grid; gap:12px; }
+    .option-btn{
+      padding:20px; border-radius:12px; font-size:18px; font-weight:600;
+      cursor:pointer; transition:all .3s;
+      text-align:left; border:2px solid #ddd; background:white;
+      display:flex; justify-content:space-between; align-items:center;
+    }
+    .option-btn:hover:not(:disabled){ background:#eff6ff; border-color:#3b82f6; }
+    .option-btn.correct{ background:#22c55e; color:white; border-color:#16a34a; }
+    .option-btn.incorrect{ background:#ef4444; color:white; border-color:#dc2626; }
+    .option-btn.disabled{ background:#f5f5f5; opacity:.5; cursor:not-allowed; }
+    .option-text{ white-space:pre-line; }
+    .icon{ font-size:24px; }
+
+    .result-message{
+      margin-top:25px; padding:16px; border-radius:12px;
+      text-align:center; font-weight:600; font-size:16px;
+    }
+    .result-message.correct{ background:#dcfce7; color:#166534; }
+    .result-message.incorrect{ background:#fee2e2; color:#991b1b; }
+
+    .hint{ text-align:center; color:#888; font-size:14px; margin-top:30px; }
+
+    .completion-screen{
+      background:white; border-radius:20px;
+      box-shadow:0 10px 40px rgba(0,0,0,0.1);
+      padding:50px; text-align:center;
+      max-width:500px; margin:0 auto;
+    }
+    .completion-emoji{ font-size:80px; margin-bottom:20px; }
+    .completion-title{ font-size:32px; font-weight:bold; color:#333; margin-bottom:30px; }
+    .completion-stats{ background:#f9fafb; border-radius:12px; padding:25px; margin-bottom:30px; }
+    .completion-stat{ color:#666; margin-bottom:10px; font-size:16px; }
+    .completion-stat:last-child{ margin-bottom:0; }
+    .stat-value{ font-weight:bold; font-size:20px; }
+    .stat-value.correct{ color:#22c55e; }
+    .stat-value.incorrect{ color:#ef4444; }
+    .stat-value.rate{ color:#3b82f6; }
+    .restart-btn{
+      background:linear-gradient(90deg,#22c55e 0%,#3b82f6 100%);
+      color:white; border:none;
+      padding:15px 30px; border-radius:12px;
+      font-size:16px; font-weight:600; cursor:pointer;
+      width:100%;
+      display:flex; align-items:center; justify-content:center; gap:10px;
+      box-shadow:0 4px 12px rgba(0,0,0,0.1);
+      transition:all .3s;
+    }
+    .restart-btn:hover{ transform:translateY(-2px); box-shadow:0 6px 16px rgba(0,0,0,0.15); }
+
+    @media (max-width:640px){
+      .chinese-word{ font-size:56px; }
+      .pinyin{ font-size:22px; }
+      .card-container{ padding:25px; }
+      .option-btn{ font-size:16px; padding:16px; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container" id="app"></div>
+
+  <script>
+    // ✅ 수정 포인트 요약
+    // 1) init()에서 generateOptions() 호출 누락 -> 첫 화면 옵션이 비거나 stale 될 수 있음
+    // 2) 틀렸을 때 cards.push({ ...cards[currentIndex] }) 는 'reviewed/understood' 상태를 그대로 복사해버림 -> 복습이 꼬임
+    //    => 틀렸을 때는 "reviewed:false" 로 새 카드(리뷰 카드)를 뒤에 추가
+    // 3) 진행도(progress)가 cards 기준이라 틀린 카드가 추가되면 16개 이상으로 늘어나면서 이상해짐
+    //    => 진행도는 '원본 단어(vocabulary)' 중 몇 개를 맞혔는지(또는 완료했는지) 기준으로 변경
+    // 4) 발음 버튼 onclick에 따옴표 인젝션 위험/깨짐 가능 -> addEventListener 방식으로 개선 (XSS/문자 깨짐 방지)
+    // 5) completion 화면 정확도 NaN 방지(0/0) 처리
+
+    const vocabulary = [
+      { id: 'jiujing', chinese: '究竟', pinyin: 'jiūjìng', korean: '도대체' },
+      { id: 'yumaoqiu', chinese: '羽毛球', pinyin: 'yǔmáoqiú', korean: '배드민턴, 배드민턴공' },
+      { id: 'haoxiang', chinese: '好像', pinyin: 'hǎoxiàng', korean: '~인 것 같다' },
+      { id: 'wangzhan', chinese: '网站', pinyin: 'wǎngzhàn', korean: '인터넷 사이트' },
+      { id: 'xishoujian', chinese: '洗手间', pinyin: 'xǐshǒujiān', korean: '화장실' },
+      { id: 'mahu', chinese: '马虎', pinyin: 'mǎhu', korean: '대충하다, 건성으로 하다' },
+      { id: 'kongpa', chinese: '恐怕', pinyin: 'kǒngpà', korean: '아마 ~일 것이다(부정적인 상황을 예측할 때 쓰임)' },
+      { id: 'suibian', chinese: '随便', pinyin: 'suíbiàn', korean: '마음대로, 좋을 대로, 아무렇게나\n함부로 하다, 제멋대로이다' },
+      { id: 'daodi', chinese: '到底', pinyin: 'dàodǐ', korean: '도대체\n끝까지 ~하다' },
+      { id: 'yuehui', chinese: '约会', pinyin: 'yuēhuì', korean: '약속, 데이트\n데이트하다' },
+      { id: 'guyi', chinese: '故意', pinyin: 'gùyì', korean: '일부러, 고의로' },
+      { id: 'yuanliang', chinese: '原谅', pinyin: 'yuánliàng', korean: '용서하다' },
+      { id: 'zhenghao', chinese: '正好', pinyin: 'zhènghǎo', korean: '딱 좋다, 꼭 맞다\n마침' },
+      { id: 'shangxin', chinese: '伤心', pinyin: 'shāngxīn', korean: '슬프다, 마음이 아프다' },
+      { id: 'chongxin', chinese: '重新', pinyin: 'chóngxīn', korean: '다시, 재차' },
+      { id: 'zongjie', chinese: '总结', pinyin: 'zǒngjié', korean: '총정리하다\n최종 결론' }
+    ];
+
+    // 학습 덱(틀린 건 뒤에 복습카드로 추가됨)
+    let cards = [];
+    let currentIndex = 0;
+    let options = [];
+    let selectedAnswer = null;
+    let showResult = false;
+    let stats = { correct: 0, incorrect: 0 };
+    let isPlaying = false;
+
+    // 원본 단어별 마스터(정답 처리된 단어 수) 추적
+    // 1) 한 번이라도 정답이면 mastered로 처리 (원하면 '연속 2회 정답' 등으로 바꿀 수 있음)
+    const mastered = new Set();
+
+    function init() {
+      cards = vocabulary.map(v => ({
+        ...v,
+        reviewed: false,
+        understood: null,   // true/false
+        isReview: false     // 틀려서 추가된 복습카드인지
+      }));
+      currentIndex = 0;
+      selectedAnswer = null;
+      showResult = false;
+      stats = { correct: 0, incorrect: 0 };
+      mastered.clear();
+      generateOptions();
+      render();
+    }
+
+    function generateOptions() {
+      const currentCard = cards[currentIndex];
+      if (!currentCard) return;
+
+      const correctAnswer = currentCard.korean;
+
+      const wrongAnswers = vocabulary
+        .filter(v => v.korean !== correctAnswer)
+        .sort(() => Math.random() - 0.5)
+        .slice(0, 3)
+        .map(v => v.korean);
+
+      options = [correctAnswer, ...wrongAnswers].sort(() => Math.random() - 0.5);
+    }
+
+    function getChineseVoice(voices) {
+      return voices.find(voice =>
+        voice.lang === 'zh-CN' ||
+        voice.lang === 'zh-Hans-CN' ||
+        (voice.lang && voice.lang.startsWith('zh'))
+      );
+    }
+
+    function playPronunciation(text) {
+      if (!('speechSynthesis' in window)) return;
+
+      isPlaying = true;
+      render();
+
+      window.speechSynthesis.cancel();
+
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.lang = 'zh-CN';
+      utterance.rate = 0.75;
+      utterance.pitch = 1.0;
+      utterance.volume = 1.0;
+
+      const voices = window.speechSynthesis.getVoices();
+      const v = getChineseVoice(voices);
+      if (v) utterance.voice = v;
+
+      utterance.onend = () => { isPlaying = false; render(); };
+      utterance.onerror = () => { isPlaying = false; render(); };
+
+      if (voices.length === 0) {
+        // voices 로딩이 늦는 브라우저 대응
+        window.speechSynthesis.onvoiceschanged = () => {
+          const newVoices = window.speechSynthesis.getVoices();
+          const voice = getChineseVoice(newVoices);
+          if (voice) utterance.voice = voice;
+          window.speechSynthesis.speak(utterance);
+          // onvoiceschanged 핸들러는 한 번만 쓰고 해제
+          window.speechSynthesis.onvoiceschanged = null;
+        };
+      } else {
+        window.speechSynthesis.speak(utterance);
+      }
+    }
+
+    function handleAnswer(optionIndex) {
+      if (showResult) return;
+
+      const currentCard = cards[currentIndex];
+      if (!currentCard) return;
+
+      const answer = options[optionIndex];
+      selectedAnswer = answer;
+      showResult = true;
+
+      const isCorrect = answer === currentCard.korean;
+
+      // 현재 카드 상태 업데이트
+      cards[currentIndex] = {
+        ...currentCard,
+        reviewed: true,
+        understood: isCorrect
+      };
+
+      // 통계 업데이트
+      if (isCorrect) {
+        stats.correct += 1;
+        mastered.add(currentCard.id); // 원본 단어 기준으로 마스터 처리
+      } else {
+        stats.incorrect += 1;
+
+        // ✅ 틀렸을 때: "복습 카드"를 새로 생성해서 뒤에 추가
+        // 기존 코드처럼 현재 카드 복사하되 reviewed/understood가 true/false로 남아있으면 복습이 꼬임
+        cards.push({
+          ...currentCard,
+          reviewed: false,
+          understood: null,
+          isReview: true
+        });
+      }
+
+      render();
+
+      setTimeout(() => {
+        if (currentIndex < cards.length - 1) {
+          currentIndex++;
+          selectedAnswer = null;
+          showResult = false;
+          generateOptions();
+          render();
+        } else {
+          render(); // 완료 화면
+        }
+      }, 1200);
+    }
+
+    function reset() {
+      window.speechSynthesis?.cancel?.();
+      init();
+    }
+
+    function getButtonClass(option) {
+      if (!showResult) return 'option-btn';
+
+      const currentCard = cards[currentIndex];
+      if (!currentCard) return 'option-btn';
+
+      if (option === currentCard.korean) return 'option-btn correct';
+      if (option === selectedAnswer && option !== currentCard.korean) return 'option-btn incorrect';
+      return 'option-btn disabled';
+    }
+
+    function escapeHtml(text) {
+      const div = document.createElement('div');
+      div.textContent = text;
+      return div.innerHTML;
+    }
+
+    function render() {
+      const app = document.getElementById('app');
+      const currentCard = cards[currentIndex];
+
+      // ✅ 진행도: "원본 단어 16개 중 몇 개를 맞혔는지"로 계산
+      const masteredCount = mastered.size;
+      const notUnderstoodCount = cards.filter(c => c.reviewed && c.understood === false).length;
+
+      if (!currentCard) {
+        const total = stats.correct + stats.incorrect;
+        const accuracy = total === 0 ? 0 : Math.round((stats.correct / total) * 100);
+
+        app.innerHTML =
+          '<div class="completion-screen">' +
+            '<div class="completion-emoji">🎉</div>' +
+            '<h2 class="completion-title">학습 완료!</h2>' +
+            '<div class="completion-stats">' +
+              '<p class="completion-stat">정답: <span class="stat-value correct">' + stats.correct + '</span></p>' +
+              '<p class="completion-stat">오답: <span class="stat-value incorrect">' + stats.incorrect + '</span></p>' +
+              '<p class="completion-stat">정답률: <span class="stat-value rate">' + accuracy + '%</span></p>' +
+            '</div>' +
+            '<button class="restart-btn" id="restartBtn"><span>🔄</span> 다시 시작하기</button>' +
+          '</div>';
+
+        document.getElementById('restartBtn').addEventListener('click', reset);
+        return;
+      }
+
+      const progressPercent = (masteredCount / vocabulary.length) * 100;
+
+      let html =
+        '<div class="progress-section">' +
+          '<div class="progress-header">' +
+            '<span class="progress-text">마스터: ' + masteredCount + '/' + vocabulary.length + '</span>' +
+            '<div class="stats">' +
+              '<span class="stat-correct">정답: ' + stats.correct + '</span>' +
+              '<span class="stat-incorrect">오답: ' + stats.incorrect + '</span>' +
+              '<button class="reset-btn" id="resetBtn" title="리셋">🔄</button>' +
+            '</div>' +
+          '</div>' +
+          '<div class="progress-bar">' +
+            '<div class="progress-fill" style="width:' + progressPercent + '%"></div>' +
+          '</div>';
+
+      if (notUnderstoodCount > 0) {
+        html += '<p class="review-notice">복습 대기: ' + notUnderstoodCount + '개</p>';
+      }
+
+      html +=
+        '</div>' +
+        '<div class="card-container">' +
+          '<div class="question-section">' +
+            '<div class="chinese-word">' + currentCard.chinese + '</div>' +
+            '<div class="pinyin">' + currentCard.pinyin + '</div>' +
+            '<button class="pronunciation-btn' + (isPlaying ? ' playing' : '') + '" id="speakBtn"' + (isPlaying ? ' disabled' : '') + '>' +
+              '🔊 발음 듣기' +
+            '</button>' +
+          '</div>' +
+          '<div class="answer-section">' +
+            '<p class="question-prompt">이 단어의 뜻은?</p>' +
+            '<div class="options">';
+
+      for (let i = 0; i < options.length; i++) {
+        const option = options[i];
+        html +=
+          '<button class="' + getButtonClass(option) + '" data-idx="' + i + '"' + (showResult ? ' disabled' : '') + '>' +
+            '<span class="option-text">' + escapeHtml(option) + '</span>';
+
+        if (showResult && option === currentCard.korean) html += '<span class="icon">✓</span>';
+        if (showResult && option === selectedAnswer && option !== currentCard.korean) html += '<span class="icon">✗</span>';
+
+        html += '</button>';
+      }
+
+      html +=
+            '</div>' +
+          '</div>';
+
+      if (showResult) {
+        const ok = selectedAnswer === currentCard.korean;
+        html +=
+          '<div class="result-message ' + (ok ? 'correct' : 'incorrect') + '">' +
+            (ok ? '정답입니다! 🎉' : '틀렸습니다. 다시 나올 거예요! 💪') +
+          '</div>';
+      }
+
+      html +=
+        '</div>' +
+        '<div class="hint">💡 정답을 선택하세요. 틀린 문제는 자동으로 다시 나옵니다</div>';
+
+      app.innerHTML = html;
+
+      // ✅ 이벤트를 HTML 문자열 onclick 대신 addEventListener로 연결 (깨짐/보안/버그 방지)
+      document.getElementById('resetBtn').addEventListener('click', reset);
+      document.getElementById('speakBtn').addEventListener('click', () => playPronunciation(currentCard.chinese));
+
+      document.querySelectorAll('.option-btn[data-idx]').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const idx = Number(btn.getAttribute('data-idx'));
+          handleAnswer(idx);
+        });
+      });
+    }
+
+    // 시작
+    init();
+  </script>
+</body>
+</html>
