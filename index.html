@@ -1,1532 +1,566 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8" />
-  <title>2025 산타의 덕질 크리스마스 파티 초대장</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <meta name="description" content="2025 산타의 덕질 크리스마스 파티 카드형 초대장" />
-
-  <!-- ✅ OG (카톡 미리보기 썸네일) : 원하는 이미지 링크로 세팅 -->
-  <meta property="og:type" content="website" />
-  <meta property="og:title" content="2025 산타의 덕질 크리스마스 파티 초대장" />
-  <meta property="og:description" content="🎄 산타 & 루돌프가 분주하게 준비 중! 7시에 와서 변신 시작!" />
-  <meta property="og:image" content="https://i.postimg.cc/yYLJKfBB/image.png" />
-  <meta property="og:image:width" content="1200" />
-  <meta property="og:image:height" content="630" />
-  <meta property="og:image:alt" content="산타와 루돌프가 크리스마스 파티를 준비하는 장면" />
-  <!-- ⚠️ 아래 og:url은 GitHub Pages 주소로 바꿔줘야 캐시/미리보기 안정적 -->
-  <meta property="og:url" content="https://YOUR_USERNAME.github.io/YOUR_REPO/" />
-
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=Gaegu:wght@300;400;700&family=Gamja+Flower&display=swap" rel="stylesheet" />
-
-  <style>
-    :root {
-      --burgundy: #8B1538;
-      --deep-red: #6B1229;
-      --forest-green: #1B4D3E;
-      --dark-green: #0f3b26;
-      --gold: #D4AF37;
-      --cream: #F5EFE0;
-      --card-bg: #FDFAF5;
-      --ornament-gold: #C9A961;
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      -webkit-tap-highlight-color: transparent;
-    }
-
-    html, body {
-      height: 100%;
-      font-family: 'Noto Sans KR', sans-serif;
-      scroll-behavior: smooth;
-      background: linear-gradient(to bottom, #1a1a1a 0%, #2d1f1f 50%, #1a1a1a 100%);
-      color: #333;
-      overflow-x: hidden;
-    }
-
-    body {
-      display: flex;
-      flex-direction: column;
-      align-items: stretch;
-    }
-
-    /* 눈 내리는 효과 */
-    body::before {
-      content: "";
-      pointer-events: none;
-      position: fixed;
-      top: -100%;
-      left: 0;
-      width: 100%;
-      height: 200%;
-      background-image:
-        radial-gradient(2px 2px at 15% 20%, white, transparent),
-        radial-gradient(3px 3px at 75% 40%, rgba(255,255,255,0.8), transparent),
-        radial-gradient(2px 2px at 45% 60%, rgba(255,255,255,0.9), transparent),
-        radial-gradient(3px 3px at 85% 80%, rgba(255,255,255,0.7), transparent),
-        radial-gradient(2px 2px at 25% 90%, white, transparent);
-      background-repeat: repeat;
-      background-size: 250px 250px, 300px 300px, 200px 200px, 350px 350px, 280px 280px;
-      animation: snow 25s linear infinite;
-      z-index: 0;
-    }
-
-    @keyframes snow {
-      0% { transform: translateY(0); }
-      100% { transform: translateY(50%); }
-    }
-
-    /* 반짝이는 별 */
-    body::after {
-      content: "";
-      pointer-events: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-image:
-        radial-gradient(circle, rgba(255,255,255,0.9) 1px, transparent 1px),
-        radial-gradient(circle, rgba(255,215,0,0.8) 1px, transparent 1px),
-        radial-gradient(circle, rgba(255,192,203,0.6) 1px, transparent 1px);
-      background-size: 150px 150px, 200px 200px, 180px 180px;
-      background-position: 0 0, 50px 50px, 100px 30px;
-      animation: twinkleEnhanced 2s ease-in-out infinite;
-      z-index: 0;
-      opacity: 0.4;
-    }
-
-    @keyframes twinkleEnhanced {
-      0% { opacity: 0.3; }
-      25% { opacity: 0.5; }
-      50% { opacity: 0.7; }
-      75% { opacity: 0.5; }
-      100% { opacity: 0.3; }
-    }
-
-    main {
-      position: relative;
-      z-index: 1;
-      width: 100%;
-      padding: 1.5rem 1rem 2.5rem;
-      max-width: 500px;
-      margin: 0 auto;
-    }
-
-    .card-stack { width: 100%; }
-
-    .card-section {
-      background: var(--card-bg);
-      border-radius: 12px;
-      margin-bottom: 1.5rem;
-      box-shadow: 0 15px 40px rgba(0,0,0,0.4);
-      border: 3px solid var(--gold);
-      padding: 0;
-      position: relative;
-      overflow: hidden;
-      animation: cardFadeIn 0.6s ease-out backwards;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    .card-section:active {
-      transform: scale(0.98);
-      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-    }
-
-    .card-section:nth-child(1) { animation-delay: 0.1s; }
-    .card-section:nth-child(2) { animation-delay: 0.2s; }
-    .card-section:nth-child(3) { animation-delay: 0.3s; }
-    .card-section:nth-child(4) { animation-delay: 0.4s; }
-    .card-section:nth-child(5) { animation-delay: 0.5s; }
-    .card-section:nth-child(6) { animation-delay: 0.6s; }
-
-    @keyframes cardFadeIn {
-      from { opacity: 0; transform: translateY(30px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .card-section::before {
-      content: "";
-      position: absolute;
-      inset: 8px;
-      border: 2px solid var(--ornament-gold);
-      border-radius: 8px;
-      pointer-events: none;
-      opacity: 0.5;
-    }
-
-    .card-section::after {
-      content: "";
-      position: absolute;
-      inset: 14px;
-      border: 1px dotted var(--gold);
-      border-radius: 4px;
-      pointer-events: none;
-      opacity: 0.3;
-    }
-
-    .card-inner {
-      position: relative;
-      z-index: 1;
-      padding: 2rem 1.5rem 2.5rem;
-    }
-
-    .corner-ornament {
-      position: absolute;
-      width: 30px;
-      height: 30px;
-      border: 2px solid var(--gold);
-      pointer-events: none;
-      z-index: 2;
-      opacity: 0.7;
-    }
-    .corner-ornament.top-left { top: 15px; left: 15px; border-right: none; border-bottom: none; }
-    .corner-ornament.top-right { top: 15px; right: 15px; border-left: none; border-bottom: none; }
-    .corner-ornament.bottom-left { bottom: 15px; left: 15px; border-right: none; border-top: none; }
-    .corner-ornament.bottom-right { bottom: 15px; right: 15px; border-left: none; border-top: none; }
-
-    .card-tag {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      font-size: 0.65rem;
-      padding: 0.4rem 0.9rem;
-      border-radius: 2px;
-      background: var(--burgundy);
-      color: var(--cream);
-      text-transform: uppercase;
-      letter-spacing: 0.15em;
-      margin-bottom: 1.2rem;
-      border: 1px solid var(--gold);
-      transition: transform 0.3s ease;
-    }
-    .card-tag:active { transform: scale(0.95); }
-
-    .card-tag span.emoji {
-      font-size: 0.9rem;
-      animation: emojiWiggle 2s ease-in-out infinite;
-    }
-    @keyframes emojiWiggle {
-      0%, 100% { transform: rotate(0deg); }
-      10% { transform: rotate(-5deg); }
-      20% { transform: rotate(5deg); }
-      30% { transform: rotate(-5deg); }
-      40% { transform: rotate(5deg); }
-      50% { transform: rotate(0deg); }
-    }
-
-    h1, h2, h3 { font-weight: 700; }
-
-    #cover .card-inner {
-      text-align: center;
-      padding: 2.5rem 1.5rem 3rem;
-      background: linear-gradient(135deg, var(--burgundy) 0%, var(--deep-red) 100%);
-      color: var(--cream);
-    }
-    #cover .card-section::before, #cover .card-section::after { border-color: var(--gold); }
-
-    .cover-title {
-      font-size: 2rem;
-      line-height: 1.4;
-      margin-bottom: 1.2rem;
-      color: var(--cream);
-      font-family: 'Gamja Flower', cursive;
-      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-      animation: fadeIn 1.5s ease-out;
-    }
-    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-
-    .cover-title .highlight {
-      color: var(--gold);
-      display: block;
-      font-size: 2.2rem;
-      margin-top: 0.3rem;
-      animation: fadeIn 1.5s ease-out 0.3s backwards;
-    }
-
-    .cover-sub {
-      font-size: 0.95rem;
-      color: var(--cream);
-      margin-bottom: 1.5rem;
-      line-height: 1.8;
-      opacity: 0.95;
-    }
-
-    .cover-accent {
-      font-size: 0.9rem;
-      color: var(--cream);
-      background: rgba(0,0,0,0.2);
-      display: inline-block;
-      padding: 0.9rem 1.2rem;
-      border-radius: 4px;
-      margin: 0 auto 1.5rem;
-      border: 2px solid var(--gold);
-      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-      animation: fadeIn 1.5s ease-out 0.6s backwards;
-    }
-
-    .scroll-hint {
-      margin-top: 1rem;
-      font-size: 0.8rem;
-      color: var(--cream);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 0.3rem;
-      opacity: 0.8;
-    }
-    .scroll-hint span.arrow {
-      font-size: 1.5rem;
-      animation: bounce 1.5s infinite;
-    }
-    @keyframes bounce {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(6px); }
-    }
-
-    .letter-title {
-      font-size: 1.4rem;
-      margin-bottom: 1rem;
-      color: var(--burgundy);
-      text-align: center;
-      font-family: 'Gamja Flower', cursive;
-    }
-
-    .letter-body {
-      font-size: 0.9rem;
-      line-height: 1.9;
-      background: var(--cream);
-      border-radius: 4px;
-      padding: 1.5rem 1.2rem;
-      border: 2px solid var(--ornament-gold);
-      position: relative;
-      box-shadow: inset 0 2px 8px rgba(0,0,0,0.05);
-      word-break: keep-all;
-    }
-
-    .letter-body strong { color: var(--burgundy); font-weight: 600; }
-
-    .letter-sign {
-      margin-top: 1.2rem;
-      font-size: 0.85rem;
-      text-align: right;
-      color: var(--burgundy);
-      font-style: italic;
-    }
-
-    .section-heading {
-      font-size: 1.3rem;
-      margin-bottom: 1.2rem;
-      color: var(--burgundy);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.5rem;
-      font-family: 'Gamja Flower', cursive;
-      text-align: center;
-    }
-
-    .section-heading span.emoji {
-      font-size: 1.4rem;
-      display: inline-block;
-      animation: emojiDance 4s ease-in-out infinite;
-    }
-
-    @keyframes emojiDance {
-      0%, 100% { transform: rotate(0deg) scale(1); }
-      10% { transform: rotate(-15deg) scale(1.1); }
-      20% { transform: rotate(15deg) scale(1.1); }
-      30% { transform: rotate(-15deg) scale(1.1); }
-      40% { transform: rotate(15deg) scale(1.1); }
-      50% { transform: rotate(0deg) scale(1); }
-    }
-
-    .info-grid {
-      display: grid;
-      gap: 1rem;
-      margin-bottom: 1.2rem;
-    }
-
-    .info-item {
-      border-radius: 4px;
-      padding: 1rem;
-      background: var(--cream);
-      border: 2px solid var(--ornament-gold);
-      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-      animation: itemFloat 3s ease-in-out infinite;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-    }
-    .info-item:active { transform: translateY(-2px) !important; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
-    .info-item:nth-child(1) { animation-delay: 0s; }
-    .info-item:nth-child(2) { animation-delay: 0.3s; }
-    .info-item:nth-child(3) { animation-delay: 0.6s; }
-
-    @keyframes itemFloat {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-3px); }
-    }
-
-    .info-label {
-      font-size: 0.7rem;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: var(--burgundy);
-      margin-bottom: 0.4rem;
-      font-weight: 600;
-    }
-
-    .info-value {
-      font-size: 1rem;
-      font-weight: 600;
-      margin-bottom: 0.5rem;
-      color: var(--deep-red);
-    }
-
-    .info-note {
-      font-size: 0.85rem;
-      color: #555;
-      line-height: 1.7;
-      word-break: keep-all;
-    }
-    .info-note strong { color: var(--burgundy); }
-
-    .theme-box {
-      background: var(--cream);
-      border: 2px solid var(--ornament-gold);
-      border-radius: 4px;
-      padding: 1rem;
-      margin-top: 1.2rem;
-    }
-
-    .theme-box h3 {
-      font-size: 1rem;
-      margin-bottom: 0.7rem;
-      color: var(--burgundy);
-    }
-
-    .theme-box p {
-      font-size: 0.85rem;
-      color: #555;
-      line-height: 1.8;
-      word-break: keep-all;
-    }
-    .theme-box strong { color: var(--burgundy); }
-
-    .theme-list { margin-top: 0.7rem; padding-left: 1rem; }
-    .theme-list li {
-      font-size: 0.83rem;
-      color: #555;
-      line-height: 1.8;
-      margin-bottom: 0.3rem;
-      word-break: keep-all;
-    }
-
-    .map-btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.45rem;
-      margin-top: 0.55rem;
-      padding: 0.55rem 0.85rem;
-      background: var(--burgundy);
-      color: var(--cream);
-      border-radius: 8px;
-      border: 1px solid var(--gold);
-      font-size: 0.82rem;
-      font-weight: 700;
-      text-decoration: none;
-      box-shadow: 0 6px 16px rgba(0,0,0,0.12);
-      transition: transform 0.15s ease, box-shadow 0.15s ease, opacity 0.15s ease;
-      user-select: none;
-    }
-    .map-btn:active {
-      transform: translateY(1px) scale(0.98);
-      box-shadow: 0 4px 12px rgba(0,0,0,0.16);
-      opacity: 0.95;
-    }
-    .map-btn .icon { font-size: 1rem; line-height: 1; }
-    .map-btn-note {
-      margin-top: 0.45rem;
-      font-size: 0.75rem;
-      color: #666;
-      line-height: 1.6;
-    }
-
-    .stay-gallery {
-      margin-top: 1.1rem;
-      background: rgba(0,0,0,0.02);
-      border: 2px solid var(--ornament-gold);
-      border-radius: 8px;
-      overflow: hidden;
-    }
-    .stay-gallery .gallery-head {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 0.6rem;
-      padding: 0.85rem 0.9rem;
-      background: rgba(139, 21, 56, 0.06);
-      border-bottom: 1px dashed rgba(212, 175, 55, 0.55);
-      color: var(--burgundy);
-      font-weight: 700;
-      font-size: 0.9rem;
-      letter-spacing: 0.01em;
-    }
-    .marquee {
-      position: relative;
-      width: 100%;
-      overflow: hidden;
-      padding: 0.9rem 0.8rem 1rem;
-      background: rgba(245, 239, 224, 0.65);
-    }
-    .marquee-track {
-      display: flex;
-      width: max-content;
-      gap: 0.75rem;
-      animation: marqueeMove 22s linear infinite;
-      will-change: transform;
-    }
-    .marquee:hover .marquee-track { animation-play-state: paused; }
-    .marquee:active .marquee-track { animation-play-state: paused; }
-
-    @keyframes marqueeMove {
-      0% { transform: translateX(0); }
-      100% { transform: translateX(-50%); }
-    }
-
-    .stay-photo {
-      width: 180px;
-      height: 120px;
-      border-radius: 10px;
-      overflow: hidden;
-      flex: 0 0 auto;
-      border: 2px solid rgba(212, 175, 55, 0.7);
-      box-shadow: 0 6px 16px rgba(0,0,0,0.12);
-      background: #fff;
-      position: relative;
-    }
-    .stay-photo img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-      transform: scale(1.02);
-      transition: transform 0.35s ease;
-    }
-    .stay-photo:active img { transform: scale(1.08); }
-    .stay-photo .badge {
-      position: absolute;
-      left: 8px;
-      top: 8px;
-      background: rgba(107, 18, 41, 0.88);
-      color: var(--cream);
-      font-size: 0.72rem;
-      padding: 0.25rem 0.5rem;
-      border-radius: 6px;
-      border: 1px solid rgba(212, 175, 55, 0.9);
-      letter-spacing: 0.02em;
-    }
-
-    .timeline { position: relative; margin-top: 1rem; padding-left: 0; }
-    .timeline-item {
-      position: relative;
-      padding-left: 2.5rem;
-      margin-bottom: 2rem;
-      transition: transform 0.2s ease;
-    }
-    .timeline-item:last-child { margin-bottom: 0; }
-    .timeline-item:active { transform: translateX(3px); }
-
-    .timeline-item::before {
-      content: "";
-      position: absolute;
-      left: 0.45rem;
-      top: 0;
-      bottom: -2rem;
-      width: 2px;
-      background: linear-gradient(to bottom, var(--burgundy) 0%, var(--ornament-gold) 100%);
-    }
-    .timeline-item:last-child::before { display: none; }
-
-    .timeline-item::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      top: 0.4rem;
-      width: 12px;
-      height: 12px;
-      border-radius: 50%;
-      background: var(--gold);
-      border: 3px solid var(--burgundy);
-      box-shadow: 0 0 0 3px var(--card-bg);
-      z-index: 1;
-    }
-
-    .timeline-time {
-      font-size: 0.75rem;
-      color: var(--burgundy);
-      font-weight: 700;
-      margin-bottom: 0.4rem;
-      display: inline-block;
-      background: rgba(139, 21, 56, 0.1);
-      padding: 0.2rem 0.6rem;
-      border-radius: 3px;
-    }
-
-    .timeline-title {
-      font-size: 0.95rem;
-      font-weight: 600;
-      margin-bottom: 0.5rem;
-      color: var(--deep-red);
-    }
-
-    .timeline-desc {
-      font-size: 0.83rem;
-      color: #555;
-      line-height: 1.8;
-      word-break: keep-all;
-    }
-    .timeline-desc strong { color: var(--burgundy); }
-
-    .checklist { list-style: none; display: grid; gap: 1rem; font-size: 0.9rem; }
-
-    .check-item {
-      display: flex;
-      align-items: flex-start;
-      gap: 0.8rem;
-      background: var(--cream);
-      padding: 1rem;
-      border-radius: 4px;
-      border: 2px solid var(--ornament-gold);
-      animation: checkFloat 3s ease-in-out infinite;
-      transition: transform 0.2s ease;
-    }
-    .check-item:active { transform: translateY(-2px) scale(0.98) !important; }
-
-    .check-item:nth-child(1) { animation-delay: 0s; }
-    .check-item:nth-child(2) { animation-delay: 0.2s; }
-    .check-item:nth-child(3) { animation-delay: 0.4s; }
-    .check-item:nth-child(4) { animation-delay: 0.6s; }
-    .check-item:nth-child(5) { animation-delay: 0.8s; }
-
-    @keyframes checkFloat {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-2px); }
-    }
-
-    .check-icon {
-      font-size: 1.3rem;
-      margin-top: 0.1rem;
-      flex-shrink: 0;
-      animation: iconShake 3s ease-in-out infinite;
-    }
-
-    @keyframes iconShake {
-      0%, 90%, 100% { transform: rotate(0deg); }
-      92% { transform: rotate(-10deg); }
-      94% { transform: rotate(10deg); }
-      96% { transform: rotate(-10deg); }
-      98% { transform: rotate(10deg); }
-    }
-
-    .check-main { font-weight: 600; margin-bottom: 0.4rem; color: var(--deep-red); font-size: 0.9rem; }
-    .check-sub { font-size: 0.8rem; color: #555; line-height: 1.8; word-break: keep-all; }
-    .check-sub strong { color: var(--burgundy); }
-
-    .check-list { margin-top: 0.5rem; padding-left: 0.8rem; }
-    .check-list li { font-size: 0.78rem; color: #666; margin-bottom: 0.2rem; word-break: keep-all; }
-
-    footer { position: relative; z-index: 1; padding: 0 1rem 2.5rem; }
-
-    .footer-inner {
-      max-width: 500px;
-      margin: 0 auto;
-      text-align: center;
-      font-size: 0.85rem;
-      color: var(--cream);
-      background: rgba(139, 21, 56, 0.3);
-      padding: 1.8rem 1.5rem;
-      border-radius: 12px;
-      border: 2px solid var(--gold);
-      word-break: keep-all;
-      animation: footerGlow 3s ease-in-out infinite;
-    }
-
-    @keyframes footerGlow {
-      0%, 100% { box-shadow: 0 0 20px rgba(212, 175, 55, 0.3); }
-      50% { box-shadow: 0 0 30px rgba(212, 175, 55, 0.6); }
-    }
-
-    .footer-inner strong { color: var(--gold); }
-    .footer-inner p { line-height: 1.8; }
-
-    @media (max-width: 360px) {
-      .stay-photo { width: 160px; height: 110px; }
-      .card-inner { padding: 1.8rem 1.2rem 2.2rem; }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      * { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
-    }
-
-    /* ✅ BGM 컨트롤 (오른쪽 아래 고정) */
-    .bgm-controller {
-      position: fixed;
-      right: 14px;
-      bottom: 14px;
-      z-index: 9999;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 10px 12px;
-      border-radius: 14px;
-      border: 1px solid rgba(212,175,55,0.9);
-      background: rgba(20, 12, 14, 0.55);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-      box-shadow: 0 10px 30px rgba(0,0,0,0.35);
-      color: #fff;
-      user-select: none;
-    }
-    .bgm-btn {
-      appearance: none;
-      border: 1px solid rgba(212,175,55,0.9);
-      background: rgba(139,21,56,0.85);
-      color: var(--cream);
-      font-weight: 800;
-      font-size: 0.85rem;
-      padding: 9px 12px;
-      border-radius: 12px;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      transition: transform .12s ease, opacity .12s ease;
-    }
-    .bgm-btn:active { transform: translateY(1px) scale(0.98); opacity: 0.95; }
-    .bgm-pill {
-      font-size: 0.75rem;
-      padding: 6px 9px;
-      border-radius: 999px;
-      border: 1px solid rgba(255,255,255,0.28);
-      background: rgba(255,255,255,0.08);
-      opacity: 0.95;
-      white-space: nowrap;
-    }
-    .bgm-vol {
-      width: 92px;
-      accent-color: var(--gold);
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>중국어 단어 학습</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #e0f2e9 0%, #d4e7f7 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 800px;
+        }
+
+        .progress-section {
+            margin-bottom: 20px;
+        }
+
+        .progress-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .progress-text {
+            font-size: 14px;
+            font-weight: 600;
+            color: #555;
+        }
+
+        .stats {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .stat-correct {
+            color: #22c55e;
+            font-size: 14px;
+        }
+
+        .stat-incorrect {
+            color: #ef4444;
+            font-size: 14px;
+        }
+
+        .reset-btn {
+            background: none;
+            border: none;
+            color: #888;
+            cursor: pointer;
+            font-size: 18px;
+            padding: 5px;
+            transition: color 0.3s;
+        }
+
+        .reset-btn:hover {
+            color: #555;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #ddd;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #22c55e 0%, #3b82f6 100%);
+            transition: width 0.5s ease;
+        }
+
+        .review-notice {
+            margin-top: 8px;
+            font-size: 13px;
+            color: #f97316;
+        }
+
+        .card-container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            padding: 40px;
+        }
+
+        .question-section {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 30px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+
+        .chinese-word {
+            font-size: 72px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .pinyin {
+            font-size: 28px;
+            color: #888;
+            margin-bottom: 25px;
+        }
+
+        .pronunciation-btn {
+            background: #3b82f6;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 50px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+            transition: all 0.3s;
+        }
+
+        .pronunciation-btn:hover {
+            background: #2563eb;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(59, 130, 246, 0.4);
+        }
+
+        .pronunciation-btn.playing {
+            animation: pulse 1s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        .answer-section {
+            margin-top: 30px;
+        }
+
+        .question-prompt {
+            text-align: center;
+            color: #666;
+            font-weight: 600;
+            margin-bottom: 20px;
+            font-size: 16px;
+        }
+
+        .options {
+            display: grid;
+            gap: 12px;
+        }
+
+        .option-btn {
+            padding: 20px;
+            border-radius: 12px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: left;
+            border: 2px solid #ddd;
+            background: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .option-btn:hover:not(:disabled) {
+            background: #eff6ff;
+            border-color: #3b82f6;
+        }
+
+        .option-btn.correct {
+            background: #22c55e;
+            color: white;
+            border-color: #16a34a;
+        }
+
+        .option-btn.incorrect {
+            background: #ef4444;
+            color: white;
+            border-color: #dc2626;
+        }
+
+        .option-btn.disabled {
+            background: #f5f5f5;
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .option-text {
+            white-space: pre-line;
+        }
+
+        .icon {
+            font-size: 24px;
+        }
+
+        .result-message {
+            margin-top: 25px;
+            padding: 16px;
+            border-radius: 12px;
+            text-align: center;
+            font-weight: 600;
+            font-size: 16px;
+        }
+
+        .result-message.correct {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .result-message.incorrect {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        .hint {
+            text-align: center;
+            color: #888;
+            font-size: 14px;
+            margin-top: 30px;
+        }
+
+        .completion-screen {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            padding: 50px;
+            text-align: center;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .completion-emoji {
+            font-size: 80px;
+            margin-bottom: 20px;
+        }
+
+        .completion-title {
+            font-size: 32px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 30px;
+        }
+
+        .completion-stats {
+            background: #f9fafb;
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 30px;
+        }
+
+        .completion-stat {
+            color: #666;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+
+        .completion-stat:last-child {
+            margin-bottom: 0;
+        }
+
+        .stat-value {
+            font-weight: bold;
+            font-size: 20px;
+        }
+
+        .stat-value.correct {
+            color: #22c55e;
+        }
+
+        .stat-value.incorrect {
+            color: #ef4444;
+        }
+
+        .stat-value.rate {
+            color: #3b82f6;
+        }
+
+        .restart-btn {
+            background: linear-gradient(90deg, #22c55e 0%, #3b82f6 100%);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+        }
+
+        .restart-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+        }
+
+        @media (max-width: 640px) {
+            .chinese-word {
+                font-size: 56px;
+            }
+
+            .pinyin {
+                font-size: 22px;
+            }
+
+            .card-container {
+                padding: 25px;
+            }
+
+            .option-btn {
+                font-size: 16px;
+                padding: 16px;
+            }
+        }
+    </style>
 </head>
-
 <body>
-  <!-- ✅ BGM 컨트롤 UI -->
-  <div class="bgm-controller" aria-label="배경음악 컨트롤">
-    <button class="bgm-btn" id="bgmToggle" type="button" aria-label="배경음악 재생/정지">
-      🎹 <span id="bgmLabel">BGM 켜기</span>
-    </button>
-    <span class="bgm-pill" id="bgmStatus">대기중</span>
-    <input class="bgm-vol" id="bgmVol" type="range" min="0" max="1" step="0.01" value="0.18" aria-label="배경음악 볼륨" />
-  </div>
-
-  <main>
-    <div class="card-stack">
-
-      <!-- 1. COVER -->
-      <section class="card-section" id="cover">
-        <div class="corner-ornament top-left"></div>
-        <div class="corner-ornament top-right"></div>
-        <div class="corner-ornament bottom-left"></div>
-        <div class="corner-ornament bottom-right"></div>
-
-        <div class="card-inner">
-          <div class="card-tag">
-            <span class="emoji">🎄</span>
-            <span>2025 Christmas Card</span>
-          </div>
-
-          <h1 class="cover-title">
-            2025 산타의<br />
-            <span class="highlight">덕질 크리스마스 파티</span>
-          </h1>
-
-          <p class="cover-sub">
-            올 한 해 네 마음을 가장 뜨겁게 만든<br />
-            그 최애로 변신해서 오는 특별한 밤.
-          </p>
-
-          <div class="cover-accent">
-            🎅 산타 왈: "7시에 오렴. <br />내가 야무진 조수 한 명 보냈당께!"
-          </div>
-
-          <div class="scroll-hint">
-            <span>카드를 천천히 넘겨보세요</span>
-            <span class="arrow">⬇️</span>
-          </div>
-        </div>
-      </section>
-
-      <!-- 2. SANTA LETTER -->
-      <section class="card-section" id="letter">
-        <div class="corner-ornament top-left"></div>
-        <div class="corner-ornament top-right"></div>
-        <div class="corner-ornament bottom-left"></div>
-        <div class="corner-ornament bottom-right"></div>
-
-        <div class="card-inner">
-          <div class="card-tag">
-            <span class="emoji">📬</span>
-            <span>From Santa</span>
-          </div>
-
-          <h2 class="letter-title">호호호, 얘들아. 산타 할아배여.</h2>
-
-          <div class="letter-body">
-            할배가 올해 착한 아이 명단 확인해봤는디...<br />
-            어이구, 너희들 이름이 <strong>빨간 줄 쳐져 있더라고?</strong>
-            <br /><br />
-            착한 아이 조건이 여러 가지 있는디,<br />
-            그 중에 하나가<br /> <strong>"통장 잔고 건전하게 관리하기"</strong>란 말이여.<br />
-            과소비하면 나쁜 아이로 분류된단다...
-            <br /><br />
-            근디 너희들 통장 확인해봤더니<br />
-            어머나, 전부 다 <strong>텅장</strong>이 되어버렸구만!<br />
-            호호호, 다들 이 조항에 해당되더라고!<br />
-            뭘 그렇게 샀는지 할배는 다 알지...
-            <br /><br />
-            학교 다니는 것도, 일하는 것도, 사람 만나는 것도<br />
-            올해 참 쉽지 않았제?<br />
-            그래도 여기까지 버텨준 거, 그거면 됐단다!
-            <br /><br />
-            근데 말이여, 착한 아이 명단에서 빠졌다고 해서<br />
-            선물 안 주는 건 아니란다.<br />
-            오히려 <strong>더 재밌는 선물</strong>을 준비했지!
-            <br /><br />
-            그래서 할배가 <strong>특별한 크리스마스 파티</strong>를 <br />하나 준비했네.<br />
-            올해 네 마음을 가장 뜨겁게 만든<br />
-            그 캐릭터나 인물로 변신해서 모이는 거여!
-            <br /><br />
-            참가자는 할배 조수 포함해서 딱 다섯 명.<br />
-            이 정도면 적당하제.
-            <br /><br />
-            할배가 하나만 부탁하자면<br />
-            <strong>2025년에 네 마음을 제일 흔들어놨던<br />
-            그 캐릭터나 사람으로 변신해서 오는 거여.</strong>
-            <br /><br />
-            근디! 미리 다 꾸미고 오면 재미없잖겄나?<br />
-            <strong>7시에 와서 그때부터 <br />각자 방에서 변신 시작</strong>하는 거란다.<br />
-            <br />
-            아, 그리고 말이여!<br />
-            할배가 <strong>크리스마스 당일엔 바빠서 못 간다.</strong><br />
-            전세계 애들 선물 배달하느라 정신없단 말이여!<br />
-            그래서 <strong>할배 조수 한 명을 보낼 거여.</strong><br />
-            걔가 나 대신 가서 너희들이랑 같이 놀아줄 거란다. 호호호!
-            <br /><br />
-            자세한 건 아래 카드들 천천히 넘겨보고,<br />
-            7시 딱 맞춰서 오면 되네!<br />
-            늦으면... 호호호, 할배가 알 거여. 🎄
-
-            <div class="letter-sign">
-              - 산타 할배가 -
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- 3. INFO -->
-      <section class="card-section" id="info">
-        <div class="corner-ornament top-left"></div>
-        <div class="corner-ornament top-right"></div>
-        <div class="corner-ornament bottom-left"></div>
-        <div class="corner-ornament bottom-right"></div>
-
-        <div class="card-inner">
-          <div class="card-tag">
-            <span class="emoji">📍</span>
-            <span>Party Info</span>
-          </div>
-
-          <h2 class="section-heading">
-            <span class="emoji">🎁</span>
-            <span>파티 기본 정보</span>
-          </h2>
-
-          <div class="info-grid">
-            <div class="info-item">
-              <div class="info-label">언제</div>
-              <div class="info-value">2025.12.25 (목)</div>
-              <p class="info-note">
-                📅 <strong>오후 3시부터 입실 가능</strong>하구,<br />
-                <strong>본게임은 7시에 시작</strong>이여!<br />
-                (3시~7시는 장 볼 사람 장 보고, 쉬고, 꿀같이 누워있으면 됨 ㅇㅋ?)
-              </p>
-            </div>
-
-            <div class="info-item">
-              <div class="info-label">어디</div>
-              <div class="info-value">아지트 같은 파티룸</div>
-              <p class="info-note">
-                📍 주소 아래 버튼 누르면 <strong>카카오맵 바로 뜸!</strong><br />
-              </p>
-            </div>
-
-            <div class="info-item">
-              <div class="info-label">누구</div>
-              <div class="info-value">조수 포함 5명</div>
-              <p class="info-note">
-                👥 산타 조수 포함해서 총 다섯 명!<br />
-                인원 딱 좋아서 수다+게임+술게임… 진행할거네!
-              </p>
-            </div>
-          </div>
-
-          <div class="theme-box" style="margin-top: 0.4rem;">
-            <h3>🧭 체크인 가이드 (길치 구제용)</h3>
-            <p style="margin-bottom:0.35rem;">
-              <strong>주소:</strong> 서울시 구로구 구로동 496-167
-            </p>
-
-            <a class="map-btn"
-               href="https://map.kakao.com/link/search/서울시%20구로구%20구로동%20496-167"
-               target="_blank"
-               rel="noopener noreferrer"
-               aria-label="카카오맵으로 서울시 구로구 구로동 496-167 검색">
-              <span class="icon">📍</span>
-              카카오맵으로 길찾기
-            </a>
-            <div class="map-btn-note">
-              (이 부분은 조수가 설명해줄거라네!)
-            </div>
-
-            <ol class="theme-list" style="padding-left: 1.2rem; margin-top:0.8rem;">
-              <li><strong>구로역 1번 출구</strong> 나온 뒤 <strong>NC백화점 방면</strong>으로 가서 <strong>육교</strong>로 횡단!</li>
-              <li>NC백화점 <strong>벽면 따라 150m 직진</strong> → 그 다음 <strong>횡단보도 2개</strong> 연속으로 건너기!</li>
-              <li><strong>애견용품샵 방면</strong>으로 <strong>70m 직진</strong> 후 <strong>오른쪽 골목</strong>으로 쏙!</li>
-              <li>골목 들어가서 <strong>60m 직진</strong> → <strong>CU 방면 왼쪽 골목</strong>으로 또 쏙!</li>
-              <li><strong>50m</strong>만 더 가면 <strong>숙소 도착</strong>입니다용 🎄 (여기서부터는 “어? 여기 맞나?”가 맞음)</li>
-            </ol>
-          </div>
-
-          <div class="theme-box" style="margin-top: 1rem;">
-            <h3>🔑 문 여는 법 / 비번</h3>
-            <p>
-              <strong>대문</strong>은 옆 <strong>우편함</strong>에 있는 <strong>대문 열쇠</strong>로 열어주세용!<br />
-              <strong>★중요★ 대문열쇠는 사용하고 나면 꼭 다시 우편함에 넣어서 보관!</strong><br /><br />
-              <strong>본채 비밀번호:</strong> 1234<br />
-              <strong>별채:</strong> 오픈되어있습니다요!<br />
-              (옥상 주민이 가끔 계단 지나갈 수 있대요! 놀라지 말기 😇)
-            </p>
-          </div>
-
-          <div class="theme-box" style="margin-top: 1rem;">
-            <h3>📶 와이파이</h3>
-            <p>
-              <strong>name:</strong> SK_WIFIGIGA8778_5G (2.4G)<br />
-              <strong>password:</strong> AAZ83@9352<br /><br />
-              <strong>5G</strong>는 가까운 데서 빠르고,<br />
-              <strong>2.4G</strong>는 멀어도 잘 잡힌대요!<br />
-              <strong>별채</strong>에 머무는 친구는 <strong>2.4G</strong> 추천 😊
-            </p>
-          </div>
-
-          <div class="stay-gallery" aria-label="숙소 이미지 미리보기">
-            <div class="gallery-head">
-              <span>🏠 숙소 미리보기</span>
-            </div>
-            <div class="marquee" id="marquee">
-              <div class="marquee-track" id="marqueeTrack">
-                <figure class="stay-photo">
-                  <span class="badge">1</span>
-                  <img src="https://a0.muscache.com/im/pictures/miso/Hosting-1201505742783014540/original/a355abdc-9598-44bb-83d6-66c65f97db3a.jpeg?im_w=720" alt="숙소 이미지 1" loading="lazy" />
-                </figure>
-                <figure class="stay-photo">
-                  <span class="badge">2</span>
-                  <img src="https://a0.muscache.com/im/pictures/miso/Hosting-1201505742783014540/original/8afa397c-697b-4cf4-854f-3a2db82c38fe.jpeg?im_w=720" alt="숙소 이미지 2" loading="lazy" />
-                </figure>
-                <figure class="stay-photo">
-                  <span class="badge">3</span>
-                  <img src="https://a0.muscache.com/im/pictures/miso/Hosting-1201505742783014540/original/755d8c3c-fb9c-420d-ad24-036c8a4a3da6.jpeg?im_w=720" alt="숙소 이미지 3" loading="lazy" />
-                </figure>
-                <figure class="stay-photo">
-                  <span class="badge">4</span>
-                  <img src="https://a0.muscache.com/im/pictures/miso/Hosting-1201505742783014540/original/5e2c0573-f888-4611-a56a-5203258ddc7e.jpeg?im_w=720" alt="숙소 이미지 4" loading="lazy" />
-                </figure>
-                <figure class="stay-photo">
-                  <span class="badge">5</span>
-                  <img src="https://a0.muscache.com/im/pictures/miso/Hosting-1201505742783014540/original/cc933890-f5ee-4e37-9d24-4290cac72ad0.jpeg?im_w=1200" alt="숙소 이미지 5" loading="lazy" />
-                </figure>
-
-                <figure class="stay-photo" aria-hidden="true">
-                  <span class="badge">1</span>
-                  <img src="https://a0.muscache.com/im/pictures/miso/Hosting-1201505742783014540/original/a355abdc-9598-44bb-83d6-66c65f97db3a.jpeg?im_w=720" alt="" loading="lazy" />
-                </figure>
-                <figure class="stay-photo" aria-hidden="true">
-                  <span class="badge">2</span>
-                  <img src="https://a0.muscache.com/im/pictures/miso/Hosting-1201505742783014540/original/8afa397c-697b-4cf4-854f-3a2db82c38fe.jpeg?im_w=720" alt="" loading="lazy" />
-                </figure>
-                <figure class="stay-photo" aria-hidden="true">
-                  <span class="badge">3</span>
-                  <img src="https://a0.muscache.com/im/pictures/miso/Hosting-1201505742783014540/original/755d8c3c-fb9c-420d-ad24-036c8a4a3da6.jpeg?im_w=720" alt="" loading="lazy" />
-                </figure>
-                <figure class="stay-photo" aria-hidden="true">
-                  <span class="badge">4</span>
-                  <img src="https://a0.muscache.com/im/pictures/miso/Hosting-1201505742783014540/original/5e2c0573-f888-4611-a56a-5203258ddc7e.jpeg?im_w=720" alt="" loading="lazy" />
-                </figure>
-                <figure class="stay-photo" aria-hidden="true">
-                  <span class="badge">5</span>
-                  <img src="https://a0.muscache.com/im/pictures/miso/Hosting-1201505742783014540/original/cc933890-f5ee-4e37-9d24-4290cac72ad0.jpeg?im_w=1200" alt="" loading="lazy" />
-                </figure>
-              </div>
-            </div>
-          </div>
-
-          <div class="theme-box">
-            <h3>🎭 테마</h3>
-            <p>
-              <strong>2025년, 네 인생을 빛낸 최애 캐릭터나 사람으로 나타나기!</strong>
-            </p>
-            <ul class="theme-list">
-              <li>만화책 캐릭터든, 드라마 사람이든, 노래하는 사람이든 다 좋네</li>
-              <li>클스마스 느낌 조금만 넣어주면 할배가 더 기뻐할 거여 🎄</li>
-            </ul>
-          </div>
-
-          <div class="theme-box" style="margin-top: 1rem;">
-            <h3>⚠️ 드레스코드 방식</h3>
-            <p>
-              <strong>집에서 미리 다 꾸미고 오는 거 안 된다!</strong><br />
-              편한 옷으로 와서 → 7시에 들어와서 → 방 정하고 → 거기서 꾸미기 시작!<br />
-              "현장에서 변신하기" 그런 거제.<br />
-              평범하게 있다가 → 갑자기 캐릭터 되는 그 과정도 다 추억이 될 거란다!
-            </p>
-          </div>
-        </div>
-      </section>
-
-      <!-- 4. SCHEDULE -->
-      <section class="card-section" id="schedule">
-        <div class="corner-ornament top-left"></div>
-        <div class="corner-ornament top-right"></div>
-        <div class="corner-ornament bottom-left"></div>
-        <div class="corner-ornament bottom-right"></div>
-
-        <div class="card-inner">
-          <div class="card-tag">
-            <span class="emoji">🕒</span>
-            <span>Schedule</span>
-          </div>
-
-          <h2 class="section-heading">
-            <span class="emoji">📖</span>
-            <span>크리스마스 밤 흐름</span>
-          </h2>
-
-          <p style="font-size:0.88rem; color:#666; margin-bottom:1rem; text-align: center;">
-            (대충 이렇게 흘러갈 거여, 딱딱하게 안 해도 되네!)
-          </p>
-
-          <div class="timeline">
-            <div class="timeline-item">
-              <div class="timeline-time">오후 3시 ~ 7시</div>
-              <div class="timeline-title">입실 & 장보기 & 쉬는 시간</div>
-              <div class="timeline-desc">
-                <strong>3시에 입실 가능!</strong><br />
-                장 볼 사람은 미리 장 보고, 아닌 사람은 그냥 누워서 기력 충전해도 됨.<br />
-                (신도림 홈플러스로 모여라잉~)
-              </div>
-            </div>
-
-            <div class="timeline-item">
-              <div class="timeline-time">저녁 7시 ~ 7시 반</div>
-              <div class="timeline-title">모여서 방 정하고 꾸미기</div>
-              <div class="timeline-desc">
-                7시에 다 같이 모여서 인사 나누고 → 각자 방 배정 → 변신 시작!<br />
-                이때부터 벌써 웃음 나올 거제.
-              </div>
-            </div>
-
-            <div class="timeline-item">
-              <div class="timeline-time">7시 반 ~ 8시</div>
-              <div class="timeline-title">캐릭터로 등장하는 시간 & 사진 찍기</div>
-              <div class="timeline-desc">
-                한 명씩 나오면서 캐릭터 소개하고 포즈 취하는 거여!<br />
-                나머지 친구들은 박수치고 사진 찍어주고.<br />
-                올해 크리스마스 기념사진 남기는 시간이제!
-              </div>
-            </div>
-
-            <div class="timeline-item">
-              <div class="timeline-time">8시부터 ~</div>
-              <div class="timeline-title">배달 음식 먹으면서 수다</div>
-              <div class="timeline-desc">
-                <strong>놀 시간 세이브하려고 음식은 전부 배달로 간다잉!</strong><br />
-                맛있는 거 시켜다가 먹으면서<br />
-                니네 하고 싶은 이야기 다 하려무나~ <br />
-                먼 얘기 했는지는 내가 다~~ 조수한테 들을겨~
-              </div>
-            </div>
-
-            <div class="timeline-item">
-              <div class="timeline-time">그다음엔</div>
-              <div class="timeline-title">선물 바꾸기 🎁</div>
-              <div class="timeline-desc">
-                각자 가져온 선물 랜덤으로 교환하는 거여!<br />
-                누가 뭘 가져왔는지 몰라서 더 재밌단다.<br />
-                포장 뜯을 때 <strong>리액션 크게 해주면 할배가 좋아할 거네!</strong>
-              </div>
-            </div>
-
-            <div class="timeline-item">
-              <div class="timeline-time">밤새도록</div>
-              <div class="timeline-title">술게임 + 게임파티 (조수 준비 완료)</div>
-              <div class="timeline-desc">
-                산타 조수한테 <strong>여러 가지 게임</strong> 준비하라고 이미
-                <br>시켜놨으니 <strong>기대해도 좋다잉~</strong><br />
-                중요한 건 다 같이 편하게 웃으면서 노는 거제!
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- 5. FOOD -->
-      <section class="card-section" id="food">
-        <div class="corner-ornament top-left"></div>
-        <div class="corner-ornament top-right"></div>
-        <div class="corner-ornament bottom-left"></div>
-        <div class="corner-ornament bottom-right"></div>
-
-        <div class="card-inner">
-          <div class="card-tag">
-            <span class="emoji">🍗</span>
-            <span>Food & Drinks</span>
-          </div>
-
-          <h2 class="section-heading">
-            <span class="emoji">🛵</span>
-            <span>음식/술 세팅 (시간 절약 버전)</span>
-          </h2>
-
-          <div class="theme-box" style="margin-top: 0.2rem;">
-            <h3>🧠 운영 철학</h3>
-            <p>
-              네 여러분! 지금부터 조수가 이야기 해볼게요! <br>
-              <strong>놀 시간 세이브</strong>해야 하니까!<br />
-              장시간 조리/준비 없음. <strong>전부 배달음식 + 최소 장보기</strong>로 갑니당 😌
-            </p>
-          </div>
-
-          <div class="theme-box" style="margin-top: 1rem;">
-            <h3>1) BHC</h3>
-            <p>
-              • 뿌링클 콤보 1마리 (기프티콘): <strong>20,100원</strong><br />
-              • 달콤바삭 치즈볼: <strong>5,500원</strong><br />
-              • 배달비: <strong>3,500원</strong><br />
-              → <strong>총 29,100원</strong>이에요!
-            </p>
-          </div>
-
-          <div class="theme-box" style="margin-top: 1rem;">
-            <h3>2) 샹츠마라 신도림점</h3>
-            <p>
-              • 로제 마라샹궈 2~3인분: <strong>36,900원</strong><br />
-              • 맵기 <strong>1단계</strong> 생각 중!<br />
-              • 마라샹궈랑 <strong>밥 같이</strong> 드실 분도 말해주세용 🍚
-            </p>
-          </div>
-
-          <div class="theme-box" style="margin-top: 1rem;">
-            <h3>3) 요아정 (디저트)</h3>
-            <p>
-              • 홀리데이 선물박스 패키지: <strong>매장 방문 시 가능</strong><br />
-              • 3~4인용 메뉴 주문에 <strong>1,000원 추가</strong>하면 OK!<br />
-            </p>
-          </div>
-
-          <div class="theme-box" style="margin-top: 1rem;">
-            <h3>4) 안주 최소 세팅</h3>
-            <p>
-              • 과일(딸기, 샤인머스켓, 토마토 등)<br />
-              • 마른안주 위주로<br />
-              → <strong>30,000원 선</strong>으로 생각 중이에요!
-            </p>
-          </div>
-
-          <div class="theme-box" style="margin-top: 1rem;">
-            <h3>5) 술</h3>
-            <p>
-              • 과일소주(다래, 살구) <strong>각 2병씩</strong><br />
-              • 카스 픽쳐 <strong>2개</strong><br /><br />
-              (여기서 추가 원하는 사람 있으면 말해주세요!)
-            </p>
-          </div>
-        </div>
-      </section>
-
-      <!-- 6. CHECKLIST -->
-      <section class="card-section" id="checklist">
-        <div class="corner-ornament top-left"></div>
-        <div class="corner-ornament top-right"></div>
-        <div class="corner-ornament bottom-left"></div>
-        <div class="corner-ornament bottom-right"></div>
-
-        <div class="card-inner">
-          <div class="card-tag">
-            <span class="emoji">✅</span>
-            <span>Checklist</span>
-          </div>
-
-          <h2 class="section-heading">
-            <span class="emoji">🧳</span>
-            <span>오기 전에 챙겨야 할 것들</span>
-          </h2>
-
-          <ul class="checklist">
-            <li class="check-item">
-              <span class="check-icon">🎁</span>
-              <div>
-                <div class="check-main">선물 하나</div>
-                <div class="check-sub">
-                  <strong>돈:</strong> 5천 원 정도면 충분하네 (부담 갖지 말고!)<br />
-                  귀여운 거, 재밌는 거, 쓸모없는 거<br />
-                  <strong>포장은 꼭 해야 한다!</strong><br />
-                  <strong>🤫 절대 비밀:</strong> 누가 뭘 가져왔는지 다른 친구들이 절대 모르게!<br />
-                  블라인드로 가져와서 랜덤 추첨할 거니께.
-                </div>
-              </div>
-            </li>
-
-            <li class="check-item">
-              <span class="check-icon">👗</span>
-              <div>
-                <div class="check-main">캐릭터 꾸미기 준비물</div>
-                <div class="check-sub">
-                  <strong>⚠️ 저가형으로! 부담 갖지 말기!</strong><br />
-                  옷이랑, 악세서리랑, 소품 같은 거<br />
-                  다이소 레벨로 가볍게 준비해도 충분해!<br />
-                  <strong>목적:</strong> 너의 <strong>텅장을 만든 그 가해자</strong>가 누군지 알아내는 거야 ㅋㅋㅋ<br />
-                  완벽하게 안 해도 괜찮단다. 느낌만 나면 충분히 멋있어!<br />
-                  <strong>🤫 비밀 엄수:</strong> 다른 친구들이 절대 알아채지 못하게 비밀로!
-                </div>
-              </div>
-            </li>
-
-            <li class="check-item">
-              <span class="check-icon">🧴</span>
-              <div>
-                <div class="check-main">개인 짐</div>
-                <div class="check-sub">
-                  세안용품, 화장품, 렌즈 담는 거, 잠옷, 충전기 같은 거<br />
-                  다음 날 개운하게 일어나려면 이런 거 챙겨와야제!
-                </div>
-              </div>
-            </li>
-
-            <li class="check-item">
-              <span class="check-icon">🍬</span>
-              <div>
-                <div class="check-main">빨간색 과자 하나</div>
-                <div class="check-sub">
-                  <strong>크리스마스 느낌으로 빨간색 과자 하나씩!</strong><br />
-                  빨간 포장 과자, 딸기맛, 체리맛, 빨간 젤리 등등<br />
-                  <strong>⚠️ 중요: 어떤 과자인지 절대 비밀!</strong><br />
-                  블라인드로 가져와서 나중에 다 같이 공개할 거란다... 후후<br />
-                  너네들 중에 중복 있음 마셔라잉~~~ 눈치게임이다잉~
-                </div>
-              </div>
-            </li>
-
-            <li class="check-item">
-              <span class="check-icon">💖</span>
-              <div>
-                <div class="check-main">2025년 이야기들</div>
-                <div class="check-sub">
-                  <ul class="check-list">
-                    <li>올해 있었던 재밌는 일, 힘들었던 일</li>
-                    <li>덕질하면서 느낀 것들</li>
-                    <li>친구들한테 하고 싶었던 말들</li>
-                  </ul>
-                  <strong>오늘은 편하게 마음 열고 이야기하는 날</strong>이니께<br />
-                  하고 싶은 얘기 있으면 다 가져오라고!
-                </div>
-              </div>
-            </li>
-          </ul>
-        </div>
-      </section>
-
-    </div>
-  </main>
-
-  <footer>
-    <div class="footer-inner">
-      <p>🎅 <strong>산타 할배 마지막 한마디</strong></p>
-      <p style="margin-top: 1rem;">
-        "호호호, 시간 약속만 잘 지켜주면 되네!<br />
-      </p>
-      <p style="margin-top: 1rem;">
-        할배가 직접 못 가서 좀 아쉽긴 한디,<br />
-        대신 보내는 조수가 너희들이랑 신나게 놀아줄 거여!
-      </p>
-      <p style="margin-top: 1rem;">
-        2025년 크리스마스,<br />
-        우리끼리 <strong>정말 따뜻하고 재밌는 추억</strong> 만들어보자꾸나!
-      </p>
-      <p style="margin-top: 1.5rem; font-size: 1.1rem;">
-        호호호, 메리 크리스마스! 🎄✨
-      </p>
-      <p style="margin-top: 0.5rem; font-style: italic;">
-        - 산타 할배가 -
-      </p>
-    </div>
-  </footer>
-
-  <script>
-    /**
-     * ✅ "무료"로 안전하게: 외부 음원 없이 WebAudio로 잔잔한 피아노 캐롤 생성
-     * - 브라우저 정책상 자동재생은 막히는 경우가 많아서:
-     *   1) 버튼 누르면 바로 시작
-     *   2) 또는 첫 터치/스크롤에서 자동 시작 시도
-     */
-
-    // ---- UI refs
-    const btn = document.getElementById("bgmToggle");
-    const label = document.getElementById("bgmLabel");
-    const statusEl = document.getElementById("bgmStatus");
-    const volEl = document.getElementById("bgmVol");
-
-    // ---- Audio state
-    let audioCtx = null;
-    let master = null;
-    let playing = false;
-    let schedTimer = null;
-    let nextNoteTime = 0;
-    let seqIndex = 0;
-
-    // ---- Music: 잔잔한 캐롤 느낌 (단순 편곡)
-    // 단위: 16분음표(= step)
-    // note = MIDI 번호, durSteps = 지속(스텝), vel = 0~1
-    const BPM = 84;
-    const STEP = 60 / BPM / 4; // 16th note seconds
-    const LOOP_STEPS = 64;     // 4마디(16*4) 루프
-
-    const melody = [
-      // bar1
-      { step: 0,  note: 76, dur: 4, vel: 0.55 }, // E5
-      { step: 4,  note: 76, dur: 4, vel: 0.55 },
-      { step: 8,  note: 76, dur: 6, vel: 0.55 },
-      { step: 14, note: 76, dur: 2, vel: 0.45 },
-
-      // bar2
-      { step: 16, note: 76, dur: 4, vel: 0.55 },
-      { step: 20, note: 79, dur: 4, vel: 0.55 }, // G5
-      { step: 24, note: 72, dur: 4, vel: 0.52 }, // C5
-      { step: 28, note: 74, dur: 4, vel: 0.52 }, // D5
-
-      // bar3
-      { step: 32, note: 76, dur: 8, vel: 0.58 },
-      { step: 40, note: 77, dur: 4, vel: 0.50 }, // F5
-      { step: 44, note: 77, dur: 4, vel: 0.50 },
-
-      // bar4
-      { step: 48, note: 77, dur: 4, vel: 0.52 },
-      { step: 52, note: 76, dur: 4, vel: 0.52 },
-      { step: 56, note: 76, dur: 4, vel: 0.50 },
-      { step: 60, note: 76, dur: 4, vel: 0.50 }
-    ];
-
-    // 왼손: 베이스 + 간단한 화음(아르페지오 느낌)
-    const leftHand = [
-      // bar1 (C)
-      { step: 0,  notes: [48, 55, 60], dur: 8,  vel: 0.18 }, // C2 G2 C3
-      { step: 8,  notes: [48, 55, 60], dur: 8,  vel: 0.16 },
-
-      // bar2 (G)
-      { step: 16, notes: [43, 50, 55], dur: 8,  vel: 0.18 }, // G1 D2 G2
-      { step: 24, notes: [43, 50, 55], dur: 8,  vel: 0.16 },
-
-      // bar3 (F)
-      { step: 32, notes: [41, 48, 53], dur: 8,  vel: 0.18 }, // F1 C2 F2
-      { step: 40, notes: [41, 48, 53], dur: 8,  vel: 0.16 },
-
-      // bar4 (C)
-      { step: 48, notes: [48, 55, 60], dur: 8,  vel: 0.18 },
-      { step: 56, notes: [48, 55, 60], dur: 8,  vel: 0.16 }
-    ];
-
-    function midiToFreq(m) {
-      return 440 * Math.pow(2, (m - 69) / 12);
-    }
-
-    function ensureAudio() {
-      if (audioCtx) return;
-
-      audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-
-      // master gain
-      master = audioCtx.createGain();
-      master.gain.value = Number(volEl.value || 0.18);
-
-      // gentle reverb-ish (simple delay + lowpass)
-      const delay = audioCtx.createDelay(1.0);
-      delay.delayTime.value = 0.18;
-
-      const fb = audioCtx.createGain();
-      fb.gain.value = 0.18;
-
-      const lp = audioCtx.createBiquadFilter();
-      lp.type = "lowpass";
-      lp.frequency.value = 1800;
-
-      // master routing
-      master.connect(audioCtx.destination);
-
-      // send effect (master -> delay -> filter -> master)
-      master.connect(delay);
-      delay.connect(lp);
-      lp.connect(fb);
-      fb.connect(delay);
-      lp.connect(audioCtx.destination); // subtle tail
-
-      statusEl.textContent = "준비완료";
-    }
-
-    // 피아노처럼: triangle + sine 조합 + 빠른 attack/짧은 decay + 살짝 tail
-    function playPianoNote(freq, time, durSec, vel) {
-      const osc1 = audioCtx.createOscillator();
-      const osc2 = audioCtx.createOscillator();
-      const g = audioCtx.createGain();
-      const lp = audioCtx.createBiquadFilter();
-
-      osc1.type = "triangle";
-      osc2.type = "sine";
-      osc1.frequency.setValueAtTime(freq, time);
-      osc2.frequency.setValueAtTime(freq * 2, time);
-
-      lp.type = "lowpass";
-      lp.frequency.setValueAtTime(2400, time);
-      lp.frequency.exponentialRampToValueAtTime(1200, time + Math.min(0.25, durSec));
-
-      const a = 0.008;
-      const d = Math.max(0.05, Math.min(0.22, durSec * 0.6));
-      const s = vel * 0.55;
-      const r = 0.10;
-
-      g.gain.setValueAtTime(0.0001, time);
-      g.gain.exponentialRampToValueAtTime(Math.max(0.0001, vel), time + a);
-      g.gain.exponentialRampToValueAtTime(Math.max(0.0001, s), time + a + d);
-      g.gain.exponentialRampToValueAtTime(0.0001, time + Math.max(durSec, a + d) + r);
-
-      osc1.connect(lp);
-      osc2.connect(lp);
-      lp.connect(g);
-      g.connect(master);
-
-      osc1.start(time);
-      osc2.start(time);
-      osc1.stop(time + durSec + r + 0.05);
-      osc2.stop(time + durSec + r + 0.05);
-    }
-
-    // scheduling (lookahead)
-    const LOOKAHEAD = 0.025;
-    const SCHEDULE_AHEAD = 0.18;
-
-    function scheduleStep(step, baseTime) {
-      melody.forEach(ev => {
-        if (ev.step === step) {
-          const t = baseTime;
-          const dur = ev.dur * STEP;
-          playPianoNote(midiToFreq(ev.note), t, dur, ev.vel);
+    <div class="container" id="app"></div>
+
+    <script>
+        const vocabulary = [
+            { chinese: '究竟', pinyin: 'jiūjìng', korean: '도대체' },
+            { chinese: '羽毛球', pinyin: 'yǔmáoqiú', korean: '배드민턴, 배드민턴공' },
+            { chinese: '好像', pinyin: 'hǎoxiàng', korean: '~인 것 같다' },
+            { chinese: '网站', pinyin: 'wǎngzhàn', korean: '인터넷 사이트' },
+            { chinese: '洗手间', pinyin: 'xǐshǒujiān', korean: '화장실' },
+            { chinese: '马虎', pinyin: 'mǎhu', korean: '대충하다, 건성으로 하다' },
+            { chinese: '恐怕', pinyin: 'kǒngpà', korean: '아마 ~일 것이다(부정적인 상황을 예측할 때 쓰임)' },
+            { chinese: '随便', pinyin: 'suíbiàn', korean: '마음대로, 좋을 대로, 아무렇게나\n함부로 하다, 제멋대로이다' },
+            { chinese: '到底', pinyin: 'dàodǐ', korean: '도대체\n끝까지 ~하다' },
+            { chinese: '约会', pinyin: 'yuēhuì', korean: '약속, 데이트\n데이트하다' },
+            { chinese: '故意', pinyin: 'gùyì', korean: '일부러, 고의로' },
+            { chinese: '原谅', pinyin: 'yuánliàng', korean: '용서하다' },
+            { chinese: '正好', pinyin: 'zhènghǎo', korean: '딱 좋다, 꼭 맞다\n마침' },
+            { chinese: '伤心', pinyin: 'shāngxīn', korean: '슬프다, 마음이 아프다' },
+            { chinese: '重新', pinyin: 'chóngxīn', korean: '다시, 재차' },
+            { chinese: '总结', pinyin: 'zǒngjié', korean: '총정리하다\n최종 결론' }
+        ];
+
+        let cards = [];
+        let currentIndex = 0;
+        let options = [];
+        let selectedAnswer = null;
+        let showResult = false;
+        let stats = { correct: 0, incorrect: 0 };
+        let isPlaying = false;
+
+        function init() {
+            cards = vocabulary.map((word, idx) => ({ ...word, id: idx, reviewed: false }));
+            render();
         }
-      });
 
-      leftHand.forEach(ev => {
-        if (ev.step === step) {
-          const t = baseTime;
-          const dur = ev.dur * STEP;
-          ev.notes.forEach((n, i) => {
-            const offset = i * 0.02;
-            playPianoNote(midiToFreq(n), t + offset, dur * 0.9, ev.vel);
-          });
+        function generateOptions() {
+            const currentCard = cards[currentIndex];
+            if (!currentCard) return;
+            
+            const correctAnswer = currentCard.korean;
+            const wrongAnswers = vocabulary
+                .filter(v => v.korean !== correctAnswer)
+                .sort(() => Math.random() - 0.5)
+                .slice(0, 3)
+                .map(v => v.korean);
+            
+            options = [correctAnswer, ...wrongAnswers]
+                .sort(() => Math.random() - 0.5);
         }
-      });
-    }
 
-    function scheduler() {
-      if (!audioCtx || !playing) return;
+        function playPronunciation(text) {
+            if ('speechSynthesis' in window) {
+                isPlaying = true;
+                render();
+                
+                window.speechSynthesis.cancel();
+                
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.lang = 'zh-CN';
+                utterance.rate = 0.8;
+                utterance.pitch = 1;
+                
+                utterance.onend = () => {
+                    isPlaying = false;
+                    render();
+                };
+                
+                utterance.onerror = () => {
+                    isPlaying = false;
+                    render();
+                };
+                
+                window.speechSynthesis.speak(utterance);
+            }
+        }
 
-      while (nextNoteTime < audioCtx.currentTime + SCHEDULE_AHEAD) {
-        const step = seqIndex % LOOP_STEPS;
-        scheduleStep(step, nextNoteTime);
+        function handleAnswer(answer) {
+            if (showResult) return;
+            
+            selectedAnswer = answer;
+            showResult = true;
+            
+            const currentCard = cards[currentIndex];
+            const isCorrect = answer === currentCard.korean;
+            
+            cards[currentIndex] = { 
+                ...cards[currentIndex], 
+                reviewed: true, 
+                understood: isCorrect 
+            };
+            
+            if (!isCorrect) {
+                cards.push({ ...cards[currentIndex] });
+            }
+            
+            stats.correct = isCorrect ? stats.correct + 1 : stats.correct;
+            stats.incorrect = isCorrect ? stats.incorrect : stats.incorrect + 1;
+            
+            render();
+            
+            setTimeout(() => {
+                if (currentIndex < cards.length - 1) {
+                    currentIndex++;
+                    selectedAnswer = null;
+                    showResult = false;
+                    generateOptions();
+                    render();
+                } else {
+                    render();
+                }
+            }, 1500);
+        }
 
-        seqIndex += 1;
-        nextNoteTime += STEP;
-      }
-    }
+        function reset() {
+            cards = vocabulary.map((word, idx) => ({ ...word, id: idx, reviewed: false }));
+            currentIndex = 0;
+            selectedAnswer = null;
+            showResult = false;
+            stats = { correct: 0, incorrect: 0 };
+            generateOptions();
+            render();
+        }
 
-    function startBGM() {
-      ensureAudio();
+        function getButtonClass(option) {
+            if (!showResult) return 'option-btn';
+            
+            const currentCard = cards[currentIndex];
+            if (option === currentCard.korean) {
+                return 'option-btn correct';
+            }
+            
+            if (option === selectedAnswer && option !== currentCard.korean) {
+                return 'option-btn incorrect';
+            }
+            
+            return 'option-btn disabled';
+        }
 
-      if (audioCtx.state === "suspended") {
-        audioCtx.resume();
-      }
+        function render() {
+            const app = document.getElementById('app');
+            const currentCard = cards[currentIndex];
+            const progress = cards.filter(c => c.reviewed).length;
+            const notUnderstoodCount = cards.filter(c => c.reviewed && !c.understood).length;
 
-      if (playing) return;
+            if (!currentCard) {
+                const accuracy = Math.round((stats.correct / (stats.correct + stats.incorrect)) * 100);
+                app.innerHTML = `
+                    <div class="completion-screen">
+                        <div class="completion-emoji">🎉</div>
+                        <h2 class="completion-title">학습 완료!</h2>
+                        <div class="completion-stats">
+                            <p class="completion-stat">정답: <span class="stat-value correct">${stats.correct}</span></p>
+                            <p class="completion-stat">오답: <span class="stat-value incorrect">${stats.incorrect}</span></p>
+                            <p class="completion-stat">정답률: <span class="stat-value rate">${accuracy}%</span></p>
+                        </div>
+                        <button class="restart-btn" onclick="reset()">
+                            <span>🔄</span>
+                            다시 시작하기
+                        </button>
+                    </div>
+                `;
+                return;
+            }
 
-      playing = true;
-      label.textContent = "BGM 끄기";
-      statusEl.textContent = "재생중";
+            app.innerHTML = `
+                <div class="progress-section">
+                    <div class="progress-header">
+                        <span class="progress-text">진행도: ${progress}/${vocabulary.length}</span>
+                        <div class="stats">
+                            <span class="stat-correct">정답: ${stats.correct}</span>
+                            <span class="stat-incorrect">오답: ${stats.incorrect}</span>
+                            <button class="reset-btn" onclick="reset()">🔄</button>
+                        </div>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: ${(progress / vocabulary.length) * 100}%"></div>
+                    </div>
+                    ${notUnderstoodCount > 0 ? `<p class="review-notice">복습 대기: ${notUnderstoodCount}개</p>` : ''}
+                </div>
 
-      nextNoteTime = audioCtx.currentTime + 0.05;
-      seqIndex = 0;
+                <div class="card-container">
+                    <div class="question-section">
+                        <div class="chinese-word">${currentCard.chinese}</div>
+                        <div class="pinyin">${currentCard.pinyin}</div>
+                        <button class="pronunciation-btn ${isPlaying ? 'playing' : ''}" 
+                                onclick="playPronunciation('${currentCard.chinese}')"
+                                ${isPlaying ? 'disabled' : ''}>
+                            🔊 발음 듣기
+                        </button>
+                    </div>
 
-      schedTimer = setInterval(scheduler, LOOKAHEAD * 1000);
-    }
+                    <div class="answer-section">
+                        <p class="question-prompt">이 단어의 뜻은?</p>
+                        <div class="options">
+                            ${options.map(option => `
+                                <button class="${getButtonClass(option)}"
+                                        onclick="handleAnswer(\`${option}\`)"
+                                        ${showResult ? 'disabled' : ''}>
+                                    <span class="option-text">${option}</span>
+                                    ${showResult && option === currentCard.korean ? '<span class="icon">✓</span>' : ''}
+                                    ${showResult && option === selectedAnswer && option !== currentCard.korean ? '<span class="icon">✗</span>' : ''}
+                                </button>
+                            `).join('')}
+                        </div>
+                    </div>
 
-    function stopBGM() {
-      playing = false;
-      label.textContent = "BGM 켜기";
-      statusEl.textContent = "정지";
+                    ${showResult ? `
+                        <div class="result-message ${selectedAnswer === currentCard.korean ? 'correct' : 'incorrect'}">
+                            ${selectedAnswer === currentCard.korean ? '정답입니다! 🎉' : '틀렸습니다. 다시 나올 거예요! 💪'}
+                        </div>
+                    ` : ''}
+                </div>
 
-      if (schedTimer) {
-        clearInterval(schedTimer);
-        schedTimer = null;
-      }
-    }
+                <div class="hint">
+                    💡 정답을 선택하세요. 틀린 문제는 자동으로 다시 나옵니다
+                </div>
+            `;
+        }
 
-    // UI events
-    btn.addEventListener("click", () => {
-      if (!playing) startBGM();
-      else stopBGM();
-    });
-
-    volEl.addEventListener("input", () => {
-      if (!master) return;
-      master.gain.value = Number(volEl.value || 0.18);
-    });
-
-    // ✅ 첫 터치/스크롤에서 자동 재생 "시도"
-    let autoTried = false;
-    function autoStartOnce() {
-      if (autoTried) return;
-      autoTried = true;
-      try { startBGM(); } catch (e) {}
-      window.removeEventListener("pointerdown", autoStartOnce);
-      window.removeEventListener("touchstart", autoStartOnce);
-      window.removeEventListener("keydown", autoStartOnce);
-      window.removeEventListener("scroll", autoStartOnce);
-    }
-    window.addEventListener("pointerdown", autoStartOnce, { once: true });
-    window.addEventListener("touchstart", autoStartOnce, { once: true });
-    window.addEventListener("keydown", autoStartOnce, { once: true });
-    window.addEventListener("scroll", autoStartOnce, { once: true });
-
-    console.log("🎄 초대장 + 잔잔 피아노 캐롤 BGM(웹오디오) 세팅 완료");
-  </script>
+        init();
+        generateOptions();
+    </script>
 </body>
 </html>
