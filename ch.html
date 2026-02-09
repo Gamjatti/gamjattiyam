@@ -31,22 +31,35 @@
         }
 
         .mode-selector {
-            display: flex;
-            gap: 10px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
             margin-bottom: 20px;
         }
 
         .mode-btn {
-            flex: 1;
-            padding: 12px;
+            padding: 12px 8px;
             border: none;
             border-radius: 10px;
-            font-size: 14px;
+            font-size: 13px;
             font-weight: bold;
             cursor: pointer;
             transition: all 0.3s;
             background: rgba(255, 255, 255, 0.2);
             color: white;
+        }
+
+        .mode-btn:nth-child(4),
+        .mode-btn:nth-child(5) {
+            grid-column: span 1;
+        }
+
+        .mode-btn:nth-child(4) {
+            grid-column: 1 / 2;
+        }
+
+        .mode-btn:nth-child(5) {
+            grid-column: 2 / 4;
         }
 
         .mode-btn.active {
@@ -65,7 +78,7 @@
             border-radius: 20px;
             padding: 30px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            min-height: 400px;
+            min-height: 450px;
             position: relative;
             transform-style: preserve-3d;
             transition: transform 0.6s;
@@ -215,6 +228,7 @@
             <button class="mode-btn active" onclick="setMode('all')">전체</button>
             <button class="mode-btn" onclick="setMode('dialogue')">대화만</button>
             <button class="mode-btn" onclick="setMode('narration')">내레이션만</button>
+            <button class="mode-btn" onclick="setMode('vocabulary')">단어</button>
             <button class="mode-btn" onclick="setMode('cloze')">시험모드</button>
         </div>
 
@@ -452,6 +466,40 @@
             }
         ];
 
+        // 단어 카드 추가
+        const vocabularyCards = [
+            { type: 'vocabulary', chinese: '银行', pinyin: 'yínháng', korean: '은행', 
+              example: '小丽去银行取钱', examplePinyin: 'xiǎo lì qù yínháng qǔ qián', exampleKorean: '샤오리는 은행에 가서 돈을 찾는다' },
+            { type: 'vocabulary', chinese: '取钱', pinyin: 'qǔ qián', korean: '돈을 인출하다',
+              example: '我想取钱', examplePinyin: 'wǒ xiǎng qǔ qián', exampleKorean: '저는 돈을 인출하고 싶어요' },
+            { type: 'vocabulary', chinese: '排队', pinyin: 'pái duì', korean: '줄을 서다',
+              example: '她在银行排队等候', examplePinyin: 'tā zài yínháng pái duì děnghòu', exampleKorean: '그녀는 은행에서 줄을 서서 기다린다' },
+            { type: 'vocabulary', chinese: '等候', pinyin: 'děnghòu', korean: '기다리다',
+              example: '请在这里等候', examplePinyin: 'qǐng zài zhèlǐ děnghòu', exampleKorean: '여기에서 기다려 주세요' },
+            { type: 'vocabulary', chinese: '窗口', pinyin: 'chuāngkǒu', korean: '창구',
+              example: '她走到窗口前', examplePinyin: 'tā zǒu dào chuāngkǒu qián', exampleKorean: '그녀는 창구 앞으로 간다' },
+            { type: 'vocabulary', chinese: '办', pinyin: 'bàn', korean: '처리하다 / (업무를) 보다',
+              example: '你要办什么业务？', examplePinyin: 'nǐ yào bàn shénme yèwù', exampleKorean: '어떤 업무를 처리하시나요?' },
+            { type: 'vocabulary', chinese: '工作人员', pinyin: 'gōngzuò rényuán', korean: '직원',
+              example: '工作人员很有礼貌', examplePinyin: 'gōngzuò rényuán hěn yǒu lǐmào', exampleKorean: '직원은 매우 예의 바르다' },
+            { type: 'vocabulary', chinese: '银行卡', pinyin: 'yínhángkǎ', korean: '은행 카드',
+              example: '请给我你的银行卡', examplePinyin: 'qǐng gěi wǒ nǐ de yínhángkǎ', exampleKorean: '은행 카드를 주세요' },
+            { type: 'vocabulary', chinese: '输入密码', pinyin: 'shūrù mìmǎ', korean: '비밀번호를 입력하다',
+              example: '请输入密码', examplePinyin: 'qǐng shūrù mìmǎ', exampleKorean: '비밀번호를 입력해 주세요' },
+            { type: 'vocabulary', chinese: '收据', pinyin: 'shōujù', korean: '영수증',
+              example: '这是你的收据', examplePinyin: 'zhè shì nǐ de shōujù', exampleKorean: '이것은 당신의 영수증입니다' },
+            { type: 'vocabulary', chinese: '挂失', pinyin: 'guàshī', korean: '분실 신고하다',
+              example: '银行卡丢了，要先挂失', examplePinyin: 'yínhángkǎ diū le, yào xiān guàshī', exampleKorean: '은행 카드를 잃어버리면 먼저 분실 신고를 해야 한다' },
+            { type: 'vocabulary', chinese: '补办', pinyin: 'bǔ bàn', korean: '재발급하다',
+              example: '可以补办一张新卡', examplePinyin: 'kěyǐ bǔ bàn yì zhāng xīn kǎ', exampleKorean: '새 카드를 재발급할 수 있다' },
+            { type: 'vocabulary', chinese: '顺利', pinyin: 'shùnlì', korean: '순조롭다',
+              example: '今天的事情很顺利', examplePinyin: 'jīntiān de shìqíng hěn shùnlì', exampleKorean: '오늘 일이 아주 순조로웠다' },
+            { type: 'vocabulary', chinese: '舒心', pinyin: 'shūxīn', korean: '마음이 편하다 / 속이 시원하다',
+              example: '今天的事情办得很舒心', examplePinyin: 'jīntiān de shìqíng bàn de hěn shūxīn', exampleKorean: '오늘 일들이 잘 해결되어서 마음이 편하다' },
+            { type: 'vocabulary', chinese: '顺便', pinyin: 'shùnbiàn', korean: '겸사겸사 / 하는 김에',
+              example: '我去银行取钱，顺便问了一下问题', examplePinyin: 'wǒ qù yínháng qǔ qián, shùnbiàn wèn le yíxià wèntí', exampleKorean: '나는 은행에 돈을 찾으러 가서 겸사겸사 질문을 하나 했다' }
+        ];
+
         let currentMode = 'all';
         let filteredCards = cards;
         let currentIndex = 0;
@@ -473,6 +521,8 @@
                 filteredCards = cards.filter(card => card.type === 'dialogue');
             } else if (mode === 'narration') {
                 filteredCards = cards.filter(card => card.type === 'narration');
+            } else if (mode === 'vocabulary') {
+                filteredCards = vocabularyCards;
             } else {
                 filteredCards = cards;
             }
@@ -486,7 +536,8 @@
             flashcard.classList.remove('flipped');
             isFlipped = false;
             
-            const typeLabel = card.type === 'dialogue' ? '대화' : '내레이션';
+            const typeLabel = card.type === 'dialogue' ? '대화' : 
+                            card.type === 'vocabulary' ? '단어' : '내레이션';
             document.getElementById('cardType').textContent = typeLabel;
             
             if (currentMode === 'cloze') {
@@ -500,6 +551,20 @@
                     <div class="korean">${card.korean}</div>
                     <div style="margin-top: 20px; padding: 15px; background: #e8f5e9; border-radius: 10px;">
                         <strong style="color: #2e7d32;">정답:</strong> <span style="color: #c62828; font-size: 20px;">${card.answer}</span>
+                    </div>
+                `;
+            } else if (currentMode === 'vocabulary') {
+                document.getElementById('frontContent').innerHTML = `
+                    <div class="chinese" style="font-size: 36px; font-weight: bold;">${card.chinese}</div>
+                    <div class="pinyin" style="font-size: 20px;">${card.pinyin}</div>
+                `;
+                document.getElementById('backContent').innerHTML = `
+                    <div class="korean" style="font-size: 22px; margin-bottom: 25px; font-weight: bold; color: #2c3e50;">${card.korean}</div>
+                    <div style="background: #f0f8ff; padding: 20px; border-radius: 15px; border-left: 4px solid #667eea;">
+                        <div style="font-size: 12px; color: #667eea; font-weight: bold; margin-bottom: 8px;">📝 예문</div>
+                        <div style="font-size: 18px; color: #333; margin-bottom: 8px;">${card.example}</div>
+                        <div style="font-size: 14px; color: #667eea; margin-bottom: 8px;">${card.examplePinyin}</div>
+                        <div style="font-size: 15px; color: #666;">${card.exampleKorean}</div>
                     </div>
                 `;
             } else {
