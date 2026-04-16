@@ -1,0 +1,1277 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>디자인 창업 대시보드</title>
+<link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@300;400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0a0e1a;
+  --bg2: #111827;
+  --bg3: #1a2235;
+  --bg4: #1e2d45;
+  --border: rgba(255,255,255,0.08);
+  --border2: rgba(255,255,255,0.15);
+  --text: #f0f4ff;
+  --text2: #8b9ab5;
+  --text3: #556070;
+  --accent: #4f8eff;
+  --accent2: #6ee7b7;
+  --accent3: #fbbf24;
+  --accent4: #f87171;
+  --accent5: #c084fc;
+  --teal: #0d9488;
+  --orange: #ea580c;
+  --green: #16a34a;
+  --red: #dc2626;
+  --purple: #7c3aed;
+  --cat-home: #3b82f6;
+  --cat-detail: #f97316;
+  --cat-sns: #ec4899;
+  --cat-content: #8b5cf6;
+  --cat-brand: #14b8a6;
+  --cat-video: #ef4444;
+  --cat-logo: #f59e0b;
+  --radius: 12px;
+  --radius-sm: 8px;
+  --mono: 'Space Mono', monospace;
+  --sans: 'Pretendard', sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);font-size:14px;min-height:100vh;overflow-x:hidden}
+
+/* NAV */
+nav{position:sticky;top:0;z-index:100;background:rgba(10,14,26,0.92);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:0 24px;display:flex;align-items:center;gap:4px;height:52px}
+nav .logo{font-family:var(--mono);font-size:13px;color:var(--accent);font-weight:700;margin-right:20px;white-space:nowrap}
+.nav-btn{padding:6px 14px;border-radius:6px;border:none;background:transparent;color:var(--text2);font-family:var(--sans);font-size:13px;cursor:pointer;transition:all .2s;white-space:nowrap}
+.nav-btn:hover{background:var(--bg3);color:var(--text)}
+.nav-btn.active{background:var(--accent);color:#fff}
+
+/* PAGES */
+.page{display:none;padding:24px;max-width:1400px;margin:0 auto;animation:fadeIn .3s ease}
+.page.active{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+
+/* CARDS */
+.card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:20px}
+.card-sm{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:16px}
+
+/* GRID */
+.grid-4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+.grid-3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.grid-2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+@media(max-width:900px){.grid-4{grid-template-columns:repeat(2,1fr)}.grid-3{grid-template-columns:1fr 1fr}}
+@media(max-width:600px){.grid-4,.grid-3,.grid-2{grid-template-columns:1fr}}
+
+/* KPI CARD */
+.kpi-card{background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius);padding:20px;position:relative;overflow:hidden}
+.kpi-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--accent-line,var(--accent))}
+.kpi-label{font-size:11px;color:var(--text2);text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px}
+.kpi-val{font-family:var(--mono);font-size:26px;font-weight:700;color:var(--text);line-height:1}
+.kpi-sub{font-size:11px;color:var(--text3);margin-top:6px}
+
+/* SECTION TITLE */
+.sec-title{font-size:12px;font-weight:600;color:var(--text2);text-transform:uppercase;letter-spacing:.1em;margin-bottom:16px;display:flex;align-items:center;gap:8px}
+.sec-title::before{content:'';width:3px;height:14px;background:var(--accent);border-radius:2px}
+h2.page-title{font-size:20px;font-weight:700;margin-bottom:24px;color:var(--text)}
+
+/* INPUTS */
+.field{display:flex;flex-direction:column;gap:4px}
+.field label{font-size:11px;color:var(--text2);font-weight:500;text-transform:uppercase;letter-spacing:.06em}
+input[type=number],input[type=text],select{background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text);font-family:var(--sans);font-size:13px;padding:8px 12px;width:100%;outline:none;transition:border .2s}
+input[type=number]:focus,select:focus{border-color:var(--accent)}
+input[type=number]{text-align:right;font-family:var(--mono)}
+select option{background:var(--bg2)}
+
+/* TABLE */
+.tbl{width:100%;border-collapse:collapse}
+.tbl th{background:var(--bg3);color:var(--text2);font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;padding:10px 12px;text-align:right;border-bottom:1px solid var(--border)}
+.tbl th:first-child{text-align:left}
+.tbl td{padding:10px 12px;border-bottom:1px solid var(--border);font-size:13px;text-align:right;font-family:var(--mono)}
+.tbl td:first-child{text-align:left;font-family:var(--sans)}
+.tbl tr:hover td{background:rgba(255,255,255,0.02)}
+.tbl .total td{background:var(--bg3);font-weight:700;border-top:1px solid var(--border2)}
+
+/* BADGES */
+.badge{display:inline-flex;align-items:center;padding:3px 9px;border-radius:20px;font-size:11px;font-weight:600}
+.badge-green{background:rgba(22,163,74,.15);color:#4ade80}
+.badge-yellow{background:rgba(234,179,8,.15);color:#fbbf24}
+.badge-red{background:rgba(220,38,38,.15);color:#f87171}
+.badge-blue{background:rgba(79,142,255,.15);color:#93c5fd}
+.badge-purple{background:rgba(124,58,237,.15);color:#c084fc}
+
+/* CATEGORY PILLS */
+.cat-pill{display:inline-flex;align-items:center;gap:6px;padding:4px 10px;border-radius:6px;font-size:12px;font-weight:600}
+
+/* PROGRESS BAR */
+.prog-wrap{height:6px;background:var(--bg4);border-radius:3px;overflow:hidden}
+.prog-bar{height:100%;border-radius:3px;transition:width .8s cubic-bezier(.4,0,.2,1)}
+
+/* TABS (sub) */
+.sub-tabs{display:flex;gap:4px;margin-bottom:20px;background:var(--bg3);padding:4px;border-radius:var(--radius-sm);width:fit-content}
+.sub-tab{padding:6px 16px;border-radius:6px;border:none;background:transparent;color:var(--text2);font-family:var(--sans);font-size:13px;cursor:pointer;transition:all .2s}
+.sub-tab.active{background:var(--bg);color:var(--text);box-shadow:0 1px 4px rgba(0,0,0,.3)}
+
+/* CHECKLIST */
+.check-item{display:flex;align-items:center;gap:12px;padding:10px 14px;border-radius:var(--radius-sm);border:1px solid var(--border);margin-bottom:8px;cursor:pointer;transition:all .2s;user-select:none}
+.check-item:hover{border-color:var(--border2);background:var(--bg3)}
+.check-item.done{opacity:.5}
+.check-item.done .check-text{text-decoration:line-through}
+.check-box{width:18px;height:18px;border:1.5px solid var(--text3);border-radius:4px;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .2s}
+.check-item.done .check-box{background:var(--accent2);border-color:var(--accent2)}
+
+/* SWOT */
+.swot-grid{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:auto auto;gap:2px;background:var(--border);border-radius:var(--radius);overflow:hidden}
+.swot-cell{padding:20px;background:var(--bg2)}
+.swot-title{font-size:13px;font-weight:700;margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.swot-item{font-size:12px;color:var(--text2);padding:5px 0;border-bottom:1px solid var(--border);line-height:1.5}
+.swot-item:last-child{border:none}
+.swot-item::before{content:'• ';color:var(--accent)}
+
+/* 4P */
+.fourp-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.fourp-card{border-radius:var(--radius);overflow:hidden}
+.fourp-head{padding:14px 18px;font-size:13px;font-weight:700}
+.fourp-body{padding:14px 18px;background:var(--bg2)}
+.fourp-item{font-size:12px;color:var(--text2);padding:5px 0;border-bottom:1px solid var(--border);line-height:1.5}
+.fourp-item:last-child{border:none}
+.fourp-item strong{color:var(--text);font-weight:600}
+
+/* CALENDAR */
+.cal-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+@media(max-width:800px){.cal-grid{grid-template-columns:repeat(2,1fr)}}
+.cal-month{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden}
+.cal-month-head{padding:10px 14px;font-size:12px;font-weight:700;background:var(--bg3)}
+.cal-event{padding:8px 12px;border-left:3px solid var(--evt-color,var(--border));margin:6px 8px;border-radius:0 6px 6px 0;background:rgba(255,255,255,.02)}
+.cal-event-title{font-size:12px;font-weight:600;color:var(--text)}
+.cal-event-date{font-size:10px;color:var(--text2);font-family:var(--mono);margin-top:2px}
+.cal-event-detail{font-size:11px;color:var(--text3);margin-top:2px}
+
+/* NUMBER FORMATTING */
+.num{font-family:var(--mono)}
+.num-green{color:var(--accent2);font-family:var(--mono)}
+.num-red{color:var(--accent4);font-family:var(--mono)}
+.num-yellow{color:var(--accent3);font-family:var(--mono)}
+.num-blue{color:var(--accent);font-family:var(--mono)}
+
+/* SCENARIO TABLE */
+.scen-tbl th,
+.scen-tbl td{padding:8px 10px;font-size:12px}
+.scen-tbl .highlight{background:rgba(79,142,255,.08);color:var(--accent);font-weight:700}
+.scen-tbl .vhighlight{background:rgba(110,231,183,.08);color:var(--accent2);font-weight:700}
+
+/* DIVIDER */
+.divider{height:1px;background:var(--border);margin:20px 0}
+
+/* RANK BADGE */
+.rank{width:22px;height:22px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;font-family:var(--mono)}
+.rank-1{background:#fbbf24;color:#000}
+.rank-2{background:#94a3b8;color:#000}
+.rank-3{background:#cd7c4a;color:#000}
+.rank-n{background:var(--bg3);color:var(--text2)}
+
+/* SCROLLBAR */
+::-webkit-scrollbar{width:6px;height:6px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--bg4);border-radius:3px}
+
+/* TOOLTIP */
+[data-tip]{position:relative;cursor:help}
+[data-tip]:hover::after{content:attr(data-tip);position:absolute;bottom:calc(100% + 6px);left:50%;transform:translateX(-50%);background:var(--bg4);color:var(--text);font-size:11px;padding:5px 10px;border-radius:6px;white-space:nowrap;z-index:200;border:1px solid var(--border2);pointer-events:none}
+
+/* TOGGLE */
+.toggle-wrap{display:flex;align-items:center;gap:10px;font-size:12px;color:var(--text2)}
+.toggle{width:36px;height:20px;background:var(--bg4);border-radius:10px;position:relative;cursor:pointer;border:none;transition:.2s;flex-shrink:0}
+.toggle.on{background:var(--accent)}
+.toggle::after{content:'';position:absolute;top:3px;left:3px;width:14px;height:14px;background:#fff;border-radius:50%;transition:.2s}
+.toggle.on::after{left:19px}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">DESIGN.BIZ</div>
+  <button class="nav-btn active" onclick="showPage('dash')">📊 대시보드</button>
+  <button class="nav-btn" onclick="showPage('sim')">🧮 시뮬레이터</button>
+  <button class="nav-btn" onclick="showPage('cat')">🗂️ 단가표</button>
+  <button class="nav-btn" onclick="showPage('income')">💰 수익계산</button>
+  <button class="nav-btn" onclick="showPage('tax')">🧾 세금계산</button>
+  <button class="nav-btn" onclick="showPage('kpi')">📈 KPI</button>
+  <button class="nav-btn" onclick="showPage('cal')">📅 세금캘린더</button>
+  <button class="nav-btn" onclick="showPage('swot')">🔍 4P·SWOT</button>
+</nav>
+
+<!-- ══════════════════════════════════════════════════ -->
+<!-- DASHBOARD -->
+<!-- ══════════════════════════════════════════════════ -->
+<div id="page-dash" class="page active">
+  <h2 class="page-title">대시보드</h2>
+
+  <div class="grid-4" style="margin-bottom:20px">
+    <div class="kpi-card" style="--accent-line:var(--accent)">
+      <div class="kpi-label">월 총수입</div>
+      <div class="kpi-val num" id="d-total-inc">0원</div>
+      <div class="kpi-sub">외주 + 스톡 + 템플릿</div>
+    </div>
+    <div class="kpi-card" style="--accent-line:var(--accent2)">
+      <div class="kpi-label">월 실수령액</div>
+      <div class="kpi-val num-green" id="d-takehome">0원</div>
+      <div class="kpi-sub">세금·경비 제외</div>
+    </div>
+    <div class="kpi-card" style="--accent-line:var(--accent4)">
+      <div class="kpi-label">월 세금 적립</div>
+      <div class="kpi-val num-red" id="d-tax-save">0원</div>
+      <div class="kpi-sub">부가세 + 소득세</div>
+    </div>
+    <div class="kpi-card" style="--accent-line:var(--accent3)">
+      <div class="kpi-label">연간 예상수입</div>
+      <div class="kpi-val num-yellow" id="d-annual">0원</div>
+      <div class="kpi-sub">현재 기준 × 12</div>
+    </div>
+  </div>
+
+  <div class="grid-2" style="margin-bottom:20px">
+    <div class="card">
+      <div class="sec-title">카테고리별 수익 현황</div>
+      <table class="tbl" id="d-cat-table">
+        <thead><tr>
+          <th style="text-align:left">카테고리</th>
+          <th>건수</th><th>실수익</th><th>목표</th><th>달성률</th>
+        </tr></thead>
+        <tbody id="d-cat-body"></tbody>
+        <tfoot><tr class="total">
+          <td>합계</td>
+          <td class="num" id="d-total-cnt">0</td>
+          <td class="num-green" id="d-total-rev">0</td>
+          <td class="num" id="d-total-goal">0</td>
+          <td id="d-total-rate">-</td>
+        </tr></tfoot>
+      </table>
+    </div>
+
+    <div class="card">
+      <div class="sec-title">세금 납부 현황</div>
+      <div style="display:flex;flex-direction:column;gap:10px" id="d-tax-summary"></div>
+      <div class="divider"></div>
+      <div class="sec-title">이번달 체크리스트</div>
+      <div id="checklist-wrap"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="sec-title">수익 파이프라인 믹스</div>
+    <div style="display:flex;gap:20px;flex-wrap:wrap" id="d-pipeline"></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════ -->
+<!-- SIMULATOR -->
+<!-- ══════════════════════════════════════════════════ -->
+<div id="page-sim" class="page">
+  <h2 class="page-title">건수별 수익 시뮬레이터</h2>
+
+  <div class="sub-tabs">
+    <button class="sub-tab active" onclick="showSubTab('sim','setup')">단가 설정</button>
+    <button class="sub-tab" onclick="showSubTab('sim','count')">건수 입력</button>
+    <button class="sub-tab" onclick="showSubTab('sim','scenario')">시나리오</button>
+    <button class="sub-tab" onclick="showSubTab('sim','reverse')">목표 역산</button>
+    <button class="sub-tab" onclick="showSubTab('sim','efficiency')">효율 분석</button>
+  </div>
+
+  <!-- 단가 설정 -->
+  <div id="sim-setup" class="sim-sub active">
+    <div class="card">
+      <div class="sec-title">카테고리별 기준단가 & 수수료 설정</div>
+      <table class="tbl" id="sim-setup-tbl">
+        <thead><tr>
+          <th style="text-align:left">카테고리</th>
+          <th>단가(원)</th><th>수수료율</th><th>작업시간(h)</th>
+          <th>실수령단가</th><th>시간당단가</th>
+        </tr></thead>
+        <tbody id="sim-setup-body"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- 건수 입력 -->
+  <div id="sim-count" class="sim-sub" style="display:none">
+    <div class="grid-2">
+      <div class="card">
+        <div class="sec-title">월 건수 입력</div>
+        <table class="tbl">
+          <thead><tr>
+            <th style="text-align:left">카테고리</th>
+            <th>건수</th><th>매출</th><th>수수료</th><th>실수익</th><th>시간</th>
+          </tr></thead>
+          <tbody id="sim-count-body"></tbody>
+          <tfoot><tr class="total">
+            <td>합계</td>
+            <td class="num" id="sc-total-cnt">0</td>
+            <td class="num" id="sc-total-rev">0</td>
+            <td class="num-red" id="sc-total-fee">0</td>
+            <td class="num-green" id="sc-total-net">0</td>
+            <td class="num" id="sc-total-hrs">0h</td>
+          </tr></tfoot>
+        </table>
+      </div>
+      <div class="card">
+        <div class="sec-title">수익 요약</div>
+        <div id="sim-count-summary"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 시나리오 테이블 -->
+  <div id="sim-scenario" class="sim-sub" style="display:none">
+    <div class="card">
+      <div class="sec-title">카테고리 × 건수별 월 수익 테이블</div>
+      <div style="overflow-x:auto">
+        <table class="tbl scen-tbl" id="scenario-tbl">
+          <thead><tr id="scen-head"></tr></thead>
+          <tbody id="scen-body"></tbody>
+          <tfoot><tr id="scen-foot"></tr></tfoot>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- 목표 역산 -->
+  <div id="sim-reverse" class="sim-sub" style="display:none">
+    <div class="grid-2">
+      <div class="card">
+        <div class="sec-title">목표 수익 역산 — 얼마 벌려면 몇 건?</div>
+        <div style="margin-bottom:16px" class="field">
+          <label>기준 카테고리</label>
+          <select id="rev-cat" onchange="updateReverse()"></select>
+        </div>
+        <table class="tbl" id="rev-tbl">
+          <thead><tr>
+            <th style="text-align:left">목표 월수익</th>
+            <th>필요건수</th><th>작업시간</th><th>하루작업(25일)</th><th>현실가능?</th>
+          </tr></thead>
+          <tbody id="rev-body"></tbody>
+        </table>
+      </div>
+      <div class="card">
+        <div class="sec-title">직접 목표 입력</div>
+        <div class="field" style="margin-bottom:16px">
+          <label>목표 월수익 (원)</label>
+          <input type="number" id="custom-goal" value="3000000" oninput="updateCustomReverse()">
+        </div>
+        <div id="custom-rev-result"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 효율 분석 -->
+  <div id="sim-efficiency" class="sim-sub" style="display:none">
+    <div class="card">
+      <div class="sec-title">카테고리별 시간당수익 효율 순위</div>
+      <div id="efficiency-list"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════ -->
+<!-- CATEGORY PRICE TABLE -->
+<!-- ══════════════════════════════════════════════════ -->
+<div id="page-cat" class="page">
+  <h2 class="page-title">카테고리별 단가표</h2>
+  <div id="cat-sections"></div>
+</div>
+
+<!-- ══════════════════════════════════════════════════ -->
+<!-- INCOME CALCULATOR -->
+<!-- ══════════════════════════════════════════════════ -->
+<div id="page-income" class="page">
+  <h2 class="page-title">월 수익 계산기</h2>
+  <div class="grid-2">
+    <div>
+      <div class="card" style="margin-bottom:16px">
+        <div class="sec-title">패시브 수익 (스톡 + 템플릿)</div>
+        <div id="passive-inputs"></div>
+      </div>
+      <div class="card">
+        <div class="sec-title">월 경비</div>
+        <div id="expense-inputs"></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="sec-title">수익 요약</div>
+      <div id="income-summary"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════ -->
+<!-- TAX CALCULATOR -->
+<!-- ══════════════════════════════════════════════════ -->
+<div id="page-tax" class="page">
+  <h2 class="page-title">세금 계산기 (일반과세자)</h2>
+  <div class="grid-2">
+    <div>
+      <div class="card" style="margin-bottom:16px">
+        <div class="sec-title">① 부가가치세 (연 2회)</div>
+        <div id="vat-section"></div>
+      </div>
+      <div class="card">
+        <div class="sec-title">② 종합소득세 공제 항목</div>
+        <div id="income-tax-deductions"></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="sec-title">세금 계산 결과</div>
+      <div id="tax-results"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════ -->
+<!-- KPI TRACKER -->
+<!-- ══════════════════════════════════════════════════ -->
+<div id="page-kpi" class="page">
+  <h2 class="page-title">KPI 트래커</h2>
+  <div id="kpi-sections"></div>
+</div>
+
+<!-- ══════════════════════════════════════════════════ -->
+<!-- TAX CALENDAR -->
+<!-- ══════════════════════════════════════════════════ -->
+<div id="page-cal" class="page">
+  <h2 class="page-title">세금 납부 캘린더</h2>
+  <div class="card" style="margin-bottom:20px;padding:14px 20px">
+    <div style="display:flex;gap:20px;flex-wrap:wrap;align-items:center">
+      <span style="font-size:12px;color:var(--text2)">범례:</span>
+      <span style="font-size:12px;display:flex;align-items:center;gap:6px"><span style="width:10px;height:10px;border-radius:2px;background:var(--red);display:inline-block"></span>납부 마감</span>
+      <span style="font-size:12px;display:flex;align-items:center;gap:6px"><span style="width:10px;height:10px;border-radius:2px;background:var(--orange);display:inline-block"></span>신고 준비</span>
+      <span style="font-size:12px;display:flex;align-items:center;gap:6px"><span style="width:10px;height:10px;border-radius:2px;background:var(--green);display:inline-block"></span>여유</span>
+      <span style="font-size:12px;display:flex;align-items:center;gap:6px"><span style="width:10px;height:10px;border-radius:2px;background:var(--accent3);display:inline-block"></span>절세 기회</span>
+    </div>
+  </div>
+  <div class="cal-grid" id="cal-grid"></div>
+  <div class="card" style="margin-top:20px">
+    <div class="sec-title">월 세금 적립 가이드</div>
+    <div id="cal-guide"></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════ -->
+<!-- 4P · SWOT -->
+<!-- ══════════════════════════════════════════════════ -->
+<div id="page-swot" class="page">
+  <h2 class="page-title">4P 마케팅 전략 & SWOT 분석</h2>
+  <div class="sub-tabs">
+    <button class="sub-tab active" onclick="showSubTab('swot','fourp')">4P 전략</button>
+    <button class="sub-tab" onclick="showSubTab('swot','swot')">SWOT 분석</button>
+    <button class="sub-tab" onclick="showSubTab('swot','matrix')">전략 매트릭스</button>
+  </div>
+  <div id="swot-fourp" class="swot-sub active"></div>
+  <div id="swot-swot" class="swot-sub" style="display:none"></div>
+  <div id="swot-matrix" class="swot-sub" style="display:none"></div>
+</div>
+
+<script>
+// ═══════════════════════════════════════════════
+// STATE
+// ═══════════════════════════════════════════════
+const S = {
+  cats: [
+    {id:'home',    name:'홈페이지 제작',  color:'var(--cat-home)',    price:800000,  fee:0.10, hours:24},
+    {id:'detail',  name:'상세페이지',     color:'var(--cat-detail)',  price:150000,  fee:0.20, hours:8},
+    {id:'sns',     name:'SNS 광고대행',   color:'var(--cat-sns)',     price:200000,  fee:0.00, hours:8},
+    {id:'content', name:'콘텐츠 제작',    color:'var(--cat-content)', price:150000,  fee:0.00, hours:6},
+    {id:'brand',   name:'브랜딩/CI',      color:'var(--cat-brand)',   price:500000,  fee:0.10, hours:20},
+    {id:'video',   name:'영상 편집',      color:'var(--cat-video)',   price:200000,  fee:0.10, hours:8},
+    {id:'logo',    name:'로고/썸네일',    color:'var(--cat-logo)',    price:80000,   fee:0.20, hours:3},
+  ],
+  counts: [3,5,2,2,1,1,3],
+  goals:  [500000,300000,200000,150000,300000,150000,100000],
+  passive: {
+    stockGlobal: {uploads:550, sales:28, price:150},
+    stockKorea:  {uploads:250, sales:13, price:350},
+    template:    {uploads:120, sales:6,  price:400},
+  },
+  expenses: [
+    {name:'어도비CC 구독',       amount:60000,  vat:true,  inc:true},
+    {name:'장비 감가상각',       amount:100000, vat:true,  inc:true},
+    {name:'통신비 (업무 60%)',   amount:30000,  vat:true,  inc:true},
+    {name:'크몽 수수료',         amount:50000,  vat:false, inc:true},
+    {name:'교육/자기계발비',     amount:0,      vat:false, inc:true},
+    {name:'기타 경비',           amount:0,      vat:true,  inc:true},
+  ],
+  tax: {
+    personalDeduction: 1500000,
+    nps: 0,
+    yellowUmbrella: 0,
+    otherDeduction: 0,
+    taxCredit: 20000,
+  },
+  kpi: {
+    '총 월수익':     {target:2000000, months:Array(12).fill(0)},
+    '외주 수주건수': {target:15,      months:Array(12).fill(0)},
+    '스톡 업로드':   {target:50,      months:Array(12).fill(0)},
+    '템플릿 등록':   {target:20,      months:Array(12).fill(0)},
+    '크몽 리뷰':     {target:3,       months:Array(12).fill(0)},
+    '신규 고객':     {target:3,       months:Array(12).fill(0)},
+    '재의뢰 고객':   {target:2,       months:Array(12).fill(0)},
+    '순이익률(%)':   {target:60,      months:Array(12).fill(0)},
+  },
+  checklist: [
+    {text:'상세페이지 수주 5건 이상', done:false},
+    {text:'스톡이미지 50장 업로드', done:false},
+    {text:'템플릿 10개 등록', done:false},
+    {text:'경비 증빙 수집 (영수증·카드내역)', done:false},
+    {text:'부가세 적립계좌 이체', done:false},
+    {text:'소득세 적립계좌 이체', done:false},
+    {text:'KPI 실적 입력', done:false},
+    {text:'커뮤니티 직수주 활동', done:false},
+  ],
+};
+
+// ═══════════════════════════════════════════════
+// COMPUTED
+// ═══════════════════════════════════════════════
+function calcOutsource(){
+  return S.cats.reduce((sum,c,i)=>sum+S.counts[i]*c.price*(1-c.fee),0);
+}
+function calcPassive(){
+  const p=S.passive;
+  return p.stockGlobal.sales*p.stockGlobal.price
+        +p.stockKorea.sales*p.stockKorea.price
+        +p.template.sales*p.template.price;
+}
+function calcTotalInc(){return calcOutsource()+calcPassive()}
+function calcExpenses(){return S.expenses.reduce((s,e)=>s+e.amount,0)}
+function calcVatPayable(){
+  const sales=calcOutsource()*6;
+  const vatOut=sales*0.1;
+  const vatIn=S.expenses.filter(e=>e.vat).reduce((s,e)=>s+e.amount,0)*6*0.1;
+  return Math.max(0,vatOut-vatIn);
+}
+function calcVatMonthly(){return calcVatPayable()/6}
+function calcAnnualInc(){return calcTotalInc()*12}
+function calcAnnualExp(){return calcExpenses()*12}
+function calcBusinessInc(){return Math.max(0,calcAnnualInc()-calcAnnualExp())}
+function calcTaxBase(){
+  return Math.max(0,calcBusinessInc()-S.tax.personalDeduction-S.tax.nps-S.tax.yellowUmbrella-S.tax.otherDeduction);
+}
+function calcIncomeTax(){
+  const t=calcTaxBase();
+  if(t<=14000000)return t*0.06;
+  if(t<=50000000)return (t-14000000)*0.15+840000;
+  if(t<=88000000)return (t-50000000)*0.24+6360000;
+  if(t<=150000000)return (t-88000000)*0.35+15480000;
+  return (t-150000000)*0.38+37180000;
+}
+function calcFinalTax(){return Math.max(0,calcIncomeTax()-S.tax.taxCredit)}
+function calcLocalTax(){return calcFinalTax()*0.1}
+function calcTotalTax(){return calcFinalTax()+calcLocalTax()}
+function calcIncomeMonthly(){return calcTotalTax()/12}
+function calcTakehome(){
+  return calcTotalInc()-calcExpenses()-calcVatMonthly()-calcIncomeMonthly();
+}
+
+// ═══════════════════════════════════════════════
+// FORMAT
+// ═══════════════════════════════════════════════
+function won(n,short=false){
+  n=Math.round(n);
+  if(short&&Math.abs(n)>=10000000)return (n/10000000).toFixed(1)+'천만';
+  if(short&&Math.abs(n)>=1000000)return (n/1000000).toFixed(0)+'만';
+  if(short&&Math.abs(n)>=10000)return (n/10000).toFixed(0)+'만';
+  return n.toLocaleString('ko-KR')+'원';
+}
+function pct(n){return(n*100).toFixed(1)+'%'}
+
+// ═══════════════════════════════════════════════
+// NAVIGATION
+// ═══════════════════════════════════════════════
+function showPage(id){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('page-'+id).classList.add('active');
+  event.currentTarget.classList.add('active');
+  renderAll();
+}
+function showSubTab(group, id){
+  const parent = event.currentTarget.closest('.page')||document.querySelector('.page.active');
+  parent.querySelectorAll('.sub-tab').forEach(b=>b.classList.remove('active'));
+  event.currentTarget.classList.add('active');
+  if(group==='sim') document.querySelectorAll('.sim-sub').forEach(s=>{s.style.display='none'});
+  if(group==='swot') document.querySelectorAll('.swot-sub').forEach(s=>{s.style.display='none'});
+  const target=document.getElementById(group+'-'+id)||document.getElementById('swot-'+id);
+  if(target)target.style.display='block';
+}
+
+// ═══════════════════════════════════════════════
+// RENDER: DASHBOARD
+// ═══════════════════════════════════════════════
+function renderDash(){
+  const totalInc=calcTotalInc(), takehome=calcTakehome();
+  const taxSave=calcVatMonthly()+calcIncomeMonthly();
+  document.getElementById('d-total-inc').textContent=won(totalInc);
+  document.getElementById('d-takehome').textContent=won(takehome);
+  document.getElementById('d-tax-save').textContent=won(taxSave);
+  document.getElementById('d-annual').textContent=won(totalInc*12,true);
+
+  // cat table
+  const tbody=document.getElementById('d-cat-body');
+  let totalCnt=0,totalRev=0,totalGoal=0;
+  tbody.innerHTML=S.cats.map((c,i)=>{
+    const cnt=S.counts[i], rev=cnt*c.price*(1-c.fee), goal=S.goals[i];
+    const rate=goal?rev/goal:0;
+    totalCnt+=cnt; totalRev+=rev; totalGoal+=goal;
+    const badge=rate>=1?'badge-green':rate>=0.7?'badge-yellow':'badge-red';
+    return `<tr>
+      <td><span class="cat-pill" style="background:${c.color}22;color:${c.color}">${c.name}</span></td>
+      <td class="num">${cnt}건</td>
+      <td class="num-green">${won(rev)}</td>
+      <td class="num">${won(goal)}</td>
+      <td><span class="badge ${badge}">${pct(rate)}</span>
+        <div class="prog-wrap" style="margin-top:4px;width:80px">
+          <div class="prog-bar" style="width:${Math.min(100,rate*100)}%;background:${c.color}"></div>
+        </div></td>
+    </tr>`;
+  }).join('');
+  const totalRate=totalGoal?totalRev/totalGoal:0;
+  document.getElementById('d-total-cnt').textContent=totalCnt+'건';
+  document.getElementById('d-total-rev').textContent=won(totalRev);
+  document.getElementById('d-total-goal').textContent=won(totalGoal);
+  document.getElementById('d-total-rate').innerHTML=`<span class="badge ${totalRate>=1?'badge-green':totalRate>=0.7?'badge-yellow':'badge-red'}">${pct(totalRate)}</span>`;
+
+  // tax summary
+  const taxEl=document.getElementById('d-tax-summary');
+  const taxItems=[
+    ['부가세 월 적립',calcVatMonthly(),'1월·7월 25일 납부'],
+    ['소득세 월 적립',calcIncomeMonthly(),'5월 31일 신고·납부'],
+    ['총 월 세금 적립',taxSave,''],
+  ];
+  taxEl.innerHTML=taxItems.map(([n,v,d])=>`
+    <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 14px;background:var(--bg3);border-radius:var(--radius-sm)">
+      <div>
+        <div style="font-size:13px;font-weight:500">${n}</div>
+        ${d?`<div style="font-size:11px;color:var(--text3)">${d}</div>`:''}
+      </div>
+      <div class="num-red" style="font-size:16px;font-weight:700">${won(v)}</div>
+    </div>`).join('');
+
+  // checklist
+  const cl=document.getElementById('checklist-wrap');
+  cl.innerHTML=S.checklist.map((item,i)=>`
+    <div class="check-item ${item.done?'done':''}" onclick="toggleCheck(${i})">
+      <div class="check-box">${item.done?'<svg width="10" height="8" viewBox="0 0 10 8"><path d="M1 4l3 3L9 1" stroke="#0a0e1a" stroke-width="1.8" fill="none"/></svg>':''}</div>
+      <span class="check-text" style="font-size:12px">${item.text}</span>
+    </div>`).join('');
+
+  // pipeline
+  const pip=document.getElementById('d-pipeline');
+  const outsource=calcOutsource(), passive=calcPassive(), total=outsource+passive;
+  const pipes=[
+    {name:'외주',val:outsource,color:'var(--accent)',pct:outsource/total},
+    {name:'스톡',val:passive*0.6,color:'var(--accent2)',pct:passive*0.6/total},
+    {name:'템플릿',val:passive*0.4,color:'var(--accent3)',pct:passive*0.4/total},
+  ];
+  pip.innerHTML=pipes.map(p=>`
+    <div style="flex:1;min-width:160px">
+      <div style="display:flex;justify-content:space-between;margin-bottom:6px">
+        <span style="font-size:12px;color:${p.color};font-weight:600">${p.name}</span>
+        <span class="num" style="font-size:12px">${won(p.val)}</span>
+      </div>
+      <div class="prog-wrap"><div class="prog-bar" style="width:${Math.min(100,p.pct*100)}%;background:${p.color}"></div></div>
+      <div style="font-size:11px;color:var(--text3);margin-top:4px">${pct(p.pct)}</div>
+    </div>`).join('');
+}
+
+function toggleCheck(i){
+  S.checklist[i].done=!S.checklist[i].done;
+  renderDash();
+}
+
+// ═══════════════════════════════════════════════
+// RENDER: SIMULATOR
+// ═══════════════════════════════════════════════
+function renderSim(){
+  // setup table
+  const tbody=document.getElementById('sim-setup-body');
+  tbody.innerHTML=S.cats.map((c,i)=>`<tr>
+    <td><span style="color:${c.color};font-weight:600">${c.name}</span></td>
+    <td><input type="number" value="${c.price}" min="0" step="1000"
+      onchange="S.cats[${i}].price=+this.value;renderAll()" style="width:110px"></td>
+    <td><input type="number" value="${(c.fee*100).toFixed(0)}" min="0" max="50" step="1"
+      onchange="S.cats[${i}].fee=this.value/100;renderAll()" style="width:70px"> %</td>
+    <td><input type="number" value="${c.hours}" min="1" max="100"
+      onchange="S.cats[${i}].hours=+this.value;renderAll()" style="width:70px"></td>
+    <td class="num-green">${won(c.price*(1-c.fee))}</td>
+    <td class="num">${won(c.price*(1-c.fee)/c.hours)}/h</td>
+  </tr>`).join('');
+
+  // count table
+  const cbody=document.getElementById('sim-count-body');
+  let tCnt=0,tRev=0,tFee=0,tNet=0,tHrs=0;
+  cbody.innerHTML=S.cats.map((c,i)=>{
+    const cnt=S.counts[i],rev=cnt*c.price,fee=cnt*c.price*c.fee,net=rev-fee,hrs=cnt*c.hours;
+    tCnt+=cnt;tRev+=rev;tFee+=fee;tNet+=net;tHrs+=hrs;
+    return `<tr>
+      <td><span style="color:${c.color};font-weight:600">${c.name}</span></td>
+      <td><input type="number" value="${cnt}" min="0" max="50"
+        onchange="S.counts[${i}]=+this.value;renderAll()" style="width:60px"></td>
+      <td class="num">${won(rev)}</td>
+      <td class="num-red">${won(fee)}</td>
+      <td class="num-green">${won(net)}</td>
+      <td class="num">${hrs}h</td>
+    </tr>`;
+  }).join('');
+  document.getElementById('sc-total-cnt').textContent=tCnt+'건';
+  document.getElementById('sc-total-rev').textContent=won(tRev);
+  document.getElementById('sc-total-fee').textContent=won(tFee);
+  document.getElementById('sc-total-net').textContent=won(tNet);
+  document.getElementById('sc-total-hrs').textContent=tHrs+'h';
+
+  const summary=document.getElementById('sim-count-summary');
+  const hrsPerDay=tHrs/25;
+  summary.innerHTML=`
+    <div style="display:flex;flex-direction:column;gap:10px">
+      ${[['총 매출',won(tRev),''],['수수료 합계',won(tFee),'num-red'],
+         ['실수익 합계',won(tNet),'num-green'],['총 작업시간',tHrs+'h',''],
+         ['하루 작업(25일)',hrsPerDay.toFixed(1)+'h',''],
+         ['시간당 수익',won(tHrs?tNet/tHrs:0),'num-yellow'],
+        ].map(([l,v,cls])=>`
+        <div style="display:flex;justify-content:space-between;padding:10px 14px;background:var(--bg3);border-radius:var(--radius-sm)">
+          <span style="font-size:13px">${l}</span>
+          <span class="num ${cls}" style="font-size:14px;font-weight:600">${v}</span>
+        </div>`).join('')}
+      <div style="padding:12px 14px;background:${hrsPerDay<=8?'rgba(110,231,183,.1)':'rgba(248,113,113,.1)'};border-radius:var(--radius-sm);border:1px solid ${hrsPerDay<=8?'rgba(110,231,183,.3)':'rgba(248,113,113,.3)'}">
+        <div style="font-size:12px;font-weight:700;color:${hrsPerDay<=8?'var(--accent2)':'var(--accent4)'}">
+          ${hrsPerDay<=8?'✅ 하루 8h 이내 — 현실적 가능':'⚠️ 하루 '+hrsPerDay.toFixed(1)+'h — 빡빡한 일정'}
+        </div>
+      </div>
+    </div>`;
+
+  // scenario table
+  const counts=[1,2,3,5,7,10];
+  const thead=document.getElementById('scen-head');
+  thead.innerHTML='<th style="text-align:left">카테고리 / 건수</th>'+
+    counts.map(c=>`<th style="${c>=5?'color:var(--accent2)':''}">${c}건</th>`).join('');
+  const sbody=document.getElementById('scen-body');
+  sbody.innerHTML=S.cats.map(c=>`<tr>
+    <td><span style="color:${c.color};font-weight:600">${c.name}</span>
+      <span style="font-size:10px;color:var(--text3);margin-left:6px">${won(c.price*(1-c.fee))}/건</span></td>
+    ${counts.map(n=>{
+      const v=n*c.price*(1-c.fee);
+      const cls=n>=5?'vhighlight':n>=3?'highlight':'';
+      return `<td class="${cls}">${won(v)}</td>`;
+    }).join('')}
+  </tr>`).join('');
+  const sfoot=document.getElementById('scen-foot');
+  sfoot.innerHTML='<td style="font-weight:700;text-align:left">합산</td>'+
+    counts.map(n=>{
+      const total=S.cats.reduce((s,c)=>s+n*c.price*(1-c.fee),0)/S.cats.length*n;
+      return `<td class="num-green" style="font-weight:700">${won(total)}</td>`;
+    }).join('');
+
+  // reverse
+  const revCat=document.getElementById('rev-cat');
+  if(!revCat.options.length){
+    S.cats.forEach((c,i)=>{
+      const o=document.createElement('option');
+      o.value=i; o.textContent=c.name; revCat.appendChild(o);
+    });
+  }
+  updateReverse();
+
+  // efficiency
+  const effList=document.getElementById('efficiency-list');
+  const sorted=[...S.cats].map((c,i)=>({...c,idx:i,hourly:c.price*(1-c.fee)/c.hours}))
+    .sort((a,b)=>b.hourly-a.hourly);
+  effList.innerHTML=sorted.map((c,rank)=>`
+    <div style="display:flex;align-items:center;gap:14px;padding:12px 16px;background:var(--bg3);border-radius:var(--radius-sm);margin-bottom:8px">
+      <span class="rank rank-${rank<3?rank+1:'n'}">${rank+1}</span>
+      <span style="flex:1;color:${c.color};font-weight:600">${c.name}</span>
+      <div style="text-align:right">
+        <div class="num-green" style="font-size:15px;font-weight:700">${won(c.hourly)}/h</div>
+        <div style="font-size:11px;color:var(--text3)">${won(c.price*(1-c.fee))}/건 ÷ ${c.hours}h</div>
+      </div>
+      <div class="prog-wrap" style="width:100px">
+        <div class="prog-bar" style="width:${(c.hourly/sorted[0].hourly*100).toFixed(0)}%;background:${c.color}"></div>
+      </div>
+    </div>`).join('');
+}
+
+function updateReverse(){
+  const i=+document.getElementById('rev-cat').value;
+  const c=S.cats[i];
+  const net=c.price*(1-c.fee);
+  const goals=[500000,1000000,2000000,3000000,5000000];
+  document.getElementById('rev-body').innerHTML=goals.map(g=>{
+    const cnt=Math.ceil(g/net);
+    const hrs=cnt*c.hours;
+    const hpd=hrs/25;
+    return `<tr>
+      <td class="num-yellow">${won(g)}</td>
+      <td class="num">${cnt}건</td>
+      <td class="num">${hrs}h</td>
+      <td class="num">${hpd.toFixed(1)}h</td>
+      <td><span class="badge ${hpd<=8?'badge-green':'badge-red'}">${hpd<=8?'가능':'빡셈'}</span></td>
+    </tr>`;
+  }).join('');
+}
+
+function updateCustomReverse(){
+  const g=+document.getElementById('custom-goal').value;
+  if(!g)return;
+  const results=document.getElementById('custom-rev-result');
+  results.innerHTML=`
+    <div style="font-size:12px;color:var(--text2);margin-bottom:12px">목표: <span class="num-yellow">${won(g)}</span></div>
+    <div style="display:flex;flex-direction:column;gap:8px">
+    ${S.cats.map(c=>{
+      const net=c.price*(1-c.fee);
+      const cnt=Math.ceil(g/net);
+      const hpd=cnt*c.hours/25;
+      return `<div style="display:flex;justify-content:space-between;align-items:center;padding:10px 14px;background:var(--bg3);border-radius:var(--radius-sm)">
+        <span style="color:${c.color};font-weight:600;font-size:12px">${c.name}</span>
+        <span class="num" style="font-size:13px">${cnt}건</span>
+        <span style="font-size:11px;color:var(--text3)">${(cnt*c.hours)}h/월</span>
+        <span class="badge ${hpd<=8?'badge-green':'badge-red'}">${hpd<=8?'✅':'⚠️'}</span>
+      </div>`;
+    }).join('')}
+    </div>`;
+}
+
+// ═══════════════════════════════════════════════
+// RENDER: CATEGORY TABLE
+// ═══════════════════════════════════════════════
+const CAT_PACKAGES = {
+  home:    [['랜딩페이지',300000,8],['홈페이지 5P',800000,24],['풀커스텀',2000000,60]],
+  detail:  [['기본형(3000px)',50000,3],['스탠다드(8000px)',150000,8],['풀패키지',400000,16]],
+  sns:     [['카드뉴스5장',80000,4],['광고소재풀세트',200000,8],['월정액운영',500000,20]],
+  content: [['카드뉴스1세트',60000,3],['인포그래픽',150000,6],['월콘텐츠패키지',350000,15]],
+  brand:   [['로고디자인',200000,8],['CI패키지',500000,20],['풀브랜딩',1500000,60]],
+  video:   [['쇼츠/릴스',80000,3],['유튜브편집',200000,8],['모션그래픽',400000,16]],
+  logo:    [['썸네일1장',20000,1],['썸네일월정액',150000,8],['채널아트풀세트',100000,4]],
+};
+const CAT_DESC = {
+  home:'기업/개인 웹사이트, 랜딩페이지, 포트폴리오 사이트',
+  detail:'스마트스토어, 쿠팡, 네이버쇼핑 상품 상세페이지',
+  sns:'인스타그램, 페이스북, 카카오 광고 소재 제작 및 운영',
+  content:'블로그, 뉴스레터, 카드뉴스, 인포그래픽 콘텐츠',
+  brand:'로고, 브랜드 가이드, 명함, 패키지 디자인',
+  video:'유튜브 편집, 릴스, 쇼츠, 모션그래픽',
+  logo:'유튜브 썸네일, 프로필 이미지, 아이콘 제작',
+};
+
+function renderCat(){
+  const wrap=document.getElementById('cat-sections');
+  wrap.innerHTML=S.cats.map(c=>{
+    const pkgs=CAT_PACKAGES[c.id];
+    return `<div class="card" style="margin-bottom:16px;border-left:4px solid ${c.color}">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px">
+        <span style="font-size:15px;font-weight:700;color:${c.color}">${c.name}</span>
+      </div>
+      <div style="font-size:12px;color:var(--text3);margin-bottom:16px">${CAT_DESC[c.id]}</div>
+      <table class="tbl">
+        <thead><tr>
+          <th style="text-align:left">패키지</th>
+          <th>단가</th><th>시간</th><th>시간당</th>
+          <th style="background:rgba(220,38,38,.1)">크몽 후(${(c.fee*100).toFixed(0)}%↓)</th>
+          <th style="background:rgba(22,163,74,.1)">직거래</th>
+          <th>월 3건</th><th>월 5건</th>
+        </tr></thead>
+        <tbody>
+          ${pkgs.map(([name,price,hours])=>`<tr>
+            <td style="font-weight:500">${name}</td>
+            <td class="num">${won(price)}</td>
+            <td class="num">${hours}h</td>
+            <td class="num">${won(price/hours)}/h</td>
+            <td class="num-red" style="background:rgba(220,38,38,.05)">${won(price*(1-c.fee))}</td>
+            <td class="num-green" style="background:rgba(22,163,74,.05)">${won(price)}</td>
+            <td class="num-yellow">${won(price*(1-c.fee)*3)}</td>
+            <td class="num-yellow">${won(price*(1-c.fee)*5)}</td>
+          </tr>`).join('')}
+          <tr style="background:var(--bg3)">
+            <td style="font-weight:700">평균</td>
+            <td class="num" style="font-weight:700">${won(pkgs.reduce((s,p)=>s+p[1],0)/pkgs.length)}</td>
+            <td class="num">${(pkgs.reduce((s,p)=>s+p[2],0)/pkgs.length).toFixed(0)}h</td>
+            <td colspan="5"></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>`;
+  }).join('');
+}
+
+// ═══════════════════════════════════════════════
+// RENDER: INCOME
+// ═══════════════════════════════════════════════
+function renderIncome(){
+  const p=S.passive;
+  document.getElementById('passive-inputs').innerHTML=`
+    <div style="display:flex;flex-direction:column;gap:14px">
+      ${[
+        ['스톡 글로벌 업로드',p.stockGlobal.uploads,'stockGlobal','uploads'],
+        ['스톡 글로벌 월판매',p.stockGlobal.sales,'stockGlobal','sales'],
+        ['스톡 글로벌 장당단가',p.stockGlobal.price,'stockGlobal','price'],
+        ['스톡 국내 업로드',p.stockKorea.uploads,'stockKorea','uploads'],
+        ['스톡 국내 월판매',p.stockKorea.sales,'stockKorea','sales'],
+        ['스톡 국내 장당단가',p.stockKorea.price,'stockKorea','price'],
+        ['템플릿 누적등록',p.template.uploads,'template','uploads'],
+        ['템플릿 월판매수',p.template.sales,'template','sales'],
+        ['템플릿 개당단가',p.template.price,'template','price'],
+      ].map(([l,v,obj,key])=>`
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:12px">
+          <label style="font-size:12px;color:var(--text2);min-width:120px">${l}</label>
+          <input type="number" value="${v}" min="0"
+            onchange="S.passive.${obj}.${key}=+this.value;renderAll()"
+            style="width:100px;text-align:right">
+        </div>`).join('')}
+      <div style="padding:12px;background:var(--bg3);border-radius:var(--radius-sm)">
+        <div style="display:flex;justify-content:space-between">
+          <span style="font-size:12px;color:var(--text2)">패시브 수익 합계</span>
+          <span class="num-green" style="font-size:15px;font-weight:700">${won(calcPassive())}</span>
+        </div>
+      </div>
+    </div>`;
+
+  document.getElementById('expense-inputs').innerHTML=`
+    <div style="display:flex;flex-direction:column;gap:10px">
+      ${S.expenses.map((e,i)=>`
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:8px">
+          <label style="font-size:12px;min-width:130px">${e.name}</label>
+          <input type="number" value="${e.amount}" min="0" step="1000"
+            onchange="S.expenses[${i}].amount=+this.value;renderAll()"
+            style="width:100px;text-align:right">
+          <span class="badge ${e.vat?'badge-blue':'badge-red'}" style="min-width:50px;justify-content:center">${e.vat?'부가세공제':'공제불가'}</span>
+        </div>`).join('')}
+      <div style="padding:12px;background:var(--bg3);border-radius:var(--radius-sm)">
+        <div style="display:flex;justify-content:space-between">
+          <span style="font-size:12px;color:var(--text2)">경비 합계</span>
+          <span class="num-red" style="font-size:15px;font-weight:700">${won(calcExpenses())}</span>
+        </div>
+      </div>
+    </div>`;
+
+  const sum=document.getElementById('income-summary');
+  const inc=calcTotalInc(), exp=calcExpenses(), net=inc-exp;
+  const vat=calcVatMonthly(), itax=calcIncomeMonthly(), take=calcTakehome();
+  sum.innerHTML=`
+    <div style="display:flex;flex-direction:column;gap:10px">
+      ${[
+        ['외주 수입',calcOutsource(),'num-blue',''],
+        ['패시브 수입',calcPassive(),'num-blue',''],
+        ['월 총수입',inc,'num-green','font-size:18px;font-weight:800'],
+        ['월 경비',exp,'num-red',''],
+        ['월 순수익',net,'num-green',''],
+        ['─────','','',''],
+        ['부가세 적립',vat,'num-red',''],
+        ['소득세 적립',itax,'num-red',''],
+        ['💰 월 실수령액',take,'num-green','font-size:20px;font-weight:800;padding:14px 16px'],
+      ].map(([l,v,cls,extra])=>v===''?`<div style="border-top:1px solid var(--border);margin:4px 0"></div>`:`
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 14px;background:var(--bg3);border-radius:var(--radius-sm)">
+          <span style="font-size:13px">${l}</span>
+          <span class="${cls}" style="${extra}">${won(v)}</span>
+        </div>`).join('')}
+    </div>`;
+}
+
+// ═══════════════════════════════════════════════
+// RENDER: TAX
+// ═══════════════════════════════════════════════
+function renderTax(){
+  const vatPay=calcVatPayable(), vatM=calcVatMonthly();
+  document.getElementById('vat-section').innerHTML=`
+    <div style="display:flex;flex-direction:column;gap:10px">
+      ${[
+        ['과세매출 (6개월)',calcOutsource()*6,'num-blue',''],
+        ['매출세액 (10%)',calcOutsource()*6*0.1,'num-red',''],
+        ['매입세액 공제',S.expenses.filter(e=>e.vat).reduce((s,e)=>s+e.amount,0)*6*0.1,'num-green',''],
+        ['납부 부가세',vatPay,'num-red','font-weight:700'],
+        ['⚠️ 월 적립액',vatM,'num-red','font-size:17px;font-weight:800'],
+      ].map(([l,v])=>`
+        <div style="display:flex;justify-content:space-between;padding:10px 14px;background:var(--bg3);border-radius:var(--radius-sm)">
+          <span style="font-size:13px">${l}</span>
+          <span class="num-red" style="font-size:14px;font-weight:600">${won(v)}</span>
+        </div>`).join('')}
+    </div>`;
+
+  const t=S.tax;
+  document.getElementById('income-tax-deductions').innerHTML=`
+    <div style="display:flex;flex-direction:column;gap:12px">
+      ${[
+        ['인적공제 (본인)','personalDeduction',t.personalDeduction],
+        ['국민연금 납입','nps',t.nps],
+        ['노란우산공제','yellowUmbrella',t.yellowUmbrella],
+        ['기타 소득공제','otherDeduction',t.otherDeduction],
+        ['세액공제','taxCredit',t.taxCredit],
+      ].map(([l,k,v])=>`
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:12px">
+          <label style="font-size:12px;min-width:130px">${l}</label>
+          <input type="number" value="${v}" min="0" step="10000"
+            onchange="S.tax.${k}=+this.value;renderAll()"
+            style="width:130px;text-align:right">
+        </div>`).join('')}
+    </div>`;
+
+  const taxBase=calcTaxBase(), calcTax=calcIncomeTax(), finalTax=calcFinalTax();
+  const localTax=calcLocalTax(), totalTax=calcTotalTax(), monthly=calcIncomeMonthly();
+  const bandName=taxBase<=14000000?'6%':taxBase<=50000000?'15%':taxBase<=88000000?'24%':'35%+';
+  document.getElementById('tax-results').innerHTML=`
+    <div style="display:flex;flex-direction:column;gap:10px">
+      ${[
+        ['연간 총수입',calcTotalInc()*12,'num-blue'],
+        ['연간 경비',calcExpenses()*12,'num-red'],
+        ['사업소득금액',calcBusinessInc(),''],
+        ['각종 공제',t.personalDeduction+t.nps+t.yellowUmbrella+t.otherDeduction,'num-green'],
+        ['과세표준',taxBase,'num-yellow'],
+        [`적용세율 (${bandName})`,'',''],
+        ['산출세액',calcTax,'num-red'],
+        ['세액공제',t.taxCredit,'num-green'],
+        ['결정세액',finalTax,'num-red'],
+        ['지방소득세',localTax,'num-red'],
+        ['연 세금합계',totalTax,'num-red'],
+        ['⚠️ 월 적립액',monthly,'num-red'],
+      ].map(([l,v,cls])=>v===''?`<div style="color:var(--text3);font-size:11px;padding:4px 14px">${l}</div>`:`
+        <div style="display:flex;justify-content:space-between;padding:10px 14px;background:var(--bg3);border-radius:var(--radius-sm)">
+          <span style="font-size:13px">${l}</span>
+          <span class="${cls}" style="font-size:14px;font-weight:600">${won(v)}</span>
+        </div>`).join('')}
+      <div style="padding:12px 14px;background:rgba(220,38,38,.08);border:1px solid rgba(220,38,38,.2);border-radius:var(--radius-sm)">
+        <div style="font-size:11px;color:var(--accent4)">💡 중간예납 (11월): 결정세액의 50% = ${won(finalTax*0.5)} 고지납부</div>
+      </div>
+    </div>`;
+}
+
+// ═══════════════════════════════════════════════
+// RENDER: KPI
+// ═══════════════════════════════════════════════
+function renderKPI(){
+  const cur=new Date().getMonth();
+  const monthNames=['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'];
+  const wrap=document.getElementById('kpi-sections');
+  wrap.innerHTML=`
+    <div class="card" style="margin-bottom:16px">
+      <div class="sec-title">KPI 현황 — 이번달 (${monthNames[cur]})</div>
+      <div style="display:flex;flex-direction:column;gap:12px">
+        ${Object.entries(S.kpi).map(([name,data])=>{
+          const actual=data.months[cur];
+          const rate=data.target?actual/data.target:0;
+          return `<div style="display:grid;grid-template-columns:140px 1fr 80px 80px;gap:12px;align-items:center">
+            <span style="font-size:13px;font-weight:500">${name}</span>
+            <div>
+              <div class="prog-wrap">
+                <div class="prog-bar" style="width:${Math.min(100,rate*100)}%;background:${rate>=1?'var(--accent2)':rate>=0.7?'var(--accent3)':'var(--accent4)'}"></div>
+              </div>
+            </div>
+            <input type="number" value="${actual}" min="0"
+              onchange="S.kpi['${name}'].months[${cur}]=+this.value;renderAll()"
+              style="width:75px;font-size:12px">
+            <span class="badge ${rate>=1?'badge-green':rate>=0.7?'badge-yellow':'badge-red'}" style="justify-content:center">
+              ${rate>=1?'✅':rate>=0.7?'🟡':'🔴'} ${pct(rate)}</span>
+          </div>`;
+        }).join('')}
+      </div>
+    </div>
+    <div class="card">
+      <div class="sec-title">목표 수정</div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px">
+        ${Object.entries(S.kpi).map(([name,data])=>`
+          <div class="field">
+            <label>${name} 목표</label>
+            <input type="number" value="${data.target}" min="0"
+              onchange="S.kpi['${name}'].target=+this.value;renderAll()">
+          </div>`).join('')}
+      </div>
+    </div>`;
+}
+
+// ═══════════════════════════════════════════════
+// RENDER: CALENDAR
+// ═══════════════════════════════════════════════
+const TAX_EVENTS = {
+  1:  [{color:'var(--red)',   date:'1월 25일',  title:'부가세 납부 마감', detail:'전년 7~12월 확정신고·납부'},
+       {color:'var(--orange)',date:'1월 31일',  title:'사업장현황신고',   detail:'면세업종 해당'}],
+  2:  [{color:'var(--green)', date:'2월',       title:'증빙 정리',       detail:'여유 기간 활용'}],
+  3:  [{color:'var(--accent3)',date:'3월',      title:'노란우산 점검',    detail:'소득공제 최대화'}],
+  4:  [{color:'var(--orange)',date:'4월 25일',  title:'부가세 예정신고',  detail:'1분기 선택 신고'}],
+  5:  [{color:'var(--red)',   date:'5/1~31',    title:'종합소득세 신고납부',detail:'전년도 소득 확정신고'},
+       {color:'var(--red)',   date:'5월 31일',  title:'지방소득세',       detail:'종소세 10%'}],
+  6:  [{color:'var(--green)', date:'6월',       title:'납부 완료',        detail:'하반기 계획 수립'}],
+  7:  [{color:'var(--red)',   date:'7월 25일',  title:'부가세 납부 마감', detail:'올해 1~6월 확정신고·납부'},
+       {color:'var(--accent3)',date:'7월',      title:'중간예납 준비',    detail:'11월 적립 시작'}],
+  8:  [{color:'var(--green)', date:'8월',       title:'증빙 수집',        detail:'하반기 경비 정리'}],
+  9:  [{color:'var(--orange)',date:'9월 25일',  title:'부가세 예정신고',  detail:'3분기 선택 신고'},
+       {color:'var(--accent3)',date:'9월',      title:'절세 상품 점검',   detail:'노란우산·연금저축'}],
+  10: [{color:'var(--orange)',date:'10월',      title:'중간예납 고지',    detail:'국세청 우편 확인'}],
+  11: [{color:'var(--red)',   date:'11월 30일', title:'중간예납 납부',    detail:'전년 세액의 50%'},
+       {color:'var(--orange)',date:'11월',      title:'연간 실적 정리',   detail:'12월 마감 준비'}],
+  12: [{color:'var(--green)', date:'12월',      title:'연말 마무리',      detail:'증빙·노란우산 최종납입'},
+       {color:'var(--accent3)',date:'12월 31일',title:'절세 마감',        detail:'모든 공제 최종 확인'}],
+};
+
+function renderCalendar(){
+  const grid=document.getElementById('cal-grid');
+  const names=['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'];
+  grid.innerHTML=names.map((_,i)=>{
+    const m=i+1;
+    const evts=TAX_EVENTS[m]||[];
+    return `<div class="cal-month">
+      <div class="cal-month-head">${names[i]}</div>
+      ${evts.length?evts.map(e=>`
+        <div class="cal-event" style="--evt-color:${e.color}">
+          <div class="cal-event-title">${e.title}</div>
+          <div class="cal-event-date">${e.date}</div>
+          <div class="cal-event-detail">${e.detail}</div>
+        </div>`).join('')
+        :`<div style="padding:12px 14px;font-size:11px;color:var(--text3)">납부 일정 없음</div>`}
+    </div>`;
+  }).join('');
+
+  document.getElementById('cal-guide').innerHTML=`
+    <table class="tbl">
+      <thead><tr>
+        <th style="text-align:left">세금</th><th>납부시기</th>
+        <th>월 적립액</th><th>비고</th>
+      </tr></thead>
+      <tbody>
+        <tr><td>부가가치세</td><td>1/25·7/25</td><td class="num-red">${won(calcVatMonthly())}</td><td style="font-size:11px;color:var(--text3)">과세매출×10%-매입세액</td></tr>
+        <tr><td>종합소득세</td><td>5/1~31</td><td class="num-red">${won(calcIncomeMonthly())}</td><td style="font-size:11px;color:var(--text3)">전년 소득 기준</td></tr>
+        <tr><td>지방소득세</td><td>5/31</td><td class="num-red">${won(calcIncomeMonthly()*0.1)}</td><td style="font-size:11px;color:var(--text3)">종소세의 10%</td></tr>
+        <tr><td>중간예납</td><td>11/30</td><td class="num-red">${won(calcFinalTax()*0.5/12)}</td><td style="font-size:11px;color:var(--text3)">전년 결정세액 50%</td></tr>
+        <tr class="total"><td>월 총 적립</td><td></td><td class="num-red">${won(calcVatMonthly()+calcIncomeMonthly()*1.1)}</td><td></td></tr>
+      </tbody>
+    </table>`;
+}
+
+// ═══════════════════════════════════════════════
+// RENDER: 4P · SWOT
+// ═══════════════════════════════════════════════
+const FOURP_DATA = [
+  {name:'Product (제품/서비스)',color:'var(--teal)',items:[
+    {k:'핵심 서비스',v:'상세페이지·홈페이지·SNS광고·콘텐츠·영상·브랜딩 7개 카테고리'},
+    {k:'차별화',v:'기획력 포함 풀패키지 → "단순 디자인" 아닌 "매출 증가 솔루션" 포지셔닝'},
+    {k:'품질 전략',v:'전/후 매출 데이터 공개, 포트폴리오 누적으로 신뢰도 구축'},
+    {k:'패키지 구성',v:'Basic(저가진입) → Standard(표준) → Premium(고수익) 3단계'},
+    {k:'부가 수익',v:'스톡이미지·템플릿 패시브 인컴으로 수입 분산 구조 구축'},
+  ]},
+  {name:'Price (가격 전략)',color:'var(--orange)',items:[
+    {k:'초기',v:'후기 0~10개: 시장 하단가 → 포트폴리오·신뢰 확보 우선'},
+    {k:'성장',v:'후기 30개+: 평균단가 30~50% 인상, 패키지 단가 명시'},
+    {k:'수수료 최적화',v:'크몽(20%) → 커뮤니티 직수주(0%) 비중 점진 확대'},
+    {k:'월정액 전환',v:'단골 고객에게 월 고정계약 제안 → 안정 수입'},
+    {k:'프리미엄 경로',v:'브랜딩·홈페이지 고단가 비중 확대 → 시간당수익 극대화'},
+  ]},
+  {name:'Place (유통채널)',color:'var(--purple)',items:[
+    {k:'크몽',v:'후기 축적·검색 노출 → 신규 고객 유입 창구'},
+    {k:'커뮤니티',v:'아프니까사장이다·스마트스토어 카페 → 광고비 0원 직수주'},
+    {k:'SNS',v:'인스타그램 포트폴리오 계정 운영 → 브랜딩+수주 동시'},
+    {k:'스톡 플랫폼',v:'Shutterstock·Adobe Stock·클립아트코리아·크라우드픽 동시'},
+    {k:'오픈카카오',v:'자영업자 채널 활동 → 입소문 기반 소개 수주'},
+  ]},
+  {name:'Promotion (프로모션)',color:'var(--green)',items:[
+    {k:'포트폴리오',v:'비포·애프터 매출 데이터 공개 → 구체적 ROI 제시'},
+    {k:'후기 전략',v:'초기 할인 → 리뷰 확보 → 단가 인상 선순환'},
+    {k:'커뮤니티',v:'유용한 정보 먼저 공유 → 신뢰 → 자연스러운 수주'},
+    {k:'시즌 마케팅',v:'설날·수능·빼빼로데이 시즌 템플릿 미리 등록'},
+    {k:'추천 인센티브',v:'기존 고객 추천 시 할인 → 바이럴 확산'},
+  ]},
+];
+
+const SWOT_DATA = [
+  {type:'S',name:'강점 (Strengths)',color:'var(--green)',bg:'rgba(22,163,74,.08)',items:[
+    '다양한 카테고리 커버 → 1인이지만 풀서비스 가능',
+    'AI 도구 활용 능력 → 작업속도·품질 동시 향상',
+    '스톡+템플릿 패시브인컴 → 수입 분산 구조',
+    '커뮤니티 직수주 가능 → 수수료 0% 수익 구조',
+    '포트폴리오 누적 → 단가 협상력 지속 증가',
+  ]},
+  {type:'W',name:'약점 (Weaknesses)',color:'var(--red)',bg:'rgba(220,38,38,.08)',items:[
+    '초반 브랜드 인지도 없음 → 가격 경쟁 불가피',
+    '1인 운영 → 동시 처리 건수 물리적 한계',
+    '스톡이미지 초기 단가 낮음 → 즉시 수익화 어려움',
+    '크몽 수수료 20% → 수익률 하락 요인',
+    '비수기 수입 불안정 → 현금흐름 리스크',
+  ]},
+  {type:'O',name:'기회 (Opportunities)',color:'var(--accent)',bg:'rgba(79,142,255,.08)',items:[
+    '스마트스토어 셀러 매년 수십만명 신규 유입',
+    'AI 도구 확산 → 직접 디자인 포기한 사업주 증가',
+    '1인 창업·소상공인 급증 → 저비용 디자인 수요 폭발',
+    'SNS 마케팅 의무화 → 콘텐츠 수요 지속 성장',
+    '글로벌 스톡 시장 성장 → 달러 수입 기회',
+  ]},
+  {type:'T',name:'위협 (Threats)',color:'var(--accent3)',bg:'rgba(251,191,36,.08)',items:[
+    'Canva·미리캔버스 AI 고도화 → 단순작업 대체 위험',
+    '크몽 상세페이지 17,000개+ → 가격 경쟁 심화',
+    '크몽 정책 변경 → 플랫폼 의존 리스크',
+    'AI 생성 이미지 확산 → 스톡이미지 단가 하락',
+    '경기침체 → 소상공인 마케팅 예산 축소',
+  ]},
+];
+
+const MATRIX_DATA = [
+  {name:'SO 전략 (강점×기회)',color:'var(--green)',
+   content:'스마트스토어 셀러 급증 + 풀서비스 역량 → 기획 포함 풀패키지 상품화로 고단가 포지셔닝. 경쟁사가 못 하는 "매출 증가 보장" 프레임으로 단가를 2배 올릴 수 있다.'},
+  {name:'ST 전략 (강점×위협)',color:'var(--teal)',
+   content:'AI 도구 활용 + 기획력으로 단순대체 영역 이상 서비스 → 프리미엄 포지셔닝. "AI가 만들 수 없는 브랜딩 전략가"로 포지션 이동.'},
+  {name:'WO 전략 (약점×기회)',color:'var(--orange)',
+   content:'브랜드 없음 약점 → 커뮤니티 무료활동+후기 누적으로 인지도 구축. 소상공인 급증 기회를 활용해 초기 포트폴리오 확보.'},
+  {name:'WT 전략 (약점×위협)',color:'var(--red)',
+   content:'플랫폼 의존도 낮추고 직수주 채널 확보 → 크몽 비중 50% 이하로 유지. 자체 SNS 채널 병행으로 리스크 분산.'},
+];
+
+function renderSWOT(){
+  // 4P
+  document.getElementById('swot-fourp').innerHTML=`
+    <div class="fourp-grid">
+      ${FOURP_DATA.map(p=>`
+        <div class="fourp-card">
+          <div class="fourp-head" style="background:${p.color}20;color:${p.color};border-bottom:2px solid ${p.color}">${p.name}</div>
+          <div class="fourp-body">
+            ${p.items.map(item=>`
+              <div class="fourp-item">
+                <strong>${item.k}:</strong> ${item.v}
+              </div>`).join('')}
+          </div>
+        </div>`).join('')}
+    </div>`;
+
+  // SWOT
+  document.getElementById('swot-swot').innerHTML=`
+    <div class="swot-grid">
+      ${SWOT_DATA.map(s=>`
+        <div class="swot-cell" style="background:${s.bg}">
+          <div class="swot-title" style="color:${s.color}">${s.type} — ${s.name}</div>
+          ${s.items.map(i=>`<div class="swot-item">${i}</div>`).join('')}
+        </div>`).join('')}
+    </div>`;
+
+  // matrix
+  document.getElementById('swot-matrix').innerHTML=`
+    <div style="display:flex;flex-direction:column;gap:12px">
+      ${MATRIX_DATA.map(m=>`
+        <div style="border-radius:var(--radius);overflow:hidden">
+          <div style="padding:12px 18px;background:${m.color}25;color:${m.color};font-weight:700;font-size:13px;border-left:4px solid ${m.color}">${m.name}</div>
+          <div style="padding:14px 18px;background:var(--bg2);font-size:13px;color:var(--text2);line-height:1.7;border:1px solid var(--border);border-top:none;border-radius:0 0 var(--radius) var(--radius)">${m.content}</div>
+        </div>`).join('')}
+    </div>`;
+}
+
+// ═══════════════════════════════════════════════
+// RENDER ALL
+// ═══════════════════════════════════════════════
+function renderAll(){
+  renderDash();
+  renderSim();
+  renderCat();
+  renderIncome();
+  renderTax();
+  renderKPI();
+  renderCalendar();
+  renderSWOT();
+}
+
+// init
+renderAll();
+updateCustomReverse();
+</script>
+</body>
+</html>
