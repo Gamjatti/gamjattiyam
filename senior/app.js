@@ -23,7 +23,9 @@
   const todayReport = data.reports[todayDate];
 
   document.getElementById("today-date").textContent = todayDate;
-  document.getElementById("today-summary").textContent = todayReport.summary || "";
+  document.getElementById("today-summary").innerHTML = sanitize(
+    todayReport.summary_html || esc(todayReport.summary || "")
+  );
 
   // TOP 3
   const heroCards = document.getElementById("hero-cards");
@@ -142,6 +144,42 @@
     }[c]));
   }
   function truncate(s, n) { return s.length > n ? s.slice(0, n) + "…" : s; }
+
+  // Allowlist-based sanitizer: permits <strong>, <em>, <code>, <br>, <a>, <ul>, <li>.
+  function sanitize(dirty) {
+    const tpl = document.createElement("template");
+    tpl.innerHTML = String(dirty);
+    const ALLOWED = new Set(["STRONG", "B", "EM", "I", "CODE", "BR", "A", "UL", "LI"]);
+    const ALLOWED_ATTRS = { A: new Set(["href", "target", "rel"]) };
+    function walk(node) {
+      [...node.childNodes].forEach((n) => {
+        if (n.nodeType === 1) {
+          if (!ALLOWED.has(n.tagName)) {
+            const text = document.createTextNode(n.textContent);
+            n.replaceWith(text);
+            return;
+          }
+          const allowed = ALLOWED_ATTRS[n.tagName] || new Set();
+          [...n.attributes].forEach((a) => {
+            if (!allowed.has(a.name)) n.removeAttribute(a.name);
+          });
+          if (n.tagName === "A") {
+            const href = n.getAttribute("href") || "";
+            if (!/^(https?:|\/|#|mailto:)/i.test(href)) n.removeAttribute("href");
+            n.setAttribute("target", "_blank");
+            n.setAttribute("rel", "noopener noreferrer");
+          }
+          walk(n);
+        } else if (n.nodeType !== 3) {
+          n.remove();
+        }
+      });
+    }
+    walk(tpl.content);
+    const div = document.createElement("div");
+    div.appendChild(tpl.content);
+    return div.innerHTML;
+  }
 
   render();
 
