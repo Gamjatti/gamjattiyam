@@ -1,1 +1,73 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>시니어 트렌드 대시보드</title>
+<meta name="description" content="매일 아침 업데이트되는 시니어 유튜브 콘텐츠 트렌드">
+<meta name="theme-color" content="#e67e22">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="시니어 트렌드">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="apple-touch-icon" href="favicon.svg">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header class="header">
+  <h1>📊 시니어 트렌드</h1>
+  <div class="subtitle">5060+ 유튜브 콘텐츠 · <span id="today-date">-</span></div>
+</header>
+<main class="container">
 
+  <section class="hero">
+    <h2 class="hero-title">🔥 오늘의 TOP 3</h2>
+    <p id="today-summary" style="color: var(--text-muted); font-size: 15px; margin: -6px 0 14px;"></p>
+    <div class="hero-cards" id="hero-cards"></div>
+  </section>
+
+  <section class="filters">
+    <div class="filter-row" aria-label="카테고리 필터">
+      <button class="filter-pill active" data-filter="category" data-value="all">전체</button>
+      <button class="filter-pill" data-filter="category" data-value="health">🏥 건강</button>
+      <button class="filter-pill" data-filter="category" data-value="money">💰 돈</button>
+      <button class="filter-pill" data-filter="category" data-value="travel">✈️ 여행</button>
+      <button class="filter-pill" data-filter="category" data-value="digital">📱 디지털</button>
+    </div>
+    <div class="filter-row" aria-label="난이도 필터">
+      <button class="filter-pill active" data-filter="difficulty" data-value="all">난이도 전체</button>
+      <button class="filter-pill" data-filter="difficulty" data-value="easy">쉬움</button>
+      <button class="filter-pill" data-filter="difficulty" data-value="medium">중간</button>
+      <button class="filter-pill" data-filter="difficulty" data-value="hard">어려움</button>
+    </div>
+    <div class="filter-row" aria-label="잠재력 필터">
+      <button class="filter-pill active" data-filter="potential" data-value="all">잠재력 전체</button>
+      <button class="filter-pill" data-filter="potential" data-value="high">🔥 상</button>
+      <button class="filter-pill" data-filter="potential" data-value="medium">중</button>
+      <button class="filter-pill" data-filter="potential" data-value="low">하</button>
+    </div>
+    <input id="search" class="search-box" type="search" placeholder="🔍 제목·채널·키워드 검색">
+    <select id="sort" class="sort-select">
+      <option value="recent">정렬: 최신순</option>
+      <option value="potential">정렬: 잠재력 높은순</option>
+      <option value="easy">정렬: 난이도 쉬운순</option>
+    </select>
+  </section>
+
+  <section>
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+      <h2 style="margin:0; font-size:18px;">💡 전체 아이디어</h2>
+      <span id="result-count" style="color: var(--text-muted); font-size: 14px;">-</span>
+    </div>
+    <div id="ideas-grid" class="ideas-grid"></div>
+  </section>
+
+  <section class="archive">
+    <h2 class="archive-title">📚 과거 리포트</h2>
+    <div id="archive-list"></div>
+  </section>
+
+</main>
+<script src="app.js"></script>
+</body>
+</html>
