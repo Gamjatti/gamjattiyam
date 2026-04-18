@@ -71,6 +71,12 @@
       font-size: 16px;
     }
 
+    .question-guide {
+      margin: -4px 0 10px;
+      font-size: 13px;
+      color: #6b7280;
+    }
+
     .options {
       display: grid;
       gap: 10px;
@@ -157,6 +163,7 @@
       font-size: 16px;
       font-weight: 700;
       color: #111827;
+      white-space: pre-line;
     }
 
     .hidden {
@@ -187,7 +194,7 @@
   <div class="wrap">
     <div class="card">
       <h1>✈️ 후쿠오카 여행 간단 질문지</h1>
-      <p class="sub">친구들이랑 취향 맞춰보기용 / 객관식만 있는 심플 버전</p>
+      <p class="sub">친구들이랑 취향 맞춰보기용 / 복수선택 가능한 객관식 버전</p>
 
       <form id="travelForm">
         <div class="section">
@@ -195,29 +202,32 @@
 
           <div class="question">
             <span class="question-title">이번 여행에서 제일 중요한 건?</span>
+            <p class="question-guide">복수선택 가능</p>
             <div class="options">
-              <label class="option"><input type="radio" name="priority" value="감성/사진" /> 감성 / 사진</label>
-              <label class="option"><input type="radio" name="priority" value="먹방" /> 먹방</label>
-              <label class="option"><input type="radio" name="priority" value="쇼핑" /> 쇼핑</label>
-              <label class="option"><input type="radio" name="priority" value="힐링/온천" /> 힐링 / 온천</label>
+              <label class="option"><input type="checkbox" name="priority" value="감성/사진" /> 감성 / 사진</label>
+              <label class="option"><input type="checkbox" name="priority" value="먹방" /> 먹방</label>
+              <label class="option"><input type="checkbox" name="priority" value="쇼핑" /> 쇼핑</label>
+              <label class="option"><input type="checkbox" name="priority" value="힐링/온천" /> 힐링 / 온천</label>
             </div>
           </div>
 
           <div class="question">
             <span class="question-title">여행 텐션은?</span>
+            <p class="question-guide">복수선택 가능</p>
             <div class="options">
-              <label class="option"><input type="radio" name="tempo" value="빡세게" /> 빡세게 돌아다니기</label>
-              <label class="option"><input type="radio" name="tempo" value="적당히" /> 적당히 알차게</label>
-              <label class="option"><input type="radio" name="tempo" value="여유롭게" /> 여유롭게 쉬기</label>
+              <label class="option"><input type="checkbox" name="tempo" value="빡세게" /> 빡세게 돌아다니기</label>
+              <label class="option"><input type="checkbox" name="tempo" value="적당히" /> 적당히 알차게</label>
+              <label class="option"><input type="checkbox" name="tempo" value="여유롭게" /> 여유롭게 쉬기</label>
             </div>
           </div>
 
           <div class="question">
             <span class="question-title">일정 스타일은?</span>
+            <p class="question-guide">복수선택 가능</p>
             <div class="options">
-              <label class="option"><input type="radio" name="scheduleStyle" value="꽉 채우기" /> 꽉 채운 일정</label>
-              <label class="option"><input type="radio" name="scheduleStyle" value="반반" /> 반반</label>
-              <label class="option"><input type="radio" name="scheduleStyle" value="즉흥" /> 즉흥 여행</label>
+              <label class="option"><input type="checkbox" name="scheduleStyle" value="꽉 채우기" /> 꽉 채운 일정</label>
+              <label class="option"><input type="checkbox" name="scheduleStyle" value="반반" /> 반반</label>
+              <label class="option"><input type="checkbox" name="scheduleStyle" value="즉흥" /> 즉흥 여행</label>
             </div>
           </div>
         </div>
@@ -227,29 +237,32 @@
 
           <div class="question">
             <span class="question-title">1인 예산 스타일은?</span>
+            <p class="question-guide">복수선택 가능</p>
             <div class="options">
-              <label class="option"><input type="radio" name="budget" value="가성비" /> 가성비 중요</label>
-              <label class="option"><input type="radio" name="budget" value="적당히 씀" /> 적당히 씀</label>
-              <label class="option"><input type="radio" name="budget" value="돈 써도 됨" /> 돈 써도 됨</label>
+              <label class="option"><input type="checkbox" name="budget" value="가성비" /> 가성비 중요</label>
+              <label class="option"><input type="checkbox" name="budget" value="적당히 씀" /> 적당히 씀</label>
+              <label class="option"><input type="checkbox" name="budget" value="돈 써도 됨" /> 돈 써도 됨</label>
             </div>
           </div>
 
           <div class="question">
             <span class="question-title">숙소에서 제일 중요한 건?</span>
+            <p class="question-guide">복수선택 가능</p>
             <div class="options">
-              <label class="option"><input type="radio" name="stay" value="위치" /> 위치</label>
-              <label class="option"><input type="radio" name="stay" value="가격" /> 가격</label>
-              <label class="option"><input type="radio" name="stay" value="감성/뷰" /> 감성 / 뷰</label>
-              <label class="option"><input type="radio" name="stay" value="온천" /> 온천</label>
+              <label class="option"><input type="checkbox" name="stay" value="위치" /> 위치</label>
+              <label class="option"><input type="checkbox" name="stay" value="가격" /> 가격</label>
+              <label class="option"><input type="checkbox" name="stay" value="감성/뷰" /> 감성 / 뷰</label>
+              <label class="option"><input type="checkbox" name="stay" value="온천" /> 온천</label>
             </div>
           </div>
 
           <div class="question">
             <span class="question-title">료칸은?</span>
+            <p class="question-guide">복수선택 가능</p>
             <div class="options">
-              <label class="option"><input type="radio" name="ryokan" value="꼭 가고 싶다" /> 꼭 가고 싶다</label>
-              <label class="option"><input type="radio" name="ryokan" value="가도 좋다" /> 가도 좋다</label>
-              <label class="option"><input type="radio" name="ryokan" value="상관없다" /> 상관없다</label>
+              <label class="option"><input type="checkbox" name="ryokan" value="꼭 가고 싶다" /> 꼭 가고 싶다</label>
+              <label class="option"><input type="checkbox" name="ryokan" value="가도 좋다" /> 가도 좋다</label>
+              <label class="option"><input type="checkbox" name="ryokan" value="상관없다" /> 상관없다</label>
             </div>
           </div>
         </div>
@@ -259,20 +272,22 @@
 
           <div class="question">
             <span class="question-title">여행에서 더 중요한 건?</span>
+            <p class="question-guide">복수선택 가능</p>
             <div class="options">
-              <label class="option"><input type="radio" name="foodShopping" value="맛집" /> 맛집 탐방</label>
-              <label class="option"><input type="radio" name="foodShopping" value="카페" /> 카페 / 디저트</label>
-              <label class="option"><input type="radio" name="foodShopping" value="쇼핑" /> 쇼핑</label>
-              <label class="option"><input type="radio" name="foodShopping" value="골고루" /> 골고루 다</label>
+              <label class="option"><input type="checkbox" name="foodShopping" value="맛집" /> 맛집 탐방</label>
+              <label class="option"><input type="checkbox" name="foodShopping" value="카페" /> 카페 / 디저트</label>
+              <label class="option"><input type="checkbox" name="foodShopping" value="쇼핑" /> 쇼핑</label>
+              <label class="option"><input type="checkbox" name="foodShopping" value="골고루" /> 골고루 다</label>
             </div>
           </div>
 
           <div class="question">
             <span class="question-title">웨이팅은?</span>
+            <p class="question-guide">복수선택 가능</p>
             <div class="options">
-              <label class="option"><input type="radio" name="waiting" value="가능" /> 유명하면 기다릴 수 있음</label>
-              <label class="option"><input type="radio" name="waiting" value="짧으면 가능" /> 짧으면 가능</label>
-              <label class="option"><input type="radio" name="waiting" value="싫음" /> 웨이팅 싫음</label>
+              <label class="option"><input type="checkbox" name="waiting" value="가능" /> 유명하면 기다릴 수 있음</label>
+              <label class="option"><input type="checkbox" name="waiting" value="짧으면 가능" /> 짧으면 가능</label>
+              <label class="option"><input type="checkbox" name="waiting" value="싫음" /> 웨이팅 싫음</label>
             </div>
           </div>
         </div>
@@ -282,28 +297,31 @@
 
           <div class="question">
             <span class="question-title">사진은?</span>
+            <p class="question-guide">복수선택 가능</p>
             <div class="options">
-              <label class="option"><input type="radio" name="photo" value="엄청 중요" /> 엄청 중요</label>
-              <label class="option"><input type="radio" name="photo" value="적당히" /> 적당히</label>
-              <label class="option"><input type="radio" name="photo" value="별로" /> 별로 안 중요</label>
+              <label class="option"><input type="checkbox" name="photo" value="엄청 중요" /> 엄청 중요</label>
+              <label class="option"><input type="checkbox" name="photo" value="적당히" /> 적당히</label>
+              <label class="option"><input type="checkbox" name="photo" value="별로" /> 별로 안 중요</label>
             </div>
           </div>
 
           <div class="question">
             <span class="question-title">걷는 거 / 이동은?</span>
+            <p class="question-guide">복수선택 가능</p>
             <div class="options">
-              <label class="option"><input type="radio" name="walking" value="많이 걸어도 됨" /> 많이 걸어도 됨</label>
-              <label class="option"><input type="radio" name="walking" value="적당히" /> 적당히</label>
-              <label class="option"><input type="radio" name="walking" value="최소한" /> 최소한만 걷고 싶음</label>
+              <label class="option"><input type="checkbox" name="walking" value="많이 걸어도 됨" /> 많이 걸어도 됨</label>
+              <label class="option"><input type="checkbox" name="walking" value="적당히" /> 적당히</label>
+              <label class="option"><input type="checkbox" name="walking" value="최소한" /> 최소한만 걷고 싶음</label>
             </div>
           </div>
 
           <div class="question">
             <span class="question-title">아침 시작은?</span>
+            <p class="question-guide">복수선택 가능</p>
             <div class="options">
-              <label class="option"><input type="radio" name="morning" value="일찍" /> 일찍 시작 가능</label>
-              <label class="option"><input type="radio" name="morning" value="보통" /> 보통</label>
-              <label class="option"><input type="radio" name="morning" value="늦게" /> 늦게 시작하고 싶음</label>
+              <label class="option"><input type="checkbox" name="morning" value="일찍" /> 일찍 시작 가능</label>
+              <label class="option"><input type="checkbox" name="morning" value="보통" /> 보통</label>
+              <label class="option"><input type="checkbox" name="morning" value="늦게" /> 늦게 시작하고 싶음</label>
             </div>
           </div>
         </div>
@@ -313,15 +331,17 @@
 
           <div class="question">
             <span class="question-title">자유시간 필요해?</span>
+            <p class="question-guide">복수선택 가능</p>
             <div class="options">
-              <label class="option"><input type="radio" name="freeTime" value="필요함" /> 필요함</label>
-              <label class="option"><input type="radio" name="freeTime" value="상관 없음" /> 상관 없음</label>
-              <label class="option"><input type="radio" name="freeTime" value="계속 같이 다녀도 됨" /> 계속 같이 다녀도 됨</label>
+              <label class="option"><input type="checkbox" name="freeTime" value="필요함" /> 필요함</label>
+              <label class="option"><input type="checkbox" name="freeTime" value="상관 없음" /> 상관 없음</label>
+              <label class="option"><input type="checkbox" name="freeTime" value="계속 같이 다녀도 됨" /> 계속 같이 다녀도 됨</label>
             </div>
           </div>
 
           <div class="question">
             <span class="question-title">내가 맡을 수 있는 역할은?</span>
+            <p class="question-guide">복수선택 가능</p>
             <div class="options">
               <label class="option"><input type="checkbox" name="role" value="일정 짜기" /> 일정 짜기</label>
               <label class="option"><input type="checkbox" name="role" value="맛집 / 카페 찾기" /> 맛집 / 카페 찾기</label>
@@ -338,16 +358,18 @@
 
           <div class="question">
             <span class="question-title">싫어하는 여행 스타일은?</span>
+            <p class="question-guide">복수선택 가능</p>
             <div class="options">
-              <label class="option"><input type="radio" name="hateStyle" value="너무 빡센 일정" /> 너무 빡센 일정</label>
-              <label class="option"><input type="radio" name="hateStyle" value="계속 사진만 찍는 여행" /> 계속 사진만 찍는 여행</label>
-              <label class="option"><input type="radio" name="hateStyle" value="계획 없는 여행" /> 계획 없는 여행</label>
-              <label class="option"><input type="radio" name="hateStyle" value="쇼핑만 하는 여행" /> 쇼핑만 하는 여행</label>
+              <label class="option"><input type="checkbox" name="hateStyle" value="너무 빡센 일정" /> 너무 빡센 일정</label>
+              <label class="option"><input type="checkbox" name="hateStyle" value="계속 사진만 찍는 여행" /> 계속 사진만 찍는 여행</label>
+              <label class="option"><input type="checkbox" name="hateStyle" value="계획 없는 여행" /> 계획 없는 여행</label>
+              <label class="option"><input type="checkbox" name="hateStyle" value="쇼핑만 하는 여행" /> 쇼핑만 하는 여행</label>
             </div>
           </div>
 
           <div class="question">
             <span class="question-title">스트레스 받는 상황은?</span>
+            <p class="question-guide">복수선택 가능</p>
             <div class="options">
               <label class="option"><input type="checkbox" name="stress" value="늦는 거" /> 늦는 거</label>
               <label class="option"><input type="checkbox" name="stress" value="계획 없음" /> 계획 없음</label>
@@ -442,59 +464,37 @@
   </div>
 
   <script>
-    function getRadioValue(name) {
-      const checked = document.querySelector(`input[name="${name}"]:checked`);
-      return checked ? checked.value : "미선택";
-    }
-
     function getCheckedValues(name) {
-      return Array.from(document.querySelectorAll(`input[name="${name}"]:checked`))
-        .map(el => el.value)
-        .join(", ") || "미선택";
+      const checked = Array.from(document.querySelectorAll(`input[name="${name}"]:checked`))
+        .map(el => el.value);
+      return checked.length ? checked.join(", ") : "미선택";
     }
 
     function generateSummary(priority, tempo, photo, ryokan, freeTime) {
-      let summary = "";
-
-      if (priority === "감성/사진") summary += "감성 여행 선호 / ";
-      else if (priority === "먹방") summary += "먹방 여행 선호 / ";
-      else if (priority === "쇼핑") summary += "쇼핑 중심 여행 / ";
-      else if (priority === "힐링/온천") summary += "힐링 중심 여행 / ";
-
-      if (tempo === "빡세게") summary += "빡센 일정 가능 / ";
-      else if (tempo === "적당히") summary += "균형형 여행 / ";
-      else if (tempo === "여유롭게") summary += "여유로운 일정 선호 / ";
-
-      if (photo === "엄청 중요") summary += "사진 욕심 많음 / ";
-      else if (photo === "적당히") summary += "사진은 적당히 / ";
-      else summary += "사진 비중 낮음 / ";
-
-      if (ryokan === "꼭 가고 싶다") summary += "료칸 필수파 / ";
-      else if (ryokan === "가도 좋다") summary += "료칸 호감형 / ";
-      else summary += "료칸 집착 없음 / ";
-
-      if (freeTime === "필요함") summary += "자유시간 필요한 타입";
-      else if (freeTime === "상관 없음") summary += "같이 다녀도 혼자 다녀도 무난한 타입";
-      else summary += "계속 같이 다니는 여행도 OK";
-
-      return summary;
+      return [
+        `중요 포인트: ${priority}`,
+        `여행 텐션: ${tempo}`,
+        `사진 성향: ${photo}`,
+        `료칸 성향: ${ryokan}`,
+        `자유시간 성향: ${freeTime}`
+      ].join(" / ");
     }
 
     function generateResult() {
-      const priority = getRadioValue("priority");
-      const tempo = getRadioValue("tempo");
-      const scheduleStyle = getRadioValue("scheduleStyle");
-      const budget = getRadioValue("budget");
-      const stay = getRadioValue("stay");
-      const ryokan = getRadioValue("ryokan");
-      const foodShopping = getRadioValue("foodShopping");
-      const waiting = getRadioValue("waiting");
-      const photo = getRadioValue("photo");
-      const walking = getRadioValue("walking");
-      const morning = getRadioValue("morning");
-      const freeTime = getRadioValue("freeTime");
+      const priority = getCheckedValues("priority");
+      const tempo = getCheckedValues("tempo");
+      const scheduleStyle = getCheckedValues("scheduleStyle");
+      const budget = getCheckedValues("budget");
+      const stay = getCheckedValues("stay");
+      const ryokan = getCheckedValues("ryokan");
+      const foodShopping = getCheckedValues("foodShopping");
+      const waiting = getCheckedValues("waiting");
+      const photo = getCheckedValues("photo");
+      const walking = getCheckedValues("walking");
+      const morning = getCheckedValues("morning");
+      const freeTime = getCheckedValues("freeTime");
       const role = getCheckedValues("role");
-      const hateStyle = getRadioValue("hateStyle");
+      const hateStyle = getCheckedValues("hateStyle");
       const stress = getCheckedValues("stress");
 
       document.getElementById("resultPriority").textContent = priority;
