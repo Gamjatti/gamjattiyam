@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>후쿠오카 여행 사전 질문지</title>
+  <title>후쿠오카 여행 간단 질문지</title>
   <style>
     * {
       box-sizing: border-box;
@@ -12,42 +12,46 @@
 
     body {
       margin: 0;
-      padding: 0;
       background: #f7f8fb;
-      color: #222;
+      color: #111827;
       line-height: 1.6;
     }
 
     .wrap {
-      max-width: 920px;
+      max-width: 860px;
       margin: 40px auto;
-      padding: 24px;
+      padding: 20px;
     }
 
     .card {
-      background: #fff;
-      border-radius: 20px;
+      background: #ffffff;
+      border-radius: 24px;
       padding: 32px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+      box-shadow: 0 12px 40px rgba(17, 24, 39, 0.08);
+      margin-bottom: 24px;
     }
 
     h1 {
-      margin: 0 0 10px;
+      margin: 0 0 8px;
       font-size: 32px;
       font-weight: 800;
-      color: #111;
     }
 
     .sub {
       margin: 0 0 28px;
-      color: #666;
+      color: #6b7280;
       font-size: 15px;
     }
 
+    h2 {
+      margin: 0 0 18px;
+      font-size: 22px;
+    }
+
     .section {
-      margin-bottom: 36px;
+      margin-bottom: 30px;
       padding-bottom: 24px;
-      border-bottom: 1px solid #ececec;
+      border-bottom: 1px solid #edf0f5;
     }
 
     .section:last-child {
@@ -56,14 +60,8 @@
       padding-bottom: 0;
     }
 
-    h2 {
-      margin: 0 0 18px;
-      font-size: 22px;
-      color: #111;
-    }
-
     .question {
-      margin-bottom: 20px;
+      margin-bottom: 22px;
     }
 
     .question-title {
@@ -71,7 +69,6 @@
       margin-bottom: 10px;
       font-weight: 700;
       font-size: 16px;
-      color: #222;
     }
 
     .options {
@@ -82,68 +79,29 @@
     .option {
       display: flex;
       align-items: center;
-      gap: 8px;
-      padding: 12px 14px;
+      gap: 10px;
+      padding: 13px 14px;
       border: 1px solid #e5e7eb;
-      border-radius: 12px;
-      background: #fafafa;
+      border-radius: 14px;
+      background: #fafbff;
       transition: 0.2s ease;
     }
 
     .option:hover {
-      border-color: #b8c2ff;
-      background: #f4f6ff;
-    }
-
-    input[type="text"],
-    textarea,
-    select {
-      width: 100%;
-      padding: 14px 16px;
-      border: 1px solid #dcdfe4;
-      border-radius: 12px;
-      background: #fff;
-      font-size: 15px;
-      outline: none;
-    }
-
-    input[type="text"]:focus,
-    textarea:focus,
-    select:focus {
-      border-color: #7c8cff;
-      box-shadow: 0 0 0 3px rgba(124, 140, 255, 0.12);
-    }
-
-    textarea {
-      min-height: 100px;
-      resize: vertical;
-    }
-
-    .inline-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 14px;
-    }
-
-    .note {
-      margin-top: 28px;
-      padding: 18px;
-      background: #f3f6ff;
-      border-radius: 14px;
-      color: #3a4373;
-      font-size: 14px;
+      border-color: #8aa4ff;
+      background: #f4f7ff;
     }
 
     .btn-area {
-      margin-top: 32px;
       display: flex;
       gap: 12px;
       flex-wrap: wrap;
+      margin-top: 28px;
     }
 
     button {
       border: none;
-      border-radius: 12px;
+      border-radius: 14px;
       padding: 14px 20px;
       font-size: 15px;
       font-weight: 700;
@@ -153,7 +111,7 @@
 
     .primary {
       background: #111827;
-      color: #fff;
+      color: white;
     }
 
     .primary:hover {
@@ -161,18 +119,54 @@
     }
 
     .secondary {
-      background: #eef1f7;
-      color: #222;
+      background: #eef2f7;
+      color: #1f2937;
     }
 
     .secondary:hover {
-      background: #e3e8f2;
+      background: #e2e8f0;
+    }
+
+    .result-box {
+      background: #f8faff;
+      border: 1px solid #dfe8ff;
+      border-radius: 20px;
+      padding: 24px;
+    }
+
+    .result-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+
+    .result-item {
+      background: white;
+      border: 1px solid #e5e7eb;
+      border-radius: 16px;
+      padding: 16px;
+    }
+
+    .result-label {
+      font-size: 13px;
+      color: #6b7280;
+      margin-bottom: 6px;
+    }
+
+    .result-value {
+      font-size: 16px;
+      font-weight: 700;
+      color: #111827;
+    }
+
+    .hidden {
+      display: none;
     }
 
     @media (max-width: 768px) {
       .wrap {
-        padding: 16px;
         margin: 20px auto;
+        padding: 14px;
       }
 
       .card {
@@ -183,7 +177,7 @@
         font-size: 26px;
       }
 
-      .inline-grid {
+      .result-grid {
         grid-template-columns: 1fr;
       }
     }
@@ -192,202 +186,137 @@
 <body>
   <div class="wrap">
     <div class="card">
-      <h1>✈️ 후쿠오카 여행 사전 질문지</h1>
-      <p class="sub">
-        여자 3명 여행용 / 후쿠오카 · 유후인 · 벳푸 일정 짜기 전에 서로 취향 맞추는 질문지
-      </p>
+      <h1>✈️ 후쿠오카 여행 간단 질문지</h1>
+      <p class="sub">친구들이랑 취향 맞춰보기용 / 객관식만 있는 심플 버전</p>
 
-      <form>
+      <form id="travelForm">
         <div class="section">
-          <h2>1. 기본 정보</h2>
-
-          <div class="question">
-            <label class="question-title" for="name">이름</label>
-            <input type="text" id="name" name="name" placeholder="이름을 입력해주세요" />
-          </div>
-
-          <div class="question">
-            <label class="question-title" for="nickname">여행에서 불리고 싶은 이름 / 별명</label>
-            <input type="text" id="nickname" name="nickname" placeholder="예: 서연, 셔니 등" />
-          </div>
-        </div>
-
-        <div class="section">
-          <h2>2. 여행 스타일</h2>
+          <h2>1. 여행 스타일</h2>
 
           <div class="question">
             <span class="question-title">이번 여행에서 제일 중요한 건?</span>
             <div class="options">
-              <label class="option"><input type="checkbox" name="priority" value="감성/사진" /> 감성 / 사진</label>
-              <label class="option"><input type="checkbox" name="priority" value="먹방" /> 먹방</label>
-              <label class="option"><input type="checkbox" name="priority" value="쇼핑" /> 쇼핑</label>
-              <label class="option"><input type="checkbox" name="priority" value="힐링/온천" /> 힐링 / 온천</label>
-              <label class="option"><input type="checkbox" name="priority" value="관광/구경" /> 관광 / 구경</label>
-              <label class="option"><input type="checkbox" name="priority" value="즉흥성" /> 즉흥적으로 노는 재미</label>
+              <label class="option"><input type="radio" name="priority" value="감성/사진" /> 감성 / 사진</label>
+              <label class="option"><input type="radio" name="priority" value="먹방" /> 먹방</label>
+              <label class="option"><input type="radio" name="priority" value="쇼핑" /> 쇼핑</label>
+              <label class="option"><input type="radio" name="priority" value="힐링/온천" /> 힐링 / 온천</label>
             </div>
           </div>
 
           <div class="question">
-            <span class="question-title">여행 텐션은 어떤 편이 좋아?</span>
+            <span class="question-title">여행 텐션은?</span>
             <div class="options">
               <label class="option"><input type="radio" name="tempo" value="빡세게" /> 빡세게 돌아다니기</label>
               <label class="option"><input type="radio" name="tempo" value="적당히" /> 적당히 알차게</label>
-              <label class="option"><input type="radio" name="tempo" value="여유롭게" /> 여유롭게 쉬엄쉬엄</label>
+              <label class="option"><input type="radio" name="tempo" value="여유롭게" /> 여유롭게 쉬기</label>
             </div>
           </div>
 
           <div class="question">
-            <span class="question-title">하루 일정 스타일은?</span>
+            <span class="question-title">일정 스타일은?</span>
             <div class="options">
-              <label class="option"><input type="radio" name="schedule-style" value="꽉 채우기" /> 꽉 채우기</label>
-              <label class="option"><input type="radio" name="schedule-style" value="70%만 채우기" /> 70%만 채우기</label>
-              <label class="option"><input type="radio" name="schedule-style" value="즉흥" /> 즉흥으로 움직이기</label>
+              <label class="option"><input type="radio" name="scheduleStyle" value="꽉 채우기" /> 꽉 채운 일정</label>
+              <label class="option"><input type="radio" name="scheduleStyle" value="반반" /> 반반</label>
+              <label class="option"><input type="radio" name="scheduleStyle" value="즉흥" /> 즉흥 여행</label>
             </div>
           </div>
         </div>
 
         <div class="section">
-          <h2>3. 예산 & 소비 스타일</h2>
+          <h2>2. 돈 & 숙소</h2>
 
           <div class="question">
-            <span class="question-title">1인 예산은 어느 정도 생각해?</span>
+            <span class="question-title">1인 예산 스타일은?</span>
             <div class="options">
-              <label class="option"><input type="radio" name="budget" value="50~80만원" /> 50~80만원</label>
-              <label class="option"><input type="radio" name="budget" value="80~120만원" /> 80~120만원</label>
-              <label class="option"><input type="radio" name="budget" value="120만원 이상" /> 120만원 이상</label>
+              <label class="option"><input type="radio" name="budget" value="가성비" /> 가성비 중요</label>
+              <label class="option"><input type="radio" name="budget" value="적당히 씀" /> 적당히 씀</label>
+              <label class="option"><input type="radio" name="budget" value="돈 써도 됨" /> 돈 써도 됨</label>
             </div>
           </div>
-
-          <div class="question">
-            <span class="question-title">먹는 거에 돈 쓰는 편?</span>
-            <div class="options">
-              <label class="option"><input type="radio" name="food-budget" value="아낌 없음" /> 아낌 없음</label>
-              <label class="option"><input type="radio" name="food-budget" value="적당히" /> 적당히</label>
-              <label class="option"><input type="radio" name="food-budget" value="절약" /> 가성비 위주</label>
-            </div>
-          </div>
-
-          <div class="question">
-            <span class="question-title">쇼핑 스타일은?</span>
-            <div class="options">
-              <label class="option"><input type="radio" name="shopping-style" value="많이 산다" /> 많이 산다</label>
-              <label class="option"><input type="radio" name="shopping-style" value="적당히 산다" /> 적당히 산다</label>
-              <label class="option"><input type="radio" name="shopping-style" value="거의 안 산다" /> 거의 안 산다</label>
-            </div>
-          </div>
-        </div>
-
-        <div class="section">
-          <h2>4. 숙소 취향</h2>
 
           <div class="question">
             <span class="question-title">숙소에서 제일 중요한 건?</span>
             <div class="options">
-              <label class="option"><input type="checkbox" name="accommodation" value="위치" /> 위치</label>
-              <label class="option"><input type="checkbox" name="accommodation" value="가격" /> 가격</label>
-              <label class="option"><input type="checkbox" name="accommodation" value="감성/뷰" /> 감성 / 뷰</label>
-              <label class="option"><input type="checkbox" name="accommodation" value="온천" /> 온천</label>
-              <label class="option"><input type="checkbox" name="accommodation" value="넓이/쾌적함" /> 넓이 / 쾌적함</label>
+              <label class="option"><input type="radio" name="stay" value="위치" /> 위치</label>
+              <label class="option"><input type="radio" name="stay" value="가격" /> 가격</label>
+              <label class="option"><input type="radio" name="stay" value="감성/뷰" /> 감성 / 뷰</label>
+              <label class="option"><input type="radio" name="stay" value="온천" /> 온천</label>
             </div>
           </div>
 
           <div class="question">
             <span class="question-title">료칸은?</span>
             <div class="options">
-              <label class="option"><input type="radio" name="ryokan" value="무조건 가고 싶다" /> 무조건 가고 싶다</label>
-              <label class="option"><input type="radio" name="ryokan" value="상관 없다" /> 상관 없다</label>
-              <label class="option"><input type="radio" name="ryokan" value="굳이 없어도 된다" /> 굳이 없어도 된다</label>
+              <label class="option"><input type="radio" name="ryokan" value="꼭 가고 싶다" /> 꼭 가고 싶다</label>
+              <label class="option"><input type="radio" name="ryokan" value="가도 좋다" /> 가도 좋다</label>
+              <label class="option"><input type="radio" name="ryokan" value="상관없다" /> 상관없다</label>
             </div>
           </div>
         </div>
 
         <div class="section">
-          <h2>5. 음식 취향</h2>
+          <h2>3. 음식 & 쇼핑</h2>
 
           <div class="question">
-            <label class="question-title" for="cannot-eat">못 먹는 음식 / 피하고 싶은 음식</label>
-            <textarea id="cannot-eat" name="cannot-eat" placeholder="예: 회, 날달걀, 너무 느끼한 음식 등"></textarea>
-          </div>
-
-          <div class="question">
-            <label class="question-title" for="must-eat">꼭 먹고 싶은 음식 3가지 이상</label>
-            <textarea id="must-eat" name="must-eat" placeholder="예: 라멘, 스시, 규카츠, 푸딩, 모츠나베 등"></textarea>
-          </div>
-
-          <div class="question">
-            <span class="question-title">맛집 웨이팅 가능?</span>
+            <span class="question-title">여행에서 더 중요한 건?</span>
             <div class="options">
-              <label class="option"><input type="radio" name="waiting" value="30분 이상도 가능" /> 30분 이상도 가능</label>
-              <label class="option"><input type="radio" name="waiting" value="20~30분 정도" /> 20~30분 정도는 가능</label>
-              <label class="option"><input type="radio" name="waiting" value="절대 싫음" /> 절대 싫음</label>
+              <label class="option"><input type="radio" name="foodShopping" value="맛집" /> 맛집 탐방</label>
+              <label class="option"><input type="radio" name="foodShopping" value="카페" /> 카페 / 디저트</label>
+              <label class="option"><input type="radio" name="foodShopping" value="쇼핑" /> 쇼핑</label>
+              <label class="option"><input type="radio" name="foodShopping" value="골고루" /> 골고루 다</label>
+            </div>
+          </div>
+
+          <div class="question">
+            <span class="question-title">웨이팅은?</span>
+            <div class="options">
+              <label class="option"><input type="radio" name="waiting" value="가능" /> 유명하면 기다릴 수 있음</label>
+              <label class="option"><input type="radio" name="waiting" value="짧으면 가능" /> 짧으면 가능</label>
+              <label class="option"><input type="radio" name="waiting" value="싫음" /> 웨이팅 싫음</label>
             </div>
           </div>
         </div>
 
         <div class="section">
-          <h2>6. 사진 & 콘텐츠 스타일</h2>
+          <h2>4. 사진 & 이동</h2>
 
           <div class="question">
-            <span class="question-title">사진 찍는 거 좋아해?</span>
+            <span class="question-title">사진은?</span>
             <div class="options">
-              <label class="option"><input type="radio" name="photo" value="많이 찍고 싶다" /> 많이 찍고 싶다</label>
+              <label class="option"><input type="radio" name="photo" value="엄청 중요" /> 엄청 중요</label>
               <label class="option"><input type="radio" name="photo" value="적당히" /> 적당히</label>
-              <label class="option"><input type="radio" name="photo" value="별로 관심 없음" /> 별로 관심 없음</label>
+              <label class="option"><input type="radio" name="photo" value="별로" /> 별로 안 중요</label>
             </div>
           </div>
 
           <div class="question">
-            <span class="question-title">인스타 감성 / 사진 스팟 중요도는?</span>
+            <span class="question-title">걷는 거 / 이동은?</span>
             <div class="options">
-              <label class="option"><input type="radio" name="instagram" value="매우 중요" /> 매우 중요</label>
-              <label class="option"><input type="radio" name="instagram" value="보통" /> 보통</label>
-              <label class="option"><input type="radio" name="instagram" value="상관 없음" /> 상관 없음</label>
+              <label class="option"><input type="radio" name="walking" value="많이 걸어도 됨" /> 많이 걸어도 됨</label>
+              <label class="option"><input type="radio" name="walking" value="적당히" /> 적당히</label>
+              <label class="option"><input type="radio" name="walking" value="최소한" /> 최소한만 걷고 싶음</label>
             </div>
           </div>
 
           <div class="question">
-            <span class="question-title">찍고 싶은 콘텐츠는?</span>
+            <span class="question-title">아침 시작은?</span>
             <div class="options">
-              <label class="option"><input type="checkbox" name="content-type" value="감성 브이로그" /> 감성 브이로그</label>
-              <label class="option"><input type="checkbox" name="content-type" value="먹방" /> 먹방</label>
-              <label class="option"><input type="checkbox" name="content-type" value="릴스/틱톡" /> 릴스 / 틱톡</label>
-              <label class="option"><input type="checkbox" name="content-type" value="사진 위주" /> 사진 위주</label>
-              <label class="option"><input type="checkbox" name="content-type" value="안 찍음" /> 안 찍음</label>
+              <label class="option"><input type="radio" name="morning" value="일찍" /> 일찍 시작 가능</label>
+              <label class="option"><input type="radio" name="morning" value="보통" /> 보통</label>
+              <label class="option"><input type="radio" name="morning" value="늦게" /> 늦게 시작하고 싶음</label>
             </div>
           </div>
         </div>
 
         <div class="section">
-          <h2>7. 이동 & 체력</h2>
-
-          <div class="question">
-            <span class="question-title">걷기 가능한 정도는?</span>
-            <div class="options">
-              <label class="option"><input type="radio" name="walking" value="2만보 이상 가능" /> 2만보 이상 가능</label>
-              <label class="option"><input type="radio" name="walking" value="1만보 정도" /> 1만보 정도</label>
-              <label class="option"><input type="radio" name="walking" value="최소한으로" /> 적게 걷고 싶다</label>
-            </div>
-          </div>
-
-          <div class="question">
-            <span class="question-title">아침 시작 시간은?</span>
-            <div class="options">
-              <label class="option"><input type="radio" name="morning" value="일찍 시작" /> 일찍 시작 (8~9시)</label>
-              <label class="option"><input type="radio" name="morning" value="적당히" /> 적당히 (9~10시)</label>
-              <label class="option"><input type="radio" name="morning" value="느긋하게" /> 느긋하게 (10~11시)</label>
-            </div>
-          </div>
-        </div>
-
-        <div class="section">
-          <h2>8. 자유시간 & 역할 분담</h2>
+          <h2>5. 자유시간 & 역할 분담</h2>
 
           <div class="question">
             <span class="question-title">자유시간 필요해?</span>
             <div class="options">
-              <label class="option"><input type="radio" name="free-time" value="필요함" /> 필요함</label>
-              <label class="option"><input type="radio" name="free-time" value="상관 없음" /> 상관 없음</label>
-              <label class="option"><input type="radio" name="free-time" value="계속 같이 다녀도 됨" /> 계속 같이 다녀도 됨</label>
+              <label class="option"><input type="radio" name="freeTime" value="필요함" /> 필요함</label>
+              <label class="option"><input type="radio" name="freeTime" value="상관 없음" /> 상관 없음</label>
+              <label class="option"><input type="radio" name="freeTime" value="계속 같이 다녀도 됨" /> 계속 같이 다녀도 됨</label>
             </div>
           </div>
 
@@ -395,21 +324,26 @@
             <span class="question-title">내가 맡을 수 있는 역할은?</span>
             <div class="options">
               <label class="option"><input type="checkbox" name="role" value="일정 짜기" /> 일정 짜기</label>
-              <label class="option"><input type="checkbox" name="role" value="맛집/카페 찾기" /> 맛집 / 카페 찾기</label>
+              <label class="option"><input type="checkbox" name="role" value="맛집 / 카페 찾기" /> 맛집 / 카페 찾기</label>
               <label class="option"><input type="checkbox" name="role" value="숙소 찾기" /> 숙소 찾기</label>
               <label class="option"><input type="checkbox" name="role" value="촬영 담당" /> 촬영 담당</label>
-              <label class="option"><input type="checkbox" name="role" value="길 찾기/교통" /> 길 찾기 / 교통 담당</label>
+              <label class="option"><input type="checkbox" name="role" value="길 찾기 / 교통 담당" /> 길 찾기 / 교통 담당</label>
               <label class="option"><input type="checkbox" name="role" value="아무거나 가능" /> 아무거나 가능</label>
             </div>
           </div>
         </div>
 
         <div class="section">
-          <h2>9. 여행에서 싫은 것</h2>
+          <h2>6. 여행에서 싫은 것</h2>
 
           <div class="question">
-            <label class="question-title" for="hate-style">싫어하는 여행 스타일</label>
-            <textarea id="hate-style" name="hate-style" placeholder="예: 너무 빡센 일정, 계속 사진만 찍는 거, 계획 없는 거 등"></textarea>
+            <span class="question-title">싫어하는 여행 스타일은?</span>
+            <div class="options">
+              <label class="option"><input type="radio" name="hateStyle" value="너무 빡센 일정" /> 너무 빡센 일정</label>
+              <label class="option"><input type="radio" name="hateStyle" value="계속 사진만 찍는 여행" /> 계속 사진만 찍는 여행</label>
+              <label class="option"><input type="radio" name="hateStyle" value="계획 없는 여행" /> 계획 없는 여행</label>
+              <label class="option"><input type="radio" name="hateStyle" value="쇼핑만 하는 여행" /> 쇼핑만 하는 여행</label>
+            </div>
           </div>
 
           <div class="question">
@@ -419,34 +353,175 @@
               <label class="option"><input type="checkbox" name="stress" value="계획 없음" /> 계획 없음</label>
               <label class="option"><input type="checkbox" name="stress" value="돈 문제" /> 돈 문제</label>
               <label class="option"><input type="checkbox" name="stress" value="체력 고갈" /> 체력 고갈</label>
-              <label class="option"><input type="checkbox" name="stress" value="대기시간 길어지는 것" /> 대기시간 길어지는 것</label>
-              <label class="option"><input type="checkbox" name="stress" value="계속 붙어다니는 것" /> 계속 붙어다니는 것</label>
+              <label class="option"><input type="checkbox" name="stress" value="대기시간 길어짐" /> 대기시간 길어짐</label>
+              <label class="option"><input type="checkbox" name="stress" value="계속 붙어다니기" /> 계속 붙어다니기</label>
             </div>
           </div>
         </div>
 
-        <div class="section">
-          <h2>10. 마지막 질문</h2>
-
-          <div class="question">
-            <label class="question-title" for="best-moment">이번 여행에서 가장 기대하는 순간은?</label>
-            <textarea id="best-moment" name="best-moment" placeholder="예: 유후인 감성 거리 걷기, 료칸 온천, 라멘 먹방, 셋이 사진 많이 찍는 거 등"></textarea>
-          </div>
-        </div>
-
-        <div class="note">
-          이 질문지 결과를 모아서
-          <strong>공통 취향 = 메인 일정</strong>,
-          <strong>갈리는 취향 = 자유시간 or 선택 코스</strong>
-          로 나누면 여행 만족도가 훨씬 올라갑니다.
-        </div>
-
         <div class="btn-area">
-          <button type="submit" class="primary">제출하기</button>
-          <button type="reset" class="secondary">다시 작성하기</button>
+          <button type="button" class="primary" onclick="generateResult()">결과 보기</button>
+          <button type="reset" class="secondary" onclick="resetResult()">다시 선택하기</button>
         </div>
       </form>
     </div>
+
+    <div class="card hidden" id="resultCard">
+      <h1>🧾 최종 결과지</h1>
+      <p class="sub">선택한 답변 기준으로 정리된 여행 취향 요약</p>
+
+      <div class="result-box">
+        <div class="result-grid">
+          <div class="result-item">
+            <div class="result-label">가장 중요한 것</div>
+            <div class="result-value" id="resultPriority">-</div>
+          </div>
+          <div class="result-item">
+            <div class="result-label">여행 텐션</div>
+            <div class="result-value" id="resultTempo">-</div>
+          </div>
+          <div class="result-item">
+            <div class="result-label">일정 스타일</div>
+            <div class="result-value" id="resultSchedule">-</div>
+          </div>
+          <div class="result-item">
+            <div class="result-label">예산 스타일</div>
+            <div class="result-value" id="resultBudget">-</div>
+          </div>
+          <div class="result-item">
+            <div class="result-label">숙소 우선순위</div>
+            <div class="result-value" id="resultStay">-</div>
+          </div>
+          <div class="result-item">
+            <div class="result-label">료칸 선호</div>
+            <div class="result-value" id="resultRyokan">-</div>
+          </div>
+          <div class="result-item">
+            <div class="result-label">맛집/카페/쇼핑 성향</div>
+            <div class="result-value" id="resultFoodShopping">-</div>
+          </div>
+          <div class="result-item">
+            <div class="result-label">웨이팅 허용도</div>
+            <div class="result-value" id="resultWaiting">-</div>
+          </div>
+          <div class="result-item">
+            <div class="result-label">사진 중요도</div>
+            <div class="result-value" id="resultPhoto">-</div>
+          </div>
+          <div class="result-item">
+            <div class="result-label">걷기/이동 성향</div>
+            <div class="result-value" id="resultWalking">-</div>
+          </div>
+          <div class="result-item">
+            <div class="result-label">아침 시작 스타일</div>
+            <div class="result-value" id="resultMorning">-</div>
+          </div>
+          <div class="result-item">
+            <div class="result-label">자유시간</div>
+            <div class="result-value" id="resultFreeTime">-</div>
+          </div>
+          <div class="result-item">
+            <div class="result-label">맡을 수 있는 역할</div>
+            <div class="result-value" id="resultRole">-</div>
+          </div>
+          <div class="result-item">
+            <div class="result-label">싫어하는 여행 스타일</div>
+            <div class="result-value" id="resultHateStyle">-</div>
+          </div>
+          <div class="result-item">
+            <div class="result-label">스트레스 포인트</div>
+            <div class="result-value" id="resultStress">-</div>
+          </div>
+          <div class="result-item">
+            <div class="result-label">한줄 요약</div>
+            <div class="result-value" id="resultSummary">-</div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
+
+  <script>
+    function getRadioValue(name) {
+      const checked = document.querySelector(`input[name="${name}"]:checked`);
+      return checked ? checked.value : "미선택";
+    }
+
+    function getCheckedValues(name) {
+      return Array.from(document.querySelectorAll(`input[name="${name}"]:checked`))
+        .map(el => el.value)
+        .join(", ") || "미선택";
+    }
+
+    function generateSummary(priority, tempo, photo, ryokan, freeTime) {
+      let summary = "";
+
+      if (priority === "감성/사진") summary += "감성 여행 선호 / ";
+      else if (priority === "먹방") summary += "먹방 여행 선호 / ";
+      else if (priority === "쇼핑") summary += "쇼핑 중심 여행 / ";
+      else if (priority === "힐링/온천") summary += "힐링 중심 여행 / ";
+
+      if (tempo === "빡세게") summary += "빡센 일정 가능 / ";
+      else if (tempo === "적당히") summary += "균형형 여행 / ";
+      else if (tempo === "여유롭게") summary += "여유로운 일정 선호 / ";
+
+      if (photo === "엄청 중요") summary += "사진 욕심 많음 / ";
+      else if (photo === "적당히") summary += "사진은 적당히 / ";
+      else summary += "사진 비중 낮음 / ";
+
+      if (ryokan === "꼭 가고 싶다") summary += "료칸 필수파 / ";
+      else if (ryokan === "가도 좋다") summary += "료칸 호감형 / ";
+      else summary += "료칸 집착 없음 / ";
+
+      if (freeTime === "필요함") summary += "자유시간 필요한 타입";
+      else if (freeTime === "상관 없음") summary += "같이 다녀도 혼자 다녀도 무난한 타입";
+      else summary += "계속 같이 다니는 여행도 OK";
+
+      return summary;
+    }
+
+    function generateResult() {
+      const priority = getRadioValue("priority");
+      const tempo = getRadioValue("tempo");
+      const scheduleStyle = getRadioValue("scheduleStyle");
+      const budget = getRadioValue("budget");
+      const stay = getRadioValue("stay");
+      const ryokan = getRadioValue("ryokan");
+      const foodShopping = getRadioValue("foodShopping");
+      const waiting = getRadioValue("waiting");
+      const photo = getRadioValue("photo");
+      const walking = getRadioValue("walking");
+      const morning = getRadioValue("morning");
+      const freeTime = getRadioValue("freeTime");
+      const role = getCheckedValues("role");
+      const hateStyle = getRadioValue("hateStyle");
+      const stress = getCheckedValues("stress");
+
+      document.getElementById("resultPriority").textContent = priority;
+      document.getElementById("resultTempo").textContent = tempo;
+      document.getElementById("resultSchedule").textContent = scheduleStyle;
+      document.getElementById("resultBudget").textContent = budget;
+      document.getElementById("resultStay").textContent = stay;
+      document.getElementById("resultRyokan").textContent = ryokan;
+      document.getElementById("resultFoodShopping").textContent = foodShopping;
+      document.getElementById("resultWaiting").textContent = waiting;
+      document.getElementById("resultPhoto").textContent = photo;
+      document.getElementById("resultWalking").textContent = walking;
+      document.getElementById("resultMorning").textContent = morning;
+      document.getElementById("resultFreeTime").textContent = freeTime;
+      document.getElementById("resultRole").textContent = role;
+      document.getElementById("resultHateStyle").textContent = hateStyle;
+      document.getElementById("resultStress").textContent = stress;
+      document.getElementById("resultSummary").textContent =
+        generateSummary(priority, tempo, photo, ryokan, freeTime);
+
+      document.getElementById("resultCard").classList.remove("hidden");
+      document.getElementById("resultCard").scrollIntoView({ behavior: "smooth" });
+    }
+
+    function resetResult() {
+      document.getElementById("resultCard").classList.add("hidden");
+    }
+  </script>
 </body>
 </html>
