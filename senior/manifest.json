@@ -1,0 +1,19 @@
+{
+  "name": "시니어 트렌드 대시보드",
+  "short_name": "시니어 트렌드",
+  "description": "매일 아침 업데이트되는 시니어 유튜브 콘텐츠 트렌드",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#faf5ef",
+  "theme_color": "#e67e22",
+  "icons": [
+    {
+      "src": "favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

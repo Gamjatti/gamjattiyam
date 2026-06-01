@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>중국어 단어 암기 카드 (50개)</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Malgun Gothic', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            max-width: 600px;
+            width: 100%;
+        }
+
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            font-size: 2em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .progress-bar {
+            background: rgba(255,255,255,0.2);
+            border-radius: 10px;
+            height: 8px;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            background: linear-gradient(90deg, #4CAF50, #8BC34A);
+            height: 100%;
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        .card-wrapper {
+            perspective: 1000px;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            padding: 40px;
+            min-height: 400px;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.6s;
+            cursor: pointer;
+        }
+
+        .card.flipped {
+            transform: rotateY(180deg);
+        }
+
+        .card-front, .card-back {
+            backface-visibility: hidden;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .card-back {
+            transform: rotateY(180deg);
+        }
+
+        .chinese {
+            font-size: 4em;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .pinyin {
+            font-size: 1.5em;
+            color: #667eea;
+            margin-bottom: 15px;
+        }
+
+        .meaning {
+            font-size: 1.3em;
+            color: #666;
+            text-align: center;
+        }
+
+        .example-box {
+            width: 100%;
+            background: #f8f9fa;
+            border-left: 4px solid #667eea;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+
+        .example-chinese {
+            font-size: 1.8em;
+            color: #333;
+            margin-bottom: 10px;
+            line-height: 1.6;
+        }
+
+        .example-pinyin {
+            font-size: 1.1em;
+            color: #764ba2;
+            margin-bottom: 10px;
+            font-style: italic;
+        }
+
+        .example-meaning {
+            font-size: 1.2em;
+            color: #555;
+            line-height: 1.5;
+        }
+
+        .controls {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        button {
+            background: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 10px;
+            font-size: 1em;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+            color: #667eea;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        .flip-hint {
+            text-align: center;
+            color: white;
+            margin-top: 20px;
+            font-size: 0.9em;
+            opacity: 0.8;
+        }
+
+        .counter {
+            text-align: center;
+            color: white;
+            font-size: 1.2em;
+            margin-bottom: 10px;
+        }
+
+        @media (max-width: 600px) {
+            .chinese {
+                font-size: 3em;
+            }
+            
+            .card {
+                padding: 30px;
+                min-height: 350px;
+            }
+
+            .example-chinese {
+                font-size: 1.5em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🇨🇳 중국어 단어 암기</h1>
+            <div class="counter">
+                <span id="current">1</span> / <span id="total">50</span>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progress"></div>
+            </div>
+        </div>
+
+        <div class="card-wrapper">
+            <div class="card" id="flashcard" onclick="flipCard()">
+                <div class="card-front">
+                    <div class="chinese" id="chinese"></div>
+                    <div class="pinyin" id="pinyin"></div>
+                    <div class="meaning" id="meaning"></div>
+                </div>
+                <div class="card-back">
+                    <div class="example-box">
+                        <div class="example-chinese" id="exChinese"></div>
+                        <div class="example-pinyin" id="exPinyin"></div>
+                        <div class="example-meaning" id="exMeaning"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="flip-hint">💡 카드를 클릭하면 예문을 볼 수 있어요</div>
+
+        <div class="controls">
+            <button onclick="prevCard()">← 이전</button>
+            <button onclick="shuffle()">🔀 섞기</button>
+            <button onclick="nextCard()">다음 →</button>
+        </div>
+    </div>
+
+    <script>
+        const words = [
+            {
+                chinese: "阿姨",
+                pinyin: "ā yí",
+                meaning: "이모, 아주머니",
+                exChinese: "一位阿姨从前边走过来",
+                exPinyin: "yí wèi ā yí cóng qián biān zǒu guò lái",
+                exMeaning: "아주머니 한 분이 앞쪽에서 걸어오신다"
+            },
+            {
+                chinese: "阿",
+                pinyin: "a",
+                meaning: "(접두사) 친근하게 부르는 말<br>예: 阿姨, 阿明",
+                exChinese: "这是多么好的机会啊！",
+                exPinyin: "zhè shì duō me hǎo de jī huì a",
+                exMeaning: "이게 얼마나 좋은 기회니!"
+            },
+            {
+                chinese: "矮",
+                pinyin: "ǎi",
+                meaning: "키가 작다",
+                exChinese: "她的个子很矮",
+                exPinyin: "tā de gè zi hěn ǎi",
+                exMeaning: "그녀는 키가 작다"
+            },
+            {
+                chinese: "爱",
+                pinyin: "ài",
+                meaning: "사랑하다 / 좋아하다",
+                exChinese: "我爱看电影",
+                exPinyin: "wǒ ài kàn diàn yǐng",
+                exMeaning: "나는 영화를 보는 것을 좋아한다"
+            },
+            {
+                chinese: "爱好",
+                pinyin: "ài hào",
+                meaning: "취미",
+                exChinese: "游泳是我的爱好",
+                exPinyin: "yóu yǒng shì wǒ de ài hào",
+                exMeaning: "수영은 내 취미이다"
+            },
+            {
+                chinese: "八",
+                pinyin: "bā",
+                meaning: "여덟",
+                exChinese: "我家有八口人",
+                exPinyin: "wǒ jiā yǒu bā kǒu rén",
+                exMeaning: "우리 집에는 여덟 식구가 있다"
+            },
+            {
+                chinese: "把",
+                pinyin: "bǎ",
+                meaning: "~을/를 (처리·조작 강조하는 문장 구조)",
+                exChinese: "我已经把那本书看完了",
+                exPinyin: "wǒ yǐ jīng bǎ nà běn shū kàn wán le",
+                exMeaning: "나는 이미 그 책을 다 봤다"
+            },
+            {
+                chinese: "爸爸",
+                pinyin: "bà ba",
+                meaning: "아빠",
+                exChinese: "爸爸在医院工作，是医生",
+                exPinyin: "bà ba zài yī yuàn gōng zuò, shì yī shēng",
+                exMeaning: "아빠는 병원에서 일하며 의사이다"
+            },
+            {
+                chinese: "吧",
+                pinyin: "ba",
+                meaning: "~하자 / ~해 (권유, 제안)",
+                exChinese: "我们在图书馆门口见面吧",
+                exPinyin: "wǒ men zài tú shū guǎn mén kǒu jiàn miàn ba",
+                exMeaning: "우리 도서관 입구에서 만나자"
+            },
+            {
+                chinese: "班",
+                pinyin: "bān",
+                meaning: "반, 조",
+                exChinese: "我们班一共有二十多个学生",
+                exPinyin: "wǒ men bān yí gòng yǒu èr shí duō gè xué shēng",
+                exMeaning: "우리 반에는 총 20여 명의 학생이 있다"
+            },
+            {
+                chinese: "搬",
+                pinyin: "bān",
+                meaning: "옮기다",
+                exChinese: "搬东西时要小心点儿",
+                exPinyin: "bān dōng xi shí yào xiǎo xīn diǎn er",
+                exMeaning: "물건을 옮길 때 조심해야 해"
+            },
+            {
+                chinese: "半",
+                pinyin: "bàn",
+                meaning: "반(1/2)",
+                exChinese: "我们等了你半个小时",
+                exPinyin: "wǒ men děng le nǐ bàn gè xiǎo shí",
+                exMeaning: "우리는 너를 30분 기다렸어"
+            },
+            {
+                chinese: "办法",
+                pinyin: "bàn fǎ",
+                meaning: "방법",
+                exChinese: "我觉得这是个好办法",
+                exPinyin: "wǒ jué de zhè shì gè hǎo bàn fǎ",
+                exMeaning: "나는 이것이 좋은 방법이라고 생각한다"
+            },
+            {
+                chinese: "办公室",
+                pinyin: "bàn gōng shì",
+                meaning: "사무실",
+                exChinese: "他还没下班，在办公室工作呢",
+                exPinyin: "tā hái méi xià bān, zài bàn gōng shì gōng zuò ne",
+                exMeaning: "그는 아직 퇴근하지 않고 사무실에서 일하고 있다"
+            },
+            {
+                chinese: "帮忙",
+                pinyin: "bāng máng",
+                meaning: "도움을 주다",
+                exChinese: "你有什么需要帮忙的吗？",
+                exPinyin: "nǐ yǒu shén me xū yào bāng máng de ma",
+                exMeaning: "도와드릴 일이 있나요?"
+            },
+            {
+                chinese: "帮助",
+                pinyin: "bāng zhù",
+                meaning: "돕다",
+                exChinese: "别担心，我会帮助你的",
+                exPinyin: "bié dān xīn, wǒ huì bāng zhù nǐ de",
+                exMeaning: "걱정 마, 내가 너를 도울게"
+            },
+            {
+                chinese: "包",
+                pinyin: "bāo",
+                meaning: "가방 / 싸다",
+                exChinese: "请把这些东西包起来",
+                exPinyin: "qǐng bǎ zhè xiē dōng xi bāo qǐ lái",
+                exMeaning: "이 물건들을 싸 주세요"
+            },
+            {
+                chinese: "饱",
+                pinyin: "bǎo",
+                meaning: "배부르다",
+                exChinese: "我已经吃饱了",
+                exPinyin: "wǒ yǐ jīng chī bǎo le",
+                exMeaning: "나는 이미 배불리 먹었다"
+            },
+            {
+                chinese: "报纸",
+                pinyin: "bào zhǐ",
+                meaning: "신문",
+                exChinese: "他每天早上都看报纸",
+                exPinyin: "tā měi tiān zǎo shang dōu kàn bào zhǐ",
+                exMeaning: "그는 매일 아침마다 신문을 본다"
+            },
+            {
+                chinese: "杯子",
+                pinyin: "bēi zi",
+                meaning: "컵",
+                exChinese: "请给我两个杯子",
+                exPinyin: "qǐng gěi wǒ liǎng gè bēi zi",
+                exMeaning: "저에게 컵 2개를 주세요"
+            },
+            {
+                chinese: "北方",
+                pinyin: "běi fāng",
+                meaning: "북방, 북쪽 지역",
+                exChinese: "我爸爸是北方人",
+                exPinyin: "wǒ bà ba shì běi fāng rén",
+                exMeaning: "우리 아빠는 북방 사람이다"
+            },
+            {
+                chinese: "北京",
+                pinyin: "běi jīng",
+                meaning: "베이징",
+                exChinese: "我在北京工作了一年",
+                exPinyin: "wǒ zài běi jīng gōng zuò le yì nián",
+                exMeaning: "나는 베이징에서 1년 동안 일했다"
+            },
+            {
+                chinese: "被",
+                pinyin: "bèi",
+                meaning: "~에게 / ~을 당하다 (피동)",
+                exChinese: "我的面包被弟弟吃了",
+                exPinyin: "wǒ de miàn bāo bèi dì di chī le",
+                exMeaning: "내 빵은 남동생이 먹었다"
+            },
+            {
+                chinese: "本",
+                pinyin: "běn",
+                meaning: "(양사) 권(책)",
+                exChinese: "昨天你借了几本书？",
+                exPinyin: "zuó tiān nǐ jiè le jǐ běn shū",
+                exMeaning: "어제 너는 책을 몇 권 빌렸니?"
+            },
+            {
+                chinese: "鼻子",
+                pinyin: "bí zi",
+                meaning: "코",
+                exChinese: "他的鼻子又大又高",
+                exPinyin: "tā de bí zi yòu dà yòu gāo",
+                exMeaning: "그의 코는 크면서도 높다"
+            }
+        ];
+
+        let currentIndex = 0;
+        let isFlipped = false;
+
+        function updateCard() {
+            const word = words[currentIndex];
+            document.getElementById('chinese').textContent = word.chinese;
+            document.getElementById('pinyin').textContent = word.pinyin;
+            document.getElementById('meaning').innerHTML = word.meaning;
+            document.getElementById('exChinese').textContent = word.exChinese;
+            document.getElementById('exPinyin').textContent = word.exPinyin;
+            document.getElementById('exMeaning').textContent = word.exMeaning;
+            
+            document.getElementById('current').textContent = currentIndex + 1;
+            document.getElementById('total').textContent = words.length;
+            
+            const progress = ((currentIndex + 1) / words.length) * 100;
+            document.getElementById('progress').style.width = progress + '%';
+            
+            // Reset flip
+            if (isFlipped) {
+                document.getElementById('flashcard').classList.remove('flipped');
+                isFlipped = false;
+            }
+        }
+
+        function flipCard() {
+            const card = document.getElementById('flashcard');
+            card.classList.toggle('flipped');
+            isFlipped = !isFlipped;
+        }
+
+        function nextCard() {
+            currentIndex = (currentIndex + 1) % words.length;
+            updateCard();
+        }
+
+        function prevCard() {
+            currentIndex = (currentIndex - 1 + words.length) % words.length;
+            updateCard();
+        }
+
+        function shuffle() {
+            for (let i = words.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [words[i], words[j]] = [words[j], words[i]];
+            }
+            currentIndex = 0;
+            updateCard();
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight') nextCard();
+            if (e.key === 'ArrowLeft') prevCard();
+            if (e.key === ' ') {
+                e.preventDefault();
+                flipCard();
+            }
+        });
+
+        // Initialize
+        updateCard();
+    </script>
+</body>
+</html>

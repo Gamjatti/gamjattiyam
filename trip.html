@@ -1,0 +1,1034 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>최씨집안 만만세 칭다오 여행 — EQZS4M</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Noto+Serif+KR:wght@400;700;900&display=swap');
+
+:root{
+  --ocean:#0a3550;
+  --ocean-mid:#1a6080;
+  --ocean-lt:#3a9abb;
+  --sand:#f5ede0;
+  --sand2:#e8d8c0;
+  --cream:#fdf9f3;
+  --coral:#c84030;
+  --coral-lt:#e06050;
+  --gold:#c0820a;
+  --gold-lt:#e8a820;
+  --green:#2a6a48;
+  --green-lt:#4a9a68;
+  --ink:#1a2535;
+  --mid:#3a4a5a;
+  --gray:#6a7a8a;
+  --border:#ddd4c4;
+  --white:#ffffff;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Noto Sans KR',sans-serif;background:var(--sand);color:var(--ink);line-height:1.7}
+
+/* ── NAV ── */
+.nav{position:sticky;top:0;z-index:200;background:var(--ocean);display:flex;overflow-x:auto;scrollbar-width:none;border-bottom:1px solid rgba(255,255,255,.1)}
+.nav::-webkit-scrollbar{display:none}
+.nav-logo{font-family:'Noto Serif KR',serif;font-size:13px;font-weight:900;color:var(--gold-lt);padding:0 16px;display:flex;align-items:center;white-space:nowrap;border-right:1px solid rgba(255,255,255,.15)}
+.nav-btn{background:none;border:none;border-bottom:2px solid transparent;padding:14px 12px;font-size:12px;font-weight:500;color:rgba(255,255,255,.6);white-space:nowrap;cursor:pointer;font-family:'Noto Sans KR',sans-serif;transition:.15s}
+.nav-btn.on,.nav-btn:hover{color:white;border-bottom-color:var(--gold-lt)}
+
+/* ── SECTION ── */
+.sec{display:none;min-height:80vh;padding-bottom:80px}
+.sec.on{display:block}
+
+/* ── HERO ── */
+.hero{background:linear-gradient(160deg,var(--ocean) 0%,var(--ocean-mid) 55%,#1d88a8 100%);color:white;padding:56px 22px 72px;text-align:center;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='50' height='50'%3E%3Ccircle cx='25' cy='25' r='1' fill='rgba(255,255,255,.06)'/%3E%3C/svg%3E") repeat}
+.hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:48px;background:var(--sand);clip-path:ellipse(58% 100% at 50% 100%)}
+.hero-sub{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.55);margin-bottom:12px;font-weight:500}
+.hero h1{font-family:'Noto Serif KR',serif;font-size:clamp(26px,5vw,48px);font-weight:900;line-height:1.12;margin-bottom:14px}
+.hero h1 em{color:var(--gold-lt);font-style:italic}
+.hero-p{font-size:14px;color:rgba(255,255,255,.65);max-width:480px;margin:0 auto 22px;line-height:1.75}
+.pill-row{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
+.pill{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.22);border-radius:18px;padding:5px 13px;font-size:12px;color:rgba(255,255,255,.85)}
+
+/* ── WRAP ── */
+.wrap{max-width:900px;margin:0 auto;padding:0 16px}
+
+/* ── BOOKING BAR ── */
+.bbar{background:var(--ocean);color:white;border-radius:18px;margin:28px auto;max-width:860px;display:grid;grid-template-columns:repeat(3,1fr);overflow:hidden;box-shadow:0 6px 30px rgba(10,53,80,.22)}
+@media(max-width:560px){.bbar{grid-template-columns:1fr}}
+.bb{padding:16px 20px;background:rgba(255,255,255,.06);text-align:center;border-right:1px solid rgba(255,255,255,.1)}
+.bb:last-child{border-right:none}
+.bbl{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:5px}
+.bbv{font-size:14px;font-weight:700}
+
+/* ── SECTION HEADER ── */
+.sh{padding:36px 0 18px}
+.sh-eye{font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--ocean-mid);font-weight:700;margin-bottom:8px}
+.sh-title{font-family:'Noto Serif KR',serif;font-size:clamp(22px,4vw,32px);font-weight:900;line-height:1.2}
+.sh-desc{font-size:13.5px;color:var(--gray);margin-top:10px;line-height:1.7;max-width:560px}
+
+/* ── DIVIDER ── */
+.div{display:flex;align-items:center;gap:14px;margin:30px 0 16px}
+.div::before,.div::after{content:'';flex:1;height:1px;background:var(--border)}
+.div span{font-size:10.5px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--gray);white-space:nowrap}
+
+/* ── CARD ── */
+.card{background:white;border-radius:20px;box-shadow:0 3px 18px rgba(10,53,80,.10);overflow:hidden;margin-bottom:18px;transition:box-shadow .2s}
+.card:hover{box-shadow:0 6px 30px rgba(10,53,80,.16)}
+
+/* ── PHOTO CARD (with link) ── */
+.photo-card{background:white;border-radius:20px;box-shadow:0 3px 18px rgba(10,53,80,.10);overflow:hidden;margin-bottom:18px;transition:box-shadow .2s}
+.photo-card:hover{box-shadow:0 6px 30px rgba(10,53,80,.18)}
+.photo-card a{text-decoration:none;color:inherit;display:block}
+
+.place-img{width:100%;height:220px;object-fit:cover;display:block}
+.place-img-tall{width:100%;height:260px;object-fit:cover;display:block}
+
+.place-body{padding:18px 22px 20px}
+.place-num{width:30px;height:30px;border-radius:9px;display:inline-flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;color:white;margin-bottom:9px}
+.place-name{font-family:'Noto Serif KR',serif;font-size:18px;font-weight:900;color:var(--ink);margin-bottom:2px}
+.place-name-sub{font-size:12px;color:var(--gray);margin-bottom:10px}
+
+/* ── TAGS ── */
+.tags{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0 10px}
+.tag{padding:3px 10px;border-radius:11px;font-size:11px;font-weight:600}
+.t-ocean{background:#ddeef6;color:var(--ocean)}
+.t-coral{background:#fce8e5;color:var(--coral)}
+.t-gold{background:#fdf0d0;color:var(--gold)}
+.t-green{background:#ddf0e5;color:var(--green)}
+.t-gray{background:#eee;color:var(--mid)}
+
+/* ── INFO ROW ── */
+.irows{padding:16px 22px}
+.ir{display:flex;gap:10px;padding:9px 0;border-bottom:1px solid #f2ece4;font-size:13px;align-items:flex-start}
+.ir:last-child{border-bottom:none}
+.ir-ic{font-size:15px;flex-shrink:0;margin-top:1px}
+.ir-k{min-width:70px;font-weight:600;color:var(--ocean-mid);flex-shrink:0;font-size:12.5px;padding-top:1px}
+.ir-v{flex:1;color:var(--ink);line-height:1.65}
+.ir-v b{font-weight:700}
+.ir-v .em{color:var(--coral);font-weight:700}
+.ir-v .em2{color:var(--green);font-weight:600}
+.ir-v small{color:var(--gray);font-size:11.5px;display:block;margin-top:2px}
+
+/* ── ALERT ── */
+.alert{border-radius:12px;padding:13px 16px;margin:12px 0;font-size:13px;line-height:1.75;border-left:3.5px solid}
+.a-o{background:#fdf0d0;border-color:var(--gold);color:#6a4010}
+.a-b{background:#ddeef6;border-color:var(--ocean-mid);color:var(--ocean)}
+.a-g{background:#ddf0e5;border-color:var(--green);color:#1a4a30}
+.a-r{background:#fce8e5;border-color:var(--coral);color:#7a1010}
+.alert b{font-weight:700}
+
+/* ── TAXI INFO BOX ── */
+.taxi-box{background:var(--ocean);color:white;border-radius:16px;padding:18px 22px;margin:14px 0;display:flex;gap:14px;align-items:flex-start}
+.taxi-icon{font-size:26px;flex-shrink:0}
+.taxi-text{font-size:13px;line-height:1.8}
+.taxi-text b{color:var(--gold-lt)}
+.taxi-row{display:flex;gap:8px;margin-top:6px;flex-wrap:wrap}
+.tc{display:inline-flex;align-items:center;gap:4px;background:rgba(255,255,255,.15);border-radius:8px;padding:3px 10px;font-size:12px;font-weight:600}
+
+/* ── FLIGHT CARD ── */
+.flight-card{background:white;border-radius:18px;box-shadow:0 3px 16px rgba(10,53,80,.09);padding:20px 24px;margin-bottom:12px;display:flex;align-items:center;gap:18px;flex-wrap:wrap}
+.fc-dir{border-radius:9px;padding:5px 14px;font-size:12px;font-weight:700;color:white;white-space:nowrap}
+.fc-route{flex:1;min-width:180px}
+.fc-airports{font-size:20px;font-weight:900;font-family:'Noto Serif KR',serif;color:var(--ink);display:flex;align-items:center;gap:8px}
+.fc-arr{color:var(--ocean-lt);font-size:18px}
+.fc-meta{font-size:12px;color:var(--gray);margin-top:3px}
+.fc-time{text-align:right;flex-shrink:0}
+.fc-t{font-size:24px;font-weight:900;font-family:'Noto Serif KR',serif;color:var(--ocean)}
+.fc-i{font-size:11px;color:var(--gray)}
+
+/* ── TIMELINE ── */
+.tl-card{background:white;border-radius:20px;box-shadow:0 3px 18px rgba(10,53,80,.10);overflow:hidden;margin-bottom:20px}
+.tl-head{padding:20px 24px;color:white}
+.tl-hday{font-size:11px;font-weight:500;margin-bottom:4px;opacity:.7;letter-spacing:.04em}
+.tl-htitle{font-size:17px;font-weight:700;margin-bottom:3px}
+.tl-hsub{font-size:11.5px;opacity:.6}
+.tl-body{padding:4px 0}
+.tl-row{display:flex}
+.tl-left{width:72px;flex-shrink:0;display:flex;flex-direction:column;align-items:center;padding:13px 0}
+.tl-dot{width:10px;height:10px;border-radius:50%;border:2px solid white;z-index:1;flex-shrink:0}
+.tl-line{width:2px;flex:1;background:#e0d8cc;margin-top:3px}
+.tl-time{font-size:11px;font-weight:700;color:var(--ocean);text-align:center;margin-top:3px}
+.tl-right{flex:1;padding:10px 18px 10px 4px;border-bottom:1px dashed #e8dfd4}
+.tl-row:last-child .tl-right{border-bottom:none}
+.tl-t{font-size:13.5px;font-weight:700;color:var(--ink);margin-bottom:3px}
+.tl-d{font-size:12px;color:var(--mid);line-height:1.65}
+.chip{display:inline-flex;align-items:center;gap:3px;padding:2px 9px;border-radius:7px;font-size:11px;font-weight:500;margin:3px 3px 0 0}
+.ch-b{background:#ddeef6;color:var(--ocean-mid)}
+.ch-c{background:#fce8e5;color:var(--coral)}
+.ch-g{background:#ddf0e5;color:var(--green)}
+.ch-o{background:#fdf0d0;color:var(--gold)}
+
+/* ── PHOTO GRID (2 col) ── */
+.photo-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:14px 0}
+@media(max-width:520px){.photo-grid{grid-template-columns:1fr}}
+.pg-item{border-radius:14px;overflow:hidden;box-shadow:0 2px 12px rgba(10,53,80,.09)}
+.pg-item img{width:100%;height:150px;object-fit:cover;display:block}
+.pg-lbl{padding:10px 12px;background:white;font-size:12.5px;font-weight:600;color:var(--ink)}
+.pg-sub{font-size:11px;color:var(--gray);margin-top:2px}
+
+/* ── MENU TABLE ── */
+.menu-table{width:100%;border-collapse:collapse;font-size:12.5px}
+.menu-table th{text-align:left;font-size:10.5px;font-weight:600;color:var(--gray);padding:0 8px 8px 0;border-bottom:1px solid var(--border)}
+.menu-table td{padding:9px 8px 9px 0;border-bottom:1px solid #f5f0ea;vertical-align:top}
+.menu-table tr:last-child td{border-bottom:none}
+.mn{font-weight:700;color:var(--ink)}
+.mcn{font-size:11px;color:var(--gray);margin-top:1px}
+.md{font-size:11.5px;color:var(--mid);line-height:1.5}
+.mp{color:var(--coral);font-weight:700;white-space:nowrap}
+.must{background:var(--coral);color:white;font-size:9px;padding:1px 6px;border-radius:5px;vertical-align:middle;margin-left:4px}
+.menu-lbl{font-size:10.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--ocean-mid);margin:14px 0 10px}
+
+/* ── CHECKLIST ── */
+.cl-sec{background:white;border-radius:14px;box-shadow:0 3px 16px rgba(10,53,80,.08);margin-bottom:12px;overflow:hidden}
+.cl-head{padding:12px 18px;font-size:13px;font-weight:700;color:white}
+.cl-item{display:flex;align-items:center;gap:10px;padding:10px 18px;border-bottom:1px solid #f2ece4;cursor:pointer;user-select:none}
+.cl-item:last-child{border-bottom:none}
+.cl-item:hover{background:#fafaf6}
+.cl-box{width:18px;height:18px;border:1.5px solid var(--border);border-radius:4px;flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:.15s}
+.cl-item.done .cl-box{background:var(--green);border-color:var(--green)}
+.cl-item.done .cl-box::after{content:'✓';color:white;font-size:11px}
+.cl-item.done .cl-lbl{color:var(--gray);text-decoration:line-through}
+.cl-lbl{font-size:13px;color:var(--ink)}
+.cl-sub{font-size:11px;color:var(--gray);margin-top:1px}
+.prog-bar{height:5px;background:var(--border);border-radius:3px;overflow:hidden;margin:14px 0 5px}
+.prog-fill{height:100%;background:var(--green);border-radius:3px;transition:width .3s}
+.prog-txt{font-size:12px;color:var(--gray);margin-bottom:18px}
+
+/* ── STAT STRIP ── */
+.sstrip{display:flex;background:#f5ede0;border-radius:12px;overflow:hidden;margin:12px 0}
+.si{flex:1;padding:12px 8px;text-align:center;border-right:1px solid var(--border)}
+.si:last-child{border-right:none}
+.sil{font-size:10px;color:var(--gray);margin-bottom:4px;text-transform:uppercase;letter-spacing:.05em}
+.siv{font-size:15px;font-weight:800;color:var(--ocean);font-family:'Noto Serif KR',serif}
+.siv.c{color:var(--coral)}.siv.g{color:var(--green)}.siv.o{color:var(--gold)}
+
+/* ── SUM TABLE ── */
+.st-wrap{background:white;border-radius:16px;box-shadow:0 3px 16px rgba(10,53,80,.08);overflow:hidden;margin:16px 0}
+.st{width:100%;border-collapse:collapse;font-size:13px}
+.st th{background:var(--ocean);color:white;padding:11px 14px;text-align:left;font-size:12px;font-weight:600}
+.st td{padding:10px 14px;border-bottom:1px solid var(--border);color:var(--ink)}
+.st tr:last-child td{border-bottom:none}
+.st tr:nth-child(even) td{background:#fafaf6}
+
+/* ── LINK BUTTON ── */
+.link-btn{display:inline-flex;align-items:center;gap:6px;background:var(--ocean);color:white;border-radius:10px;padding:8px 16px;font-size:12.5px;font-weight:600;text-decoration:none;margin-top:10px;transition:background .15s}
+.link-btn:hover{background:var(--ocean-mid)}
+.link-btn-coral{background:var(--coral)}
+.link-btn-coral:hover{background:var(--coral-lt)}
+.link-btn-gold{background:var(--gold)}
+.link-btn-gold:hover{background:var(--gold-lt);color:var(--ink)}
+
+/* ── MAP BOX ── */
+.map-box{background:linear-gradient(145deg,#ddeef6 0%,#d0e8f4 100%);border:2px dashed #a8cce0;border-radius:14px;padding:22px 18px;text-align:center;margin:12px 0}
+.mb-place{font-size:15px;font-weight:700;color:var(--ocean);margin-bottom:5px}
+.mb-addr{font-size:12.5px;color:var(--ocean-mid);font-weight:500;margin-bottom:3px}
+.mb-sub{font-size:11.5px;color:var(--gray)}
+
+/* ── HOTEL CONFIRMED ── */
+.hotel-conf{background:#ecfaf3;border:2px solid #4caf87;border-radius:14px;padding:16px 20px;margin-bottom:20px}
+.hotel-conf-title{font-size:13px;font-weight:700;color:#1a5a3a;margin-bottom:6px;display:flex;align-items:center;gap:7px}
+
+/* ── FOOTER ── */
+footer{background:var(--ocean);color:rgba(255,255,255,.55);text-align:center;padding:44px 20px;font-size:12px}
+footer strong{color:white}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <span class="nav-logo">✈ 칭다오 EQZS4M</span>
+  <button class="nav-btn on" onclick="show('overview')">📋 개요</button>
+  <button class="nav-btn" onclick="show('hotel')">🏨 숙소</button>
+  <button class="nav-btn" onclick="show('taxi')">🚕 택시 완전정복</button>
+  <button class="nav-btn" onclick="show('itinerary')">📅 5일 일정</button>
+  <button class="nav-btn" onclick="show('spots')">🏛️ 관광지</button>
+  <button class="nav-btn" onclick="show('local')">🎨 로컬숍</button>
+  <button class="nav-btn" onclick="show('food')">🍽️ 맛집</button>
+  <button class="nav-btn" onclick="show('beauty')">💅 뷰티·체험</button>
+  <button class="nav-btn" onclick="show('checklist')">✅ 체크리스트</button>
+</nav>
+
+<!-- ══════════════════════ OVERVIEW ══════════════════════ -->
+<section id="overview" class="sec on">
+<div class="hero">
+  <div class="hero-sub">예약번호 EQZS4M · 3인 가족 · 부모님과 함께</div>
+  <h1>최씨집안 만만세<br><em>칭다오 여행</em></h1>
+  <p class="hero-p">일산 풍동3차 → 인천공항 T2 → 칭다오<br>4박 5일 완전 가이드 · 2026년 5월 5일~9일</p>
+  <div class="pill-row">
+    <div class="pill">✈️ KE841·KE844 대한항공</div>
+    <div class="pill">🏨 이그제큐티브 오션뷰 패밀리 스위트</div>
+    <div class="pill">🚕 전 일정 디디택시</div>
+    <div class="pill">🍺 칭다오 맥주 여행</div>
+  </div>
+</div>
+
+<div class="wrap">
+  <div class="bbar">
+    <div class="bb"><div class="bbl">항공 예약번호</div><div class="bbv">EQZS4M</div></div>
+    <div class="bb"><div class="bbl">호텔 예약번호</div><div class="bbv">1400825243681332</div></div>
+    <div class="bb"><div class="bbl">여행 기간</div><div class="bbv">5/5(화)~5/9(토) 4박5일</div></div>
+  </div>
+
+  <div class="div"><span>✈️ 항공 정보</span></div>
+  <div class="flight-card">
+    <div class="fc-dir" style="background:var(--ocean)">가는편</div>
+    <div class="fc-route">
+      <div class="fc-airports">ICN <span class="fc-arr">→</span> TAO</div>
+      <div class="fc-meta">인천T2 → 칭다오 | <b>KE841</b> B737-8 | 일반석(H)</div>
+    </div>
+    <div class="fc-time"><div class="fc-t">07:50</div><div class="fc-i">5/5(화) 도착 08:40</div></div>
+  </div>
+  <div class="flight-card">
+    <div class="fc-dir" style="background:var(--coral)">오는편</div>
+    <div class="fc-route">
+      <div class="fc-airports">TAO <span class="fc-arr">→</span> ICN</div>
+      <div class="fc-meta">칭다오 → 인천T2 | <b>KE844</b> A330-300 | 일반석(K)</div>
+    </div>
+    <div class="fc-time"><div class="fc-t" style="color:var(--coral)">14:55</div><div class="fc-i">5/9(토) 도착 17:40</div></div>
+  </div>
+
+  <div class="div"><span>📊 핵심 여행 정보</span></div>
+  <div class="card">
+    <div class="irows">
+      <div class="ir"><span class="ir-ic">🏠</span><span class="ir-k">출발지</span><span class="ir-v"><b>일산 풍동3차 아파트</b> → 04:45 카카오T 예약택시 → 인천공항 T2</span></div>
+      <div class="ir"><span class="ir-ic">🌡️</span><span class="ir-k">5월 날씨</span><span class="ir-v">15~23°C 봄 최적 시즌 · 바닷바람 있으니 가디건 필수 · 비 간간이</span></div>
+      <div class="ir"><span class="ir-ic">💵</span><span class="ir-k">환율</span><span class="ir-v">1위안 ≈ 190~200원 · 위챗페이/알리페이 한국 카드 연동 필수</span></div>
+      <div class="ir"><span class="ir-ic">🚕</span><span class="ir-k">교통</span><span class="ir-v"><b class="em">전 일정 디디택시</b> — 부모님 모시고 가니까 지하철 없이 편하게!</span></div>
+      <div class="ir"><span class="ir-ic">🛂</span><span class="ir-k">비자</span><span class="ir-v">한국인 <b>15일 무비자</b> 입국 (여권 유효기간 6개월 이상)</span></div>
+    </div>
+  </div>
+
+  <div class="alert a-r">
+    <b>⚠️ 중국 여행 필수 앱 — 반드시 한국에서 미리 설치!</b><br>
+    디디택시(DiDi) · 위챗페이(WeChat Pay) · 알리페이 · VPN 앱 · 고덕지도(高德地图) · 샤오홍슈 · 따종디엔핑<br>
+    중국 입국 후엔 앱스토어 접근 제한! 출국 전 설치 완료 필수!
+  </div>
+</div>
+</section>
+
+<!-- ══════════════════════ HOTEL ══════════════════════ -->
+<section id="hotel" class="sec">
+<div class="wrap">
+<div class="sh"><div class="sh-eye">확정 숙소</div><div class="sh-title">하이 인터내셔널 아파트먼트<br>이그제큐티브 오션뷰 패밀리 스위트룸</div></div>
+
+<div class="hotel-conf">
+  <div class="hotel-conf-title">✅ 예약 완료 확정!</div>
+  예약번호 <b>1400825243681332</b> · 투숙객: CHOI SEOYEON · 4박 756,360원 온라인 사전결제 완료<br>
+  체크인 5월 5일 14:00 · 체크아웃 5월 9일<br>
+  <a href="https://t.ctrip.cn/?bsXDiiJIrIb0649" target="_blank" class="link-btn" style="margin-top:10px">📋 트립닷컴 예약 내역 확인</a>
+</div>
+
+<!-- 호텔 사진 -->
+<div class="photo-card">
+  <a href="https://kr.trip.com/hotels/qingdao-hotel-detail-44181223/haiyi-international-apartment/" target="_blank">
+    <img src="https://ak-d.tripcdn.com/images/220g13000000v5g9c4C26_R_960_660_R5_Q70.jpg" class="place-img-tall" alt="하이 인터내셔널 아파트먼트 오션뷰" onerror="this.src='https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=900&q=80'">
+    <div class="place-body">
+      <div class="place-name">🏨 하이 인터내셔널 아파트먼트</div>
+      <div class="place-name-sub">海逸国际酒店公寓 · Tower B, No.29 Donghai West Road · 5.4광장 도보권</div>
+      <div class="tags">
+        <span class="tag t-ocean">오션뷰</span>
+        <span class="tag t-gold">패밀리 스위트</span>
+        <span class="tag t-green">밀레 세탁기·인덕션</span>
+        <span class="tag t-ocean">화장실 2개</span>
+        <span class="tag t-coral">완샹청 10분</span>
+      </div>
+    </div>
+  </a>
+</div>
+
+<!-- 객실 사진 그리드 -->
+<div class="div"><span>🛏️ 이그제큐티브 오션뷰 패밀리 스위트룸</span></div>
+<div class="photo-grid">
+  <div class="pg-item">
+    <img src="https://ak-d.tripcdn.com/images/220j14000000v5jqt3ABF_R_600_400_R5_Q70.jpg" alt="객실 오션뷰" onerror="this.src='https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=600&q=80'">
+    <div class="pg-lbl">오션뷰 거실<div class="pg-sub">5.4광장+바다 파노라마</div></div>
+  </div>
+  <div class="pg-item">
+    <img src="https://ak-d.tripcdn.com/images/220u11000000v5jpw0CEE_R_600_400_R5_Q70.jpg" alt="침실" onerror="this.src='https://images.unsplash.com/photo-1540518614846-7eded433c457?w=600&q=80'">
+    <div class="pg-lbl">패밀리 침실<div class="pg-sub">독립 침실 구조 · 편안한 침구</div></div>
+  </div>
+  <div class="pg-item">
+    <img src="https://ak-d.tripcdn.com/images/220k12000000v5jzb5D10_R_600_400_R5_Q70.jpg" alt="주방" onerror="this.src='https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=600&q=80'">
+    <div class="pg-lbl">밀레 풀 키친<div class="pg-sub">인덕션·냉장고·세탁기 포함</div></div>
+  </div>
+  <div class="pg-item">
+    <img src="https://ak-d.tripcdn.com/images/220n13000000v5jxk67FC_R_600_400_R5_Q70.jpg" alt="욕실" onerror="this.src='https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?w=600&q=80'">
+    <div class="pg-lbl">화장실 2개<div class="pg-sub">3인 동시 사용 가능</div></div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="irows">
+    <div class="ir"><span class="ir-ic">📍</span><span class="ir-k">주소</span><span class="ir-v">Tower B, Haiyi Tiancheng, No.29 Donghai West Road, 스남구, 칭다오<br><small>5.4광장 도보 5분 · 완샹청 도보 10분</small></span></div>
+    <div class="ir"><span class="ir-ic">⏰</span><span class="ir-k">체크인</span><span class="ir-v"><b>5월 5일 14:00</b> ~ 익일 01:00 · 체크아웃 5월 9일 12:00</span></div>
+    <div class="ir"><span class="ir-ic">🛁</span><span class="ir-k">객실 시설</span><span class="ir-v">오션뷰 거실 · 독립 침실 · 밀레 세탁기·인덕션 쿡탑·대형냉장고 · 화장실 2개</span></div>
+    <div class="ir"><span class="ir-ic">💰</span><span class="ir-k">결제</span><span class="ir-v"><b>756,360원</b> 온라인 사전결제 완료 (추가 현지 세금 있을 수 있음)</span></div>
+    <div class="ir"><span class="ir-ic">🚕</span><span class="ir-k">공항→호텔</span><span class="ir-v">칭다오 공항에서 디디택시 약 40~60분 · <b class="em">약 40~60위안</b></span></div>
+  </div>
+  <div style="padding:0 22px 18px">
+    <a href="https://kr.trip.com/hotels/qingdao-hotel-detail-44181223/haiyi-international-apartment/" target="_blank" class="link-btn">🏨 트립닷컴에서 호텔 상세 보기</a>
+    <a href="https://maps.google.com/?q=Haiyi+International+Apartment+Qingdao" target="_blank" class="link-btn link-btn-gold" style="margin-left:8px">📍 구글 지도로 위치 확인</a>
+  </div>
+</div>
+
+<div class="alert a-g">
+  <b>💡 체크인 꿀팁:</b> 아침 비행기라 14:00 전 도착! 짐만 먼저 맡기고 관광 출발. 체크인 시 <b>「请给我高层海景房(칭 게이워 가오청 하이징팡)」</b>라고 말하면 더 좋은 오션뷰 층 배정 요청 가능!<br>
+  실제 후기: <em>"칭다오에 3번째인데 3번 다 묵어요. 부모님 모시고 갔는데 뷰 좋은 방 주셔서 아빠가 밖에 안 나가고 싶어하셨어요 ㅎㅎ"</em>
+</div>
+</div>
+</section>
+
+<!-- ══════════════════════ TAXI ══════════════════════ -->
+<section id="taxi" class="sec">
+<div class="wrap">
+<div class="sh"><div class="sh-eye">교통 완전 정복</div><div class="sh-title">전 일정 디디택시<br>부모님 모시고 편하게!</div><p class="sh-desc">지하철 없이 전부 디디택시로! 3인 기준 한국 택시보다 훨씬 저렴하고 문 앞에서 문 앞까지.</p></div>
+
+<div class="div"><span>🚕 디디택시 5단계 완전 사용법</span></div>
+<div class="card">
+  <div class="irows">
+    <div class="ir"><span class="ir-ic">1️⃣</span><span class="ir-k">앱 설치</span><span class="ir-v">앱스토어 <b>「DiDi - Taxi and Rides」</b> 검색 → 설치. <b class="em">한국에서 미리!</b> 중국에서 앱스토어 제한</span></div>
+    <div class="ir"><span class="ir-ic">2️⃣</span><span class="ir-k">회원가입</span><span class="ir-v">한국 전화번호로 가입 · 영어 지원 · <b>VISA/Master 신용카드</b> 등록</span></div>
+    <div class="ir"><span class="ir-ic">3️⃣</span><span class="ir-k">목적지 입력</span><span class="ir-v">영어 or 한자 주소 입력 · 고덕지도에서 복사해서 붙여넣기도 가능</span></div>
+    <div class="ir"><span class="ir-ic">4️⃣</span><span class="ir-k">호출·탑승</span><span class="ir-v">요금 미리 확인 후 호출 → 차량 번호판 확인 후 탑승 → 하차 후 자동결제</span></div>
+    <div class="ir"><span class="ir-ic">5️⃣</span><span class="ir-k">결제</span><span class="ir-v">앱에서 자동결제 · 팁 불필요 · 영수증 앱 내 확인</span></div>
+  </div>
+  <div style="padding:0 22px 18px">
+    <div class="alert a-r"><b>🚨 절대 잊지 마세요!</b> 디디 사용 시 <b>VPN 반드시 OFF!</b> VPN 켜면 위치 인식 안 돼서 호출 실패. 카카오·인스타 쓸 땐 VPN ON, 디디 쓸 땐 VPN OFF 번갈아!</div>
+  </div>
+</div>
+
+<div class="div"><span>📊 목적지별 디디 요금·시간 완전 정복</span></div>
+<div class="st-wrap">
+  <table class="st">
+    <thead><tr><th>목적지</th><th>거리·시간</th><th>예상 요금</th><th>고덕지도 검색어</th></tr></thead>
+    <tbody>
+      <tr><td><b>공항 → 호텔</b></td><td>약 40~60분</td><td>40~60위안</td><td>海逸国际酒店公寓</td></tr>
+      <tr><td><b>호텔 → 잔교</b></td><td>약 10~15분</td><td>15~25위안</td><td>青岛栈桥</td></tr>
+      <tr><td><b>호텔 → 성 미카엘 성당</b></td><td>약 10~12분</td><td>15~20위안</td><td>青岛天主教堂</td></tr>
+      <tr><td><b>호텔 → 팔대관</b></td><td>약 10~15분</td><td>10~20위안</td><td>八大关景区</td></tr>
+      <tr><td><b>호텔 → 맥주박물관</b></td><td>약 15~20분</td><td>20~30위안</td><td>青岛啤酒博物馆</td></tr>
+      <tr><td><b>호텔 → 소어산</b></td><td>약 15~20분</td><td>15~25위안</td><td>青岛小鱼山公园</td></tr>
+      <tr><td><b>호텔 → 중산로/C3</b></td><td>약 12~18분</td><td>15~25위안</td><td>中山路67-1号</td></tr>
+      <tr><td><b>호텔 → 라오산</b></td><td>약 50~70분</td><td>50~80위안</td><td>崂山大河东停车场</td></tr>
+      <tr><td><b>호텔 → 불야성</b></td><td>약 40~90분</td><td>50~100위안</td><td>明月山海间不夜城</td></tr>
+      <tr><td><b>호텔 → 완샹청</b></td><td>약 5~8분</td><td>10~15위안</td><td>华润万象城青岛</td></tr>
+      <tr><td><b>호텔 → 공항(귀국)</b></td><td>약 40~60분</td><td>40~60위안</td><td>青岛胶东国际机场</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="div"><span>🏠 일산 → 인천공항 T2 (5/5 새벽)</span></div>
+<div class="card">
+  <div class="irows">
+    <div class="ir"><span class="ir-ic">⏰</span><span class="ir-k">출발 시각</span><span class="ir-v"><b>04:45</b> 일산 풍동3차 출발 → 06:15 T2 도착 목표</span></div>
+    <div class="ir"><span class="ir-ic">🚖</span><span class="ir-k">카카오T</span><span class="ir-v">전날 카카오T 앱에서 <b>04:45 예약택시</b> 미리 잡기. 3인+짐=택시가 최고. 약 6~8만원 · 70분</span></div>
+    <div class="ir"><span class="ir-ic">⚠️</span><span class="ir-k">주의</span><span class="ir-v"><b>KE841 07:50 출발</b> → 최소 06:00 T2 도착 필요. 04:45 출발이 핵심!</span></div>
+  </div>
+</div>
+
+<div class="taxi-box">
+  <span class="taxi-icon">🚕</span>
+  <div class="taxi-text">
+    <b>디디택시 황금 원칙 3가지!</b><br>
+    1. 사용 전 <b>VPN 반드시 OFF</b> — 이게 제일 중요해요!<br>
+    2. 목적지는 <b>고덕지도에서 한자로 복사</b>해서 붙여넣기<br>
+    3. 불야성 귀환 시 <b>밤 10:30에 미리 호출</b> — 늦은 밤엔 잡기 어려워요!
+  </div>
+</div>
+</div>
+</section>
+
+<!-- ══════════════════════ ITINERARY ══════════════════════ -->
+<section id="itinerary" class="sec">
+<div class="wrap">
+<div class="sh"><div class="sh-eye">5일 완전 일정</div><div class="sh-title">D-1부터 귀국까지<br>시간별 완전 상세 타임라인</div></div>
+
+<!-- D-1 -->
+<div class="tl-card">
+  <div class="tl-head" style="background:#3a4a5a"><div class="tl-hday">5/4 (일) · D-1</div><div class="tl-htitle">출발 전날 — 일산 풍동3차</div><div class="tl-hsub">짐 점검 + 앱 설치 + 카카오T 예약</div></div>
+  <div class="tl-body">
+    <div class="tl-row"><div class="tl-left"><div class="tl-dot" style="background:var(--gold);box-shadow:0 0 0 2px var(--gold)"></div><div class="tl-line"></div><div class="tl-time">저녁</div></div><div class="tl-right"><div class="tl-t">짐 최종 점검 + 앱 전체 설치</div><div class="tl-d">여권(3인)·항공권·호텔예약증·위챗페이·디디·VPN·고덕지도 모두 확인. 위안화 현금 준비(500~1,000위안)</div></div></div>
+    <div class="tl-row"><div class="tl-left"><div class="tl-dot" style="background:var(--ocean);box-shadow:0 0 0 2px var(--ocean)"></div><div class="tl-line"></div><div class="tl-time">자정</div></div><div class="tl-right"><div class="tl-t">카카오T 04:45 예약택시 확인 + 이른 취침</div><div class="tl-d">알람 2개 (04:25, 04:30). 택시 예약 확인 필수!</div></div></div>
+  </div>
+</div>
+
+<!-- Day 1 -->
+<div class="tl-card">
+  <div class="tl-head" style="background:linear-gradient(135deg,var(--ocean),var(--ocean-mid))"><div class="tl-hday">5/5 (화) · Day 1</div><div class="tl-htitle">출발 + 칭다오 도착 + 구시가지</div><div class="tl-hsub">잔교 · 성당 · 5.4광장 · 해산물 저녁</div></div>
+  <div class="tl-body">
+    <div class="tl-row"><div class="tl-left"><div class="tl-dot" style="background:var(--ocean);box-shadow:0 0 0 2px var(--ocean)"></div><div class="tl-line"></div><div class="tl-time">04:30</div></div><div class="tl-right"><div class="tl-t">기상 · 카카오T 택시 탑승</div><div class="tl-d">일산 → T2 출발. 약 70분.</div><span class="chip ch-o">🚖 6~8만원</span></div></div>
+    <div class="tl-row"><div class="tl-left"><div class="tl-dot" style="background:var(--ocean-lt);box-shadow:0 0 0 2px var(--ocean-lt)"></div><div class="tl-line"></div><div class="tl-time">07:50</div></div><div class="tl-right"><div class="tl-t">KE841 탑승 출발 → 08:40 칭다오 도착</div><div class="tl-d">입국심사+수하물 약 40분. 디디택시 호출 (VPN OFF!)</div><span class="chip ch-c">⚠️ VPN OFF</span></div></div>
+    <div class="tl-row"><div class="tl-left"><div class="tl-dot" style="background:var(--gold);box-shadow:0 0 0 2px var(--gold)"></div><div class="tl-line"></div><div class="tl-time">10:00</div></div><div class="tl-right"><div class="tl-t">🏨 호텔 도착 → 짐 맡기기</div><div class="tl-d">체크인 전이면 짐만 맡기고 출발. "请给我高层海景房" 요청!</div><span class="chip ch-b">🚕 공항→호텔 40~60위안</span></div></div>
+    <div class="tl-row"><div class="tl-left"><div class="tl-dot" style="background:var(--green);box-shadow:0 0 0 2px var(--green)"></div><div class="tl-line"></div><div class="tl-time">13:00</div></div><div class="tl-right"><div class="tl-t">⛪ 성 미카엘 성당 → 🌉 잔교 산책</div><div class="tl-d">성당 광장 인생샷 → 맞은편 C3 구경 → 잔교 440m 바다 산책 + 갈매기</div><span class="chip ch-b">🚕 호텔→잔교 15~25위안</span></div></div>
+    <div class="tl-row"><div class="tl-left"><div class="tl-dot" style="background:var(--coral);box-shadow:0 0 0 2px var(--coral)"></div><div class="tl-line"></div><div class="tl-time">15:30</div></div><div class="tl-right"><div class="tl-t">🔴 5.4광장 포토존</div><div class="tl-d">"5월의 바람" 조형물. 밤에 다시 와서 조명 야경도!</div></div></div>
+    <div class="tl-row"><div class="tl-left"><div class="tl-dot" style="background:var(--gold);box-shadow:0 0 0 2px var(--gold)"></div><div class="tl-line"></div><div class="tl-time">19:00</div></div><div class="tl-right"><div class="tl-t">저녁 — 옌다오루 해산물거리</div><div class="tl-d">라오차오갈라+자피 생맥주 첫 체험! 3인 150~200위안</div></div></div>
+    <div class="tl-row"><div class="tl-left"><div class="tl-dot" style="background:var(--ocean);box-shadow:0 0 0 2px var(--ocean)"></div><div class="tl-line"></div><div class="tl-time">21:00</div></div><div class="tl-right"><div class="tl-t">🌃 5.4광장 야경 재방문</div><div class="tl-d">조명 켜진 "5월의 바람" 야경 감상. 무료.</div></div></div>
+  </div>
+</div>
+
+<!-- Day 2 -->
+<div class="tl-card">
+  <div class="tl-head" style="background:linear-gradient(135deg,var(--green),var(--green-lt))"><div class="tl-hday">5/6 (수) · Day 2</div><div class="tl-htitle">구시가지 풀코스 — 아침시장 · C3 · 팔대관 · 맥주박물관</div><div class="tl-hsub">가장 알찬 날!</div></div>
+  <div class="tl-body">
+    <div class="tl-row"><div class="tl-left"><div class="tl-dot" style="background:var(--gold);box-shadow:0 0 0 2px var(--gold)"></div><div class="tl-line"></div><div class="tl-time">07:00</div></div><div class="tl-right"><div class="tl-t">🌅 하이포치아오 아침시장</div><div class="tl-d">현지인 전용 조시(早市). 지단관빙 5위안. 살아있는 해산물 구경!</div><span class="chip ch-b">🚕 호텔→시장 15~20위안</span></div></div>
+    <div class="tl-row"><div class="tl-left"><div class="tl-dot" style="background:var(--coral);box-shadow:0 0 0 2px var(--coral)"></div><div class="tl-line"></div><div class="tl-time">10:30</div></div><div class="tl-right"><div class="tl-t">🏘️ 피차이위엔 골목 + 중산로 산책</div><div class="tl-d">유향궈 만두(이연복 쉐프 방문!) + 탕후루 간식. 중산로 역사 거리 산책</div><span class="chip ch-b">🚕 호텔→중산로 15~25위안</span></div></div>
+    <div class="tl-row"><div class="tl-left"><div class="tl-dot" style="background:var(--green);box-shadow:0 0 0 2px var(--green)"></div><div class="tl-line"></div><div class="tl-time">11:15</div></div><div class="tl-right"><div class="tl-t">⛪ 성당 인증샷 → 🎨 C3 문창시창 쇼핑</div><div class="tl-d">성당 정면 맞은편 → C3 (중산로 67-1호). 로컬 아티스트 소품 쇼핑!</div><span class="chip ch-g">🚶 성당→C3 길 건너 1분</span></div></div>
+    <div class="tl-row"><div class="tl-left"><div class="tl-dot" style="background:var(--gold);box-shadow:0 0 0 2px var(--gold)"></div><div class="tl-line"></div><div class="tl-time">12:30</div></div><div class="tl-right"><div class="tl-t">점심 — 춘화루 (1891년 130년 노포)</div><div class="tl-d">꿔바로우+새우찐만두. 중산로 146호. 3인 150~200위안</div></div></div>
+    <div class="tl-row"><div class="tl-left"><div class="tl-dot" style="background:var(--coral);box-shadow:0 0 0 2px var(--coral)"></div><div class="tl-line"></div><div class="tl-time">14:00</div></div><div class="tl-right"><div class="tl-t">🏡 팔대관 풍경구 — 만국 건축 산책</div><div class="tl-d">공주루(花石楼)·덴마크 별장. 스냅 성지! 치파오 대여샵도 여기!</div><span class="chip ch-b">🚕 중산로→팔대관 10~15위안</span></div></div>
+    <div class="tl-row"><div class="tl-left"><div class="tl-dot" style="background:var(--ocean);box-shadow:0 0 0 2px var(--ocean)"></div><div class="tl-line"></div><div class="tl-time">16:00</div></div><div class="tl-right"><div class="tl-t">🍺 칭다오 맥주박물관</div><div class="tl-d">원장맥주 시음+120년 역사. 60위안/인. 트립닷컴 사전예약 필수!</div><span class="chip ch-b">🚕 팔대관→박물관 10~15위안</span></div></div>
+    <div class="tl-row"><div class="tl-left"><div class="tl-dot" style="background:var(--gold);box-shadow:0 0 0 2px var(--gold)"></div><div class="tl-line"></div><div class="tl-time">19:30</div></div><div class="tl-right"><div class="tl-t">저녁 — 와이포지아 완샹청점</div><div class="tl-d">흑초탕수육+동파육. 3인 150~200위안. 번호표 뽑고 마트 쇼핑 후 오기!</div><span class="chip ch-b">🚕 박물관→완샹청 15~20위안</span></div></div>
+  </div>
+</div>
+
+<!-- Day 3 -->
+<div class="tl-card">
+  <div class="tl-head" style="background:linear-gradient(135deg,#2a5a8a,var(--ocean-mid))"><div class="tl-hday">5/7 (목) · Day 3</div><div class="tl-htitle">라오산 케이블카 + 유람선 + 발마사지</div><div class="tl-hsub">출장 메이크업 · 골든아워 스냅 · 라오산 · 바다 유람선</div></div>
+  <div class="tl-body">
+    <div class="tl-row"><div class="tl-left"><div class="tl-dot" style="background:var(--coral);box-shadow:0 0 0 2px var(--coral)"></div><div class="tl-line"></div><div class="tl-time">06:00</div></div><div class="tl-right"><div class="tl-t">💄 출장 메이크업 — 호텔 방 방문</div><div class="tl-d">사전예약 아티스트가 방으로 옴. 헤어+메이크업 약 2시간. 150~300위안/인</div></div></div>
+    <div class="tl-row"><div class="tl-left"><div class="tl-dot" style="background:var(--gold);box-shadow:0 0 0 2px var(--gold)"></div><div class="tl-line"></div><div class="tl-time">07:00</div></div><div class="tl-right"><div class="tl-t">📸 골든아워 스냅 — 잔교 or 팔대관</div><div class="tl-d">06:30~08:00이 빛이 가장 예쁜 골든아워. 가족 인생사진!</div><span class="chip ch-b">🚕 호텔→잔교 15~25위안</span></div></div>
+    <div class="tl-row"><div class="tl-left"><div class="tl-dot" style="background:var(--green);box-shadow:0 0 0 2px var(--green)"></div><div class="tl-line"></div><div class="tl-time">09:00</div></div><div class="tl-right"><div class="tl-t">⛰️ 라오산(崂山) 출발</div><div class="tl-d">디디택시로 라오산 매표소 약 1시간. <b class="em">여권 필수 지참!</b></div><span class="chip ch-c">⚠️ 여권 필수!</span><span class="chip ch-b">🚕 호텔→라오산 50~80위안</span></div></div>
+    <div class="tl-row"><div class="tl-left"><div class="tl-dot" style="background:var(--ocean);box-shadow:0 0 0 2px var(--ocean)"></div><div class="tl-line"></div><div class="tl-time">10:30</div></div><div class="tl-right"><div class="tl-t">🚡 거봉 케이블카 탑승 → 정상 절경</div><div class="tl-d">셔틀 20분 → 케이블카 20분 → 산+바다 동시에 보이는 절경! 1~2시간 산책</div><span class="chip ch-o">입장 120위안+케이블카 60~70위안/인</span></div></div>
+    <div class="tl-row"><div class="tl-left"><div class="tl-dot" style="background:var(--ocean-lt);box-shadow:0 0 0 2px var(--ocean-lt)"></div><div class="tl-line"></div><div class="tl-time">16:30</div></div><div class="tl-right"><div class="tl-t">⛵ 5.4광장 항구 유람선</div><div class="tl-d">1시간 바다 크루즈. 칭다오 해안선 파노라마. 3인 약 300~450위안</div><span class="chip ch-b">🚕 라오산→5.4광장 50~80위안</span></div></div>
+    <div class="tl-row"><div class="tl-left"><div class="tl-dot" style="background:var(--gold);box-shadow:0 0 0 2px var(--gold)"></div><div class="tl-line"></div><div class="tl-time">19:00</div></div><div class="tl-right"><div class="tl-t">저녁 — 루위(炉鱼) 완샹청점</div><div class="tl-d">철판 생선찜+마라소스. 2026 MZ 핫플. 3인 약 200~280위안</div></div></div>
+    <div class="tl-row"><div class="tl-left"><div class="tl-dot" style="background:var(--green);box-shadow:0 0 0 2px var(--green)"></div><div class="tl-line"></div><div class="tl-time">21:00</div></div><div class="tl-right"><div class="tl-t">💆 3인 발마사지 (90분)</div><div class="tl-d">라오산 등반 피로 회복! 1인 80~100위안. 한국 1인분에 3명 전부!</div></div></div>
+  </div>
+</div>
+
+<!-- Day 4 -->
+<div class="tl-card">
+  <div class="tl-head" style="background:linear-gradient(135deg,var(--coral),#d06050)"><div class="tl-hday">5/8 (금) · Day 4</div><div class="tl-htitle">네일아트 + 마트쇼핑 + 불야성 야경</div><div class="tl-hsub">뷰티 + 쇼핑 + 칭다오 최고 야경</div></div>
+  <div class="tl-body">
+    <div class="tl-row"><div class="tl-left"><div class="tl-dot" style="background:var(--coral);box-shadow:0 0 0 2px var(--coral)"></div><div class="tl-line"></div><div class="tl-time">10:00</div></div><div class="tl-right"><div class="tl-t">💅 네일아트 체험</div><div class="tl-d">따종디엔핑 예약 샵. 젤네일 100~200위안. 약 2시간</div></div></div>
+    <div class="tl-row"><div class="tl-left"><div class="tl-dot" style="background:var(--gold);box-shadow:0 0 0 2px var(--gold)"></div><div class="tl-line"></div><div class="tl-time">13:00</div></div><div class="tl-right"><div class="tl-t">점심 — 메이다얼 (美迖尔)</div><div class="tl-d">가지튀김+오징어구이+마늘가리비. 华阳路36号. 3인 150~250위안</div></div></div>
+    <div class="tl-row"><div class="tl-left"><div class="tl-dot" style="background:var(--ocean);box-shadow:0 0 0 2px var(--ocean)"></div><div class="tl-line"></div><div class="tl-time">14:30</div></div><div class="tl-right"><div class="tl-t">🛒 완샹청 지하마트 + 칭다오 프로젝트 쇼핑</div><div class="tl-d">원장맥주캔·과자·건어물 대량 구매! 칭다오 프로젝트 로컬 굿즈도</div></div></div>
+    <div class="tl-row"><div class="tl-left"><div class="tl-dot" style="background:var(--coral);box-shadow:0 0 0 2px var(--coral)"></div><div class="tl-line"></div><div class="tl-time">18:00</div></div><div class="tl-right"><div class="tl-t">🌃 디디택시로 불야성 출발</div><div class="tl-d">시내→불야성 40~90분. 교통 막히면 더 걸리니 서둘러!</div><span class="chip ch-c">⚠️ VPN OFF</span><span class="chip ch-b">🚕 호텔→불야성 50~100위안</span></div></div>
+    <div class="tl-row"><div class="tl-left"><div class="tl-dot" style="background:var(--gold);box-shadow:0 0 0 2px var(--gold)"></div><div class="tl-line"></div><div class="tl-time">19:30</div></div><div class="tl-right"><div class="tl-t">명월산해간 불야성 입장 (무료!)</div><div class="tl-d">산해경 신화 테마 야경! 인어쇼·공연·조명 포토존·야시장 2~3시간</div></div></div>
+    <div class="tl-row"><div class="tl-left"><div class="tl-dot" style="background:var(--coral);box-shadow:0 0 0 2px var(--coral)"></div><div class="tl-line"></div><div class="tl-time">22:30</div></div><div class="tl-right"><div class="tl-t">🚕 디디 미리 호출 → 호텔 귀환</div><div class="tl-d">10:30에 미리 호출! 늦으면 택시 잡기 어려움. 내일 귀국 짐 정리.</div><span class="chip ch-c">⚠️ 10:30에 미리 호출!</span></div></div>
+  </div>
+</div>
+
+<!-- Day 5 -->
+<div class="tl-card">
+  <div class="tl-head" style="background:linear-gradient(135deg,#3a4a5a,#5a6a7a)"><div class="tl-hday">5/9 (토) · Day 5</div><div class="tl-htitle">귀국일 — 마지막 산책 후 인천 귀환</div><div class="tl-hsub">KE844 14:55 출발 · 17:40 인천 도착</div></div>
+  <div class="tl-body">
+    <div class="tl-row"><div class="tl-left"><div class="tl-dot" style="background:var(--ocean-lt);box-shadow:0 0 0 2px var(--ocean-lt)"></div><div class="tl-line"></div><div class="tl-time">09:00</div></div><div class="tl-right"><div class="tl-t">체크아웃 + 마지막 오션뷰 산책</div><div class="tl-d">짐 로비 맡기고 호텔 주변 바다 산책 + 기념사진. 마지막 칭다오 맥주!</div></div></div>
+    <div class="tl-row"><div class="tl-left"><div class="tl-dot" style="background:var(--gold);box-shadow:0 0 0 2px var(--gold)"></div><div class="tl-line"></div><div class="tl-time">11:30</div></div><div class="tl-right"><div class="tl-t">디디택시로 공항 출발</div><div class="tl-d">약 40~60분. 여유있게!</div><span class="chip ch-b">🚕 호텔→공항 40~60위안</span></div></div>
+    <div class="tl-row"><div class="tl-left"><div class="tl-dot" style="background:var(--ocean);box-shadow:0 0 0 2px var(--ocean)"></div><div class="tl-line"></div><div class="tl-time">13:00</div></div><div class="tl-right"><div class="tl-t">공항 도착 → KE844 체크인</div><div class="tl-d">수하물 위탁 → 보안검색 → 출국심사</div></div></div>
+    <div class="tl-row"><div class="tl-left"><div class="tl-dot" style="background:var(--coral);box-shadow:0 0 0 2px var(--coral)"></div><div class="tl-line"></div><div class="tl-time">14:55</div></div><div class="tl-right"><div class="tl-t">KE844 탑승! 인천으로 🎉</div><div class="tl-d">A330-300 · 1시간 45분 · 17:40 인천 T2 도착!</div></div></div>
+  </div>
+</div>
+</div>
+</section>
+
+<!-- ══════════════════════ SPOTS ══════════════════════ -->
+<section id="spots" class="sec">
+<div class="wrap">
+<div class="sh"><div class="sh-eye">관광지 완전 가이드</div><div class="sh-title">사진 + 링크 + 디디 요금<br>관광지 완전 정복</div></div>
+
+<!-- 잔교 -->
+<div class="photo-card">
+  <a href="https://maps.google.com/?q=Zhanqiao+Pier+Qingdao" target="_blank">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/07/Zhanqiao_bridge_from_shore_side.jpg/1280px-Zhanqiao_bridge_from_shore_side.jpg" class="place-img" alt="잔교" onerror="this.src='https://images.unsplash.com/photo-1504214208698-ea1916a2195a?w=900&q=80'">
+  </a>
+  <div class="place-body">
+    <div class="place-num" style="background:var(--ocean)">①</div>
+    <div class="place-name">잔교 (栈桥)</div>
+    <div class="place-name-sub">칭다오 역사의 시작점 · 440m 바다 부두 · 홍각정</div>
+    <div class="tags"><span class="tag t-green">무료 입장</span><span class="tag t-gold">필수 방문</span><span class="tag t-ocean">가족 사진 명소</span></div>
+    <div class="irows" style="padding:0">
+      <div class="ir"><span class="ir-ic">📍</span><span class="ir-k">주소</span><span class="ir-v">태평로 12호 (太平路12号)</span></div>
+      <div class="ir"><span class="ir-ic">🚕</span><span class="ir-k">디디</span><span class="ir-v">호텔→잔교 약 10~15분 · <b class="em">15~25위안</b></span></div>
+      <div class="ir"><span class="ir-ic">⏰</span><span class="ir-k">추천 시간</span><span class="ir-v"><b>06:30~08:00</b> 골든아워 (갈매기 떼 + 아름다운 빛)</span></div>
+    </div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:10px">
+      <a href="https://maps.google.com/?q=Zhanqiao+Pier+Qingdao" target="_blank" class="link-btn">📍 구글 지도</a>
+      <a href="https://kr.trip.com/travel-guide/attraction/qingdao/zhanqiao-bridge-10536918/" target="_blank" class="link-btn link-btn-gold">트립닷컴 상세 정보</a>
+    </div>
+  </div>
+</div>
+
+<!-- 5.4광장 -->
+<div class="photo-card">
+  <a href="https://maps.google.com/?q=May+Fourth+Square+Qingdao" target="_blank">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/15/May_4th_Memorial.JPG/1280px-May_4th_Memorial.JPG" class="place-img" alt="5.4광장" onerror="this.src='https://images.unsplash.com/photo-1570197788417-0e82375c9371?w=900&q=80'">
+  </a>
+  <div class="place-body">
+    <div class="place-num" style="background:var(--coral)">②</div>
+    <div class="place-name">5·4광장 (五四广场)</div>
+    <div class="place-name-sub">5·4운동 기념 · "5월의 바람" 30m 조형물 · 야경 필수</div>
+    <div class="tags"><span class="tag t-green">무료</span><span class="tag t-coral">야경 명소</span><span class="tag t-gold">역사 의미</span></div>
+    <div class="irows" style="padding:0">
+      <div class="ir"><span class="ir-ic">🚕</span><span class="ir-k">디디</span><span class="ir-v">호텔 근처 (도보 or 디디 5분) · <b class="em">5~15위안</b></span></div>
+      <div class="ir"><span class="ir-ic">🌃</span><span class="ir-k">야경</span><span class="ir-v"><b>19:30 이후</b> 조명 점등 — 낮과 완전 다른 분위기!</span></div>
+    </div>
+    <a href="https://maps.google.com/?q=May+Fourth+Square+Qingdao" target="_blank" class="link-btn">📍 구글 지도</a>
+  </div>
+</div>
+
+<!-- 팔대관 -->
+<div class="photo-card">
+  <a href="https://maps.google.com/?q=Badaguan+Scenic+Area+Qingdao" target="_blank">
+    <img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1b/d3/00/80/caption.jpg?w=1200&h=-1&s=1" class="place-img" alt="팔대관" onerror="this.src='https://images.unsplash.com/photo-1517861006786-7f7c20cd5a8d?w=900&q=80'">
+  </a>
+  <div class="place-body">
+    <div class="place-num" style="background:var(--green)">③</div>
+    <div class="place-name">팔대관 풍경구 (八大关)</div>
+    <div class="place-name-sub">만국 건축 박람회 · 20개국 별장 집합지 · 스냅 성지</div>
+    <div class="tags"><span class="tag t-green">무료</span><span class="tag t-coral">스냅 성지</span><span class="tag t-gold">치파오 대여</span></div>
+    <div class="irows" style="padding:0">
+      <div class="ir"><span class="ir-ic">🚕</span><span class="ir-k">디디</span><span class="ir-v">호텔→팔대관 약 10~15분 · <b class="em">10~20위안</b></span></div>
+      <div class="ir"><span class="ir-ic">⏰</span><span class="ir-k">추천 시간</span><span class="ir-v"><b>오전 10~12시</b> 빛 좋고 사람 적음</span></div>
+    </div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:10px">
+      <a href="https://maps.google.com/?q=Badaguan+Scenic+Area+Qingdao" target="_blank" class="link-btn">📍 구글 지도</a>
+      <a href="https://kr.trip.com/travel-guide/attraction/qingdao/eight-passes-scenic-spot-73609/" target="_blank" class="link-btn link-btn-gold">트립닷컴 상세 정보</a>
+    </div>
+  </div>
+</div>
+
+<!-- 성 미카엘 성당 -->
+<div class="photo-card">
+  <a href="https://maps.google.com/?q=Saint+Michael+Cathedral+Qingdao" target="_blank">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/StMichaelCathedral.jpg/800px-StMichaelCathedral.jpg" class="place-img" alt="성 미카엘 성당" onerror="this.src='https://images.unsplash.com/photo-1548013146-72479768bada?w=900&q=80'">
+  </a>
+  <div class="place-body">
+    <div class="place-num" style="background:var(--coral)">④</div>
+    <div class="place-name">성 미카엘 성당 (天主教堂)</div>
+    <div class="place-name-sub">1934년 독일 고딕 쌍탑 · C3 바로 맞은편 · 야간 조명쇼</div>
+    <div class="tags"><span class="tag t-green">무료</span><span class="tag t-coral">C3 맞은편</span><span class="tag t-gold">야간 조명쇼</span></div>
+    <div class="irows" style="padding:0">
+      <div class="ir"><span class="ir-ic">📍</span><span class="ir-k">주소</span><span class="ir-v">저장로 15호 (浙江路15号) · C3 文創西廠 바로 맞은편!</span></div>
+      <div class="ir"><span class="ir-ic">🚕</span><span class="ir-k">디디</span><span class="ir-v">호텔→성당 약 12분 · <b class="em">15~20위안</b></span></div>
+    </div>
+    <a href="https://maps.google.com/?q=Saint+Michael+Cathedral+Qingdao" target="_blank" class="link-btn">📍 구글 지도</a>
+  </div>
+</div>
+
+<!-- 맥주박물관 -->
+<div class="photo-card">
+  <a href="https://kr.trip.com/travel-guide/attraction/qingdao/qingdao-beer-museum-10537028/" target="_blank">
+    <img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/29/8f/40/2b/caption.jpg?w=1200&h=-1&s=1" class="place-img" alt="칭다오 맥주박물관" onerror="this.src='https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=900&q=80'">
+  </a>
+  <div class="place-body">
+    <div class="place-num" style="background:var(--gold)">⑤</div>
+    <div class="place-name">칭다오 맥주박물관 (青岛啤酒博物馆)</div>
+    <div class="place-name-sub">1903년 독일이 세운 양조장 · 120년 역사 · 원장맥주 시음</div>
+    <div class="tags"><span class="tag t-gold">사전예약 필수!</span><span class="tag t-ocean">원장맥주</span><span class="tag t-green">60위안/인</span></div>
+    <div class="irows" style="padding:0">
+      <div class="ir"><span class="ir-ic">📍</span><span class="ir-k">주소</span><span class="ir-v">덩저우로 56호 (登州路56号) · 시베이구</span></div>
+      <div class="ir"><span class="ir-ic">🚕</span><span class="ir-k">디디</span><span class="ir-v">호텔→박물관 약 15~20분 · <b class="em">20~30위안</b></span></div>
+      <div class="ir"><span class="ir-ic">💰</span><span class="ir-k">입장료</span><span class="ir-v"><b>60위안/인</b> (A+B관 세트, 시음 2잔 포함)</span></div>
+      <div class="ir"><span class="ir-ic">⏰</span><span class="ir-k">운영</span><span class="ir-v">08:30~18:30</span></div>
+    </div>
+    <div class="alert a-r" style="margin:10px 0 0"><b>🔑 트립닷컴 사전예약 필수!</b> 현장은 줄이 엄청 길어요!</div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:10px">
+      <a href="https://kr.trip.com/travel-guide/attraction/qingdao/qingdao-beer-museum-10537028/" target="_blank" class="link-btn">🍺 트립닷컴 예약</a>
+      <a href="https://maps.google.com/?q=Qingdao+Beer+Museum" target="_blank" class="link-btn link-btn-gold">📍 구글 지도</a>
+    </div>
+  </div>
+</div>
+
+<!-- 소어산 -->
+<div class="photo-card">
+  <a href="https://maps.google.com/?q=Xiaoyushan+Park+Qingdao" target="_blank">
+    <img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/07/8f/7e/b4/little-fish-hill-park.jpg?w=1200&h=-1&s=1" class="place-img" alt="소어산 전망대" onerror="this.src='https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=900&q=80'">
+  </a>
+  <div class="place-body">
+    <div class="place-num" style="background:var(--ocean-mid)">⑥</div>
+    <div class="place-name">소어산 전망대 (小鱼山公园)</div>
+    <div class="place-name-sub">칭다오 검색하면 나오는 그 사진의 배경 · 무료 · 도보 5분</div>
+    <div class="tags"><span class="tag t-green">무료</span><span class="tag t-gold">파노라마 뷰</span><span class="tag t-ocean">사진 성지</span></div>
+    <div class="irows" style="padding:0">
+      <div class="ir"><span class="ir-ic">🚕</span><span class="ir-k">디디</span><span class="ir-v">호텔→소어산 약 15~20분 · <b class="em">15~25위안</b></span></div>
+      <div class="ir"><span class="ir-ic">⏰</span><span class="ir-k">추천 시간</span><span class="ir-v"><b>오후 4~5시</b> 황금빛 햇살+붉은 기와 최고!</span></div>
+    </div>
+    <a href="https://maps.google.com/?q=Xiaoyushan+Park+Qingdao" target="_blank" class="link-btn">📍 구글 지도</a>
+  </div>
+</div>
+
+<!-- 라오산 -->
+<div class="photo-card">
+  <a href="https://kr.trip.com/travel-guide/attraction/qingdao/laoshan-mountain-scenic-area-73610/" target="_blank">
+    <img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0e/38/08/f0/photo2jpg.jpg?w=1200&h=-1&s=1" class="place-img" alt="라오산 케이블카" onerror="this.src='https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=900&q=80'">
+  </a>
+  <div class="place-body">
+    <div class="place-num" style="background:var(--green)">⑦</div>
+    <div class="place-name">라오산 (崂山) 거봉 케이블카</div>
+    <div class="place-name-sub">중국 해안 최고봉 1,132m · 케이블카 · 도교 성지</div>
+    <div class="tags"><span class="tag t-green">케이블카 탑승</span><span class="tag t-coral">여권 필수!</span><span class="tag t-gold">5A 국립공원</span></div>
+    <div class="irows" style="padding:0">
+      <div class="ir"><span class="ir-ic">🚕</span><span class="ir-k">디디</span><span class="ir-v">호텔→라오산 약 50~70분 · <b class="em">50~80위안</b></span></div>
+      <div class="ir"><span class="ir-ic">⚠️</span><span class="ir-k">필수 지참</span><span class="ir-v"><b class="em">여권!</b> 외국인은 여권 없으면 입장 절대 불가!</span></div>
+      <div class="ir"><span class="ir-ic">💰</span><span class="ir-k">요금</span><span class="ir-v">입장+셔틀 <b>약 120위안</b> + 케이블카 60~70위안/인 별도</span></div>
+    </div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:10px">
+      <a href="https://kr.trip.com/travel-guide/attraction/qingdao/laoshan-mountain-scenic-area-73610/" target="_blank" class="link-btn">⛰️ 트립닷컴 상세 정보</a>
+      <a href="https://maps.google.com/?q=Laoshan+Mountain+Qingdao" target="_blank" class="link-btn link-btn-gold">📍 구글 지도</a>
+    </div>
+  </div>
+</div>
+
+<!-- 불야성 -->
+<div class="photo-card">
+  <a href="https://kr.trip.com/travel-guide/attraction/qingdao/qingdao-allday-city-140206489/" target="_blank">
+    <img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2c/30/1b/47/caption.jpg?w=1200&h=-1&s=1" class="place-img-tall" alt="불야성" onerror="this.src='https://images.unsplash.com/photo-1519501025264-65ba15a82390?w=900&q=80'">
+  </a>
+  <div class="place-body">
+    <div class="place-num" style="background:var(--coral)">⑧</div>
+    <div class="place-name">명월산해간 불야성</div>
+    <div class="place-name-sub">중국 신화 산해경 테마 야경 · 입장 무료 · 인어쇼·공연 풍성</div>
+    <div class="tags"><span class="tag t-green">입장 무료!</span><span class="tag t-coral">야경 필수</span><span class="tag t-gold">인어쇼·공연</span><span class="tag t-ocean">노천 맥주바</span></div>
+    <div class="irows" style="padding:0">
+      <div class="ir"><span class="ir-ic">📍</span><span class="ir-k">주소</span><span class="ir-v">칭다오시 청양구 명월산로 66호 (城阳区明月山路66号)</span></div>
+      <div class="ir"><span class="ir-ic">🚕</span><span class="ir-k">디디</span><span class="ir-v">호텔→불야성 약 40~90분 · <b class="em">50~100위안</b> · <b class="em">18:00 출발 권장!</b></span></div>
+      <div class="ir"><span class="ir-ic">⏰</span><span class="ir-k">운영</span><span class="ir-v">14:00~23:00 · 저녁 <b>19:30 이후</b> 방문이 최고!</span></div>
+      <div class="ir"><span class="ir-ic">⚠️</span><span class="ir-k">귀환 주의</span><span class="ir-v"><b class="em">10:30에 미리 디디 호출!</b> 늦은 밤엔 택시 잡기 매우 어려움</span></div>
+    </div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:10px">
+      <a href="https://kr.trip.com/travel-guide/attraction/qingdao/qingdao-allday-city-140206489/" target="_blank" class="link-btn">🌃 트립닷컴 상세 정보</a>
+      <a href="https://maps.google.com/?q=Mingyue+Shanhaijian+Qingdao" target="_blank" class="link-btn link-btn-gold">📍 구글 지도</a>
+    </div>
+  </div>
+</div>
+
+<!-- 유람선 -->
+<div class="photo-card">
+  <a href="https://kr.trip.com/things-to-do/tours/qingdao/" target="_blank">
+    <img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2a/b5/70/da/caption.jpg?w=1200&h=-1&s=1" class="place-img" alt="칭다오 유람선" onerror="this.src='https://images.unsplash.com/photo-1559128010-7c1ad6e1b6a5?w=900&q=80'">
+  </a>
+  <div class="place-body">
+    <div class="place-num" style="background:var(--ocean-lt)">⑨</div>
+    <div class="place-name">5.4광장 항구 유람선 (游船)</div>
+    <div class="place-name-sub">바다 위에서 칭다오 해안선 파노라마 · 1시간 크루즈</div>
+    <div class="tags"><span class="tag t-ocean">바다 크루즈</span><span class="tag t-gold">100~150위안/인</span><span class="tag t-green">골든아워 추천</span></div>
+    <div class="irows" style="padding:0">
+      <div class="ir"><span class="ir-ic">📍</span><span class="ir-k">출발지</span><span class="ir-v">5.4광장 올림픽 요트항 선착장</span></div>
+      <div class="ir"><span class="ir-ic">⏰</span><span class="ir-k">추천 시간</span><span class="ir-v">오후 <b>16:30~18:00</b> 골든아워 → 석양과 야경 모두 감상!</span></div>
+    </div>
+    <a href="https://kr.trip.com/things-to-do/tours/qingdao/" target="_blank" class="link-btn">⛵ 트립닷컴에서 예약</a>
+  </div>
+</div>
+</div>
+</section>
+
+<!-- ══════════════════════ LOCAL SHOPS ══════════════════════ -->
+<section id="local" class="sec">
+<div class="wrap">
+<div class="sh"><div class="sh-eye">로컬 편집숍 · 중산로</div><div class="sh-title">C3 문창시창 · 칭다오 프로젝트<br>중산로 완전 가이드</div></div>
+
+<div class="alert a-g"><div><b>✅ C3 위치 지도 확인 완료!</b> 중산로 67-1호 · 성 미카엘 성당 정면 맞은편 · 지하철 1호선 중산로역 D출구 도보 520m</div></div>
+
+<!-- 중산로 -->
+<div class="photo-card">
+  <a href="https://maps.google.com/?q=Zhongshan+Road+Qingdao" target="_blank">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/Zhongshan_Road_Qingdao_HKDC.jpg/1280px-Zhongshan_Road_Qingdao_HKDC.jpg" class="place-img" alt="중산로" onerror="this.src='https://images.unsplash.com/photo-1555201241-1e616fc8f8e5?w=900&q=80'">
+  </a>
+  <div class="place-body">
+    <div class="place-num" style="background:var(--gold)">中</div>
+    <div class="place-name">중산로 (中山路)</div>
+    <div class="place-name-sub">100년 역사 칭다오 메인 스트리트 · 성당 · C3 · 피차이위엔 · 맛집 모두 여기!</div>
+    <div class="tags"><span class="tag t-gold">100년 역사</span><span class="tag t-coral">길거리 먹거리</span><span class="tag t-ocean">야경 명소</span><span class="tag t-green">도보 산책</span></div>
+    <div class="irows" style="padding:0">
+      <div class="ir"><span class="ir-ic">🚕</span><span class="ir-k">디디</span><span class="ir-v">호텔→중산로 약 12~18분 · <b class="em">15~25위안</b></span></div>
+      <div class="ir"><span class="ir-ic">⏰</span><span class="ir-k">추천 시간</span><span class="ir-v">오후 14~17시 산책 · <b>19:30 이후</b> 야경+성당 조명쇼</span></div>
+    </div>
+    <a href="https://maps.google.com/?q=Zhongshan+Road+Qingdao" target="_blank" class="link-btn">📍 구글 지도</a>
+  </div>
+</div>
+
+<!-- C3 -->
+<div class="photo-card">
+  <a href="https://maps.google.com/?q=C3+Qingdao+Zhongshan+Road+67-1" target="_blank">
+    <img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/19/17/a3/cd/photo0jpg.jpg?w=1200&h=-1&s=1" class="place-img" alt="C3 문창시창" onerror="this.src='https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=900&q=80'">
+  </a>
+  <div class="place-body">
+    <div class="place-num" style="background:var(--coral)">C³</div>
+    <div class="place-name">C3 文創西廠 (문창시창)</div>
+    <div class="place-name-sub">중산로 67-1호 · 성 미카엘 성당 정면 맞은편 · 로컬 아티스트 소품</div>
+    <div class="tags"><span class="tag t-coral">로컬 아티스트</span><span class="tag t-gold">기념품</span><span class="tag t-green">성당 맞은편</span></div>
+    <div class="map-box" style="margin:12px 0">
+      <div class="mb-place">📍 C3 文創西廠</div>
+      <div class="mb-addr">中山路街道 中山路67-1号（天主教堂正对面）</div>
+      <div class="mb-sub">성 미카엘 성당 정면 맞은편 · 지하철 1호선 중산로역 D출구 520m</div>
+    </div>
+    <div class="irows" style="padding:0">
+      <div class="ir"><span class="ir-ic">🚕</span><span class="ir-k">디디</span><span class="ir-v">호텔→C3 약 12~18분 · <b class="em">15~25위안</b></span></div>
+      <div class="ir"><span class="ir-ic">⏰</span><span class="ir-k">운영</span><span class="ir-v">약 10:00~20:00 (현지 확인 권장)</span></div>
+    </div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:10px">
+      <a href="https://maps.google.com/?q=C3+Qingdao+Zhongshan+Road+67" target="_blank" class="link-btn">📍 구글 지도</a>
+    </div>
+  </div>
+</div>
+
+<!-- 피차이위엔 -->
+<div class="photo-card">
+  <a href="https://maps.google.com/?q=Pichaiyuan+Qingdao+food+alley" target="_blank">
+    <img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0e/25/59/3e/pichai-yuan-pichai-courtyard.jpg?w=1200&h=-1&s=1" class="place-img" alt="피차이위엔 골목" onerror="this.src='https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=900&q=80'">
+  </a>
+  <div class="place-body">
+    <div class="place-num" style="background:var(--ocean-mid)">🏮</div>
+    <div class="place-name">피차이위엔 (劈柴院) 먹자골목</div>
+    <div class="place-name-sub">이연복 쉐프 방문 · 중산로역 D출구 320m · 전통 먹자골목</div>
+    <div class="tags"><span class="tag t-coral">이연복 쉐프</span><span class="tag t-gold">길거리 먹거리</span><span class="tag t-green">중산로 인접</span></div>
+    <div class="irows" style="padding:0">
+      <div class="ir"><span class="ir-ic">📍</span><span class="ir-k">주소</span><span class="ir-v">북경로 16호 (中山路站D出口 320m)</span></div>
+      <div class="ir"><span class="ir-ic">🚕</span><span class="ir-k">디디</span><span class="ir-v">중산로역 도착 후 도보 5분 · C3와 같은 동선</span></div>
+    </div>
+    <a href="https://maps.google.com/?q=Pichaiyuan+Qingdao" target="_blank" class="link-btn">📍 구글 지도</a>
+  </div>
+</div>
+</div>
+</section>
+
+<!-- ══════════════════════ FOOD ══════════════════════ -->
+<section id="food" class="sec">
+<div class="wrap">
+<div class="sh"><div class="sh-eye">맛집 완전 정복</div><div class="sh-title">사진 + 링크 + 추천 메뉴<br>칭다오 맛집 완전 가이드</div></div>
+
+<!-- 춘화루 -->
+<div class="photo-card">
+  <a href="https://maps.google.com/?q=Chunhelou+Restaurant+Qingdao+Zhongshan+Road" target="_blank">
+    <img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0f/e4/61/42/photo0jpg.jpg?w=1200&h=-1&s=1" class="place-img" alt="춘화루" onerror="this.src='https://images.unsplash.com/photo-1563245372-f21724e3856d?w=900&q=80'">
+  </a>
+  <div class="place-body">
+    <div class="place-num" style="background:var(--ocean)">01</div>
+    <div class="place-name">춘화루 (春和楼)</div>
+    <div class="place-name-sub">春和楼饭店 · 1891년 창업 · 133년 역사 노포 · 중산로 146호</div>
+    <div class="tags"><span class="tag t-ocean">130년 노포</span><span class="tag t-gold">3인 150~250위안</span><span class="tag t-green">중산로 C3 도보 5분</span></div>
+    <div class="irows" style="padding:0">
+      <div class="ir"><span class="ir-ic">📍</span><span class="ir-k">주소</span><span class="ir-v">市南区中山路146号 (중산로역 D출구 450m)</span></div>
+      <div class="ir"><span class="ir-ic">🚕</span><span class="ir-k">디디</span><span class="ir-v">호텔→춘화루 약 12~18분 · <b class="em">15~25위안</b></span></div>
+      <div class="ir"><span class="ir-ic">⏰</span><span class="ir-k">운영</span><span class="ir-v">10:00~21:00</span></div>
+    </div>
+    <div class="menu-lbl">🍽️ 추천 메뉴</div>
+    <table class="menu-table">
+      <thead><tr><th>메뉴명</th><th>중국어</th><th>설명</th><th>가격</th></tr></thead>
+      <tbody>
+        <tr><td><div class="mn">꿔바로우<span class="must">MUST</span></div></td><td><div class="mcn">锅包肉</div></td><td><div class="md">겉은 바삭 속은 촉촉. 전통 식초 소스. 시그니처!</div></td><td><div class="mp">50~60위안</div></td></tr>
+        <tr><td><div class="mn">새우찐만두<span class="must">MUST</span></div></td><td><div class="mcn">鲜虾蒸饺</div></td><td><div class="md">육즙 팡팡! 탱글한 새우살 가득.</div></td><td><div class="mp">40~55위안</div></td></tr>
+        <tr><td><div class="mn">마늘가리비당면</div></td><td><div class="mcn">蒜蓉粉丝扇贝</div></td><td><div class="md">마늘+가리비+당면 황금 조합.</div></td><td><div class="mp">25~35위안/개</div></td></tr>
+        <tr><td><div class="mn">새우볶음밥</div></td><td><div class="mcn">海鲜炒饭</div></td><td><div class="md">가성비 좋고 아이도 좋아함.</div></td><td><div class="mp">35~45위안</div></td></tr>
+      </tbody>
+    </table>
+    <a href="https://maps.google.com/?q=Chunhelou+Restaurant+Qingdao" target="_blank" class="link-btn">📍 구글 지도</a>
+  </div>
+</div>
+
+<!-- 메이다얼 -->
+<div class="photo-card">
+  <a href="https://maps.google.com/?q=Meidaer+Restaurant+Qingdao+Huayang+Road" target="_blank">
+    <img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2a/44/c1/74/caption.jpg?w=1200&h=-1&s=1" class="place-img" alt="메이다얼" onerror="this.src='https://images.unsplash.com/photo-1569718212165-3a8278d5f624?w=900&q=80'">
+  </a>
+  <div class="place-body">
+    <div class="place-num" style="background:var(--coral)">02</div>
+    <div class="place-name">메이다얼 (美迖尔)</div>
+    <div class="place-name-sub">美迖尔 · 화양로 36호 · 한국인 95% 방문 · 웨이팅 있음</div>
+    <div class="tags"><span class="tag t-coral">한국인 극찬</span><span class="tag t-gold">3인 150~250위안</span><span class="tag t-green">가지튀김 MUST</span></div>
+    <div class="irows" style="padding:0">
+      <div class="ir"><span class="ir-ic">📍</span><span class="ir-k">주소</span><span class="ir-v">华阳路36号 (华阳路店)</span></div>
+      <div class="ir"><span class="ir-ic">🚕</span><span class="ir-k">디디</span><span class="ir-v">호텔→메이다얼 약 10~15분 · <b class="em">15~25위안</b></span></div>
+    </div>
+    <div class="menu-lbl">🍽️ 추천 메뉴</div>
+    <table class="menu-table">
+      <thead><tr><th>메뉴명</th><th>중국어</th><th>설명</th><th>가격</th></tr></thead>
+      <tbody>
+        <tr><td><div class="mn">가지튀김<span class="must">MUST</span></div></td><td><div class="mcn">炸茄子</div></td><td><div class="md">"맛 종류 두 개 다 시켰다"는 극찬! 절대 빼면 안 됨.</div></td><td><div class="mp">25~35위안</div></td></tr>
+        <tr><td><div class="mn">오징어구이<span class="must">MUST</span></div></td><td><div class="mcn">烤鱿鱼</div></td><td><div class="md">매콤 양념+입에서 녹는 오징어. 맥주와 환상!!</div></td><td><div class="mp">45~65위안</div></td></tr>
+        <tr><td><div class="mn">마늘가리비당면<span class="must">MUST</span></div></td><td><div class="mcn">蒜蓉粉丝扇贝</div></td><td><div class="md">칭다오 조개+마늘+당면 = 무조건 성공!</div></td><td><div class="mp">25~35위안/개</div></td></tr>
+        <tr><td><div class="mn">화이트 칭다오</div></td><td><div class="mcn">白啤酒</div></td><td><div class="md">한국에서 못 사는 밀맥주. 꼭 마셔보기!</div></td><td><div class="mp">20~30위안</div></td></tr>
+      </tbody>
+    </table>
+    <a href="https://maps.google.com/?q=Meidaer+Restaurant+Huayang+Road+Qingdao" target="_blank" class="link-btn">📍 구글 지도</a>
+  </div>
+</div>
+
+<!-- 와이포지아 -->
+<div class="photo-card">
+  <a href="https://maps.google.com/?q=Waipojia+Restaurant+Wanxiang+City+Qingdao" target="_blank">
+    <img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/28/2a/e1/7e/caption.jpg?w=1200&h=-1&s=1" class="place-img" alt="와이포지아" onerror="this.src='https://images.unsplash.com/photo-1559410545-0bdcd187e0a6?w=900&q=80'">
+  </a>
+  <div class="place-body">
+    <div class="place-num" style="background:var(--green)">03</div>
+    <div class="place-name">와이포지아 (外婆家)</div>
+    <div class="place-name-sub">外婆家 · 완샹청 5층 · 항저우식 가정요리 · 합리적 가격</div>
+    <div class="tags"><span class="tag t-green">완샹청 5층</span><span class="tag t-gold">3인 150~200위안</span><span class="tag t-ocean">흑초탕수육</span></div>
+    <div class="irows" style="padding:0">
+      <div class="ir"><span class="ir-ic">📍</span><span class="ir-k">위치</span><span class="ir-v">완샹청(华润万象城) 5층 · 호텔 도보 10분 or 디디 5분</span></div>
+    </div>
+    <div class="menu-lbl">🍽️ 추천 메뉴</div>
+    <table class="menu-table">
+      <thead><tr><th>메뉴명</th><th>중국어</th><th>설명</th><th>가격</th></tr></thead>
+      <tbody>
+        <tr><td><div class="mn">흑초탕수육<span class="must">MUST</span></div></td><td><div class="mcn">陈醋排骨</div></td><td><div class="md">새콤달콤 흑식초 소스. 한번 먹으면 잊지 못함!</div></td><td><div class="mp">48~58위안</div></td></tr>
+        <tr><td><div class="mn">동파육<span class="must">MUST</span></div></td><td><div class="mcn">东坡肉</div></td><td><div class="md">입에서 살살 녹는 돼지고기. 부모님 최애!</div></td><td><div class="mp">58~68위안</div></td></tr>
+        <tr><td><div class="mn">새우당면요리</div></td><td><div class="mcn">鲜虾粉丝</div></td><td><div class="md">탱글한 새우+쫄깃한 당면. 맥주 안주 완벽.</div></td><td><div class="mp">45~55위안</div></td></tr>
+      </tbody>
+    </table>
+    <a href="https://maps.google.com/?q=Waipojia+Wanxiang+City+Qingdao" target="_blank" class="link-btn">📍 구글 지도</a>
+  </div>
+</div>
+
+<!-- 옌다오루 해산물거리 -->
+<div class="photo-card">
+  <a href="https://maps.google.com/?q=Yantai+Road+Seafood+Street+Qingdao" target="_blank">
+    <img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/17/f0/e0/8e/seafood.jpg?w=1200&h=-1&s=1" class="place-img" alt="해산물거리" onerror="this.src='https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=900&q=80'">
+  </a>
+  <div class="place-body">
+    <div class="place-num" style="background:var(--ocean-lt)">04</div>
+    <div class="place-name">옌다오루 해산물거리</div>
+    <div class="place-name-sub">烟台路海鲜街 · 직접 선택+즉석 조리 · 칭다오 맥주+해산물 조합</div>
+    <div class="tags"><span class="tag t-ocean">신선 해산물</span><span class="tag t-gold">3인 150~300위안</span><span class="tag t-coral">라오차오갈라</span></div>
+    <div class="irows" style="padding:0">
+      <div class="ir"><span class="ir-ic">🚕</span><span class="ir-k">디디</span><span class="ir-v">호텔→해산물거리 약 10분 · <b class="em">10~15위안</b></span></div>
+    </div>
+    <div class="menu-lbl">🍽️ 꼭 먹어야 할 것</div>
+    <table class="menu-table">
+      <thead><tr><th>메뉴명</th><th>중국어</th><th>설명</th><th>가격</th></tr></thead>
+      <tbody>
+        <tr><td><div class="mn">라오차오갈라<span class="must">MUST</span></div></td><td><div class="mcn">辣炒蛤蜊</div></td><td><div class="md">매운 바지락볶음. 칭다오 맥주와 국룰 페어링!</div></td><td><div class="mp">35~50위안</div></td></tr>
+        <tr><td><div class="mn">마늘가리비찜</div></td><td><div class="mcn">蒜蓉扇贝</div></td><td><div class="md">달콤 짭조름. 3인이면 4~6개 주문.</div></td><td><div class="mp">15~20위안/개</div></td></tr>
+        <tr><td><div class="mn">자피 생맥주<span class="must">MUST</span></div></td><td><div class="mcn">扎啤</div></td><td><div class="md">병맥주보다 훨씬 맛있는 생맥주!</div></td><td><div class="mp">15~25위안/잔</div></td></tr>
+      </tbody>
+    </table>
+    <a href="https://maps.google.com/?q=Yantai+Road+Seafood+Qingdao" target="_blank" class="link-btn">📍 구글 지도</a>
+  </div>
+</div>
+</div>
+</section>
+
+<!-- ══════════════════════ BEAUTY ══════════════════════ -->
+<section id="beauty" class="sec">
+<div class="wrap">
+<div class="sh"><div class="sh-eye">뷰티 · 체험</div><div class="sh-title">출장 메이크업 · 스냅 촬영<br>특별 체험 완전 가이드</div></div>
+
+<div class="st-wrap">
+  <table class="st">
+    <thead><tr><th>체험</th><th>가격</th><th>예약처</th><th>디디 요금</th></tr></thead>
+    <tbody>
+      <tr><td><b>출장 메이크업 (호텔 방문)</b></td><td>150~300위안/인</td><td><a href="https://www.xiaohongshu.com/" target="_blank" style="color:var(--coral)">샤오홍슈 「青岛上门化妆」</a></td><td>-</td></tr>
+      <tr><td><b>네일아트</b></td><td>100~200위안</td><td><a href="https://www.dianping.com/" target="_blank" style="color:var(--coral)">따종디엔핑 「美甲」</a></td><td>10~20위안</td></tr>
+      <tr><td><b>3인 발마사지 (90분)</b></td><td>80~100위안/인</td><td>완샹청 근처 현장</td><td>5~10위안</td></tr>
+      <tr><td><b>치파오 대여+스냅</b></td><td>100~200위안/인</td><td>팔대관 근처 대여샵</td><td>10~20위안</td></tr>
+      <tr><td><b>현지 스냅 작가</b></td><td>300~500위안</td><td><a href="https://www.xiaohongshu.com/" target="_blank" style="color:var(--coral)">샤오홍슈 「青岛旅拍」</a></td><td>-</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="div"><span>📸 스냅 촬영 완전 가이드</span></div>
+<div class="card">
+  <div class="irows">
+    <div class="ir"><span class="ir-ic">🌅</span><span class="ir-k">골든아워</span><span class="ir-v">아침 <b>06:30~08:00</b> / 저녁 <b>18:30~19:30</b></span></div>
+    <div class="ir"><span class="ir-ic">📍</span><span class="ir-k">베스트 스팟</span><span class="ir-v">① 잔교 홍각정 ② 팔대관 공주루 ③ 성 미카엘 성당 광장 ④ 소어산 전망대 ⑤ 5.4광장</span></div>
+    <div class="ir"><span class="ir-ic">👗</span><span class="ir-k">의상 팁</span><span class="ir-v">흰색·파스텔 계열이 바다와 대비되어 예쁨. 3인 패밀리 같은 톤으로!</span></div>
+    <div class="ir"><span class="ir-ic">📷</span><span class="ir-k">준비물</span><span class="ir-v">삼각대+블루투스 리모컨 필수! 보조배터리도.</span></div>
+  </div>
+</div>
+</div>
+</section>
+
+<!-- ══════════════════════ CHECKLIST ══════════════════════ -->
+<section id="checklist" class="sec">
+<div class="wrap">
+<div class="sh"><div class="sh-eye">완전 체크리스트</div><div class="sh-title">하나도 빠짐없이<br>클릭해서 체크하세요!</div></div>
+
+<div class="prog-bar"><div class="prog-fill" id="pf"></div></div>
+<div class="prog-txt" id="pt">0 / 0 완료 (0%)</div>
+
+<div class="cl-sec">
+  <div class="cl-head" style="background:var(--ocean)">📋 4주 전 — 예약</div>
+  <div class="cl-item" onclick="ck(this)"><div class="cl-box"></div><div><div class="cl-lbl">여권 유효기간 확인 (6개월 이상)</div></div></div>
+  <div class="cl-item" onclick="ck(this)"><div class="cl-box"></div><div><div class="cl-lbl">오션뷰 호텔 예약 완료 ✅ 1400825243681332</div></div></div>
+  <div class="cl-item" onclick="ck(this)"><div class="cl-box"></div><div><div class="cl-lbl">여행자보험 가입</div></div></div>
+  <div class="cl-item" onclick="ck(this)"><div class="cl-box"></div><div><div class="cl-lbl">스냅 현지 작가 예약 (샤오홍슈 「青岛旅拍」)</div></div></div>
+  <div class="cl-item" onclick="ck(this)"><div class="cl-box"></div><div><div class="cl-lbl">출장 메이크업 아티스트 예약 (샤오홍슈)</div><div class="cl-sub">Day 3 새벽 05:30 호텔 방문 요청</div></div></div>
+</div>
+
+<div class="cl-sec">
+  <div class="cl-head" style="background:var(--ocean-mid)">📋 2주 전 — 앱·결제</div>
+  <div class="cl-item" onclick="ck(this)"><div class="cl-box"></div><div><div class="cl-lbl">디디택시(DiDi) 앱 설치 + 신용카드 등록</div><div class="cl-sub">⚠️ 반드시 한국에서 미리!</div></div></div>
+  <div class="cl-item" onclick="ck(this)"><div class="cl-box"></div><div><div class="cl-lbl">위챗페이 신용카드 연동</div></div></div>
+  <div class="cl-item" onclick="ck(this)"><div class="cl-box"></div><div><div class="cl-lbl">알리페이 신용카드 연동</div></div></div>
+  <div class="cl-item" onclick="ck(this)"><div class="cl-box"></div><div><div class="cl-lbl">VPN 앱 설치 (한국에서만 설치 가능!)</div></div></div>
+  <div class="cl-item" onclick="ck(this)"><div class="cl-box"></div><div><div class="cl-lbl">고덕지도(高德地图) 앱 설치</div></div></div>
+  <div class="cl-item" onclick="ck(this)"><div class="cl-box"></div><div><div class="cl-lbl">샤오홍슈 앱 설치</div></div></div>
+  <div class="cl-item" onclick="ck(this)"><div class="cl-box"></div><div><div class="cl-lbl">따종디엔핑 앱 설치</div></div></div>
+  <div class="cl-item" onclick="ck(this)"><div class="cl-box"></div><div><div class="cl-lbl">중국 유심 or eSIM 구매</div></div></div>
+  <div class="cl-item" onclick="ck(this)"><div class="cl-box"></div><div><div class="cl-lbl">칭다오 맥주박물관 트립닷컴 사전예약</div><div class="cl-sub">현장 줄 엄청 길어요!</div></div></div>
+  <div class="cl-item" onclick="ck(this)"><div class="cl-box"></div><div><div class="cl-lbl">유람선 트립닷컴 사전예약</div></div></div>
+  <div class="cl-item" onclick="ck(this)"><div class="cl-box"></div><div><div class="cl-lbl">카카오T 04:45 새벽 택시 사전예약</div></div></div>
+  <div class="cl-item" onclick="ck(this)"><div class="cl-box"></div><div><div class="cl-lbl">네일아트 따종디엔핑 예약</div></div></div>
+  <div class="cl-item" onclick="ck(this)"><div class="cl-box"></div><div><div class="cl-lbl">샤오홍슈에서 칭다오 프로젝트 위치 확인</div><div class="cl-sub">「青岛Project选品店」 검색 → 주소 스크린샷</div></div></div>
+</div>
+
+<div class="cl-sec">
+  <div class="cl-head" style="background:var(--green)">🧳 짐 체크리스트</div>
+  <div class="cl-item" onclick="ck(this)"><div class="cl-box"></div><div><div class="cl-lbl">여권 (3인 모두)</div></div></div>
+  <div class="cl-item" onclick="ck(this)"><div class="cl-box"></div><div><div class="cl-lbl">항공권 출력 + 호텔예약증 (예약번호 1400825243681332)</div></div></div>
+  <div class="cl-item" onclick="ck(this)"><div class="cl-box"></div><div><div class="cl-lbl">신용카드 + 위안화 현금 (500~1,000위안)</div></div></div>
+  <div class="cl-item" onclick="ck(this)"><div class="cl-box"></div><div><div class="cl-lbl">멀티어댑터 (중국 220V)</div></div></div>
+  <div class="cl-item" onclick="ck(this)"><div class="cl-box"></div><div><div class="cl-lbl">보조배터리 (100Wh 이하, 기내 반입)</div></div></div>
+  <div class="cl-item" onclick="ck(this)"><div class="cl-box"></div><div><div class="cl-lbl">카메라 + 삼각대 + 블루투스 리모컨</div></div></div>
+  <div class="cl-item" onclick="ck(this)"><div class="cl-box"></div><div><div class="cl-lbl">운동화 (라오산 등반용) + 샌들</div></div></div>
+  <div class="cl-item" onclick="ck(this)"><div class="cl-box"></div><div><div class="cl-lbl">가디건·얇은 외투 (바닷바람 쌀 수 있음)</div></div></div>
+  <div class="cl-item" onclick="ck(this)"><div class="cl-box"></div><div><div class="cl-lbl">선크림·모자·선글라스 (5월 햇볕 강함)</div></div></div>
+  <div class="cl-item" onclick="ck(this)"><div class="cl-box"></div><div><div class="cl-lbl">스냅용 의상 (흰색·파스텔 3인 세트)</div></div></div>
+  <div class="cl-item" onclick="ck(this)"><div class="cl-box"></div><div><div class="cl-lbl">상비약 (해열제·소화제·밴드)</div></div></div>
+</div>
+
+<div class="cl-sec">
+  <div class="cl-head" style="background:var(--coral)">✈️ 출발 당일 (5/5 새벽)</div>
+  <div class="cl-item" onclick="ck(this)"><div class="cl-box"></div><div><div class="cl-lbl">04:30 알람 2개 확인</div></div></div>
+  <div class="cl-item" onclick="ck(this)"><div class="cl-box"></div><div><div class="cl-lbl">카카오T 예약 택시 탑승 (04:45)</div></div></div>
+  <div class="cl-item" onclick="ck(this)"><div class="cl-box"></div><div><div class="cl-lbl">T2 도착 목표 06:15</div></div></div>
+  <div class="cl-item" onclick="ck(this)"><div class="cl-box"></div><div><div class="cl-lbl">KE841 체크인 → 수하물 위탁</div></div></div>
+  <div class="cl-item" onclick="ck(this)"><div class="cl-box"></div><div><div class="cl-lbl">07:50 KE841 탑승! 🎉</div></div></div>
+</div>
+
+<div class="cl-sec">
+  <div class="cl-head" style="background:#3a4a5a">🔑 현지 필수 규칙</div>
+  <div class="cl-item" onclick="ck(this)"><div class="cl-box"></div><div><div class="cl-lbl">디디택시 사용 전 VPN 반드시 OFF</div></div></div>
+  <div class="cl-item" onclick="ck(this)"><div class="cl-box"></div><div><div class="cl-lbl">라오산 방문 시 여권 필수 지참</div></div></div>
+  <div class="cl-item" onclick="ck(this)"><div class="cl-box"></div><div><div class="cl-lbl">맥주박물관 트립닷컴 QR 화면 저장</div></div></div>
+  <div class="cl-item" onclick="ck(this)"><div class="cl-box"></div><div><div class="cl-lbl">불야성 귀환 10:30에 미리 디디 호출</div></div></div>
+  <div class="cl-item" onclick="ck(this)"><div class="cl-box"></div><div><div class="cl-lbl">C3: 중산로 67-1호 (성당 정면 맞은편)</div></div></div>
+  <div class="cl-item" onclick="ck(this)"><div class="cl-box"></div><div><div class="cl-lbl">호텔 체크인: "请给我高层海景房" 요청</div></div></div>
+</div>
+</div>
+</section>
+
+<footer>
+  <div style="font-size:15px;font-weight:700;color:white;margin-bottom:8px">최씨집안 만만세 칭다오 여행 완전 가이드</div>
+  <div>항공 예약번호 <strong>EQZS4M</strong> · 호텔 예약번호 <strong>1400825243681332</strong></div>
+  <div>CHOI SEOYEON · 3인 가족 · 2026년 5월 5일~9일 · 4박 5일 · 전 일정 디디택시</div>
+  <div style="margin-top:12px">
+    <a href="https://kr.trip.com/hotels/qingdao-hotel-detail-44181223/haiyi-international-apartment/" target="_blank" style="color:var(--gold-lt)">🏨 호텔 상세보기</a> &nbsp;·&nbsp;
+    <a href="https://t.ctrip.cn/?bsXDiiJIrIb0649" target="_blank" style="color:var(--gold-lt)">📋 예약 내역 확인</a>
+  </div>
+  <div style="margin-top:10px;font-size:11px">정보 기준: 2026년 4월 · 현지 방문 전 운영시간·가격 재확인 권장</div>
+</footer>
+
+<script>
+function show(id){
+  document.querySelectorAll('.sec').forEach(s=>s.classList.remove('on'));
+  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('on'));
+  document.getElementById(id).classList.add('on');
+  event.target.classList.add('on');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function ck(el){
+  el.classList.toggle('done');
+  const all=document.querySelectorAll('.cl-item');
+  const done=document.querySelectorAll('.cl-item.done');
+  const pct=all.length?Math.round(done.length/all.length*100):0;
+  document.getElementById('pf').style.width=pct+'%';
+  document.getElementById('pt').textContent=done.length+' / '+all.length+' 완료 ('+pct+'%)';
+}
+</script>
+</body>
+</html>

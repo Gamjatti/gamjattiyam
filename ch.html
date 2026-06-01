@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>중국어 은행 회화 학습</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            color: white;
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+
+        .mode-selector {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
+        .mode-btn {
+            padding: 12px 8px;
+            border: none;
+            border-radius: 10px;
+            font-size: 13px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+        }
+
+        .mode-btn:nth-child(4),
+        .mode-btn:nth-child(5) {
+            grid-column: span 1;
+        }
+
+        .mode-btn:nth-child(4) {
+            grid-column: 1 / 2;
+        }
+
+        .mode-btn:nth-child(5) {
+            grid-column: 2 / 4;
+        }
+
+        .mode-btn.active {
+            background: white;
+            color: #667eea;
+            transform: scale(1.05);
+        }
+
+        .card-container {
+            perspective: 1000px;
+            margin-bottom: 20px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            min-height: 450px;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.6s;
+        }
+
+        .card.flipped {
+            transform: rotateY(180deg);
+        }
+
+        .card-face {
+            backface-visibility: hidden;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .card-back {
+            transform: rotateY(180deg);
+        }
+
+        .card-type {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: #667eea;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .chinese {
+            font-size: 22px;
+            margin-bottom: 10px;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .pinyin {
+            font-size: 16px;
+            color: #667eea;
+            margin-bottom: 10px;
+            line-height: 1.6;
+        }
+
+        .korean {
+            font-size: 16px;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .tts-btn {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            font-size: 24px;
+            cursor: pointer;
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s;
+        }
+
+        .tts-btn:active {
+            transform: scale(0.95);
+            background: #45a049;
+        }
+
+        .blank {
+            color: #ff6b6b;
+            font-weight: bold;
+            text-decoration: underline;
+            text-decoration-style: dashed;
+        }
+
+        .controls {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .control-btn {
+            flex: 1;
+            padding: 15px;
+            border: none;
+            border-radius: 15px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .prev-btn {
+            background: #f8f9fa;
+            color: #333;
+        }
+
+        .next-btn {
+            background: #667eea;
+            color: white;
+        }
+
+        .flip-btn {
+            background: #764ba2;
+            color: white;
+        }
+
+        .control-btn:active {
+            transform: scale(0.95);
+        }
+
+        .progress {
+            text-align: center;
+            color: white;
+            margin-top: 15px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .cloze-input {
+            background: #fff3cd;
+            border: 2px dashed #ffc107;
+            border-radius: 5px;
+            padding: 2px 8px;
+            margin: 0 3px;
+            min-width: 60px;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🏦 중국어 은행 회화</h1>
+        
+        <div class="mode-selector">
+            <button class="mode-btn active" onclick="setMode('all')">전체</button>
+            <button class="mode-btn" onclick="setMode('dialogue')">대화만</button>
+            <button class="mode-btn" onclick="setMode('narration')">내레이션만</button>
+            <button class="mode-btn" onclick="setMode('vocabulary')">단어</button>
+            <button class="mode-btn" onclick="setMode('cloze')">시험모드</button>
+        </div>
+
+        <div class="card-container">
+            <div class="card" id="flashcard">
+                <div class="card-face card-front">
+                    <div class="card-type" id="cardType">대화</div>
+                    <div id="frontContent"></div>
+                    <button class="tts-btn" onclick="speakChinese()">🔊</button>
+                </div>
+                <div class="card-face card-back">
+                    <div id="backContent"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="controls">
+            <button class="control-btn prev-btn" onclick="prevCard()">← 이전</button>
+            <button class="control-btn flip-btn" onclick="flipCard()">뒤집기</button>
+            <button class="control-btn next-btn" onclick="nextCard()">다음 →</button>
+        </div>
+
+        <div class="progress" id="progress">1 / 20</div>
+    </div>
+
+    <script>
+        const cards = [
+            {
+                type: 'narration',
+                chinese: '今天上午，小丽去银行取钱。',
+                pinyin: 'Jīntiān shàngwǔ, Xiǎolì qù yínháng qǔ qián.',
+                korean: '오늘 오전, 샤오리는 은행에 돈을 찾으러 갔다.',
+                cloze: '今天上午，小丽去___取钱。',
+                answer: '银行'
+            },
+            {
+                type: 'narration',
+                chinese: '银行里人不多，很安静。',
+                pinyin: 'Yínháng lǐ rén bú duō, hěn ānjìng.',
+                korean: '은행 안에는 사람이 많지 않아 조용했다.',
+                cloze: '银行里人不多，很___。',
+                answer: '安静'
+            },
+            {
+                type: 'narration',
+                chinese: '她拿着银行卡，排队等候。',
+                pinyin: 'Tā názhe yínhángkǎ, páiduì děnghòu.',
+                korean: '그녀는 은행카드를 들고 줄을 서서 기다렸다.',
+                cloze: '她拿着银行卡，___等候。',
+                answer: '排队'
+            },
+            {
+                type: 'narration',
+                chinese: '轮到小丽了，她走到窗口前。',
+                pinyin: 'Lúndào Xiǎolì le, tā zǒu dào chuāngkǒu qián.',
+                korean: '샤오리 차례가 되자, 창구 앞으로 갔다.',
+                cloze: '___小丽了，她走到窗口前。',
+                answer: '轮到'
+            },
+            {
+                type: 'dialogue',
+                chinese: '你好，请问你要办什么？',
+                pinyin: 'Nǐhǎo, qǐngwèn nǐ yào bàn shénme?',
+                korean: '안녕하세요, 무엇을 도와드릴까요?',
+                cloze: '你好，请问你要___什么？',
+                answer: '办'
+            },
+            {
+                type: 'dialogue',
+                chinese: '你好，我想取钱。',
+                pinyin: 'Nǐhǎo, wǒ xiǎng qǔ qián.',
+                korean: '안녕하세요, 돈을 찾고 싶어요.',
+                cloze: '你好，我想___钱。',
+                answer: '取'
+            },
+            {
+                type: 'dialogue',
+                chinese: '好的，请给我你的银行卡。',
+                pinyin: 'Hǎo de, qǐng gěi wǒ nǐ de yínhángkǎ.',
+                korean: '네, 당신의 은행카드를 주세요.',
+                cloze: '好的，请给我你的___。',
+                answer: '银行卡'
+            },
+            {
+                type: 'dialogue',
+                chinese: '好的，在这里。',
+                pinyin: 'Hǎo de, zài zhèlǐ.',
+                korean: '네, 여기요.',
+                cloze: '好的，在___。',
+                answer: '这里'
+            },
+            {
+                type: 'dialogue',
+                chinese: '你要取多少钱？',
+                pinyin: 'Nǐ yào qǔ duōshao qián?',
+                korean: '얼마를 찾으실 건가요?',
+                cloze: '你要取___钱？',
+                answer: '多少'
+            },
+            {
+                type: 'dialogue',
+                chinese: '取五千块。',
+                pinyin: 'Qǔ wǔqiān kuài.',
+                korean: '5천 위안을 찾을게요.',
+                cloze: '取___块。',
+                answer: '五千'
+            },
+            {
+                type: 'dialogue',
+                chinese: '请问要现金还是转账？',
+                pinyin: 'Qǐngwèn yào xiànjīn háishi zhuǎnzhàng?',
+                korean: '현금으로 드릴까요, 이체로 해드릴까요?',
+                cloze: '请问要现金还是___？',
+                answer: '转账'
+            },
+            {
+                type: 'dialogue',
+                chinese: '要现金。',
+                pinyin: 'Yào xiànjīn.',
+                korean: '현금으로요.',
+                cloze: '要___。',
+                answer: '现金'
+            },
+            {
+                type: 'dialogue',
+                chinese: '好的，请输入密码。',
+                pinyin: 'Hǎo de, qǐng shūrù mìmǎ.',
+                korean: '네, 비밀번호를 입력해주세요.',
+                cloze: '好的，请输入___。',
+                answer: '密码'
+            },
+            {
+                type: 'narration',
+                chinese: '小丽低头输入密码。',
+                pinyin: 'Xiǎolì dītóu shūrù mìmǎ.',
+                korean: '샤오리는 고개를 숙이고 비밀번호를 입력했다.',
+                cloze: '小丽___输入密码。',
+                answer: '低头'
+            },
+            {
+                type: 'dialogue',
+                chinese: '请稍等一下。',
+                pinyin: 'Qǐng shāoděng yíxià.',
+                korean: '잠시만 기다려주세요.',
+                cloze: '请___一下。',
+                answer: '稍等'
+            },
+            {
+                type: 'dialogue',
+                chinese: '这是你的钱，请点一下。',
+                pinyin: 'Zhè shì nǐ de qián, qǐng diǎn yíxià.',
+                korean: '여기 돈입니다, 한번 세어보세요.',
+                cloze: '这是你的钱，请___一下。',
+                answer: '点'
+            },
+            {
+                type: 'dialogue',
+                chinese: '对的，一共五千块。',
+                pinyin: 'Duì de, yígòng wǔqiān kuài.',
+                korean: '맞아요, 총 5천 위안이에요.',
+                cloze: '对的，___五千块。',
+                answer: '一共'
+            },
+            {
+                type: 'narration',
+                chinese: '小丽把钱放进包里。',
+                pinyin: 'Xiǎolì bǎ qián fàng jìn bāo lǐ.',
+                korean: '샤오리는 돈을 가방에 넣었다.',
+                cloze: '小丽把钱___包里。',
+                answer: '放进'
+            },
+            {
+                type: 'dialogue',
+                chinese: '这是你的银行卡和收据。',
+                pinyin: 'Zhè shì nǐ de yínhángkǎ hé shōujù.',
+                korean: '여기 당신의 은행카드와 영수증입니다.',
+                cloze: '这是你的银行卡和___。',
+                answer: '收据'
+            },
+            {
+                type: 'narration',
+                chinese: '小丽突然想到一件事，又问了工作人员。',
+                pinyin: 'Xiǎolì tūrán xiǎngdào yí jiàn shì, yòu wèn le gōngzuòrényuán.',
+                korean: '샤오리는 갑자기 한 가지가 떠올라 다시 직원에게 물었다.',
+                cloze: '小丽___想到一件事，又问了工作人员。',
+                answer: '突然'
+            },
+            {
+                type: 'dialogue',
+                chinese: '不好意思，我可以顺便问一下吗？',
+                pinyin: 'Bùhǎoyìsi, wǒ kěyǐ shùnbiàn wèn yíxià ma?',
+                korean: '죄송한데, 혹시 겸사겸사 하나 물어봐도 될까요?',
+                cloze: '不好意思，我可以___问一下吗？',
+                answer: '顺便'
+            },
+            {
+                type: 'dialogue',
+                chinese: '如果银行卡丢了，怎么办？',
+                pinyin: 'Rúguǒ yínhángkǎ diū le, zěnme bàn?',
+                korean: '만약 은행카드를 잃어버리면 어떻게 하나요?',
+                cloze: '如果银行卡___了，怎么办？',
+                answer: '丢'
+            },
+            {
+                type: 'dialogue',
+                chinese: '可以先挂失，然后再补办一张新卡。',
+                pinyin: 'Kěyǐ xiān guàshī, ránhòu zài bǔbàn yì zhāng xīn kǎ.',
+                korean: '먼저 분실신고를 하고, 그 다음 새 카드를 재발급하면 됩니다.',
+                cloze: '可以先___，然后再补办一张新卡。',
+                answer: '挂失'
+            },
+            {
+                type: 'dialogue',
+                chinese: '明白了，谢谢你。',
+                pinyin: 'Míngbai le, xièxie nǐ.',
+                korean: '알겠습니다, 감사합니다.',
+                cloze: '___了，谢谢你。',
+                answer: '明白'
+            },
+            {
+                type: 'narration',
+                chinese: '小丽慢慢走出银行。',
+                pinyin: 'Xiǎolì mànmàn zǒu chū yínháng.',
+                korean: '샤오리는 천천히 은행을 나왔다.',
+                cloze: '小丽___走出银行。',
+                answer: '慢慢'
+            },
+            {
+                type: 'narration',
+                chinese: '今天的事情办得很顺利，她觉得很舒心。',
+                pinyin: 'Jīntiān de shìqing bàn de hěn shùnlì, tā juéde hěn shūxīn.',
+                korean: '오늘 일이 아주 순조롭게 처리되어 마음이 편안했다.',
+                cloze: '今天的事情办得很___，她觉得很舒心。',
+                answer: '顺利'
+            }
+        ];
+
+        // 단어 카드 추가
+        const vocabularyCards = [
+            { type: 'vocabulary', chinese: '银行', pinyin: 'yínháng', korean: '은행', 
+              example: '小丽去银行取钱', examplePinyin: 'xiǎo lì qù yínháng qǔ qián', exampleKorean: '샤오리는 은행에 가서 돈을 찾는다' },
+            { type: 'vocabulary', chinese: '取钱', pinyin: 'qǔ qián', korean: '돈을 인출하다',
+              example: '我想取钱', examplePinyin: 'wǒ xiǎng qǔ qián', exampleKorean: '저는 돈을 인출하고 싶어요' },
+            { type: 'vocabulary', chinese: '排队', pinyin: 'pái duì', korean: '줄을 서다',
+              example: '她在银行排队等候', examplePinyin: 'tā zài yínháng pái duì děnghòu', exampleKorean: '그녀는 은행에서 줄을 서서 기다린다' },
+            { type: 'vocabulary', chinese: '等候', pinyin: 'děnghòu', korean: '기다리다',
+              example: '请在这里等候', examplePinyin: 'qǐng zài zhèlǐ děnghòu', exampleKorean: '여기에서 기다려 주세요' },
+            { type: 'vocabulary', chinese: '窗口', pinyin: 'chuāngkǒu', korean: '창구',
+              example: '她走到窗口前', examplePinyin: 'tā zǒu dào chuāngkǒu qián', exampleKorean: '그녀는 창구 앞으로 간다' },
+            { type: 'vocabulary', chinese: '办', pinyin: 'bàn', korean: '처리하다 / (업무를) 보다',
+              example: '你要办什么业务？', examplePinyin: 'nǐ yào bàn shénme yèwù', exampleKorean: '어떤 업무를 처리하시나요?' },
+            { type: 'vocabulary', chinese: '工作人员', pinyin: 'gōngzuò rényuán', korean: '직원',
+              example: '工作人员很有礼貌', examplePinyin: 'gōngzuò rényuán hěn yǒu lǐmào', exampleKorean: '직원은 매우 예의 바르다' },
+            { type: 'vocabulary', chinese: '银行卡', pinyin: 'yínhángkǎ', korean: '은행 카드',
+              example: '请给我你的银行卡', examplePinyin: 'qǐng gěi wǒ nǐ de yínhángkǎ', exampleKorean: '은행 카드를 주세요' },
+            { type: 'vocabulary', chinese: '输入密码', pinyin: 'shūrù mìmǎ', korean: '비밀번호를 입력하다',
+              example: '请输入密码', examplePinyin: 'qǐng shūrù mìmǎ', exampleKorean: '비밀번호를 입력해 주세요' },
+            { type: 'vocabulary', chinese: '收据', pinyin: 'shōujù', korean: '영수증',
+              example: '这是你的收据', examplePinyin: 'zhè shì nǐ de shōujù', exampleKorean: '이것은 당신의 영수증입니다' },
+            { type: 'vocabulary', chinese: '挂失', pinyin: 'guàshī', korean: '분실 신고하다',
+              example: '银行卡丢了，要先挂失', examplePinyin: 'yínhángkǎ diū le, yào xiān guàshī', exampleKorean: '은행 카드를 잃어버리면 먼저 분실 신고를 해야 한다' },
+            { type: 'vocabulary', chinese: '补办', pinyin: 'bǔ bàn', korean: '재발급하다',
+              example: '可以补办一张新卡', examplePinyin: 'kěyǐ bǔ bàn yì zhāng xīn kǎ', exampleKorean: '새 카드를 재발급할 수 있다' },
+            { type: 'vocabulary', chinese: '顺利', pinyin: 'shùnlì', korean: '순조롭다',
+              example: '今天的事情很顺利', examplePinyin: 'jīntiān de shìqíng hěn shùnlì', exampleKorean: '오늘 일이 아주 순조로웠다' },
+            { type: 'vocabulary', chinese: '舒心', pinyin: 'shūxīn', korean: '마음이 편하다 / 속이 시원하다',
+              example: '今天的事情办得很舒心', examplePinyin: 'jīntiān de shìqíng bàn de hěn shūxīn', exampleKorean: '오늘 일들이 잘 해결되어서 마음이 편하다' },
+            { type: 'vocabulary', chinese: '顺便', pinyin: 'shùnbiàn', korean: '겸사겸사 / 하는 김에',
+              example: '我去银行取钱，顺便问了一下问题', examplePinyin: 'wǒ qù yínháng qǔ qián, shùnbiàn wèn le yíxià wèntí', exampleKorean: '나는 은행에 돈을 찾으러 가서 겸사겸사 질문을 하나 했다' }
+        ];
+
+        let currentMode = 'all';
+        let filteredCards = cards;
+        let currentIndex = 0;
+        let isFlipped = false;
+
+        function setMode(mode) {
+            currentMode = mode;
+            currentIndex = 0;
+            isFlipped = false;
+            
+            // Update button styles
+            document.querySelectorAll('.mode-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            // Filter cards
+            if (mode === 'dialogue') {
+                filteredCards = cards.filter(card => card.type === 'dialogue');
+            } else if (mode === 'narration') {
+                filteredCards = cards.filter(card => card.type === 'narration');
+            } else if (mode === 'vocabulary') {
+                filteredCards = vocabularyCards;
+            } else {
+                filteredCards = cards;
+            }
+            
+            updateCard();
+        }
+
+        function updateCard() {
+            const card = filteredCards[currentIndex];
+            const flashcard = document.getElementById('flashcard');
+            flashcard.classList.remove('flipped');
+            isFlipped = false;
+            
+            const typeLabel = card.type === 'dialogue' ? '대화' : 
+                            card.type === 'vocabulary' ? '단어' : '내레이션';
+            document.getElementById('cardType').textContent = typeLabel;
+            
+            if (currentMode === 'cloze') {
+                document.getElementById('frontContent').innerHTML = `
+                    <div class="chinese">${card.cloze}</div>
+                    <div class="pinyin">${card.pinyin}</div>
+                `;
+                document.getElementById('backContent').innerHTML = `
+                    <div class="chinese">${card.chinese}</div>
+                    <div class="pinyin">${card.pinyin}</div>
+                    <div class="korean">${card.korean}</div>
+                    <div style="margin-top: 20px; padding: 15px; background: #e8f5e9; border-radius: 10px;">
+                        <strong style="color: #2e7d32;">정답:</strong> <span style="color: #c62828; font-size: 20px;">${card.answer}</span>
+                    </div>
+                `;
+            } else if (currentMode === 'vocabulary') {
+                document.getElementById('frontContent').innerHTML = `
+                    <div class="chinese" style="font-size: 36px; font-weight: bold;">${card.chinese}</div>
+                    <div class="pinyin" style="font-size: 20px;">${card.pinyin}</div>
+                `;
+                document.getElementById('backContent').innerHTML = `
+                    <div class="korean" style="font-size: 22px; margin-bottom: 25px; font-weight: bold; color: #2c3e50;">${card.korean}</div>
+                    <div style="background: #f0f8ff; padding: 20px; border-radius: 15px; border-left: 4px solid #667eea;">
+                        <div style="font-size: 12px; color: #667eea; font-weight: bold; margin-bottom: 8px;">📝 예문</div>
+                        <div style="font-size: 18px; color: #333; margin-bottom: 8px;">${card.example}</div>
+                        <div style="font-size: 14px; color: #667eea; margin-bottom: 8px;">${card.examplePinyin}</div>
+                        <div style="font-size: 15px; color: #666;">${card.exampleKorean}</div>
+                    </div>
+                `;
+            } else {
+                document.getElementById('frontContent').innerHTML = `
+                    <div class="chinese">${card.chinese}</div>
+                    <div class="pinyin">${card.pinyin}</div>
+                `;
+                document.getElementById('backContent').innerHTML = `
+                    <div class="korean">${card.korean}</div>
+                `;
+            }
+            
+            document.getElementById('progress').textContent = 
+                `${currentIndex + 1} / ${filteredCards.length}`;
+        }
+
+        function flipCard() {
+            const flashcard = document.getElementById('flashcard');
+            flashcard.classList.toggle('flipped');
+            isFlipped = !isFlipped;
+        }
+
+        function nextCard() {
+            currentIndex = (currentIndex + 1) % filteredCards.length;
+            updateCard();
+        }
+
+        function prevCard() {
+            currentIndex = (currentIndex - 1 + filteredCards.length) % filteredCards.length;
+            updateCard();
+        }
+
+        function speakChinese() {
+            const card = filteredCards[currentIndex];
+            const utterance = new SpeechSynthesisUtterance(card.chinese);
+            utterance.lang = 'zh-CN';
+            utterance.rate = 0.8;
+            speechSynthesis.speak(utterance);
+        }
+
+        // Initialize
+        updateCard();
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft') prevCard();
+            if (e.key === 'ArrowRight') nextCard();
+            if (e.key === ' ') {
+                e.preventDefault();
+                flipCard();
+            }
+        });
+
+        // Touch swipe support
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        document.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+        });
+
+        document.addEventListener('touchend', (e) => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        });
+
+        function handleSwipe() {
+            if (touchEndX < touchStartX - 50) nextCard();
+            if (touchEndX > touchStartX + 50) prevCard();
+        }
+    </script>
+</body>
+</html>
