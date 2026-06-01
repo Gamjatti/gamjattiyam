@@ -1,0 +1,307 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>HSK 4급 이미지 단어장</title>
+<style>
+  :root{
+    --ink:#202124; --muted:#667085; --line:#d9ded6; --paper:#fffdf8; --wash:#f4f7ee;
+    --mint:#b9d7c4; --coral:#ef9a87; --gold:#f1c65b;
+    --shadow:0 18px 50px rgba(44,56,42,.18);
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; min-height:100vh; color:var(--ink);
+    font-family:"Pretendard","Noto Sans KR",system-ui,-apple-system,"Segoe UI",sans-serif;
+    background:
+      linear-gradient(135deg,rgba(185,215,196,.5),transparent 42%),
+      linear-gradient(215deg,rgba(241,198,91,.34),transparent 38%),
+      var(--wash);
+  }
+  .app-shell{min-height:100vh; display:grid; place-items:center; padding:24px}
+  .study-panel{width:min(100%,760px); display:grid; gap:18px}
+  .topbar{display:flex; align-items:center; justify-content:space-between; gap:16px}
+  .eyebrow{margin:0 0 6px; color:#50715c; font-size:14px; font-weight:800}
+  h1{margin:0; font-size:clamp(24px,5vw,40px); line-height:1.05}
+  .icon-button{width:48px; height:48px; border:1px solid var(--line); border-radius:8px;
+    color:var(--ink); background:rgba(255,255,255,.74); cursor:pointer; font-size:20px}
+  .progress-copy{display:flex; justify-content:space-between; gap:16px; color:var(--muted); font-size:15px}
+  .progress-copy strong{color:#3f614a}
+  .progress-track{height:12px; overflow:hidden; border:1px solid rgba(80,113,92,.22);
+    border-radius:999px; background:rgba(255,255,255,.7)}
+  .progress-bar{width:0%; height:100%; border-radius:inherit;
+    background:linear-gradient(90deg,var(--mint),var(--gold),var(--coral)); transition:width 240ms ease}
+
+  .card-stage{display:grid; place-items:center; perspective:1400px}
+  .study-card{width:100%; height:min(540px,calc(100vh - 240px)); min-height:440px;
+    position:relative; border:0; padding:0; background:transparent; cursor:pointer}
+  .card-inner{position:absolute; inset:0; transform-style:preserve-3d;
+    transition:transform 420ms cubic-bezier(.2,.78,.26,1)}
+  .study-card.is-flipped .card-inner{transform:rotateY(180deg)}
+  .card-face{position:absolute; inset:0; display:grid; overflow:hidden;
+    border:1px solid rgba(80,113,92,.2); border-radius:14px; background:var(--paper);
+    box-shadow:var(--shadow); backface-visibility:hidden}
+  .card-back{transform:rotateY(180deg)}
+  /* 보이는 면만 클릭 받도록 — 숨은 면이 버튼 클릭을 가로채는 문제 방지 */
+  .study-card:not(.is-flipped) .card-back{pointer-events:none}
+  .study-card.is-flipped .card-front{pointer-events:none}
+  .hero-image{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; background:#dfe6da}
+  .image-overlay{position:absolute; inset:0;
+    background:linear-gradient(180deg,rgba(15,20,16,.12),rgba(15,20,16,.66))}
+  .front-content{position:relative; z-index:1; display:grid; align-content:end; gap:14px;
+    padding:clamp(22px,4vw,40px); color:#fff; text-align:left}
+  .hanzi{font-family:"Noto Serif SC","SimSun",serif; font-weight:800;
+    font-size:clamp(72px,16vw,140px); line-height:.92; text-shadow:0 10px 32px rgba(0,0,0,.22)}
+  .tap-hint{margin:0; color:rgba(255,255,255,.9); font-size:15px; font-weight:700;
+    text-shadow:0 4px 18px rgba(0,0,0,.4)}
+  .back-content{position:relative; z-index:1; display:grid; align-content:center; gap:16px;
+    padding:clamp(22px,5vw,46px); color:var(--ink); background:rgba(255,253,248,.96); text-align:left}
+  .word-row{display:grid; grid-template-columns:1fr auto; gap:16px; align-items:start}
+  .back-content .hanzi{color:#263126; font-size:clamp(60px,13vw,112px); text-shadow:none}
+  .pinyin{margin:0; color:#4c6553; font-size:clamp(24px,5vw,40px); font-weight:900}
+  .meaning-ko{margin:0; font-size:clamp(22px,4.5vw,32px); font-weight:900}
+  .meaning-en{margin:0; color:#5a6b5f; font-size:clamp(16px,3vw,20px); line-height:1.5; font-weight:600}
+  .actions{display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:10px}
+  .action-button{min-height:56px; border:0; border-radius:8px; color:var(--ink); font-weight:900; cursor:pointer}
+  .unknown{background:#f4c0b6} .known{background:#b9d7c4}
+  .speak-btn{width:54px; height:54px; border:0; border-radius:50%; background:var(--mint); font-size:22px; cursor:pointer; box-shadow:0 6px 18px rgba(44,56,42,.18); transition:transform .1s ease}
+  .speak-btn:active{transform:scale(.92)}
+
+  .complete-view{display:grid; place-items:center; min-height:440px; padding:32px;
+    border:1px solid rgba(80,113,92,.2); border-radius:14px; text-align:center;
+    background:linear-gradient(135deg,rgba(185,215,196,.7),transparent 54%),var(--paper); box-shadow:var(--shadow)}
+  .complete-view h2{margin:0; font-size:clamp(34px,8vw,60px)}
+  .complete-view p{max-width:44ch; margin:16px auto 28px; color:var(--muted); line-height:1.6}
+  .primary-button{min-width:180px; min-height:54px; border:0; border-radius:8px;
+    background:var(--ink); color:#fff; font-weight:900; cursor:pointer}
+</style>
+</head>
+<body>
+  <main class="app-shell">
+    <section class="study-panel" aria-live="polite">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow" id="poolInfo">HSK 4급 · 전체 단어</p>
+          <h1>HSK 4급 이미지 단어장</h1>
+        </div>
+        <button class="icon-button" id="restartButton" type="button" aria-label="새 세션">↻</button>
+      </header>
+      <div class="progress-area">
+        <div class="progress-copy">
+          <span id="progressText">처리한 카드 0 / 20</span>
+          <strong id="currentTheme">이미지 연상 학습</strong>
+        </div>
+        <div class="progress-track" aria-hidden="true">
+          <div class="progress-bar" id="progressBar"></div>
+        </div>
+      </div>
+      <div id="cardMount"></div>
+    </section>
+  </main>
+
+<script src="words-data.js"></script>
+<script src="words-ko.js"></script>
+<script>
+/* WORDS_DATA: [{h,p,e,k}] (words-data.js)  /  WORDS_KO: {hanzi: "한국어뜻"} (words-ko.js) */
+const KO = (typeof WORDS_KO !== "undefined") ? WORDS_KO : {};
+// 이미지: loremflickr 키워드 기반 (무료·무키, 단어별 lock으로 고정 → 새로고침해도 동일)
+// ※ 일관된 그림체가 필요하면 나노바나나 일괄 생성으로 로컬 이미지 교체 권장
+function buildImage(w, i){
+  const kw = encodeURIComponent(w.k || "study");
+  return `https://loremflickr.com/600/600/${kw}?lock=${i + 1}`;
+}
+const POOL = WORDS_DATA.map((w, i) => ({
+  hanzi: w.h,
+  pinyin: w.p,
+  english: w.e,
+  korean: KO[w.h] || "",
+  image: buildImage(w, i),
+}));
+
+const SESSION_SIZE = 20;
+const REVIEW_GAP = 5;
+const STORE_KEY = "hsk4_known_v1";
+
+const cardMount = document.querySelector("#cardMount");
+const progressText = document.querySelector("#progressText");
+const progressBar = document.querySelector("#progressBar");
+const currentTheme = document.querySelector("#currentTheme");
+const restartButton = document.querySelector("#restartButton");
+const poolInfo = document.querySelector("#poolInfo");
+
+poolInfo.textContent = `HSK 4급 · 전체 ${POOL.length}단어`;
+
+// 외운 단어(한자) 집합 — localStorage에 영구 저장 (세션이 끝나도 진도 유지)
+function loadKnown(){
+  try { return new Set(JSON.parse(localStorage.getItem(STORE_KEY) || "[]")); }
+  catch(e){ return new Set(); }
+}
+function saveKnown(){
+  try { localStorage.setItem(STORE_KEY, JSON.stringify([...knownSet])); }
+  catch(e){ /* file:// 등 저장 불가 환경에서도 학습은 계속 */ }
+}
+const knownSet = loadKnown();
+function updateMastery(){
+  currentTheme.textContent = `전체 암기 ${knownSet.size} / ${POOL.length}`;
+}
+
+let queue = [], totalCards = 0, knownCount = 0, isFlipped = false, currentWord = null;
+
+// 중국어 음성(TTS) — 브라우저 내장 Web Speech API (무료, Edge의 zh-CN 음성 권장)
+let zhVoice = null;
+function pickZhVoice(){
+  const voices = (window.speechSynthesis && speechSynthesis.getVoices()) || [];
+  zhVoice = voices.find(v => (v.lang||"").toLowerCase() === "zh-cn")
+         || voices.find(v => (v.lang||"").toLowerCase().startsWith("zh"))
+         || null;
+}
+if(window.speechSynthesis){
+  pickZhVoice();
+  speechSynthesis.onvoiceschanged = pickZhVoice;
+}
+function speakChinese(text){
+  if(!window.speechSynthesis || !text) return;
+  speechSynthesis.cancel();
+  const u = new SpeechSynthesisUtterance(text);
+  u.lang = "zh-CN";
+  if(zhVoice) u.voice = zhVoice;
+  u.rate = 0.9;
+  speechSynthesis.speak(u);
+}
+
+function shuffle(arr){
+  const a = [...arr];
+  for(let i = a.length - 1; i > 0; i--){
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+function startSession(){
+  // 아직 외우지 않은 단어 중에서만 출제 → 전체 단어를 빠짐없이 학습
+  const remaining = POOL.filter(w => !knownSet.has(w.hanzi));
+  if(remaining.length === 0){ showAllDone(); return; }
+  queue = shuffle(remaining).slice(0, SESSION_SIZE);
+  totalCards = queue.length;
+  knownCount = 0;
+  isFlipped = false;
+  renderCard();
+}
+function updateProgress(){
+  const p = totalCards === 0 ? 0 : (knownCount / totalCards) * 100;
+  progressText.textContent = `이번 세션 ${knownCount} / ${totalCards}`;
+  progressBar.style.width = `${p}%`;
+}
+function renderCard(){
+  updateProgress();
+  updateMastery();
+  if(queue.length === 0){ showComplete(); return; }
+  const w = queue[0];
+  currentWord = w;
+  const koLine = w.korean ? `<p class="meaning-ko">${w.korean}</p>` : "";
+  cardMount.innerHTML = `
+    <div class="card-stage">
+      <div class="study-card" id="studyCard" role="button" tabindex="0" aria-label="카드 뒤집기">
+        <span class="card-inner">
+          <span class="card-face card-front">
+            <img class="hero-image" src="${w.image}" alt="" loading="lazy" onerror="this.style.display='none'" />
+            <span class="image-overlay"></span>
+            <span class="front-content">
+              <span class="hanzi">${w.hanzi}</span>
+              <span class="tap-hint">탭하면 병음과 뜻을 확인합니다</span>
+            </span>
+          </span>
+          <span class="card-face card-back">
+            <span class="back-content">
+              <span class="word-row">
+                <span class="hanzi">${w.hanzi}</span>
+                <button class="speak-btn" id="speakButton" type="button" aria-label="중국어 발음 듣기" title="발음 듣기">🔊</button>
+              </span>
+              <p class="pinyin">${w.pinyin}</p>
+              ${koLine}
+              <p class="meaning-en">${w.english}</p>
+              <span class="actions">
+                <button class="action-button unknown" id="unknownButton" type="button">아직 몰라요</button>
+                <button class="action-button known" id="knownButton" type="button">알아요</button>
+              </span>
+            </span>
+          </span>
+        </span>
+      </div>
+    </div>`;
+  const card = document.querySelector("#studyCard");
+  card.addEventListener("click", flipCard);
+  card.addEventListener("keydown", flipKey);
+  document.querySelector("#knownButton").addEventListener("click", markKnown);
+  document.querySelector("#unknownButton").addEventListener("click", markUnknown);
+  document.querySelector("#speakButton").addEventListener("click", (ev) => { ev.stopPropagation(); speakChinese(w.hanzi); });
+}
+function flipCard(e){
+  // 버튼(알아요/몰라요/발음) 클릭이면 카드는 뒤집지 않음 — 전파 차단 실패에 대한 2차 방어
+  if(e && e.target && e.target.closest && e.target.closest("button")) return;
+  isFlipped = !isFlipped;
+  document.querySelector("#studyCard").classList.toggle("is-flipped", isFlipped);
+  if(isFlipped && currentWord){ try { speakChinese(currentWord.hanzi); } catch(err) {} }  // 뒤집어 뜻 볼 때 자동 발음
+}
+function flipKey(e){
+  // 버튼(알아요/몰라요/발음)에 포커스가 있을 땐 양보하고 카드 뒤집기는 하지 않음
+  if(e.target.closest && e.target.closest(".action-button, .speak-btn")) return;
+  if(e.key !== "Enter" && e.key !== " ") return;
+  e.preventDefault();
+  flipCard();
+}
+function markKnown(e){
+  e.stopPropagation();
+  const w = queue.shift();
+  knownSet.add(w.hanzi);   // 외운 단어로 영구 기록
+  saveKnown();
+  knownCount += 1;
+  isFlipped = false;
+  renderCard();
+}
+function markUnknown(e){
+  e.stopPropagation();
+  const w = queue.shift();
+  const at = Math.min(REVIEW_GAP, queue.length);
+  queue.splice(at, 0, w);
+  isFlipped = false;
+  renderCard();
+}
+function showComplete(){
+  updateMastery();
+  const left = POOL.length - knownSet.size;
+  cardMount.innerHTML = `
+    <section class="complete-view">
+      <div>
+        <h2>${totalCards}단어 완료! 🎉</h2>
+        <p>지금까지 <strong>${knownSet.size}</strong> / ${POOL.length}단어를 외웠어요. 남은 ${left}단어를 이어서 학습하세요.</p>
+        <button class="primary-button" id="againButton" type="button">다음 ${Math.min(SESSION_SIZE, left)}단어</button>
+      </div>
+    </section>`;
+  document.querySelector("#againButton").addEventListener("click", startSession);
+}
+function showAllDone(){
+  updateMastery();
+  cardMount.innerHTML = `
+    <section class="complete-view">
+      <div>
+        <h2>전체 ${POOL.length}단어 완료! 🏆</h2>
+        <p>HSK 4급 단어를 모두 외웠습니다. 진도를 초기화하고 처음부터 다시 복습할 수 있어요.</p>
+        <button class="primary-button" id="resetButton" type="button">진도 초기화하고 다시</button>
+      </div>
+    </section>`;
+  document.querySelector("#resetButton").addEventListener("click", resetProgress);
+}
+function resetProgress(){
+  knownSet.clear();
+  saveKnown();
+  startSession();
+}
+
+restartButton.addEventListener("click", startSession);
+startSession();
+</script>
+</body>
+</html>
